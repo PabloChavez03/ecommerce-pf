@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 
+import Cards from "../Cards/Cards";
+
 export default function CardDetail({
-	image,
+	image, // URL
 	name,
 	price,
+	salePrice,
 	variants,
 	stock,
 	reviews,
 	likes,
-	relatedProducts,
+	relatedProducts, // Must contain products home information
 }) {
 	const { colors, sizes } = variants;
 	const [quantity, setQuantity] = useState(1);
@@ -25,7 +28,16 @@ export default function CardDetail({
 				<img src={image} alt={name} />
 				<button>UnCorazon:D</button>
 				<h1>{name}</h1>
-				<p>{price}</p>
+				{salePrice ? (
+					<>
+						<p>
+							<s>{price}</s>
+						</p>
+						<strong>{salePrice}</strong>
+					</>
+				) : (
+					<p>{price}</p>
+				)}
 			</div>
 
 			<div>
@@ -51,11 +63,26 @@ export default function CardDetail({
 				<h5>Hay {stock} productos en stock</h5>
 			</div>
 
-			<div>Reviews</div>
+			<div>
+				<h2>Reviews</h2>
+			</div>
 
 			<div>
 				<h2>Productos relacionados</h2>
-				<div></div>
+				<div>
+					{relatedProducts.forEach((el) => {
+						return (
+							<Cards
+								name={el.name}
+								price={el.price}
+								ofertPrice={el.salePrice}
+								category={el.category}
+								image={el.image}
+								id={el.id}
+							/>
+						);
+					})}
+				</div>
 			</div>
 		</div>
 	);
