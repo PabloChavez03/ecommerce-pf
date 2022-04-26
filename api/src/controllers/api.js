@@ -17,12 +17,12 @@ const getInfoApi = () => {
 		.catch((error) => console.log(error));
 };
 
-const getAllCategories = async () => {
+const getAllCategoriesMain = async () => {
 	const listCategories = await getInfoApi();
-	const allCategories = listCategories.map((element) => element.Name);
+	const allCategories = listCategories.map((element) => element.Category); //
 	return allCategories;
 };
 
 module.exports = {
-	getAllCategories,
+	getAllCategoriesMain,
 };
