@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 export default function CreationProduct() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [data, setData] = useState({
         name: "",
         description: "",
@@ -13,14 +15,14 @@ export default function CreationProduct() {
         promotion_msg: "",
         originalprice: "",
         promotionprice: "",
-        ispromotion: "",
+        ispromotion: false,
         categories: [],
-        tipo: []
+        types: []
     });
 
-    useEffect(() => {
-        dispatch()
-      }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch()
+    //   }, [dispatch]);
     
     const colores = ["Blanco", "Negro", "Violeta", "Naranja"];
     const categorias = ["Woman", "Man", "Children", "Gatitos"];
@@ -34,6 +36,19 @@ export default function CreationProduct() {
         });
     };
 
+    const handleSelectPromotion = (event) => {
+        event.preventDefault();
+        console.log(event.target.value)
+        console.log(event.target.name)
+        if(event.target.value !== "Seleccionar") {
+            let promotion = event.target.value === "true" ? true : false;
+            setData({
+                ...data,
+                ispromotion: promotion
+            });
+        };
+    };
+
     const handleChangeSelect = (event) => {
         event.preventDefault();
         setData({
@@ -44,10 +59,45 @@ export default function CreationProduct() {
 
     const handleClickDelete = (event) => {
         event.preventDefault();
+        console.log(event.target.name)
         setData({
             ...data,
             [event.target.name]: data[event.target.name].filter((el) => el.toLowerCase() !== event.target.value.toLowerCase())
         });
+    };
+
+    const handleReset = (event) => {
+        event.preventDefault();
+        setData({name: "",
+        description: "",
+        image: "",
+        colors: [],
+        size: "",
+        listprice: "",
+        promotion_msg: "",
+        originalprice: "",
+        promotionprice: "",
+        ispromotion: "",
+        categories: [],
+        types: []});
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        alert("Producto agregado correctamente 😁");
+        setData({name: "",
+        description: "",
+        image: "",
+        colors: [],
+        size: "",
+        listprice: "",
+        promotion_msg: "",
+        originalprice: "",
+        promotionprice: "",
+        ispromotion: false,
+        categories: [],
+        types: []});
+        navigate("/")
     };
 
     return(
@@ -64,7 +114,7 @@ export default function CreationProduct() {
                 </div>
                 <div>
                     <label>Image</label>
-                    <input type="text" placeholder="Imagen del producto" name={"imagen"} value={data.image} onChange={(e)=>handleChangeInput(e)}/>
+                    <input type="text" placeholder="Imagen del producto" name={"image"} value={data.image} onChange={(e)=>handleChangeInput(e)}/>
                 </div>
                 <div>
                     <label>Talle</label>
@@ -72,7 +122,8 @@ export default function CreationProduct() {
                 </div>
                 <div>
                     <label>Color</label>
-                    <select onChange={(e)=>handleChangeSelect(e)}>
+                    <select name={"colors"} onChange={(e)=>handleChangeSelect(e)}>
+                    <option value={"Seleccionar"}>Seleccionar</option>
                     {
                         colores.length ? colores.map((color) => (
                             <option name={"colors"} value={color} >{color}</option>
@@ -81,12 +132,13 @@ export default function CreationProduct() {
                     </select>
                 </div>
                 <div>
+                    <h4>Colores seleccionados:</h4>
                     <ul>
                     {
                         data.colors.length?data.colors.map((element) => (
                             <div>
                             <li>{element}</li>
-                            <button onClick={(e)=>handleClickDelete(e)}>X</button>
+                            <button name={"colors"} value={element} onClick={(e)=>handleClickDelete(e)}>X</button>
                             </div>
                         )) : null
                     }
@@ -102,13 +154,14 @@ export default function CreationProduct() {
                 </div>
                 <div>
                     <label>Es promoción?</label>
-                    <select onChange={(e)=>handleChangeInput(e)}>
-                        <option value={"Si"} name={"ispromotion"}>Si</option>
-                        <option value={"No"} name={"ispromotion"}>No</option>
+                    <select name={"ispromotion"} onChange={(e)=>handleSelectPromotion(e)}>
+                        <option value={"Seleccionar"}>Seleccionar</option>
+                        <option value={true} name={"ispromotion"}>Si</option>
+                        <option value={false} name={"ispromotion"}>No</option>
                     </select>
                 </div>
                 {
-                    data.ispromotion === "Si"?
+                    data.ispromotion === true?
                 <div>
                     <div>
                         <label>Precio de promoción</label>
@@ -122,9 +175,59 @@ export default function CreationProduct() {
                 }
                 <div>
                     <label>Categorias</label>
-
+                    <select name={"categories"} onChange={(e)=>handleChangeSelect(e)}>
+                    <option value={"Seleccionar"}>Seleccionar</option>
+                    {
+                        categorias.length ? categorias.map((category) => (
+                            <option name={"categories"} value={category} >{category}</option>
+                        )): null
+                    }
+                    </select>
+                </div>
+                <div>
+                    <h4>Categorias seleccionadas:</h4>
+                    <ul>
+                    {
+                        data.categories.length?data.categories.map((element) => (
+                            <div>
+                            <li>{element}</li>
+                            <button name={"categories"} value={element} onClick={(e)=>handleClickDelete(e)}>X</button>
+                            </div>
+                        )) : null
+                    }
+                    </ul>
+                </div>
+                <div>
+                    <label>Tipos de prendas:</label>
+                    <select name={"types"} onChange={(e)=>handleChangeSelect(e)}>
+                    <option value={"Seleccionar"}>Seleccionar</option>
+                    {
+                        tipos.length ? tipos.map((type) => (
+                            <option name={"types"} value={type} >{type}</option>
+                        )): null
+                    }
+                    </select>
+                </div>
+                <div>
+                    <h4>Tipos de prendas seleccionados:</h4>
+                    <ul>
+                    {
+                        data.types.length?data.types.map((element) => (
+                            <div>
+                            <li>{element}</li>
+                            <button name={"types"} value={element} onClick={(e)=>handleClickDelete(e)}>X</button>
+                            </div>
+                        )) : null
+                    }
+                    </ul>
+                </div>
+                <div>
+                    <button onClick={(e)=>handleSubmit(e)} type="submit">Enviar</button>
+                </div>
+                <div>
+                    <button onClick={(e)=>handleReset(e)} type="submit">Resetear formulario</button>
                 </div>
             </form>
         </div>
-    )
-}
+    );
+};
