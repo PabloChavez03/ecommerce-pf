@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useState } from "react-redux";
-import { getProductByName } from "../../redux/actions-types";
+import { getProductByName } from "../../../redux/actions-types";
 
 export default function SearchBar() {
     const dispatch = useDispatch();
