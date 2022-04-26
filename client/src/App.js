@@ -10,8 +10,8 @@ function App() {
 	return (
 		<BrowserRouter>
 			<>
+				<NavBar />
 				<Routes>
-					<Route path={"/"} element={<NavBar />} />
 					<Route exact path={"/"} element={<Home />} />
 					<Route path={"/detail/:idProduct"} element={<CardDetail />} />
 

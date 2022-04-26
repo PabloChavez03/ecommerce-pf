@@ -1,0 +1,5 @@
+@import "./variables.scss";
+
+@function shadow($x, $y, $blur, $spread, $color: #00131170) {
+	@return $x $y $blur $spread $color;
+}
