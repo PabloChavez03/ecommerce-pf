@@ -6,13 +6,13 @@ const router = Router();
 
 // Importando los archivos para las rutas
 const routerProductos = require("./productos");
-const routerCategoriaPrincipal = require("./productos");
-const routerTipoDePrenda = require("./productos");
+const routerCategoriaPrincipal = require("./categoriaPrincipal");
+const routerTipoDePrenda = require("./tipoDePrenda");
 
 // Modularizando las rutas
 router.use("/productos", routerProductos);
-router.use("/tipo-de-prenda", routerCategoriaPrincipal);
-router.use("/categoria-principal", routerTipoDePrenda);
+router.use("/tipo-de-prenda", routerTipoDePrenda);
+router.use("/categoria-principal", routerCategoriaPrincipal);
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
