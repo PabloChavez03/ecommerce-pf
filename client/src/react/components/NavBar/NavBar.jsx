@@ -15,6 +15,10 @@ export default function NavBar() {
 		setToogleMenu(!toogleMenu);
 	};
 
+	const handleClickForHiddingBurguer = (e) => {
+		setToogleMenu(false);
+	};
+
 	return (
 		<nav className="nav">
 			<div className="nav__up">
@@ -33,10 +37,10 @@ export default function NavBar() {
 
 				<div className="nav__up__features">
 					{/* <WishListIcon /> */}
-					<NavLink exact to={"/cart"}>
+					<NavLink exact to={"/cart"} onClick={handleClickForHiddingBurguer}>
 						<CartIcon />
 					</NavLink>
-					<NavLink exact to={"/account"}>
+					<NavLink exact to={"/account"} onClick={handleClickForHiddingBurguer}>
 						<AccountIcon />
 					</NavLink>
 				</div>
@@ -45,10 +49,10 @@ export default function NavBar() {
 			<div className="nav__down">
 				<div className={`nav__down__links ${toogleMenu ? "menuActived" : ""}`}>
 					<ul>
-						<NavLink exact to={"/home"}>
+						<NavLink exact to={"/home"} onClick={handleClickForHiddingBurguer}>
 							<li>Home</li>
 						</NavLink>
-						<NavLink exact to={"/about"}>
+						<NavLink exact to={"/about"} onClick={handleClickForHiddingBurguer}>
 							<li>About</li>
 						</NavLink>
 					</ul>

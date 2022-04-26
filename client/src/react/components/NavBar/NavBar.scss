@@ -49,7 +49,18 @@
 
 	&__down {
 		&__links {
-			display: none;
+			// display: none;
+			opacity: 0;
+			visibility: hidden;
+			z-index: -1;
+			display: block;
+			position: absolute;
+			overflow: hidden;
+			top: 49px;
+			left: 0;
+			width: 100%;
+			max-height: 0px;
+			transition-duration: 0.3s;
 
 			& ul {
 				display: flex;
@@ -80,7 +91,12 @@
 		}
 
 		.menuActived {
-			display: inline;
+			// display: inline;
+			background-color: #fff;
+			opacity: 1;
+			visibility: visible;
+			z-index: 10;
+			max-height: 2000px;
 		}
 	}
 
