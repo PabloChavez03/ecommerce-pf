@@ -25,7 +25,17 @@ export default function CreationProduct() {
     //   }, [dispatch]);
     
     const colores = ["Blanco", "Negro", "Violeta", "Naranja"];
-    const categorias = ["Woman", "Man", "Children", "Gatitos"];
+    const categorias = [
+        "Women",
+        "Plus + Curve",
+        "Accessories",
+        "Swim",
+        "Activewear",
+        "Men",
+        "Girls",
+        "Collections",
+        "Sale"
+    ];
     const tipos = ["Remeras", "Pantalones", "Gafas", "Medias"];
 
     const handleChangeInput = (event) => {
@@ -38,13 +48,13 @@ export default function CreationProduct() {
 
     const handleSelectPromotion = (event) => {
         event.preventDefault();
-        console.log(event.target.value)
-        console.log(event.target.name)
         if(event.target.value !== "Seleccionar") {
             let promotion = event.target.value === "true" ? true : false;
             setData({
                 ...data,
-                ispromotion: promotion
+                ispromotion: promotion,
+                promotion_msg: "",
+                promotionprice: ""
             });
         };
     };
@@ -59,7 +69,6 @@ export default function CreationProduct() {
 
     const handleClickDelete = (event) => {
         event.preventDefault();
-        console.log(event.target.name)
         setData({
             ...data,
             [event.target.name]: data[event.target.name].filter((el) => el.toLowerCase() !== event.target.value.toLowerCase())
@@ -132,11 +141,12 @@ export default function CreationProduct() {
                     </select>
                 </div>
                 <div>
-                    <h4>Colores seleccionados:</h4>
+                    
                     <ul>
                     {
                         data.colors.length?data.colors.map((element) => (
                             <div>
+                            <h4>Colores seleccionados:</h4>
                             <li>{element}</li>
                             <button name={"colors"} value={element} onClick={(e)=>handleClickDelete(e)}>X</button>
                             </div>
@@ -185,11 +195,11 @@ export default function CreationProduct() {
                     </select>
                 </div>
                 <div>
-                    <h4>Categorias seleccionadas:</h4>
                     <ul>
                     {
                         data.categories.length?data.categories.map((element) => (
                             <div>
+                            <h4>Categorias seleccionadas:</h4>
                             <li>{element}</li>
                             <button name={"categories"} value={element} onClick={(e)=>handleClickDelete(e)}>X</button>
                             </div>
@@ -209,11 +219,11 @@ export default function CreationProduct() {
                     </select>
                 </div>
                 <div>
-                    <h4>Tipos de prendas seleccionados:</h4>
                     <ul>
                     {
                         data.types.length?data.types.map((element) => (
                             <div>
+                            <h4>Tipos de prendas seleccionados:</h4>
                             <li>{element}</li>
                             <button name={"types"} value={element} onClick={(e)=>handleClickDelete(e)}>X</button>
                             </div>
