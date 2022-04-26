@@ -1,28 +1,55 @@
 const axios = require("axios");
+const { optionsCategoriesList } = require("./index");
 
-const options = {
-	method: "GET",
-	url: "https://apidojo-forever21-v1.p.rapidapi.com/categories/v2/list",
-	headers: {
-		"X-RapidAPI-Host": "apidojo-forever21-v1.p.rapidapi.com",
-		"X-RapidAPI-Key": "324a0d5d1emshad70a2c958f1e4cp140a43jsn270daa51ceb2",
-	},
-};
 /** Haciendo una peticion usando limit */
 
 const getInfoApi = () => {
-	return axios
-		.request(options)
-		.then((response) => response.data.menuItemList[0].ChildMenus)
-		.catch((error) => console.log(error));
+  return axios
+    .request(optionsCategoriesList)
+    .then((response) => response.data.menuItemList[0].ChildMenus)
+    .catch((error) => console.log(error));
 };
 
 const getAllCategoriesMain = async () => {
-	const listCategories = await getInfoApi();
-	const allCategories = listCategories.map((element) => element.Category); //
-	return allCategories;
+  const listCategories = await getInfoApi();
+  return listCategories?.map((el) => {
+    return {
+      name: el.Category,
+      depth: el.Depth, //inicia de depth: 2 ya que el depth: 1 es el storefront osea el contenedor gral
+      childMenus: el.ChildMenus?.map((el) => {
+				return {
+          name: el.Category,
+          depth: el.Depth,
+          childMenus: el.ChildMenus?.map((el) => {
+            return {
+              name: el.Category,
+              depth: el.Depth,
+              // childMenus: el.ChildMenus,
+            };
+          }),
+        };
+			})
+    };
+  });
 };
 
+getAllCategoriesMain().then((data) => console.table(data));
+
+// const getAllSubCategories = () => {
+//   return getAllCategoriesMain().then((data) => {
+//     allCategories = data?.map((el) => el.Category);
+// 		return data?.map((el) => {
+// 			return {
+// 				name : el.Category,
+// 				depth: el.Depth,
+// 				childMenus: el.ChildMenus?.map((el) => el)
+// 			}
+// 		})
+//   });
+// };
+
+// getAllSubCategories().then((data) => console.table(data))
+
 module.exports = {
-	getAllCategoriesMain,
+  getAllCategoriesMain,
 };
