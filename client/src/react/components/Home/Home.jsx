@@ -1,8 +1,6 @@
 import React from "react";
 import Cards from "../Cards/Cards";
-
 import { useSelector } from "react-redux";
-import Cards from "../Cards/Cards";
 import Footer from "../Footer/Footer";
 
 export default function Home() {
@@ -10,8 +8,6 @@ export default function Home() {
   return (
     <div>
       {/* Necesitamos el hardcode*/}
-      <h1>Home!</h1>
-      <Footer />
       {allProducts.length ? (
         allProducts.map((product) => {
           return (
@@ -20,9 +16,9 @@ export default function Home() {
                 name={product.name}
                 id={product.id}
                 image={product.image}
-                category={product.category}
-                price={product.price}
-                ofertPrice={product.ofertPrice}
+                originalprice={product.originalprice}
+                promotionprice={product.promotionprice}
+                ispromotion={product.ispromotion}
               />
             </div>
           );
@@ -30,6 +26,7 @@ export default function Home() {
       ) : (
         <p>No hay productos disponibles.</p>
       )}
+      <Footer />
     </div>
   );
-}
+};
