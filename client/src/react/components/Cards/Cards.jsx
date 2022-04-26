@@ -5,7 +5,7 @@ export default function Cards({name, price, ofertPrice, category, image, id}) {
     return (
         <div>
             <h3>{name}</h3>
-            <img src={image} alt="Product Image"/>
+            <img src={image} alt="Product Img"/>
             <h5>{price}</h5>
             {
                 ofertPrice ? <h5>{ofertPrice}</h5> : null
