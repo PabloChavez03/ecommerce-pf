@@ -1,11 +1,13 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
+
 
 function Footer() {
   return (
     <div>
-        <button>About Us!</button>
-        <button>Instagram</button>    
-        <button>Whats App!</button>    
+        <NavLink to={'/'}><button>About Us!</button></NavLink>
+        <NavLink to={'/'}><button>Instagram</button></NavLink>   
+        <NavLink to={'/'}><button>Whats App!</button></NavLink>    
 
     </div>
   )
