@@ -21,7 +21,7 @@ export default function CreationProduct() {
     });
 
     // useEffect(() => {
-    //     dispatch()
+    //     dispatch() // Completar con la funcion que trae las categorias y tipos.
     //   }, [dispatch]);
     
     const colores = ["Blanco", "Negro", "Violeta", "Naranja"];
