@@ -54,6 +54,10 @@ export default function NavBar() {
 					</ul>
 				</div>
 			</div>
+
+			<div className="nav__searchBar">
+				<SearchBar />
+			</div>
 		</nav>
 	);
 }

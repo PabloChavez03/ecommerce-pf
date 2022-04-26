@@ -84,6 +84,11 @@
 		}
 	}
 
+	&__searchBar {
+		@include flex-center;
+		padding: 1.1rem 0 0.5rem 1rem;
+	}
+
 	@media (min-width: 600px) {
 		box-shadow: 0 3px 5px 1px #00000020;
 
@@ -124,6 +129,10 @@
 					}
 				}
 			}
+		}
+
+		&__searchBar {
+			display: none;
 		}
 	}
 }
