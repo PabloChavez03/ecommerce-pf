@@ -27,6 +27,10 @@ export default function NavBar() {
 					<h1 className="nav__up__left__logo">CLOTHES 22</h1>
 				</div>
 
+				<div className="nav__up__searchBar">
+					<SearchBar />
+				</div>
+
 				<div className="nav__up__features">
 					{/* <WishListIcon /> */}
 					<NavLink exact to={"/cart"}>
