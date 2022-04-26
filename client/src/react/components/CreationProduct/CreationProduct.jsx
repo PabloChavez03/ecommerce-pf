@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
 export default function CreationProduct() {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [data, setData] = useState({
         name: "",
@@ -19,10 +18,6 @@ export default function CreationProduct() {
         categories: [],
         types: []
     });
-
-    // useEffect(() => {
-    //     dispatch() // Completar con la funcion que trae las categorias y tipos.
-    //   }, [dispatch]);
     
     const colores = ["Blanco", "Negro", "Violeta", "Naranja"];
     const categorias = [
