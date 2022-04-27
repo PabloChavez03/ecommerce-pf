@@ -15,6 +15,7 @@ async function setDDBBproducts(categoryId) {
 				isOffertPrice: product.isOffertPrice,
 				offertPrice: product.offertPrice,
 				brandName: product.brandName,
+				colour: product.colour,
 			},
 		}).catch((e) => console.error(e)),
 	);

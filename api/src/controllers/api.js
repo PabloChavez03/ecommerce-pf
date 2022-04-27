@@ -58,7 +58,7 @@ const getAllSubCategories = async () => {
   });
 };
 
-let subCategories = [];
+// let subCategories = [];
 
 // getAllSubCategories().then((data) => {
 //   subCategories = data?.map((el) => el.childMenus?.map((el) => el.name));

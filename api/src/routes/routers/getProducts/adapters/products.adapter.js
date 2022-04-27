@@ -8,6 +8,7 @@ async function adaptProducts({ products }) {
 			isOffertPrice: product.price.isOutletPrice,
 			offertPrice: product.price.rrp.value,
 			brandName: product.brandName,
+			colour: product.colour,
 		};
 	});
 }
