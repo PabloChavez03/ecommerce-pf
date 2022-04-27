@@ -14,6 +14,8 @@ router.use("/productos", routerProductos);
 router.use("/tipo-de-prenda", routerTipoDePrenda);
 router.use("/categoria-principal", routerCategoriaPrincipal);
 
+router.use("/products", require("./routers/getProducts"));
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
