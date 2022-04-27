@@ -2,8 +2,9 @@ const getAPIproducts = require("./productsApi.getter.service");
 
 const { Product } = require("../../../../db");
 
-async function setDDBBproducts() {
-	const products = await getAPIproducts();
+async function setDDBBproducts(categoryId) {
+	const products = await getAPIproducts(categoryId);
+
 	await products?.forEach((product) =>
 		Product.findOrCreate({
 			where: {
@@ -11,9 +12,9 @@ async function setDDBBproducts() {
 				name: product.name,
 				image: product.image,
 				originalPrice: product.originalPrice,
+				isOffertPrice: product.isOffertPrice,
 				offertPrice: product.offertPrice,
-				// description: product.description,
-				// variants: product.variants,
+				brandName: product.brandName,
 			},
 		}).catch((e) => console.error(e)),
 	);

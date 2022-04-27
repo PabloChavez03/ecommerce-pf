@@ -47,8 +47,8 @@ Tipo_prenda.hasMany(Producto);
 Producto.belongsTo(Categoria_principal);
 Categoria_principal.hasMany(Producto);
 
-Product.belongsTo(Category);
-Category.hasMany(Product);
+Product.belongsToMany(Category, { through: "category_product" });
+Category.belongsToMany(Product, { through: "category_product" });
 
 module.exports = {
 	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

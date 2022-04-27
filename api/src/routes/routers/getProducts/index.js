@@ -4,15 +4,11 @@ const { Router } = require("express");
 const router = Router();
 
 router.get("", async (req, res) => {
-	const { name } = req.query;
+	const { categoryId } = req.query;
 
-	const countriesFound = name
-		? await getDDBBproducts(name)
-		: await getDDBBproducts();
+	const productsFound = await getDDBBproducts(categoryId);
 
-	countriesFound.length > 0
-		? res.status(200).send(countriesFound)
-		: res.send("Not found");
+	res.status(200).send(productsFound);
 });
 
 module.exports = router;

@@ -1,13 +1,13 @@
-async function adaptProducts({ CatalogProducts }) {
-	return await CatalogProducts?.map((product) => {
+async function adaptProducts({ products }) {
+	return await products?.map((product) => {
 		return {
-			id: product.ProductId,
-			name: product.DisplayName,
-			image: product.DefaultProductImage,
-			originalPrice: product.OriginalPrice,
-			offertPrice: product.ListPrice,
-			// description: product.Description,
-			// variants: product.Variants,
+			id: product.id,
+			name: product.name,
+			image: product.imageUrl,
+			originalPrice: product.price.current.value,
+			isOffertPrice: product.price.isOutletPrice,
+			offertPrice: product.price.rrp.value,
+			brandName: product.brandName,
 		};
 	});
 }

@@ -8,33 +8,42 @@ module.exports = (sequelize) => {
 		"product",
 		{
 			id: {
-				// ProductId
-				type: DataTypes.STRING,
+				// id
+				type: DataTypes.INTEGER,
 				allowNull: false,
 				unique: true,
 				primaryKey: true,
 			},
 			name: {
-				// DisplayName
+				// name
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
 			image: {
-				// DefaultProductImage
+				// imageUrl
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 			originalPrice: {
-				// OriginalPrice
+				// price.current.value
 				type: DataTypes.FLOAT,
 				allowNull: false,
 			},
+			isOffertPrice: {
+				// price.isOutletPrice
+				type: DataTypes.BOOLEAN,
+				allowNull: true,
+			},
 			offertPrice: {
-				// ListPrice
+				// price.rrp.value
 				type: DataTypes.FLOAT,
 				allowNull: true,
 			},
-
+			brandName: {
+				// brandName
+				type: DataTypes.STRING,
+				allowNull: true,
+			},
 			/** La información de aquí para abajo llegará con la llamada al endpoint de detail
 			 * 	así se tiene mejor rendimiento en el Home ya que no se llama toda la
 			 * 	información desde allí, sino cuando se necesite dentro de los detalles del producto
