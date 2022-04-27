@@ -1,0 +1,160 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/functions.scss";
+@import "../../../styles/mixins.scss";
+
+.nav {
+	@include flex-column;
+	box-shadow: 0 3px 5px 1px #00000020;
+
+	&__up {
+		@include flex-center;
+		justify-content: space-between;
+		padding: 0.5rem;
+
+		&__searchBar {
+			display: none;
+		}
+
+		&__left {
+			@include flex-center;
+			gap: 0.8rem;
+			margin-left: 0.5rem;
+
+			&__burguer {
+				@include flex-column;
+				justify-content: space-between;
+				width: 19.44px;
+				height: 15.97px;
+
+				&_bar {
+					height: 2px;
+					width: 100%;
+					background-color: $background-dark-color;
+					border-radius: 10px;
+				}
+			}
+
+			&__logo {
+				margin-left: 0.5rem;
+			}
+		}
+
+		&__features {
+			& svg {
+				width: 30px;
+				margin-right: 0.5rem;
+			}
+		}
+	}
+
+	&__down {
+		&__links {
+			opacity: 0;
+			visibility: hidden;
+			z-index: -1;
+			display: block;
+			position: absolute;
+			overflow: hidden;
+			top: 49px;
+			left: 0;
+			width: 100%;
+			max-height: 0px;
+			transition-duration: 0.3s;
+
+			& ul {
+				display: flex;
+				list-style: none;
+				flex-direction: column;
+
+				& a {
+					color: black;
+					border-bottom: 1px solid rgba(0, 0, 0, 0.185);
+					font-weight: $fw-bold;
+					text-decoration: none;
+					text-transform: uppercase;
+
+					& li {
+						letter-spacing: 1px;
+						padding: 1.1rem 0 0.5rem 1rem;
+
+						&:hover {
+							color: $accent-color;
+						}
+					}
+				}
+			}
+
+			.active {
+				color: $accent-color;
+			}
+		}
+
+		.menuActived {
+			background-color: #fff;
+			opacity: 1;
+			visibility: visible;
+			z-index: 10;
+			max-height: 2000px;
+		}
+	}
+
+	&__searchBar {
+		@include flex-center;
+		padding: 1.1rem 0 0.5rem 1rem;
+	}
+
+	@media (min-width: 600px) {
+		box-shadow: 0 3px 5px 1px #00000020;
+
+		&__up {
+			box-shadow: 0 3px 5px 1px #00000020;
+
+			&__searchBar {
+				display: inline;
+			}
+
+			&__left {
+				&__burguer {
+					display: none;
+				}
+				&__logo {
+					margin: 1rem;
+				}
+			}
+			&__features {
+				& svg {
+					width: 30px;
+					margin-right: 1.5rem;
+				}
+			}
+		}
+
+		&__down {
+			&__links {
+				display: flex;
+				justify-content: center;
+				opacity: 1;
+				visibility: visible;
+				max-height: 2000px;
+				position: relative;
+				top: auto;
+				left: auto;
+				width: 100%;
+
+				& ul {
+					flex-direction: row;
+					& a {
+						border-bottom: none;
+						& li {
+							padding: 1rem 0.5rem;
+						}
+					}
+				}
+			}
+		}
+
+		&__searchBar {
+			display: none;
+		}
+	}
+}
