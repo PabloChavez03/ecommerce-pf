@@ -1,0 +1,9 @@
+.principalDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.imageConstruction {
+    width: 70%;
+   
+}
