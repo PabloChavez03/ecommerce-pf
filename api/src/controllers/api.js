@@ -33,7 +33,7 @@ const getAllCategoriesMain = async () => {
   });
 };
 
-getAllCategoriesMain().then((data) => console.table(data));
+// getAllCategoriesMain().then((data) => console.table(data));
 
 // const getAllSubCategories = () => {
 //   return getAllCategoriesMain().then((data) => {
