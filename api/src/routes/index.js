@@ -5,14 +5,18 @@ const { Router } = require("express");
 const router = Router();
 
 // Importando los archivos para las rutas
-const routerProductos = require("./productos");
-const routerCategoriaPrincipal = require("./categoriaPrincipal");
-const routerTipoDePrenda = require("./tipoDePrenda");
-
 // Modularizando las rutas
-router.use("/categoria-principal", routerCategoriaPrincipal);
+<<<<<<< HEAD
+const getCategories = require("./routers/getCategories");
+const getProducts = require("./routers/getProducts");
+=======
 router.use("/productos", routerProductos);
 router.use("/tipo-de-prenda", routerTipoDePrenda);
+router.use("/categoria-principal", routerCategoriaPrincipal);
+>>>>>>> 7c1cd538ef5f6b40e043cfaf73493f731d0a6d0a
+
+router.use("/categories", getCategories);
+router.use("/products", getProducts);
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
