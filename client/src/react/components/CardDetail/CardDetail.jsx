@@ -1,35 +1,74 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cards from "../Cards/Cards";
+import products from "../../../Info/productos.json";
+import { useParams } from "react-router-dom";
 var Carousel = require('react-responsive-carousel').Carousel;
 
-export default function CardDetail({
-	ProductImages, // URL
-	name,
-	price,
-	price_offer,
-	variants,
-	stock,
-	reviews,
-	likes,
-	relatedProducts, // Must contain products home information
-}) {
-	const { colors, sizes } = variants;
+export default function CardDetail() {
 	const [quantity, setQuantity] = useState(1);
+	const {idProduct} = useParams();
+	const productFilter = products.filter((e)=> parseInt(e.id_product) === parseInt(idProduct));
+	// const [colorSelect, setColorSelect] = useState("");
+	const [imagesRender, setImagesRender] = useState([]);
+	const [sizesRender, setSizesRender] = useState([]);
+
+	const { // URL
+		name,
+		price,
+		description,
+		is_offer,
+		price_offer,
+		variants,
+	} = productFilter[0];
+
+	useEffect(()=>{
+		setImagesRender(variants[0].ProductImages);
+		setSizesRender()
+	  },[variants])
 
 	const handleQuantity = (e) => {
 		e.preventDefault();
 		if (e.target.name === "less") setQuantity(quantity - 1);
 		if (e.target.name === "more") setQuantity(quantity + 1);
 	};
+
+
+	const colors = variants.map((e)=>e.ColorName);
+	let sizes = variants.map((e)=>e.Stocks); //[{l:5 m:2 s:1}]
+	let arr = sizes.map(e=>Object.keys(e)) 
+
+	sizes = Object.keys(sizes)
+	
+	const handleChangeSelect = (event) => {
+		event.preventDefault();
+		// setColorSelect(event.target.value);
+		let variantFilter = variants.find((e)=> e.ColorName === event.target.value);
+		console.log(variantFilter.ProductImages)
+		setImagesRender([variantFilter.ProductImages]);
+	};
+
 	return (
 		<div>
-			<div>
+				<h1>{name}</h1>
 				<Carousel>
-					{ProductImages.length?ProductImages.map(image => (
-						<img src={image} alt="Img Product"/>
+					{imagesRender.length? imagesRender.map(image => (
+						<div>
+							<img src={image} alt="Img Product"/>
+						</div>
 					)) : null}
 				</Carousel>
-				<button>UnCorazon:D</button>
+				<h3>Precio $ {price}</h3>
+				<p>{description}</p>
+				{is_offer?<h3>Precio de oferta $ {price_offer}</h3> : null}
+				<select onChange={(e)=>handleChangeSelect(e)}>
+					{
+						colors.length?colors.map((color)=>(
+							<option>{color}</option>
+						)):<option>UNIQUE</option>
+					}
+				</select>
+
+				{/* <button>UnCorazon:D</button>
 				<h1>{name}</h1>
 				{price_offer ? (
 					<>
@@ -63,8 +102,8 @@ export default function CardDetail({
 						+
 					</button>
 				</div>
-				<h5>Hay {stock} productos en stock</h5>
-			</div>
+				{/* <h5>Hay {stock} productos en stock</h5> */}
+			{/* </div>
 
 			<div>
 				<h2>Reviews</h2>
@@ -86,7 +125,7 @@ export default function CardDetail({
 						);
 					})}
 				</div>
-			</div>
+			</div> */} 
 		</div>
 	);
 }

@@ -6,8 +6,8 @@ export default function Cards({
 	name,
 	price,
 	price_offer,
-	SwatchImage,
-	id,
+	default_image,
+	id_product,
 	is_offer,
 }) {
 	const handleClickAddCart = (event) => (
@@ -16,10 +16,10 @@ export default function Cards({
 	return (
 		<div>
 			<h3>{name}</h3>
-			<img src={SwatchImage} alt="Product Img" />
-			<h5>{`$ ${price}`}</h5>
-			{is_offer ? <h5>{`$ ${price_offer}`}</h5> : null}
-			<NavLink to={`/detail/${id}`} style={{ textDecoration: "none" }}>
+			<img src={default_image} alt="Product Img" />
+			<h5>{`Precio $ ${price}`}</h5>
+			{is_offer ? <h5>{`Precio de oferta $ ${price_offer}`}</h5> : null}
+			<NavLink to={`/detail/${id_product}`} style={{ textDecoration: "none" }}>
 				<button>Mostrar Detalles</button>
 			</NavLink>
 			<button onClick={(e)=>handleClickAddCart(e)}>Agregar al carrito</button>
