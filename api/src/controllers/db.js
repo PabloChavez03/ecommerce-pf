@@ -1,0 +1,1 @@
+const { getAllCategoriesMain } = require("./api");
