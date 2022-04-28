@@ -1,8 +1,9 @@
-import { GET_PRODUCT_BY_NAME } from "../actions-creators";
+import { ADD_PRODUCT_TO_CART, GET_PRODUCT_BY_NAME } from "../actions-creators";
 
 const initialState = {
     products: [],
-    productFilter: []
+    productFilter: [],
+    cartItems: [],
 };
 
 export default function rootReducer (state = initialState, {type, payload}) {
@@ -12,6 +13,11 @@ export default function rootReducer (state = initialState, {type, payload}) {
                 ...state,
                 productFilter: payload
     };
+        case ADD_PRODUCT_TO_CART:
+            return {
+                ...state,
+                cartItems: [...state.cartItems, payload]
+            };
         default: return {...state};
     };
 };

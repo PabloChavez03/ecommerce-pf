@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import Cards from "../Cards/Cards";
 import products from "../../../Info/productos.json";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addProductToCart } from "../../../redux/actions-types";
 var Carousel = require('react-responsive-carousel').Carousel;
 
 export default function CardDetail() {
+	const dispatch = useDispatch();
 	const [quantity, setQuantity] = useState(1);
 	const {idProduct} = useParams();
-	
+	const productsCart = useSelector((state)=>state.cartItems);
 	const productFilter = products.filter((e)=> parseInt(e.id_product) === parseInt(idProduct));
 	// const [colorSelect, setColorSelect] = useState("");
 	const [imagesRender, setImagesRender] = useState([]);
@@ -20,6 +23,13 @@ export default function CardDetail() {
 		price_offer,
 		variants,
 	} = productFilter[0];
+
+	const [productFilterCart, setProductFilterCart] = useState({
+		name,
+		price: is_offer?price_offer:price,
+		color: "",
+		size: ""
+	})
 
 	useEffect(()=>{
 		setImagesRender(variants[0].ProductImages);
@@ -42,10 +52,20 @@ export default function CardDetail() {
 		event.preventDefault();
 		// setColorSelect(event.target.value);
 		let variantFilter = variants.find((e)=> e.ColorName === event.target.value);
+		console.log(variantFilter)
 		let keys = Object.keys(variantFilter.Stocks);
 		setImagesRender(variantFilter.ProductImages);
 		setSizesRender(keys);
+		setProductFilterCart({
+			...productFilterCart,
+			[event.target.name]: event.target.value
+		});
 	};
+
+	const handleAddCart = (event) => {
+		event.preventDefault();
+		dispatch(addProductToCart(productFilterCart));
+	}
 
 	return (
 		<div>
@@ -61,22 +81,22 @@ export default function CardDetail() {
 				<p>{description}</p>
 				{is_offer?<h3>Precio de oferta $ {price_offer}</h3> : null}
 				<h4>Variantes:</h4>
-				<select onChange={(e)=>handleChangeSelect(e)}>
+				<select name="color"  onChange={(e)=>handleChangeSelect(e)}>
 					<option>Color</option>
 					{
 						colors.length?colors.map((color)=>(
-							<option value={color}>{color}</option>
+							<option name="color" value={color}>{color}</option>
 						)):<option>UNIQUE</option>
 					}
 				</select>
-				<select>
+				<select name="size" onChange={(e)=>handleChangeSelect(e)}>
 					<option>Talle</option>
 						{sizesRender.length ? sizesRender.map(size => (
-							<option key={size}>{size}</option>
+							<option name="size" value={size} key={size}>{size}</option>
 						)) : null}
 				</select>
 
-				<button>Agregar al carrito</button>
+				<button onClick={(e)=>handleAddCart(e)}>Agregar al carrito</button>
 				{/* <button>UnCorazon:D</button>
 				<h1>{name}</h1>
 				{price_offer ? (
