@@ -1,5 +1,5 @@
 const axios = require("axios");
-const adaptListProducts = require("../adapters/products.adapter");
+const adaptProducts = require("../adapters/products.adapter");
 
 function getAPIproducts(categoryId) {
 	const options = {
@@ -18,7 +18,7 @@ function getAPIproducts(categoryId) {
 	};
 
 	return axios(options)
-		.then(({ data }) => adaptListProducts(data))
+		.then(({ data }) => adaptProducts(data))
 		.catch((e) => console.log(e.message));
 }
 

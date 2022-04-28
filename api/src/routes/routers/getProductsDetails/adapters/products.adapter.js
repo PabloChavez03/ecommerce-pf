@@ -1,4 +1,4 @@
-async function adaptListProducts({ products }) {
+async function adaptProducts({ products }) {
 	return await products?.map((product) => {
 		return {
 			id: product.id,
@@ -13,4 +13,4 @@ async function adaptListProducts({ products }) {
 	});
 }
 
-module.exports = adaptListProducts;
+module.exports = adaptProducts;
