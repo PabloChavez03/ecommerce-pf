@@ -6,23 +6,28 @@ async function setDDBBproducts(categoryId) {
 	const products = await getAPIproducts(categoryId);
 
 	let category = await Category.findByPk(categoryId).catch((e) =>
-		console.log(e),
+		console.log(e.message),
 	);
 
 	await products.forEach(async (product) => {
-		const [newProduct, created] = await Product.findOrCreate({
-			where: {
-				id: product.id,
-				name: product.name,
-				image: product.image,
-				originalPrice: product.originalPrice,
-				isOffertPrice: product.isOffertPrice,
-				offertPrice: product.offertPrice,
-				brandName: product.brandName,
-			},
-		}).catch((e) => console.log(e));
+		try {
+			const [newProduct, created] = await Product.findOrCreate({
+				where: {
+					id: product.id,
+					name: product.name,
+					image: product.image,
+					originalPrice: product.originalPrice,
+					isOffertPrice: product.isOffertPrice,
+					offertPrice: product.offertPrice,
+					brandName: product.brandName,
+				},
+			});
+			// .catch((e) => console.log(e.message));
 
-		newProduct.addCategories(category);
+			newProduct.addCategories(category);
+		} catch (e) {
+			console.log(e.message);
+		}
 	});
 }
 

@@ -13,7 +13,7 @@ async function getDDBBproducts(categoryId) {
 				attributes: [],
 			},
 		},
-	});
+	}).catch((e) => console.log(e.message));
 }
 
 module.exports = getDDBBproducts;
