@@ -22,7 +22,6 @@ function CategorySlider() {
       ],
     },
   ];
-  console.log(arr[0]);
   return (
     <div>
       {arr?.map((e) => {
