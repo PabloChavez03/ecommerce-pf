@@ -9,6 +9,12 @@ const sequelize = new Sequelize(
 	{
 		logging: false, // set to console.log to see the raw SQL queries
 		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+		pool: {
+			max: 80,
+			min: 0,
+			acquire: 30000,
+			idle: 10000,
+		},
 	},
 );
 const basename = path.basename(__filename);
@@ -37,18 +43,12 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
+const { Product, Category } = sequelize.models;
 
-const { Categoria_principal, Producto, Tipo_prenda, Product, Category } =
-	sequelize.models;
-
-Producto.belongsTo(Tipo_prenda);
-Tipo_prenda.hasMany(Producto);
-
-Producto.belongsTo(Categoria_principal);
-Categoria_principal.hasMany(Producto);
-
-Product.belongsToMany(Category, { through: "category_product" });
-Category.belongsToMany(Product, { through: "category_product" });
+// Aca vendrian las relaciones
+// Product.hasMany(Reviews);
+Product.belongsToMany(Category, { through: "product_category" });
+Category.belongsToMany(Product, { through: "product_category" });
 
 module.exports = {
 	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

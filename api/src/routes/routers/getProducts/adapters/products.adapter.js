@@ -3,7 +3,7 @@ async function adaptProducts({ products }) {
 		return {
 			id: product.id,
 			name: product.name,
-			image: product.imageUrl,
+			image: `https://${product.imageUrl}`,
 			originalPrice: product.price.current.value,
 			isOffertPrice: product.price.isOutletPrice,
 			offertPrice: product.price.rrp.value,

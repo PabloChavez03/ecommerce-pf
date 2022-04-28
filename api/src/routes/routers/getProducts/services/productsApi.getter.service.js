@@ -1,7 +1,7 @@
 const axios = require("axios");
 const adaptProducts = require("../adapters/products.adapter");
 
-function getAPIproducts(categoryId) {
+async function getAPIproducts(categoryId) {
 	const options = {
 		method: "GET",
 		url: "https://asos2.p.rapidapi.com/products/v2/list",
@@ -17,9 +17,9 @@ function getAPIproducts(categoryId) {
 		},
 	};
 
-	return axios(options)
+	return await axios(options)
 		.then(({ data }) => adaptProducts(data))
-		.catch((e) => console.log(e.message));
+		.catch((e) => e.message);
 }
 
 module.exports = getAPIproducts;

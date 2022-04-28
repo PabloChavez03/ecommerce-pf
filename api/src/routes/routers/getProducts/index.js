@@ -8,7 +8,7 @@ router.get("", async (req, res) => {
 
 	const productsFound = await getDDBBproducts(categoryId);
 
-	res.status(200).send(productsFound);
+	res.json(productsFound);
 });
 
 module.exports = router;
