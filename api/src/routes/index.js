@@ -16,6 +16,7 @@ const router = Router();
 
 router.use("/categories", require("./routers/getCategories"));
 router.use("/products", require("./routers/getProducts"));
+router.use("/products/detail", require("./routers/getProductsDetails"));
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);

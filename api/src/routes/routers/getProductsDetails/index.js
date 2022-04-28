@@ -1,16 +1,17 @@
-const getDDBBproducts = require("./services/productsDB.getter.service");
+// const getDDBBproducts = require("./services/productsDB.getter.service");
+const getApiProductsDetail = require("./services/productsDetailApi.getter.service")
 
 const { Router } = require("express");
 const router = Router();
 
-router.get("/:categoryId", async (req, res) => {
+router.get("/:productId", async (req, res) => {
 	// const { categoryId } = req.query;
-	const { categoryId } = req.params
+	const { productId } = req.params
 	// console.log(categoryId)
+	
+	const productsDetailFound = await getApiProductsDetail(productId);
 
-	const productsFound = await getDDBBproducts(categoryId);
-
-	res.status(200).send(productsFound);
+	res.status(200).send(productsDetailFound);
 });
 
 module.exports = router;

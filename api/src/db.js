@@ -41,7 +41,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Product, Category } =
 	sequelize.models;
 
-	
+		
 Product.belongsToMany(Category, { through: "product_category" });
 Category.belongsToMany(Product, { through: "product_category" });
 
