@@ -1,16 +1,12 @@
 const getAPIproducts = require("./productsApi.getter.service");
 
-const { Product, Category } = require("../../../../db");
+const { Product } = require("../../../../db");
 
 async function setDDBBproducts(categoryId) {
 	const products = await getAPIproducts(categoryId);
 
-	let category = await Category.findByPk(categoryId).catch((e) =>
-		console.log(e),
-	);
-
-	await products.forEach(async (product) => {
-		const [newProduct, created] = await Product.findOrCreate({
+	await products?.forEach((product) =>
+		Product.findOrCreate({
 			where: {
 				id: product.id,
 				name: product.name,
@@ -21,10 +17,8 @@ async function setDDBBproducts(categoryId) {
 				brandName: product.brandName,
 				colour: product.colour,
 			},
-		}).catch((e) => console.log(e));
-
-		newProduct.addCategories(category);
-	});
+		}).catch((e) => console.error(e)),
+	);
 }
 
 module.exports = setDDBBproducts;

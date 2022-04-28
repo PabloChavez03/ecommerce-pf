@@ -44,6 +44,10 @@ module.exports = (sequelize) => {
 				type: DataTypes.STRING,
 				allowNull: true,
 			},
+			colour: {
+				type: DataTypes.STRING,
+				allowNull: true,
+			}
 			/** La información de aquí para abajo llegará con la llamada al endpoint de detail
 			 * 	así se tiene mejor rendimiento en el Home ya que no se llama toda la
 			 * 	información desde allí, sino cuando se necesite dentro de los detalles del producto
