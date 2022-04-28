@@ -37,7 +37,7 @@ export default function CardDetail() {
 	let sizes = variants.map((e)=>e.Stocks); //[{l:5 m:2 s:1}]
 	let arr = sizes.map(e=>Object.keys(e)) 
 
-	sizes = Object.keys(sizes)
+	sizes = Object.keys(sizes);
 	
 	const handleChangeSelect = (event) => {
 		event.preventDefault();
