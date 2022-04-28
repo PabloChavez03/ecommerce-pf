@@ -138,7 +138,6 @@ export default function CreationProduct() {
                     </select>
                 </div>
                 <div>
-                    
                     <ul>
                     {
                         data.colors.length?data.colors.map((element) => (

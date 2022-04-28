@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-
 import Cards from "../Cards/Cards";
+var Carousel = require('react-responsive-carousel').Carousel;
 
 export default function CardDetail({
-	image, // URL
+	ProductImages, // URL
 	name,
 	price,
-	salePrice,
+	price_offer,
 	variants,
 	stock,
 	reviews,
@@ -21,19 +21,22 @@ export default function CardDetail({
 		if (e.target.name === "less") setQuantity(quantity - 1);
 		if (e.target.name === "more") setQuantity(quantity + 1);
 	};
-
 	return (
 		<div>
 			<div>
-				<img src={image} alt={name} />
+				<Carousel>
+					{ProductImages.length?ProductImages.map(image => (
+						<img src={image} alt="Img Product"/>
+					)) : null}
+				</Carousel>
 				<button>UnCorazon:D</button>
 				<h1>{name}</h1>
-				{salePrice ? (
+				{price_offer ? (
 					<>
 						<p>
 							<s>{price}</s>
 						</p>
-						<strong>{salePrice}</strong>
+						<strong>{price_offer}</strong>
 					</>
 				) : (
 					<p>{price}</p>
@@ -75,7 +78,7 @@ export default function CardDetail({
 							<Cards
 								name={el.name}
 								price={el.price}
-								ofertPrice={el.salePrice}
+								ofertPrice={el.price_offer}
 								category={el.category}
 								image={el.image}
 								id={el.id}
