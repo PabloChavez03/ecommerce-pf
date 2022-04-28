@@ -20,6 +20,7 @@ export default function CreationProduct() {
     });
     
     const colores = ["Blanco", "Negro", "Violeta", "Naranja"];
+
     const categorias = [
         "Women",
         "Plus + Curve",
@@ -31,6 +32,7 @@ export default function CreationProduct() {
         "Collections",
         "Sale"
     ];
+    
     const tipos = ["Remeras", "Pantalones", "Gafas", "Medias"];
 
     const handleChangeInput = (event) => {
@@ -136,7 +138,6 @@ export default function CreationProduct() {
                     </select>
                 </div>
                 <div>
-                    
                     <ul>
                     {
                         data.colors.length?data.colors.map((element) => (

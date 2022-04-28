@@ -1,24 +1,28 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Construction from "../Construction/Construction";
 
 export default function Cards({
 	name,
-	originalprice,
-	promotionprice,
-	image,
-	id,
-	ispromotion,
+	price,
+	price_offer,
+	default_image,
+	id_product,
+	is_offer,
 }) {
+	const handleClickAddCart = (event) => (
+		<Construction/> //provisorio hasta que este el carrito
+	)
 	return (
 		<div>
-			<h3>{name}</h3>s
-			<img src={image} alt="Product Img" />
-			<h5>{`$ ${originalprice}`}</h5>
-			{ispromotion ? <h5>{`$ ${promotionprice}`}</h5> : null}
-			<NavLink to={`/detail/${id}`} style={{ textDecoration: "none" }}>
+			<h3>{name}</h3>
+			<img src={default_image} alt="Product Img" />
+			<h5>{`Precio $ ${price}`}</h5>
+			{is_offer ? <h5>{`Precio de oferta $ ${price_offer}`}</h5> : null}
+			<NavLink to={`/detail/${id_product}`} style={{ textDecoration: "none" }}>
 				<button>Mostrar Detalles</button>
 			</NavLink>
-			<button>Agregar al carrito</button>
+			<button onClick={(e)=>handleClickAddCart(e)}>Agregar al carrito</button>
 		</div>
 	);
 }
