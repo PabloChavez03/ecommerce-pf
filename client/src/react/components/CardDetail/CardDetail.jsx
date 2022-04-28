@@ -7,11 +7,11 @@ var Carousel = require('react-responsive-carousel').Carousel;
 export default function CardDetail() {
 	const [quantity, setQuantity] = useState(1);
 	const {idProduct} = useParams();
+	
 	const productFilter = products.filter((e)=> parseInt(e.id_product) === parseInt(idProduct));
 	// const [colorSelect, setColorSelect] = useState("");
 	const [imagesRender, setImagesRender] = useState([]);
 	const [sizesRender, setSizesRender] = useState([]);
-
 	const { // URL
 		name,
 		price,
@@ -23,7 +23,7 @@ export default function CardDetail() {
 
 	useEffect(()=>{
 		setImagesRender(variants[0].ProductImages);
-		setSizesRender()
+		setSizesRender(Object.keys(variants[0].Stocks));
 	  },[variants])
 
 	const handleQuantity = (e) => {
@@ -32,42 +32,51 @@ export default function CardDetail() {
 		if (e.target.name === "more") setQuantity(quantity + 1);
 	};
 
-
 	const colors = variants.map((e)=>e.ColorName);
 	let sizes = variants.map((e)=>e.Stocks); //[{l:5 m:2 s:1}]
-	let arr = sizes.map(e=>Object.keys(e)) 
+	let arr = sizes.map(e=>Object.keys(e));
 
 	sizes = Object.keys(sizes);
-	
+
 	const handleChangeSelect = (event) => {
 		event.preventDefault();
 		// setColorSelect(event.target.value);
 		let variantFilter = variants.find((e)=> e.ColorName === event.target.value);
-		console.log(variantFilter.ProductImages)
-		setImagesRender([variantFilter.ProductImages]);
+		let keys = Object.keys(variantFilter.Stocks);
+		setImagesRender(variantFilter.ProductImages);
+		setSizesRender(keys);
 	};
 
 	return (
 		<div>
 				<h1>{name}</h1>
 				<Carousel>
-					{imagesRender.length? imagesRender.map(image => (
+					{imagesRender.length ? imagesRender.map(image => (
 						<div>
-							<img src={image} alt="Img Product"/>
+							<img key={image} src={image} alt="Img Product"/>
 						</div>
 					)) : null}
 				</Carousel>
 				<h3>Precio $ {price}</h3>
 				<p>{description}</p>
 				{is_offer?<h3>Precio de oferta $ {price_offer}</h3> : null}
+				<h4>Variantes:</h4>
 				<select onChange={(e)=>handleChangeSelect(e)}>
+					<option>Color</option>
 					{
 						colors.length?colors.map((color)=>(
-							<option>{color}</option>
+							<option value={color}>{color}</option>
 						)):<option>UNIQUE</option>
 					}
 				</select>
+				<select>
+					<option>Talle</option>
+						{sizesRender.length ? sizesRender.map(size => (
+							<option key={size}>{size}</option>
+						)) : null}
+				</select>
 
+				<button>Agregar al carrito</button>
 				{/* <button>UnCorazon:D</button>
 				<h1>{name}</h1>
 				{price_offer ? (
