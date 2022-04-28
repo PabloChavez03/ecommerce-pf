@@ -1,13 +1,11 @@
 const setDDBBcategories = require("./categoriesDB.setter.service");
 
-const { Category } = require("../../../../db.js");
+const { Category } = require("../../../../db");
 
 async function getDDBBcategories() {
 	await setDDBBcategories();
 
-	const categories = await Category.findAll();
-
-	return categories;
+	return await Category.findAll();
 }
 
 module.exports = getDDBBcategories;

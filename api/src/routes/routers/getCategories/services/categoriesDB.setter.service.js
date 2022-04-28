@@ -1,17 +1,17 @@
 const getAPIcategories = require("./categoriesApi.getter.service");
-
-const { Category } = require("../../../../db.js");
+const { Category } = require("../../../../db");
 
 async function setDDBBcategories() {
-	const categories = await getAPIcategories();
+	const categories = await getAPIcategories().catch((e) => e.message);
 
-	await categories?.forEach(async (category) =>
+	await categories.forEach((category) =>
 		Category.findOrCreate({
 			where: {
+				id: category.id,
 				title: category.title,
-				categories: category.categories,
+				genre: category.genre,
 			},
-		}).catch((e) => console.error(e)),
+		}).catch((e) => e.message),
 	);
 }
 

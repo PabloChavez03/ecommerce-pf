@@ -2,12 +2,11 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
 	sequelize.define(
-		"category",
+		"Category",
 		{
 			id: {
 				// Category
-				type: DataTypes.UUID,
-				defaultValue: DataTypes.UUIDV4,
+				type: DataTypes.INTEGER,
 				allowNull: false,
 				unique: true,
 				primaryKey: true,
@@ -16,10 +15,9 @@ module.exports = (sequelize) => {
 				// Name
 				type: DataTypes.STRING,
 				allowNull: false,
-				unique: true,
 			},
-			categories: {
-				type: DataTypes.ARRAY(DataTypes.JSONB),
+			genre: {
+				type: DataTypes.STRING,
 				allowNull: false,
 			},
 		},

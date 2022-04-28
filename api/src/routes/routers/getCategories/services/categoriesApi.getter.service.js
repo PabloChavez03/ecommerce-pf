@@ -1,7 +1,7 @@
 const axios = require("axios");
 const adaptCategory = require("../adapters/category.adapter");
 
-function getAPIcategories() {
+async function getAPIcategories() {
 	const options = {
 		method: "GET",
 		url: "https://asos2.p.rapidapi.com/categories/list",
@@ -11,9 +11,9 @@ function getAPIcategories() {
 		},
 	};
 
-	return axios(options)
+	return await axios(options)
 		.then(({ data }) => adaptCategory(data))
-		.catch((e) => console.log(e.message));
+		.catch((e) => e.message);
 }
 
 module.exports = getAPIcategories;
