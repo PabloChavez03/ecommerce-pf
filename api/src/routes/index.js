@@ -32,7 +32,12 @@ router.use("/categories", getCategories);
 router.use("/products", getProducts);
 
 
+
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+
+
+router.use('/carrito', require("../routes/routers/carrito"));
 
 module.exports = router;

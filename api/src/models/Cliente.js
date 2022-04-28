@@ -1,7 +1,7 @@
 const { DataTypes,  } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('Client', {
+  sequelize.define('Cliente', {
     phone: {
       type: DataTypes.BIGINT(),
       allowNull: false,

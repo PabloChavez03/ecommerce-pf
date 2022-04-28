@@ -8,8 +8,8 @@ module.exports = (sequelize) => {
             primaryKey:true,
             unique: true
         },
-        id_product: {
-            type: DataTypes.INTEGER,
+        carrito_product: {
+            type: DataTypes.JSON,
             allowNull: true,
         },
     },{ timestamps: false })
