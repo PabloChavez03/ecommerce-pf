@@ -10,9 +10,9 @@ export default function Home() {
     <div>
       {/* Necesitamos el hardcode*/}
       {allProducts.length ? (
-        allProducts.map((product) => {
+        allProducts.map((product, index) => {
           return (
-            <div>
+            <div key={index}>
               <Cards
                 name={product.name}
                 price={product.price}
