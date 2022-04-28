@@ -17,6 +17,7 @@ const router = Router();
 router.use("/categories", require("./routers/getCategories"));
 router.use("/products", require("./routers/getProducts"));
 router.use("/products/detail", require("./routers/getProductsDetails"));
+router.use("/client", require("./routers/Clients/routesClient/index"));
 
 // Modularizando las rutas
 

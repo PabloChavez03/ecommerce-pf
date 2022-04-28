@@ -16,7 +16,7 @@ async function adaptProductsDetail(product) {
 					isAvailable: el.isAvailable,
 					color: el.colour,
 					// price: Object.entries(el.price).forEach(([key,value]) => [...value]),
-					price: Object.entries(el.price)?.map(el => el),
+					price: Object.entries(el.price)?.map(el => el?.map(el => el)),
 				}
 			}),
 		};
