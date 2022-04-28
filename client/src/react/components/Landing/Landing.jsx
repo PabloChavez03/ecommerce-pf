@@ -1,12 +1,12 @@
 import React from "react";
-import CategoryLanding from "../CategoryLanding/CategoryLanding";
+import CategorySlider from "../CategorySlider/CategorySlider";
 
 function Landing() {
   return (
     <div>
-      <CategoryLanding />
+      <CategorySlider />
     </div>
   );
-};
+}
 
 export default Landing;
