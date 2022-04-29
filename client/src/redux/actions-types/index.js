@@ -1,4 +1,4 @@
-import { GET_PRODUCT_BY_NAME, ADD_PRODUCT_TO_CART } from "../actions-creators";
+import { GET_PRODUCT_BY_NAME, ADD_PRODUCT_TO_CART, SET_CURRENT_PAGE } from "../actions-creators";
 
 export const getProductByName = (nameProduct) => {
     return async function (dispatch) {
@@ -10,5 +10,13 @@ export const getProductByName = (nameProduct) => {
 export const addProductToCart = (product) => {
     return async function (dispatch) {
         return dispatch({type: ADD_PRODUCT_TO_CART, payload: product})
+    };
+};
+
+
+export const setCurrentPage = (numberPage) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        payload: numberPage
     };
 };
