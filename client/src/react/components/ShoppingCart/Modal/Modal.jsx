@@ -24,7 +24,7 @@ const Modal = ({ status, setStatus }) => {
 							{cartData &&
 								cartData.map((product) => {
 									return (
-										<div key={product.id}>
+										<div key={product.name}>
 											<ProductCardModal
 												name={product.name}
 												price={product.price}

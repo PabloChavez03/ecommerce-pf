@@ -37,12 +37,12 @@ export default function CardDetail() {
 
 	const [productFilterCart, setProductFilterCart] = useState({
 		name,
-
 		price: is_offer ? price_offer : price,
 		color: colorSelect,
 		size: "",
 		id_product,
 		default_image,
+		quantity: 1,
 	});
 
 	useEffect(() => {
