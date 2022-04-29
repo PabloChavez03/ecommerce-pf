@@ -32,14 +32,14 @@ export default function NavBar() {
 	};
 
 	return (
-		<nav className="nav">
-			<div className="nav__up">
-				<div className="nav__up__left">
-					<span className="nav__up__left__burguer" onClick={handleBurguerClick}>
-						<span className="nav__up__left__burguer_bar"></span>
-						<span className="nav__up__left__burguer_bar"></span>
-						<span className="nav__up__left__burguer_bar"></span>
-						<span className="nav__up__left__burguer_bar"></span>
+		<nav className='nav'>
+			<div className='nav__up'>
+				<div className='nav__up__left'>
+					<span className='nav__up__left__burguer' onClick={handleBurguerClick}>
+						<span className='nav__up__left__burguer_bar'></span>
+						<span className='nav__up__left__burguer_bar'></span>
+						<span className='nav__up__left__burguer_bar'></span>
+						<span className='nav__up__left__burguer_bar'></span>
 					</span>
 					<NavLink to={"/"} style={{ textDecoration: "none" }}>
 						<h1 className='nav__up__left__logo'>CLOTHES 22</h1>
@@ -61,7 +61,7 @@ export default function NavBar() {
 					</div>
 					<Modal status={statusModal} setStatus={setStatusModal} />
 
-					<NavLink exact to={"/account"} onClick={handleClickForHiddingBurguer}>
+					<NavLink to={"/account"} onClick={handleClickForHiddingBurguer}>
 						<AccountIcon />
 					</NavLink>
 				</div>
@@ -70,10 +70,10 @@ export default function NavBar() {
 			<div className='nav__down'>
 				<div className={`nav__down__links ${toogleMenu ? "menuActived" : ""}`}>
 					<ul>
-						<NavLink exact to={"/home"} onClick={handleClickForHiddingBurguer}>
+						<NavLink to={"/home"} onClick={handleClickForHiddingBurguer}>
 							<li>Home</li>
 						</NavLink>
-						<NavLink exact to={"/about"} onClick={handleClickForHiddingBurguer}>
+						<NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
 							<li>About</li>
 						</NavLink>
 					</ul>

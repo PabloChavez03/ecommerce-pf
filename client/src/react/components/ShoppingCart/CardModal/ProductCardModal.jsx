@@ -1,12 +1,14 @@
 import React from "react";
 import style from "./ProductCardModal.module.css";
 
-const ProductCardModal = () => {
+const ProductCardModal = ({ name }) => {
+	/** FALTA AGREGAR LOS OTROS DATOS, SOLO ESTOY RENDERIZANDO EL NAME */
+
 	return (
 		<div className={style.cardModalContainer}>
 			<div>imagen</div>
 			<div className={style.cardModalInfoContainer}>
-				<p className={style.cardModalTitle}>Nombre</p>
+				<p className={style.cardModalTitle}>{name}</p>
 				<p>Color: Red</p>
 				<p>Talla: XL</p>
 				<div className={style.cardModalInfoPrice}>
