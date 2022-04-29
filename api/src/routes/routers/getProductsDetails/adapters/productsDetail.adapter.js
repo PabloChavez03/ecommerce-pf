@@ -1,25 +1,27 @@
 async function adaptProductsDetail(product) {
-		return {
-			id: product.id,
-			name: product.name,
-			image: product.media.images[0].url,
-			variants: product.variants?.map(el => {
-				return {
-					id: el.id,
-					name: el.name,
-					brandSize: el.brandSize,
-					sizeDescription: el.sizeDescription,
-					displaySizeText: el.displaySizeText,
-					sizeOrder: el.sizeOrder,
-					isLowInStock: el.isLowInStock,
-					isInStock: el.isInStock,
-					isAvailable: el.isAvailable,
-					color: el.colour,
-					// price: Object.entries(el.price).forEach(([key,value]) => [...value]),
-					price: Object.entries(el.price)?.map(el => el?.map(el => el)),
-				}
-			}),
-		};
+	return {
+		id: product.id,
+		name: product.name,
+		description: product.description,
+		info: product.info,
+		gender: product.gender,
+		brand: product.brand.name,
+		images: product.media.images.map((el) => el.url),
+		previousPrice: product.price.rrp.value,
+		isOffertProduct: product.price.isOutletPrice,
+		currentPrice: product.price.current.value,
+		variants: product.variants?.map((el) => {
+			return {
+				name: el.name,
+				brandSize: el.brandSize,
+				sizeDescription: el.displaySizeText,
+				isLowInStock: el.isLowInStock,
+				isInStock: el.isInStock,
+				isAvailable: el.isAvailable,
+				color: el.colour,
+			};
+		}),
+	};
 }
 
 module.exports = adaptProductsDetail;
