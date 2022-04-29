@@ -18,7 +18,7 @@ function CategoryLanding() {
       <div className={css.catCont}>
         {arr?.map((e) => {
           return (
-            <NavLink key={e.name} to={"/"}>
+            <NavLink key={e.name} to={"/"} style={{ textDecoration: "none" }}>
               <div className={css.category}>
                 <div>
                   <img className={css.img} src={e.img} alt="img" />
