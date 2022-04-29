@@ -1,4 +1,4 @@
-const getAPIproducts = require("./productsApi.getter.service");
+const getAPIproducts = require("./productsByNameApi.getter.service");
 
 const { Product, Category } = require("../../../../db");
 

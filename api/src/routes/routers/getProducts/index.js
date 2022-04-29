@@ -6,9 +6,11 @@ const router = Router();
 router.get("", async (req, res) => {
 	const { categoryId } = req.query;
 
-	const productsFound = await getDDBBproducts(categoryId);
+	if (categoryId) {
+		const productsFound = await getDDBBproducts(categoryId);
 
-	res.json(productsFound);
+		res.json(productsFound);
+	}
 });
 
 module.exports = router;
