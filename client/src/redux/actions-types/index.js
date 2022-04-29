@@ -3,8 +3,10 @@ import {
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
   CHANGE_CART_QUANTITY,
-  SET_CURRENT_PAGE
+  SET_CURRENT_PAGE,
+  GET_ALL_PRODUCTS
 } from "../actions-creators";
+import axios from "axios";
 
 export const getProductByName = (nameProduct) => {
   return async function (dispatch) {
@@ -36,4 +38,14 @@ export const setCurrentPage = (numberPage) => {
         type: SET_CURRENT_PAGE,
         payload: numberPage
     };
+};
+
+export const getAllProducts = () => {
+  return async function (dispatch) {
+    const allProducts = await axios.get("http://localhost:3001/allproducts");
+    return dispatch({
+      type: GET_ALL_PRODUCTS,
+      payload: allProducts.data
+    });
+  };
 };

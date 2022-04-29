@@ -2,46 +2,30 @@ import React, { useState, useEffect } from "react";
 import Cards from "../Cards/Cards";
 import { useSelector, useDispatch } from "react-redux";
 import Footer from "../Footer/Footer";
-import products from "../../../Info/productos.json";
+// import products from "../../../Info/productos.json";
 import css from './Home.module.css'
 import Paginated from "../Paginated/Paginated";
-import { setCurrentPage } from "../../../redux/actions-types";
+import { setCurrentPage, getAllProducts } from "../../../redux/actions-types";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const allProducts = products;
+  const allProducts = useSelector((state)=>state.products);
+  console.log(allProducts)
   const currentPage = useSelector((state) => state.currentPage);
   const [productsPerPage] = useState(9); //me guarda la cantidad de recetas por pagina.
   const lastProduct = currentPage * productsPerPage; //indice de la ultima receta.
   const firstProduct = lastProduct - productsPerPage; //indice de la primer receta.
   const productsCurent = allProducts.slice(firstProduct, lastProduct);
-  const [limitNumberPage] = useState(5); //limite de botones con numero de pag que quiero mostrar.
-  const [maxLimitNumberPage, setmaxLimitNumberPage] = useState(5); //numero limite maximo de pagina.(la ultima) por ej si renderiza 5, la primera vez sera 5, la segunda vez sera 10 y asi sucesivamente.
-  const [minLimitNumberPage, setminLimitNumberPage] = useState(0); //numero minimo de pagina. (la primera)
-
-  console.log(allProducts.length)
-  const handleNextPage = () => {
-    dispatch(setCurrentPage(currentPage + 1))
-    if(currentPage + 1 > maxLimitNumberPage) {
-        setmaxLimitNumberPage(maxLimitNumberPage + limitNumberPage);
-        setminLimitNumberPage(minLimitNumberPage + limitNumberPage);
-    };
-};
-
-const handlePrevPage = () => {
-    dispatch(setCurrentPage(currentPage - 1))
-    if(parseInt((currentPage - 1) % limitNumberPage) === 0) {
-        setmaxLimitNumberPage(maxLimitNumberPage - limitNumberPage);
-        setminLimitNumberPage(minLimitNumberPage - limitNumberPage);
-    };
-};
+  console.log(allProducts)
+ 
 
   useEffect(()=>{
+    dispatch(getAllProducts());
     dispatch(setCurrentPage(1));
   },[dispatch]);
-  
+
   return (
-    <div>
+    <div className={css.principalDivHome}>
 
       <div className={css.cardContainer}>
             <div>
@@ -50,8 +34,6 @@ const handlePrevPage = () => {
                 lastProduct={lastProduct}
                 firstProduct={firstProduct}
                 productsPerPage={productsPerPage}
-                handleNextPage={handleNextPage}
-                handlePrevPage={handlePrevPage}
               />
             </div>
       {/* Necesitamos el hardcode*/}
@@ -61,11 +43,12 @@ const handlePrevPage = () => {
             <div key={index}>
               <Cards
                 name={product.name}
-                price={product.price}
-                price_offer={product.price_offer}
-                id_product={product.id_product}
-                default_image={product.default_image}
-                is_offer={product.is_offer}
+                id={product.id}
+                image={product.image}
+                isOffertPrice={product.isOffertPrice}
+                previousPrice={product.previousPrice}
+                currentPrice={product.currentPrice}
+                brandName={product.brandName}
               />
             </div>
           );
