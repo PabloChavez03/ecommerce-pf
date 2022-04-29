@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
-    sequelize.define("carrito", { 
+    sequelize.define("Carrito", { 
         id_carrito: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -8,8 +8,8 @@ module.exports = (sequelize) => {
             primaryKey:true,
             unique: true
         },
-        id_product: {
-            type: DataTypes.INTEGER,
+        carrito_product: {
+            type: DataTypes.JSON,
             allowNull: true,
         },
     },{ timestamps: false })
