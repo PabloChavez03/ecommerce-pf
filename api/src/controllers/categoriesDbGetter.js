@@ -1,6 +1,6 @@
-const setDDBBcategories = require("./categoriesDB.setter.service");
+const setDDBBcategories = require("./categoriesDbSetter");
 
-const { Category } = require("../../../../db");
+const { Category } = require("../db");
 
 async function getDDBBcategories() {
 	const categories = await Category.findAll();

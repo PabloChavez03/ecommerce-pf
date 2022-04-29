@@ -1,6 +1,6 @@
 // const axios = require("axios");
 // const { Sequelize, Op } = require("sequelize");
-const { Cliente, Carrito } = require("../../../../db");
+const { Cliente, Carrito } = require("../db");
 // require("dotenv").config();
 
 const cliente = {

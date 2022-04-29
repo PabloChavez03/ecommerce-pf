@@ -1,5 +1,5 @@
 const axios = require("axios");
-const adaptCategory = require("../adapters/category.adapter");
+const adaptCategory = require("./categoriesAdapter");
 
 async function getAPIcategories() {
 	const options = {

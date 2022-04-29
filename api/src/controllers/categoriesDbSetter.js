@@ -1,5 +1,5 @@
-const getAPIcategories = require("./categoriesApi.getter.service");
-const { Category } = require("../../../../db");
+const getAPIcategories = require("./categoriesApiGetter");
+const { Category } = require("../db");
 
 async function setDDBBcategories() {
 	const categories = await getAPIcategories().catch((e) => e.message);
