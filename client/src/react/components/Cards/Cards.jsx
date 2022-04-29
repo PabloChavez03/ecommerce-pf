@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Construction from "../Construction/Construction";
+import css from './Cards.module.css'
 
 export default function Cards({
 	name,
@@ -14,11 +15,16 @@ export default function Cards({
 		<Construction/> //provisorio hasta que este el carrito
 	)
 	return (
-		<div>
-			<h3>{name}</h3>
+		<div className={css.container}>
+			
 			<img src={default_image} alt="Product Img" />
-			<h5>{`Precio $ ${price}`}</h5>
-			{is_offer ? <h5>{`Precio de oferta $ ${price_offer}`}</h5> : null}
+			<div className={css.price}>
+				<h3>{price}</h3>
+			
+			{is_offer ? <h4>{`Precio de oferta $ ${price_offer}`}</h4> : null}
+			</div>
+			
+			<h5 className={css.title}>{name}</h5>
 			<NavLink to={`/detail/${id_product}`} style={{ textDecoration: "none" }}>
 				<button>Mostrar Detalles</button>
 			</NavLink>

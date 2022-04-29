@@ -3,11 +3,15 @@ import Cards from "../Cards/Cards";
 //import { useSelector } from "react-redux";
 import Footer from "../Footer/Footer";
 import products from "../../../Info/productos.json";
+import css from './Home.module.css'
 
 export default function Home() {
   const allProducts = products;
   return (
     <div>
+
+      <div className={css.cardContainer}>
+
       {/* Necesitamos el hardcode*/}
       {allProducts.length ? (
         allProducts.map((product, index) => {
@@ -27,6 +31,8 @@ export default function Home() {
       ) : (
         <p>No hay productos disponibles.</p>
       )}
+      </div>
+
       <Footer />
     </div>
   );
