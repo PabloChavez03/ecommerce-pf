@@ -9,23 +9,23 @@ import Landing from "./react/components/Landing/Landing";
 import NavBar from "./react/components/NavBar/NavBar";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <>
-        <NavBar />
-        <Routes>
-          <Route path={"/"} element={<Landing />} />
-          <Route path={"/home"} element={<Home />} />
-          <Route path={"/detail/:idProduct"} element={<CardDetail />} />
-    {/* Ruta /creation provisoria para poder ver como esta quedando el formulario. */}
-          <Route path={"/creation"} element={<CreationProduct />} />
-          <Route path={"/about"} element={<Construction/>}/>
-          <Route path={"/account"} element={<Construction/>}/>
-          <Route path={"/cart"} element={<ShoppingCart/>}/>
-        </Routes>
-      </>
-    </BrowserRouter>
-  );
-};
+	return (
+		<BrowserRouter>
+			<>
+				<NavBar />
+				<Routes>
+					<Route path={"/"} element={<Landing />} />
+					<Route path={"/home"} element={<Home />} />
+					<Route path={"/detail/:idProduct"} element={<CardDetail />} />
+					{/* Ruta /creation provisoria para poder ver como esta quedando el formulario. */}
+					<Route path={"/creation"} element={<CreationProduct />} />
+					<Route path={"/about"} element={<Construction />} />
+					<Route path={"/account"} element={<Construction />} />
+					<Route path={"/cart"} element={<ShoppingCart />} />
+				</Routes>
+			</>
+		</BrowserRouter>
+	);
+}
 
 export default App;
