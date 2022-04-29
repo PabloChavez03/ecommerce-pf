@@ -13,5 +13,4 @@ router.use("/products", require("./products"));
 router.use("/products", require("./productsByName"));
 router.use("/products/detail", require("./productsDetail"));
 
-
 module.exports = router;
