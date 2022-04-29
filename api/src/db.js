@@ -63,14 +63,16 @@ Cliente.hasOne(Carrito);
 Carrito.belongsTo(Cliente);
 
 //Carrito-Products
-Carrito.belongsToMany(Product, {through: "Carrito_Producto"});
-Product.belongsToMany(Carrito, {through: "Carrito_Producto"});
+// Carrito.belongsToMany(Product, {through: "Carrito_Producto"});
+// Product.belongsToMany(Carrito, {through: "Carrito_Producto"});
+Product.hasOne(Carrito);
+Carrito.belongsTo(Product);
 
-Cliente.hasOne(Carrito);
-Carrito.belongsTo(Cliente);
+// Cliente.hasOne(Carrito);
+// Carrito.belongsTo(Cliente);  
 
-Carrito.belongsToMany(Product, { through: "carrito_product" });
-Product.belongsToMany(Carrito, { through: "carrito_product" });
+// Carrito.belongsToMany(Product, { through: "carrito_product" });
+// Product.belongsToMany(Carrito, { through: "carrito_product" });
 
 
 module.exports = {

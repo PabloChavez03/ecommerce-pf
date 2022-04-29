@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
             unique: true
         },
         carrito_product: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING,
             allowNull: true,
         },
     },{ timestamps: false })
