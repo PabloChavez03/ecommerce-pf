@@ -1,16 +1,16 @@
 const axios = require("axios");
-const adaptListProducts = require("../adapters/productsByName.adapter");
+const adaptListProducts = require("./productsAdapter");
 
-async function getAPIproducts(productName) {
+async function getAPIproducts(categoryId) {
 	const options = {
 		method: "GET",
 		url: "https://asos2.p.rapidapi.com/products/v2/list",
 		params: {
 			store: "US",
 			offset: "0",
-			categoryId: "0",
+			categoryId: `${categoryId}`,
 			limit: "48",
-			q: `${productName}`,
+			// q: query
 		},
 		headers: {
 			"X-RapidAPI-Host": "asos2.p.rapidapi.com",

@@ -22,17 +22,17 @@ const { conn } = require("./src/db.js");
 
 // Syncing all the models at once.
 // <<<<<<< HEAD
-// conn.sync({ force: false }).then(() => {
-// 	server.listen(3001, () => {
-// 		console.log("Listening on 3001"); // eslint-disable-line no-console
-// 	});
-// });
+conn.sync({ force: false }).then(() => {
+	server.listen(3001, () => {
+		console.log("Listening on 3001"); // eslint-disable-line no-console
+	});
+});
 // =======
-conn
-	.sync({ force: false })
-	.then(() => {
-		server.listen(3001, () => {
-			console.log("Listening on 3001"); // eslint-disable-line no-console
-		});
-	})
-	.catch((e) => e.message);
+// conn
+// 	.sync({ force: true })
+// 	.then(() => {
+// 		server.listen(3001, () => {
+// 			console.log("Listening on 3001"); // eslint-disable-line no-console
+// 		});
+// 	})
+// 	.catch((e) => e.message);

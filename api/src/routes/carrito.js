@@ -4,7 +4,7 @@ const {
 //   getCarrito,
   updateCarrito,
 //   deleteCarrito,
-} = require("../../controllers/Carrito");
+} = require("../controllers/carrito");
 
 const router = Router();
 

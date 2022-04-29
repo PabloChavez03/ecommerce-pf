@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
           unique: true,
         },
         carrito_product: {
-          type: DataTypes.DataTypes.ARRAY(DataTypes.JSON),
+          type: DataTypes.ARRAY(DataTypes.JSON),
           allowNull: true,
         },
       },

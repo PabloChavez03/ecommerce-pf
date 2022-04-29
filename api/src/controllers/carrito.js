@@ -1,5 +1,6 @@
-const { sequelize } = require("sequelize");
 const { Carrito, Product } = require("../db");
+
+//GET
 
 const getCarrito = async (idPhone) => {
   try {
@@ -15,6 +16,8 @@ const getCarrito = async (idPhone) => {
 };
 
 // getCarrito(34426541908).then((data) => console.log(data))
+
+//UPDATE
 
 const updateCarrito = async (name,id) => {
   try {
@@ -39,12 +42,7 @@ const updateCarrito = async (name,id) => {
   }
 };
 
-// let mati = JSON.stringify({ x:4 , y:5})
-
-updateCarrito(
-  "Vans Old Skool sneakers with graphic logo print in black",
-  34426541908
-).then((data) => console.log(data));
+//DELETE 
 
 // const deleteCarrito = async (id) => {
 //   try {
