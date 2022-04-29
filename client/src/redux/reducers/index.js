@@ -21,23 +21,23 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         productFilter: payload,
       };
-    case ADD_PRODUCT_TO_CART:
-      return {
-        ...state,
-        cartItems: [...state.cartItems, { payload, quantity: 1 }],
-      };
-    case REMOVE_PRODUCT_FROM_CART:
-      return {
-        ...state,
-        cartItems: state.cartItems.filter((e) => e.id !== payload.id),
-      };
-    case CHANGE_CART_QUANTITY:
-      return {
-        ...state,
-        cartItems: state.cartItems.filter((e) =>
-          e.id !== payload.id ? (e.quantity = payload.quantity) : e.quantity
-        ),
-      };
+      case ADD_PRODUCT_TO_CART:
+        return {
+          ...state,
+          cartItems: [...state.cartItems, payload],
+        };
+      case REMOVE_PRODUCT_FROM_CART:
+        return {
+          ...state,
+          cartItems: state.cartItems.filter((e) => e.id !== payload.id),
+        };
+      case CHANGE_CART_QUANTITY:
+        return {
+          ...state,
+          cartItems: state.cartItems.filter((e) =>
+            e.id !== payload.id ? (e.quantity = payload.quantity) : e.quantity
+          ),
+        };
     case SET_CURRENT_PAGE:
           return {
               ...state,
