@@ -1,5 +1,5 @@
-const getDDBBcategories = require("./services/categoriesDB.getter.service");
-// const getAPIcategories = require("./services/categoriesApi.getter.service");
+const getDDBBcategories = require("../controllers/categoriesDbGetter");
+
 
 const { Router } = require("express");
 const router = Router();

@@ -1,5 +1,5 @@
 const axios = require("axios");
-const adaptProducts = require("../adapters/products.adapter");
+const adaptListProducts = require("./productsAdapter");
 
 async function getAPIproducts(categoryId) {
 	const options = {
@@ -10,16 +10,17 @@ async function getAPIproducts(categoryId) {
 			offset: "0",
 			categoryId: `${categoryId}`,
 			limit: "48",
+			// q: query
 		},
 		headers: {
 			"X-RapidAPI-Host": "asos2.p.rapidapi.com",
-			"X-RapidAPI-Key": "b78c7a3b2fmsh0b41ed6110ef2c5p1eb5cfjsnb1b10669361b",
+			"X-RapidAPI-Key": "c004e83b99msh69d5ac3687a6db0p175163jsn1858aade2461",
 		},
 	};
 
-	return await axios(options)
-		.then(({ data }) => adaptProducts(data))
-		.catch((e) => e.message);
+	return axios(options)
+		.then(({ data }) => adaptListProducts(data))
+		.catch((e) => console.log(e.message));
 }
 
 module.exports = getAPIproducts;
