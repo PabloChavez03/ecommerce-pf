@@ -10,10 +10,11 @@ async function getAPIproducts(categoryId) {
 			offset: "0",
 			categoryId: `${categoryId}`,
 			limit: "48",
+			// q: query
 		},
 		headers: {
 			"X-RapidAPI-Host": "asos2.p.rapidapi.com",
-			"X-RapidAPI-Key": "b78c7a3b2fmsh0b41ed6110ef2c5p1eb5cfjsnb1b10669361b",
+			"X-RapidAPI-Key": "c004e83b99msh69d5ac3687a6db0p175163jsn1858aade2461",
 		},
 	};
 

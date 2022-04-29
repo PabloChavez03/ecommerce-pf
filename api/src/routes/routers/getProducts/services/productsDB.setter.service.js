@@ -6,7 +6,7 @@ async function setDDBBproducts(categoryId) {
 	const products = await getAPIproducts(categoryId);
 
 	let category = await Category.findByPk(categoryId).catch((e) =>
-		console.log(e),
+		console.log(e.message),
 	);
 
 	await products.forEach(async (product) => {
@@ -15,9 +15,9 @@ async function setDDBBproducts(categoryId) {
 				id: product.id,
 				name: product.name,
 				image: product.image,
-				originalPrice: product.originalPrice,
+				previousPrice: product.previousPrice,
 				isOffertPrice: product.isOffertPrice,
-				offertPrice: product.offertPrice,
+				currentPrice: product.currentPrice,
 				brandName: product.brandName,
 				colour: product.colour,
 			},

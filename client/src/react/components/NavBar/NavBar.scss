@@ -23,8 +23,8 @@
 			&__burguer {
 				@include flex-column;
 				justify-content: space-between;
-				width: 19.44px;
-				height: 15.97px;
+				width: 25.44px;
+				height: 19.97px;
 
 				&_bar {
 					height: 2px;
@@ -40,6 +40,7 @@
 		}
 
 		&__features {
+			display: flex;
 			& svg {
 				width: 30px;
 				margin-right: 0.5rem;
@@ -95,6 +96,7 @@
 			visibility: visible;
 			z-index: 10;
 			max-height: 2000px;
+			min-width: 100vh;
 		}
 	}
 
@@ -138,8 +140,8 @@
 				max-height: 2000px;
 				position: relative;
 				top: auto;
-				left: auto;
 				width: 100%;
+				z-index: 10;
 
 				& ul {
 					flex-direction: row;

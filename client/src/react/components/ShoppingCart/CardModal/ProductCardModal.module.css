@@ -1,0 +1,34 @@
+.cardModalContainer {
+	display: flex;
+	background: #fff;
+	padding: 10px 15px;
+	gap: 10px;
+}
+
+.cardModalInfoContainer {
+	font-size: 14px;
+	font-weight: 400;
+	width: 100%;
+}
+
+.cardModalTitle {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.cardModalInfoPrice {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+}
+
+.cardModalInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-weight: 600;
+}
+
+.cardModalInfo span {
+	font-weight: 400;
+}
