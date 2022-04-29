@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
-import Cards from "../Cards/Cards";
+// import Cards from "../Cards/Cards";
 import products from "../../../Info/productos.json";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../../redux/actions-types";
-var Carousel = require('react-responsive-carousel').Carousel;
+var Carousel = require("react-responsive-carousel").Carousel;
 
 export default function CardDetail() {
 	const dispatch = useDispatch();
 	//const [quantity, setQuantity] = useState(1);
-	const {idProduct} = useParams();
-	const productFilter = products.filter((e)=> parseInt(e.id_product) === parseInt(idProduct));
+	const { idProduct } = useParams();
+	const productFilter = products.filter(
+		(e) => parseInt(e.id_product) === parseInt(idProduct)
+	);
 	const [imagesRender, setImagesRender] = useState([]);
 	const [sizesRender, setSizesRender] = useState([]);
 
-	const { // URL
+	const {
+		// URL
 		name,
 		price,
 		description,
@@ -22,23 +25,23 @@ export default function CardDetail() {
 		price_offer,
 		variants,
 		id_product,
-		default_image
+		default_image,
 	} = productFilter[0];
 	const [colorSelect, setColorSelect] = useState(variants[0].ColorName);
 
 	const [productFilterCart, setProductFilterCart] = useState({
 		name,
-		price: is_offer?price_offer:price,
+		price: is_offer ? price_offer : price,
 		color: colorSelect,
 		size: "",
 		id_product,
-		default_image
+		default_image,
 	});
 
-	useEffect(()=>{
+	useEffect(() => {
 		setImagesRender(variants[0].ProductImages);
 		setSizesRender(Object.keys(variants[0].Stocks));
-	  },[variants])
+	}, [variants]);
 
 	// const handleQuantity = (e) => {
 	// 	e.preventDefault();
@@ -46,7 +49,7 @@ export default function CardDetail() {
 	// 	if (e.target.name === "more") setQuantity(quantity + 1);
 	// };
 
-	const colors = variants.map((e)=>e.ColorName);
+	const colors = variants.map((e) => e.ColorName);
 	// const handleChangeSelect = (event) => {
 	// 	event.preventDefault();
 	// 	// setColorSelect(event.target.value);
@@ -63,61 +66,73 @@ export default function CardDetail() {
 
 	const handleChangeSelect = (event) => {
 		event.preventDefault();
-		if(event.target.name === "color") {
+		if (event.target.name === "color") {
 			setColorSelect(event.target.value);
-			let variantFilter = variants.find((e)=> e.ColorName === event.target.value);
+			let variantFilter = variants.find(
+				(e) => e.ColorName === event.target.value
+			);
 			setImagesRender(variantFilter.ProductImages);
 			setProductFilterCart({
 				...productFilterCart,
-				color: event.target.value
+				color: event.target.value,
 			});
 		} else if (event.target.name === "size") {
-			let variantFilter = variants.find((e)=> e.ColorName === colorSelect);
+			let variantFilter = variants.find((e) => e.ColorName === colorSelect);
 			let keys = Object.keys(variantFilter.Stocks);
 			setSizesRender(keys);
 			setProductFilterCart({
 				...productFilterCart,
-				size: event.target.value
+				size: event.target.value,
 			});
-		};
+		}
 	};
 
 	const handleAddCart = (event) => {
 		event.preventDefault();
 		dispatch(addProductToCart(productFilterCart));
-	}
+	};
 
 	return (
 		<div>
-				<h1>{name}</h1>
-				<Carousel>
-					{imagesRender.length ? imagesRender.map(image => (
-						<div>
-							<img key={image} src={image} alt="Img Product"/>
-						</div>
-					)) : null}
-				</Carousel>
-				<h3>Precio $ {price}</h3>
-				<p>{description}</p>
-				{is_offer?<h3>Precio de oferta $ {price_offer}</h3> : null}
-				<h4>Variantes:</h4>
-				<select name="color"  onChange={(e)=>handleChangeSelect(e)}>
-					<option>Color</option>
-					{
-						colors.length?colors.map((color)=>(
-							<option name="color" value={color}>{color}</option>
-						)):<option>UNIQUE</option>
-					}
-				</select>
-				<select name="size" onChange={(e)=>handleChangeSelect(e)}>
-					<option>Talle</option>
-						{sizesRender.length ? sizesRender.map(size => (
-							<option name="size" value={size} key={size}>{size}</option>
-						)) : null}
-				</select>
+			<h1>{name}</h1>
+			<Carousel>
+				{imagesRender.length
+					? imagesRender.map((image) => (
+							<div key={image}>
+								<img src={image} alt='Img Product' />
+							</div>
+					  ))
+					: null}
+			</Carousel>
+			<h3>Precio $ {price}</h3>
+			<p>{description}</p>
+			{is_offer ? <h3>Precio de oferta $ {price_offer}</h3> : null}
+			<h4>Variantes:</h4>
+			<select name='color' onChange={(e) => handleChangeSelect(e)}>
+				<option>Color</option>
+				{colors.length ? (
+					colors.map((color) => (
+						<option key={color} name='color' value={color}>
+							{color}
+						</option>
+					))
+				) : (
+					<option>UNIQUE</option>
+				)}
+			</select>
+			<select name='size' onChange={(e) => handleChangeSelect(e)}>
+				<option>Talle</option>
+				{sizesRender.length
+					? sizesRender.map((size) => (
+							<option name='size' value={size} key={size}>
+								{size}
+							</option>
+					  ))
+					: null}
+			</select>
 
-				<button onClick={(e)=>handleAddCart(e)}>Agregar al carrito</button>
-				{/* <button>UnCorazon:D</button>
+			<button onClick={(e) => handleAddCart(e)}>Agregar al carrito</button>
+			{/* <button>UnCorazon:D</button>
 				<h1>{name}</h1>
 				{price_offer ? (
 					<>
@@ -174,7 +189,7 @@ export default function CardDetail() {
 						);
 					})}
 				</div>
-			</div> */} 
+			</div> */}
 		</div>
 	);
 }
