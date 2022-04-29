@@ -1,8 +1,17 @@
 import React from "react";
+
+import { useSelector } from "react-redux";
+
 import ProductCardModal from "../CardModal/ProductCardModal";
 import style from "./Modal.module.css";
 
 const Modal = ({ status, setStatus }) => {
+
+	const cartData = useSelector((state) => state.cartItems);
+
+	console.log(cartData);
+
+
 	return (
 		<>
 			{status && (
@@ -14,8 +23,18 @@ const Modal = ({ status, setStatus }) => {
 						</div>
 
 						<div className={style.modalCartContainer}>
-							<ProductCardModal />
+
+							{cartData &&
+								cartData.map((product) => {
+									return (
+										<div key={product.id}>
+											<ProductCardModal name={product.name} />
+										</div>
+									);
+								})}
 						</div>
+
+						{/**Info bottom */}
 
 						<div className={style.saleInfoContainer}>
 							<div className={style.saleInfo}>

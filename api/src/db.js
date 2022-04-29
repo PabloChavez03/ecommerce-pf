@@ -9,7 +9,13 @@ const sequelize = new Sequelize(
 	{
 		logging: false, // set to console.log to see the raw SQL queries
 		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-	}
+		pool: {
+			max: 80,
+			min: 0,
+			acquire: 30000,
+			idle: 10000,
+		},
+	},
 );
 const basename = path.basename(__filename);
 
@@ -19,7 +25,7 @@ const modelDefiners = [];
 fs.readdirSync(path.join(__dirname, "/models"))
 	.filter(
 		(file) =>
-			file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
+			file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js",
 	)
 	.forEach((file) => {
 		modelDefiners.push(require(path.join(__dirname, "/models", file)));
@@ -38,13 +44,31 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const { Categoria_principal, Producto, Tipo_prenda } = sequelize.models;
+const { Product, Category, ProductDetail, Order, Cliente, Carrito } =
+	sequelize.models;
 
-Producto.belongsTo(Tipo_prenda);
-Tipo_prenda.hasMany(Producto);
+// Aca vendrian las relaciones
+// Product.hasMany(Reviews);
 
-Producto.belongsTo(Categoria_principal);
-Categoria_principal.hasMany(Producto);
+//Client-Order
+Cliente.hasMany(Order);
+Order.belongsTo(Cliente);
+
+//Product-Category
+Product.belongsToMany(Category, { through: "Product_Category" });
+Category.belongsToMany(Product, { through: "Product_Category" });
+
+//ProductDetail-Product
+Product.hasOne(ProductDetail);
+ProductDetail.belongsTo(Product);
+
+//Carrito-Client
+Cliente.hasOne(Carrito);
+Carrito.belongsTo(Cliente);
+
+//Carrito-Products
+Carrito.belongsToMany(Product, { through: "Carrito_Producto" });
+Product.belongsToMany(Carrito, { through: "Carrito_Producto" });
 
 module.exports = {
 	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
