@@ -27,8 +27,11 @@ export default function NavBar() {
 						<span className="nav__up__left__burguer_bar"></span>
 						<span className="nav__up__left__burguer_bar"></span>
 						<span className="nav__up__left__burguer_bar"></span>
+						<span className="nav__up__left__burguer_bar"></span>
 					</span>
-					<h1 className="nav__up__left__logo">CLOTHES 22</h1>
+					<NavLink to={"/"} style={{ textDecoration: "none" }}>
+						<h1 className="nav__up__left__logo">CLOTHES 22</h1>
+					</NavLink>
 				</div>
 
 				<div className="nav__up__searchBar">
