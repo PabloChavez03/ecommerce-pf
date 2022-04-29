@@ -16,17 +16,11 @@ const router = Router();
 
 router.use("/categories", require("./routers/getCategories"));
 router.use("/products", require("./routers/getProducts"));
+router.use("/products", require("./routers/getProductsByName"));
 router.use("/products/detail", require("./routers/getProductsDetails"));
 router.use("/client", require("./routers/Clients/routesClient/index"));
 
 // Modularizando las rutas
-
-const getCategories = require("./routers/getCategories");
-const getProducts = require("./routers/getProducts");
-
-router.use("/categories", getCategories);
-router.use("/products", getProducts);
-
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
