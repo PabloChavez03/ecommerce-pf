@@ -17,6 +17,7 @@ const router = Router();
 router.use("/categories", require("./routers/getCategories"));
 router.use("/products", require("./routers/getProducts"));
 router.use("/products/detail", require("./routers/getProductsDetails"));
+router.use("/client", require("./routers/Clients/routesClient/index"));
 
 // Modularizando las rutas
 
@@ -28,5 +29,7 @@ router.use("/products", getProducts);
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+
+router.use("/carrito", require("../routes/routers/carrito"));
 
 module.exports = router;
