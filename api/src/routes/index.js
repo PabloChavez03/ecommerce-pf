@@ -20,10 +20,12 @@ router.use("/products", require("./routers/getProductsByName"));
 router.use("/products/detail", require("./routers/getProductsDetails"));
 router.use("/client", require("./routers/Clients/routesClient/index"));
 
+
 // Modularizando las rutas
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
 router.use("/carrito", require("../routes/routers/carrito"));
+router.use("/allproducts", require("../routes/routers/getAllProducts"));
 
 module.exports = router;
