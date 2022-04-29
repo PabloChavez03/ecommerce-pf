@@ -1,0 +1,21 @@
+.cardDetailContainer {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	margin-top: 25px;
+}
+
+.cardDetailImgContainer {
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	align-items: center;
+}
+
+.cardCarouselImg {
+	width: 75px;
+	cursor: pointer;
+}
+
+.cardPrimaryImg {
+	width: 350px;
+}

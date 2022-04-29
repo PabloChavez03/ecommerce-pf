@@ -4,6 +4,7 @@ import products from "../../../Info/productos.json";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../../redux/actions-types";
+import style from "./CardDetail.module.css";
 var Carousel = require("react-responsive-carousel").Carousel;
 
 export default function CardDetail() {
@@ -13,7 +14,10 @@ export default function CardDetail() {
 	const productFilter = products.filter(
 		(e) => parseInt(e.id_product) === parseInt(idProduct)
 	);
+
 	const [imagesRender, setImagesRender] = useState([]);
+	const [imageCurrent, setImageCurrent] = useState("");
+
 	const [sizesRender, setSizesRender] = useState([]);
 
 	const {
@@ -41,6 +45,7 @@ export default function CardDetail() {
 	useEffect(() => {
 		setImagesRender(variants[0].ProductImages);
 		setSizesRender(Object.keys(variants[0].Stocks));
+		setImageCurrent(variants[0].ProductImages[0]);
 	}, [variants]);
 
 	// const handleQuantity = (e) => {
@@ -92,46 +97,83 @@ export default function CardDetail() {
 		dispatch(addProductToCart(productFilterCart));
 	};
 
-	return (
-		<div>
-			<h1>{name}</h1>
-			<Carousel>
-				{imagesRender.length
-					? imagesRender.map((image) => (
-							<div key={image}>
-								<img src={image} alt='Img Product' />
-							</div>
-					  ))
-					: null}
-			</Carousel>
-			<h3>Precio $ {price}</h3>
-			<p>{description}</p>
-			{is_offer ? <h3>Precio de oferta $ {price_offer}</h3> : null}
-			<h4>Variantes:</h4>
-			<select name='color' onChange={(e) => handleChangeSelect(e)}>
-				<option>Color</option>
-				{colors.length ? (
-					colors.map((color) => (
-						<option key={color} name='color' value={color}>
-							{color}
-						</option>
-					))
-				) : (
-					<option>UNIQUE</option>
-				)}
-			</select>
-			<select name='size' onChange={(e) => handleChangeSelect(e)}>
-				<option>Talle</option>
-				{sizesRender.length
-					? sizesRender.map((size) => (
-							<option name='size' value={size} key={size}>
-								{size}
-							</option>
-					  ))
-					: null}
-			</select>
+	/**Creando evento para la imagen */
+	const handleImgChange = (event) => {
+		event.preventDefault();
+		console.log(event.target.src);
+		setImageCurrent(event.target.src);
+	};
 
-			<button onClick={(e) => handleAddCart(e)}>Agregar al carrito</button>
+	return (
+		<div className={style.cardDetailContainer}>
+			<div className={style.cardDetailImgContainer}>
+				{/* <Carousel>
+					{imagesRender.length
+						? imagesRender.map((image) => (
+								<div key={image}>
+									<img
+										className={style.cardDetailImg}
+										src={image}
+										alt='Img Product'
+									/>
+								</div>
+						  ))
+						: null}
+				</Carousel> */}
+				<div>
+					{imagesRender.length
+						? imagesRender.map((image) => (
+								<div key={image}>
+									<img
+										className={style.cardCarouselImg}
+										src={image}
+										alt='Img Product'
+										onClick={(event) => handleImgChange(event)}
+									/>
+								</div>
+						  ))
+						: null}
+				</div>
+				<div>
+					<img
+						className={style.cardPrimaryImg}
+						src={imageCurrent}
+						alt='Img Principal'
+					/>
+				</div>
+			</div>
+
+			<div>
+				<h1>{name}</h1>
+				<h3>Precio $ {price}</h3>
+				<p>{description}</p>
+				{is_offer ? <h3>Precio de oferta $ {price_offer}</h3> : null}
+				<h4>Variantes:</h4>
+				<select name='color' onChange={(e) => handleChangeSelect(e)}>
+					<option>Color</option>
+					{colors.length ? (
+						colors.map((color) => (
+							<option key={color} name='color' value={color}>
+								{color}
+							</option>
+						))
+					) : (
+						<option>UNIQUE</option>
+					)}
+				</select>
+				<select name='size' onChange={(e) => handleChangeSelect(e)}>
+					<option>Talle</option>
+					{sizesRender.length
+						? sizesRender.map((size) => (
+								<option name='size' value={size} key={size}>
+									{size}
+								</option>
+						  ))
+						: null}
+				</select>
+
+				<button onClick={(e) => handleAddCart(e)}>Agregar al carrito</button>
+			</div>
 			{/* <button>UnCorazon:D</button>
 				<h1>{name}</h1>
 				{price_offer ? (
