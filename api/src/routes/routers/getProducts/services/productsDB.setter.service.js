@@ -20,9 +20,9 @@ async function setDDBBproducts(categoryId) {
 					isOffertPrice: product.isOffertPrice,
 					offertPrice: product.offertPrice,
 					brandName: product.brandName,
+					colour: product.colour,
 				},
-			});
-			// .catch((e) => console.log(e.message));
+			}).catch((e) => console.log(e));
 
 			newProduct.addCategories(category);
 		} catch (e) {

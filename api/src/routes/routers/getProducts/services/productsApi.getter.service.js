@@ -1,5 +1,5 @@
 const axios = require("axios");
-const adaptProducts = require("../adapters/products.adapter");
+const adaptListProducts = require("../adapters/products.adapter");
 
 async function getAPIproducts(categoryId) {
 	const options = {
@@ -17,9 +17,9 @@ async function getAPIproducts(categoryId) {
 		},
 	};
 
-	return await axios(options)
-		.then(({ data }) => adaptProducts(data))
-		.catch((e) => e.message);
+	return axios(options)
+		.then(({ data }) => adaptListProducts(data))
+		.catch((e) => console.log(e.message));
 }
 
 module.exports = getAPIproducts;
