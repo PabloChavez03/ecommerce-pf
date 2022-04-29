@@ -4,11 +4,14 @@ import products from "../../../Info/productos.json";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../../redux/actions-types";
+
 var Carousel = require("react-responsive-carousel").Carousel;
+
 
 export default function CardDetail() {
 	const dispatch = useDispatch();
 	//const [quantity, setQuantity] = useState(1);
+
 	const { idProduct } = useParams();
 	const productFilter = products.filter(
 		(e) => parseInt(e.id_product) === parseInt(idProduct)
@@ -18,6 +21,7 @@ export default function CardDetail() {
 
 	const {
 		// URL
+
 		name,
 		price,
 		description,
@@ -25,22 +29,24 @@ export default function CardDetail() {
 		price_offer,
 		variants,
 		id_product,
-		default_image,
+		default_image
 	} = productFilter[0];
 	const [colorSelect, setColorSelect] = useState(variants[0].ColorName);
 
 	const [productFilterCart, setProductFilterCart] = useState({
 		name,
-		price: is_offer ? price_offer : price,
+
+		price: is_offer?price_offer:price,
 		color: colorSelect,
 		size: "",
 		id_product,
-		default_image,
+		default_image
 	});
 
 	useEffect(() => {
 		setImagesRender(variants[0].ProductImages);
 		setSizesRender(Object.keys(variants[0].Stocks));
+
 	}, [variants]);
 
 	// const handleQuantity = (e) => {
@@ -50,6 +56,7 @@ export default function CardDetail() {
 	// };
 
 	const colors = variants.map((e) => e.ColorName);
+
 	// const handleChangeSelect = (event) => {
 	// 	event.preventDefault();
 	// 	// setColorSelect(event.target.value);
@@ -66,6 +73,7 @@ export default function CardDetail() {
 
 	const handleChangeSelect = (event) => {
 		event.preventDefault();
+
 		if (event.target.name === "color") {
 			setColorSelect(event.target.value);
 			let variantFilter = variants.find(
@@ -78,10 +86,12 @@ export default function CardDetail() {
 			});
 		} else if (event.target.name === "size") {
 			let variantFilter = variants.find((e) => e.ColorName === colorSelect);
+
 			let keys = Object.keys(variantFilter.Stocks);
 			setSizesRender(keys);
 			setProductFilterCart({
 				...productFilterCart,
+
 				size: event.target.value,
 			});
 		}
@@ -90,7 +100,13 @@ export default function CardDetail() {
 	const handleAddCart = (event) => {
 		event.preventDefault();
 		dispatch(addProductToCart(productFilterCart));
+
 	};
+
+	const handleAddCart = (event) => {
+		event.preventDefault();
+		dispatch(addProductToCart(productFilterCart));
+	}
 
 	return (
 		<div>
@@ -133,6 +149,7 @@ export default function CardDetail() {
 
 			<button onClick={(e) => handleAddCart(e)}>Agregar al carrito</button>
 			{/* <button>UnCorazon:D</button>
+
 				<h1>{name}</h1>
 				{price_offer ? (
 					<>

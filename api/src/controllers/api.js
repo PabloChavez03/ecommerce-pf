@@ -58,14 +58,14 @@ const getAllSubCategories = async () => {
   });
 };
 
-let subCategories = [];
+// let subCategories = [];
 
-getAllSubCategories().then((data) => {
-  subCategories = data?.map((el) => el.childMenus?.map((el) => el.name));
-  console.log(subCategories);
-  return data?.map((el) => el.childMenus)
-})
-.then((data) => console.log(data));
+// getAllSubCategories().then((data) => {
+//   subCategories = data?.map((el) => el.childMenus?.map((el) => el.name));
+//   console.log(subCategories);
+//   return data?.map((el) => el.childMenus)
+// })
+// .then((data) => console.log(data));
 
 module.exports = {
   getAllCategoriesMain,

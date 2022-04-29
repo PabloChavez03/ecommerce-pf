@@ -5,11 +5,12 @@ module.exports = (sequelize) => {
 	// defino el modelo
 
 	sequelize.define(
-		"Product",
+		"ProductDetail",
 		{
 			id: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
+				autoIncrement: true,
 				unique: true,
 				primaryKey: true,
 			},
@@ -17,28 +18,38 @@ module.exports = (sequelize) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-			image: {
+			description: {
+				type: DataTypes.TEXT,
+				allowNull: false,
+			},
+			info: {
+				type: DataTypes.JSON,
+				allowNull: false,
+			},
+			gender: {
 				type: DataTypes.STRING,
-				allowNull: true,
+			},
+			brand: {
+				type: DataTypes.STRING,
+			},
+			images: {
+				type: DataTypes.ARRAY(DataTypes.STRING),
+				allowNull: false,
 			},
 			previousPrice: {
 				type: DataTypes.FLOAT,
 				allowNull: true,
 			},
-			isOffertPrice: {
+			isOffertProduct: {
 				type: DataTypes.BOOLEAN,
 				allowNull: true,
 			},
 			currentPrice: {
 				type: DataTypes.FLOAT,
-				allowNull: false,
-			},
-			brandName: {
-				type: DataTypes.STRING,
 				allowNull: true,
 			},
-			colour: {
-				type: DataTypes.STRING,
+			variants: {
+				type: DataTypes.ARRAY(DataTypes.JSON),
 				allowNull: true,
 			},
 		},

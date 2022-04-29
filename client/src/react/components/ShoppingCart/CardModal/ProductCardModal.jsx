@@ -3,6 +3,7 @@ import style from "./ProductCardModal.module.css";
 
 const ProductCardModal = ({ name }) => {
 	/** FALTA AGREGAR LOS OTROS DATOS, SOLO ESTOY RENDERIZANDO EL NAME */
+
 	return (
 		<div className={style.cardModalContainer}>
 			<div>imagen</div>
