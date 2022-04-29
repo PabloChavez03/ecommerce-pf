@@ -1,5 +1,5 @@
 // const getDDBBproducts = require("./services/productsDB.getter.service");
-const getAPIproducts = require("./services/productsByNameApi.getter.service");
+const getAPIproducts = require("../controllers/productsByNameApiGetter");
 
 const { Router } = require("express");
 const router = Router();

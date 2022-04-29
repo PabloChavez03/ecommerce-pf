@@ -1,5 +1,5 @@
 const axios = require("axios");
-const adaptProductsDetail = require("../adapters/productsDetail.adapter");
+const adaptProductsDetail = require("./productsDetailAdapter");
 
 function getApiProductsDetail(productId) {
 	const options = {

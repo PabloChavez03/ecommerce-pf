@@ -1,4 +1,4 @@
-const getDDBBproducts = require("./services/productsDB.getter.service");
+const getDDBBproducts = require("../controllers/productsDbGetter");
 
 const { Router } = require("express");
 const router = Router();

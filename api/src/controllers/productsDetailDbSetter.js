@@ -1,6 +1,6 @@
-const getAPIproductDetail = require("./productsDetailApi.getter.service");
+const getAPIproductDetail = require("./productsDetailApiGetter");
 
-const { ProductDetail, Product } = require("../../../../db");
+const { ProductDetail, Product } = require("../db");
 
 async function setDDBBproducts(productId) {
 	const productDetail = await getAPIproductDetail(productId);
