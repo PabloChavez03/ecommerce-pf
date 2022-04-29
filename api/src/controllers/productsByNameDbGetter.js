@@ -1,6 +1,6 @@
-const setDDBBproducts = require("./productsDB.setter.service");
+const setDDBBproducts = require("./productsDbSetter");
 
-const { Product, Category } = require("../../../../db");
+const { Product, Category } = require("../db");
 
 async function getDDBBproducts(categoryId) {
 	const products = await Product.findAll({

@@ -67,8 +67,9 @@ Cliente.hasOne(Carrito);
 Carrito.belongsTo(Cliente);
 
 //Carrito-Products
-Carrito.belongsToMany(Product, { through: "Carrito_Producto" });
-Product.belongsToMany(Carrito, { through: "Carrito_Producto" });
+Product.hasOne(Carrito);
+Carrito.belongsTo(Product);
+
 
 module.exports = {
 	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
