@@ -1,8 +1,8 @@
 const { Router } = require("express");
-const { Product, Category } = require("../../db");
+const { Product } = require("../../db");
 const router = Router();
 
-router.patch("", async (req, res) => {
+router.patch("/:id", async (req, res) => {
     let { name, image, previousPrice, isOffertPrice, currentPrice, brandName,  colour,  Categories } = req.body;
     let {id} = req.params;
 
