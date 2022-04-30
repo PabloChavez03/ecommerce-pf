@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Product } = require("../../db");
+const { Product } = require("../db");
 const router = Router();
 
 
@@ -13,7 +13,7 @@ router.delete("/:id", async (req, res) => {
                 id
             }
         });
-        res.status(200).send( deleted + "Eliminado")
+        res.status(200).send(`${deleted} Eliminado`)
     // } catch (error) {
     //     return new TypeError(error)
     // }

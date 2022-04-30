@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Product } = require("../../db");
+const { Product } = require("../db");
 const router = Router();
 
 router.patch("/:id", async (req, res) => {
@@ -12,7 +12,7 @@ router.patch("/:id", async (req, res) => {
                 id
             }
         });
-        res.status(200).send(modified + "Modificado perrin!")
+        res.status(200).send(`${modified} Producto modificado`)
     } catch (error) {
         return new TypeError(error)
     }
