@@ -13,7 +13,7 @@ export default function SearchBar() {
 
 	const handleClickSearch = (event) => {
 		event.preventDefault();
-		dispatch(getProductByName(event.target.value));
+		dispatch(getProductByName(search));
 		setSearch("");
 	};
 
@@ -23,7 +23,6 @@ export default function SearchBar() {
 				<input
 					value={search}
 					type={"search"}
-					autoComplete="off"
 					placeholder="Ingrese producto a buscar..."
 					onChange={(e) => handleChangeInput(e)}
 				/>
