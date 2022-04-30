@@ -6,6 +6,7 @@ import {
 	CHANGE_CART_QUANTITY,
 	SET_CURRENT_PAGE,
 	GET_ALL_PRODUCTS,
+	ORDER_BY_PRICE
 } from "../actions-creators";
 
 export const getProductByName = (nameProduct) => {
@@ -52,3 +53,10 @@ export const getAllProducts = () => {
 		});
 	};
 };
+
+export function orderByPrice(payload) {
+	return {
+	  type: ORDER_BY_PRICE,
+	  payload,
+	};
+  }

@@ -5,6 +5,7 @@ import {
 	CHANGE_CART_QUANTITY,
 	SET_CURRENT_PAGE,
 	GET_ALL_PRODUCTS,
+	ORDER_BY_PRICE
 } from "../actions-creators";
 
 const initialState = {
@@ -49,6 +50,34 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				...state,
 				products: payload,
 			};
+		case ORDER_BY_PRICE:
+			let arr =
+			  payload === "high"
+				? state.products?.sort(function (a, b) {
+					if (a.currentPrice < b.currentPrice) {
+					  return 1;
+					}
+					if (a.currentPrice > b.currentPrice) {
+					  return -1;
+					} else {
+					  return 0;
+					}
+				  })
+				: state.products?.sort(function (a, b) {
+					if (a.currentPrice > b.currentPrice) {
+					  return 1;
+					}
+					if (a.currentPrice < b.currentPrice) {
+					  return -1;
+					} else {
+					  return 0;
+					}
+				  });
+				  console.log('me cambie')
+				return {
+				  ...state,
+				  products: arr,
+				};
 		default:
 			return { ...state };
 	}

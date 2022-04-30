@@ -19,6 +19,7 @@ export default function Home() {
   const lastProduct = currentPage * productsPerPage; //indice de la ultima receta.
   const firstProduct = lastProduct - productsPerPage; //indice de la primer receta.
   const productsCurent = allProducts.slice(firstProduct, lastProduct);
+  const [render, setRender] = useState()
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -27,7 +28,11 @@ export default function Home() {
 
   return (
     <div className={css.principalDivHome}>
-      <Filter/>
+      <Filter
+        setRender={setRender}
+        setCurrentPage={setCurrentPage}
+        render={render}
+      />
       <div>
         <Paginated
           allProducts={allProducts}

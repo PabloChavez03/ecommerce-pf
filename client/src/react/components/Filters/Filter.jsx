@@ -1,11 +1,14 @@
 import React from 'react'
 import OrderByPrice from './OrderByPrice/OrderByPrice'
 
-function Filter() {
+function Filter({setRender, setCurrentPage}) {
    
   return (
     <div>
-       <OrderByPrice/>
+       <OrderByPrice
+        setRender ={setRender}
+        setCurrentPage={setCurrentPage}
+       />
         
     </div>
   )
