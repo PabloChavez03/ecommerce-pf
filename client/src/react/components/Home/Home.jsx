@@ -10,13 +10,11 @@ import { setCurrentPage, getAllProducts } from "../../../redux/actions-types";
 export default function Home() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state)=>state.products);
-  console.log(allProducts)
   const currentPage = useSelector((state) => state.currentPage);
   const [productsPerPage] = useState(9); //me guarda la cantidad de recetas por pagina.
   const lastProduct = currentPage * productsPerPage; //indice de la ultima receta.
   const firstProduct = lastProduct - productsPerPage; //indice de la primer receta.
   const productsCurent = allProducts.slice(firstProduct, lastProduct);
-  console.log(allProducts)
  
 
   useEffect(()=>{

@@ -4,7 +4,8 @@ import {
   REMOVE_PRODUCT_FROM_CART,
   CHANGE_CART_QUANTITY,
   SET_CURRENT_PAGE,
-  GET_ALL_PRODUCTS
+  GET_ALL_PRODUCTS,
+  GET_DETAILS
 } from "../actions-creators";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   productFilter: [],
   cartItems: [],
   currentPage: 1,
+  details: {}
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -47,6 +49,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
           return {
             ...state,
             products: payload
+          };
+    case GET_DETAILS: 
+          return {
+            ...state,
+            details: payload
           };
     default:
       return { ...state };

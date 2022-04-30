@@ -4,7 +4,8 @@ import {
   REMOVE_PRODUCT_FROM_CART,
   CHANGE_CART_QUANTITY,
   SET_CURRENT_PAGE,
-  GET_ALL_PRODUCTS
+  GET_ALL_PRODUCTS,
+  GET_DETAILS
 } from "../actions-creators";
 import axios from "axios";
 
@@ -49,3 +50,14 @@ export const getAllProducts = () => {
     });
   };
 };
+
+export const getDetails = (idProduct) => {
+  return async function (dispatch) {
+    const productDetail = await axios.get(`http://localhost:3001/products/detail/${idProduct}`);
+    console.log(productDetail)
+    return dispatch(({
+      type: GET_DETAILS,
+      payload: productDetail.data
+    }))
+  }
+}

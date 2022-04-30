@@ -12,9 +12,6 @@ export default function Cards({
 	currentPrice,
 	brandName
 }) {
-	const handleClickAddCart = (event) => (
-		<Construction/> //provisorio hasta que este el carrito
-	)
 	return (
 		<div className={css.container}>
 			
@@ -30,7 +27,6 @@ export default function Cards({
 			<NavLink to={`/detail/${id}`} style={{ textDecoration: "none" }}>
 				<button>Mostrar Detalles</button>
 			</NavLink>
-			<button onClick={(e)=>handleClickAddCart(e)}>Agregar al carrito</button>
 		</div>
 	);
 }
