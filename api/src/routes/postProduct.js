@@ -1,72 +1,85 @@
 const { Router } = require("express");
-const { Product, Category } = require("../db");
+const { Product, Category, ProductDetail } = require("../db");
 const router = Router();
-const crypto = require("crypto");
-
-function uuidv4() {
-	return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
-		(
-			c ^
-			(crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-		).toString(16),
-	);
-}
-// console.log(uuidv4());
 
 router.post("", async (req, res) => {
 	let {
 		name,
-		image,
+		description,
+		info,
+		gender,
+		brandName,
+		images,
 		previousPrice,
 		isOffertPrice,
 		currentPrice,
-		brandName,
 		colour,
-		Categories,
+		variants,
+		category,
 	} = req.body;
 
 	var newId = function () {
-		return Number(Math.random() + Date.now());
+		return parseInt((Math.random() + Date.now()).toString().substring(7));
 	};
 
 	const id = newId();
-	console.log(id);
 
 	try {
 		let [productCreated, created] = await Product.findOrCreate({
 			where: {
+				id,
 				name,
-				image,
+				image: images[0],
 				previousPrice,
 				isOffertPrice,
 				currentPrice,
 				brandName,
 				colour,
 			},
-			defaults: {
-				id,
-			},
 		});
 
-		console.log(productCreated);
+		let categoryDDBB = await Category.findByPk(category);
+		await productCreated.addCategory(categoryDDBB);
 
-		if (created) {
-			res.status(200).send("Producto creado con exito!");
-		} else {
-			res.status(404).send("Producto existente");
-		}
+		// if (created) {
+		// 	res.status(200).send("Creado con exito en tabla Product!");
+		// } else {
+		// 	res.status(404).send("Producto existente");
+		// }
 	} catch (e) {
 		console.log(e.message);
 	}
 
-	// let categoriDb = await Category.findAll({
-	// 	where: { id: Categories },
-	// });
-	// await productCreated.addCategory(categoriDb);
+	try {
+		let [productCreated, created] = await ProductDetail.findOrCreate({
+			where: {
+				id,
+				name,
+				description,
+				info,
+				gender,
+				brand: brandName,
+				images,
+				previousPrice,
+				isOffertProduct: isOffertPrice,
+				currentPrice,
+				variants,
+			},
+		});
 
-	// } catch (error) {
-	// 	return new TypeError(error);
-	// }
+		let productDDBB = await Product.findByPk(id);
+		console.log(productDDBB);
+
+		await productCreated.setProduct(productDDBB);
+
+		if (created) {
+			res.status(200).send("Detalles creados exitosamente!");
+		} else {
+			res.status(404).send("Producto existente");
+		}
+	} catch (e) {
+		console.log(e);
+	}
 });
 
 module.exports = router;
