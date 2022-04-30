@@ -5,6 +5,9 @@ import {
 	CHANGE_CART_QUANTITY,
 	SET_CURRENT_PAGE,
 	GET_ALL_PRODUCTS,
+	POST_PRODUCT,
+	UPDATE_PRODUCT,
+	DELETE_PRODUCT,
 } from "../actions-creators";
 
 const initialState = {
@@ -49,6 +52,18 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				...state,
 				products: payload,
 			};
+		case POST_PRODUCT :
+			return {
+				...state,
+			};
+		case UPDATE_PRODUCT :
+			return {
+				...state,
+			};
+		case DELETE_PRODUCT :
+			return {
+				...state,
+			}
 		default:
 			return { ...state };
 	}
