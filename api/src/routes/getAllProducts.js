@@ -4,7 +4,6 @@ const router = Router();
 
 router.get("", async (req, res) => {
 	let allProducts = await getAllDbInfo();
-	console.log(allProducts);
 
 	try {
 		allProducts

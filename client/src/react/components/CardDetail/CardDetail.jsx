@@ -103,10 +103,10 @@ export default function CardDetail() {
 
 	};
 
-	const handleAddCart = (event) => {
-		event.preventDefault();
-		dispatch(addProductToCart(productFilterCart));
-	}
+	// const handleAddCart = (event) => {
+	// 	event.preventDefault();
+	// 	dispatch(addProductToCart(productFilterCart));
+	// }
 
 	return (
 		<div>
