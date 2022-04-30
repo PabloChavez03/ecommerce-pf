@@ -3,13 +3,15 @@ const adaptCategory = require("./categoriesAdapter");
 
 async function getAPIcategories() {
 	const options = {
-		method: "GET",
-		url: "https://asos2.p.rapidapi.com/categories/list",
-		headers: {
-			"X-RapidAPI-Host": "asos2.p.rapidapi.com",
-			"X-RapidAPI-Key": "c004e83b99msh69d5ac3687a6db0p175163jsn1858aade2461",
-		},
-	};
+
+    method: "GET",
+    url: "https://asos2.p.rapidapi.com/categories/list",
+    headers: {
+      "X-RapidAPI-Host": "asos2.p.rapidapi.com",
+      "X-RapidAPI-Key": "324a0d5d1emshad70a2c958f1e4cp140a43jsn270daa51ceb2",
+    },
+  };
+
 
 	return await axios(options)
 		.then(({ data }) => adaptCategory(data))
