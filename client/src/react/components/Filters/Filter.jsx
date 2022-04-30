@@ -2,12 +2,17 @@ import React from 'react'
 import FiltersByMark from './FiltersByMark/FiltersByMark'
 import OrderByPrice from './OrderByPrice/OrderByPrice'
 
-function Filter() {
-   
+function Filter({ setRender, setCurrentPage }) {
+
   return (
     <div>
-       <OrderByPrice/>
-        <FiltersByMark/>
+
+      <OrderByPrice
+        setRender={setRender}
+        setCurrentPage={setCurrentPage}
+      />
+      <FiltersByMark />
+
     </div>
   )
 }
