@@ -6,7 +6,10 @@ import {
 	CHANGE_CART_QUANTITY,
 	SET_CURRENT_PAGE,
 	GET_ALL_PRODUCTS,
+	GET_CURRENT_BRANDS,
+	GET_FILTERS_BRANDS,
 } from "../actions-creators";
+import { currentbrands } from "../controllers";
 
 export const getProductByName = (nameProduct) => {
 	return async function (dispatch) {
@@ -52,3 +55,18 @@ export const getAllProducts = () => {
 		});
 	};
 };
+
+export const getCurrentBrands = () => async (dispatch) => {
+	let brands = await currentbrands();
+	return dispatch({
+		type: GET_CURRENT_BRANDS,
+		payload: brands
+	})
+}
+export const getFiltersBrands = (payload) => {
+	
+	return {
+		type: GET_FILTERS_BRANDS,
+		payload
+	}
+}
