@@ -25,17 +25,17 @@ export const currentbrands = async () => {
         console.log(err);
     }
 }
-export const filterbrands = async (brand) => {
+export const filterbrands =  (brand,allProducts) => {
     try {
-        const data = await urlAllProduct();
+        const data =  allProducts;
         let databrand = []
         data.forEach(item => {
             if (item.brandName === brand) {
                 databrand.push(item);
             }
         })
-        console.log(databrand)
-        return databrand;
+   
+        return  databrand;
 
     } catch (err) {
         console.log(err);

@@ -11,7 +11,9 @@ function Filter({ setRender, setCurrentPage }) {
         setRender={setRender}
         setCurrentPage={setCurrentPage}
       />
-      <FiltersByMark />
+      <FiltersByMark
+        setCurrentPage={setCurrentPage}
+      />
 
     </div>
   )

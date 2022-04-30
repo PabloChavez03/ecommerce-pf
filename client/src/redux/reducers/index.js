@@ -74,7 +74,8 @@ export default function rootReducer(state = initialState, { type, payload }) {
           products: allProducts
         }
       } else {
-        let databrands = filterbrands(payload)
+        let databrands = filterbrands(payload,allProducts)
+
         return {
           ...state,
           products: databrands,
