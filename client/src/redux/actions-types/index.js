@@ -5,7 +5,8 @@ import {
   CHANGE_CART_QUANTITY,
   SET_CURRENT_PAGE,
   GET_ALL_PRODUCTS,
-  GET_DETAILS
+  GET_DETAILS,
+  SET_DETAILS
 } from "../actions-creators";
 import axios from "axios";
 
@@ -14,7 +15,6 @@ export const getProductByName = (nameProduct) => {
 		const { data } = await axios.get(
 			`http://localhost:3001/products?productName=${nameProduct}`
 		);
-
 		//Acá iria la constante creada donde guardamos el listado de productos que coinciden con el nombre.
 		return dispatch({ type: GET_PRODUCT_BY_NAME, payload: data }); //nameProduct provisoriamente hasta que tengamos creada la constante que trae los productos.
 	};
@@ -54,13 +54,19 @@ export const getAllProducts = () => {
 	};
 };
 
-export const getDetails = (idProduct) => {
+export const getDetails = (productId) => {
   return async function (dispatch) {
-    const productDetail = await axios.get(`http://localhost:3001/products/detail/${idProduct}`);
-    console.log(productDetail)
+    const productDetail = await axios.get(`http://localhost:3001/products/detail/${productId}`);
+	console.log(productDetail)
     return dispatch(({
       type: GET_DETAILS,
       payload: productDetail.data
-    }))
-  }
-}
+    }));
+  };
+};
+
+export const setDetails = () => {
+	return ({
+		type: SET_DETAILS
+	});
+};

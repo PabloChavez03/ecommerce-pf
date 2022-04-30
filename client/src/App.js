@@ -16,7 +16,7 @@ function App() {
 				<Routes>
 					<Route path={"/"} element={<Landing />} />
 					<Route path={"/home"} element={<Home />} />
-					<Route path={"/detail/:idProduct"} element={<CardDetail />} />
+					<Route path={"/detail/:productId"} element={<CardDetail />} />
 					{/* Ruta /creation provisoria para poder ver como esta quedando el formulario. */}
 					<Route path={"/creation"} element={<CreationProduct />} />
 					<Route path={"/about"} element={<Construction />} />

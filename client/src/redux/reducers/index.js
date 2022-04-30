@@ -5,7 +5,8 @@ import {
   CHANGE_CART_QUANTITY,
   SET_CURRENT_PAGE,
   GET_ALL_PRODUCTS,
-  GET_DETAILS
+  GET_DETAILS,
+  SET_DETAILS
 } from "../actions-creators";
 
 const initialState = {
@@ -54,6 +55,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
           return {
             ...state,
             details: payload
+          };
+    case SET_DETAILS:
+          return {
+            ...state,
+            details: {}
           };
     default:
       return { ...state };
