@@ -3,6 +3,7 @@ const adaptListProducts = require("./productsAdapter");
 
 async function getAPIproducts(categoryId) {
 	const options = {
+
     method: "GET",
     url: "https://asos2.p.rapidapi.com/products/v2/list",
     params: {

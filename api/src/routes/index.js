@@ -14,8 +14,7 @@ router.use("/products", require("./products"));
 router.use("/products/detail", require("./productsDetail"));
 router.use("/allproducts", require("./getAllProducts"));
 router.use("/products/create", require("./postProduct"));
-
-
-
+router.use("/products/update", require("./updateProduct"));
+router.use("/products/delete", require("./deleteProduct"));
 
 module.exports = router;
