@@ -1,10 +1,17 @@
 import axios from "axios";
-import { GET_PRODUCT_BY_NAME, ADD_PRODUCT_TO_CART } from "../actions-creators";
+import {
+	GET_PRODUCT_BY_NAME,
+	ADD_PRODUCT_TO_CART,
+	REMOVE_PRODUCT_FROM_CART,
+	CHANGE_CART_QUANTITY,
+	SET_CURRENT_PAGE,
+	GET_ALL_PRODUCTS,
+} from "../actions-creators";
 
 export const getProductByName = (nameProduct) => {
 	return async function (dispatch) {
 		const { data } = await axios.get(
-			`http://localhost:3001/products?productName=${nameProduct}`,
+			`http://localhost:3001/products?productName=${nameProduct}`
 		);
 
 		//Acá iria la constante creada donde guardamos el listado de productos que coinciden con el nombre.
@@ -15,5 +22,33 @@ export const getProductByName = (nameProduct) => {
 export const addProductToCart = (product) => {
 	return async function (dispatch) {
 		return dispatch({ type: ADD_PRODUCT_TO_CART, payload: product });
+	};
+};
+
+export const removeProductFromCart = (product) => {
+	return async function (dispatch) {
+		return dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: product });
+	};
+};
+export const changeCartQuantity = (product) => {
+	return async function (dispatch) {
+		return dispatch({ type: CHANGE_CART_QUANTITY, payload: product });
+	};
+};
+
+export const setCurrentPage = (numberPage) => {
+	return {
+		type: SET_CURRENT_PAGE,
+		payload: numberPage,
+	};
+};
+
+export const getAllProducts = () => {
+	return async function (dispatch) {
+		const allProducts = await axios.get("http://localhost:3001/allproducts");
+		return dispatch({
+			type: GET_ALL_PRODUCTS,
+			payload: allProducts.data,
+		});
 	};
 };
