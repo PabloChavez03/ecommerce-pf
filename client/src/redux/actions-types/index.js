@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import {
 	GET_PRODUCT_BY_NAME,
 	ADD_PRODUCT_TO_CART,
@@ -6,7 +8,6 @@ import {
 	SET_CURRENT_PAGE,
 	GET_ALL_PRODUCTS,
 } from "../actions-creators";
-import axios from "axios";
 
 export const getProductByName = (nameProduct) => {
 	return async function (dispatch) {

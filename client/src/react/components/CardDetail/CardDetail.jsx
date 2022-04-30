@@ -13,7 +13,7 @@ export default function CardDetail() {
 
 	const { idProduct } = useParams();
 	const productFilter = products.filter(
-		(e) => parseInt(e.id_product) === parseInt(idProduct)
+		(e) => parseInt(e.id_product) === parseInt(idProduct),
 	);
 
 	const [imagesRender, setImagesRender] = useState([]);
@@ -79,7 +79,7 @@ export default function CardDetail() {
 		if (event.target.name === "color") {
 			setColorSelect(event.target.value);
 			let variantFilter = variants.find(
-				(e) => e.ColorName === event.target.value
+				(e) => e.ColorName === event.target.value,
 			);
 			setImagesRender(variantFilter.ProductImages);
 			setProductFilterCart({
@@ -132,8 +132,8 @@ export default function CardDetail() {
 									<img
 										className={style.cardCarouselImg}
 										src={image}
-										alt='Img Product'
-										onClick={(event) => handleImgChange(event)}
+										alt="Img Product"
+										//	onClick={(event) => handleImgChange(event)}
 									/>
 								</div>
 						  ))
@@ -143,7 +143,7 @@ export default function CardDetail() {
 					<img
 						className={style.cardPrimaryImg}
 						src={imageCurrent}
-						alt='Img Principal'
+						alt="Img Principal"
 					/>
 				</div>
 			</div>
@@ -154,11 +154,11 @@ export default function CardDetail() {
 				<p>{description}</p>
 				{is_offer ? <h3>Precio de oferta $ {price_offer}</h3> : null}
 				<h4>Variantes:</h4>
-				<select name='color' onChange={(e) => handleChangeSelect(e)}>
+				<select name="color" onChange={(e) => handleChangeSelect(e)}>
 					<option>Color</option>
 					{colors.length ? (
 						colors.map((color) => (
-							<option key={color} name='color' value={color}>
+							<option key={color} name="color" value={color}>
 								{color}
 							</option>
 						))
@@ -166,11 +166,11 @@ export default function CardDetail() {
 						<option>UNIQUE</option>
 					)}
 				</select>
-				<select name='size' onChange={(e) => handleChangeSelect(e)}>
+				<select name="size" onChange={(e) => handleChangeSelect(e)}>
 					<option>Talle</option>
 					{sizesRender.length
 						? sizesRender.map((size) => (
-								<option name='size' value={size} key={size}>
+								<option name="size" value={size} key={size}>
 									{size}
 								</option>
 						  ))
