@@ -7,6 +7,9 @@ import style from "./Modal.module.css";
 
 const Modal = ({ status, setStatus }) => {
 	const cartData = useSelector((state) => state.cartItems);
+
+	// console.log(cartData);
+
 	return (
 		<>
 			{status && (
