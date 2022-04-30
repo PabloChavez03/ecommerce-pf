@@ -27,5 +27,6 @@ router.use("/client", require("./routers/Clients/routesClient/index"));
 
 router.use("/carrito", require("../routes/routers/carrito"));
 router.use("/allproducts", require("../routes/routers/getAllProducts"));
+router.use("/create", require("../routes/routers/postProduct"));
 
 module.exports = router;
