@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import Cards from "../Cards/Cards";
 import { useSelector, useDispatch } from "react-redux";
 import Footer from "../Footer/Footer";
+import css from "./Home.module.css";
+import Filter from "../Filters/Filter";
 import { NavLink } from "react-router-dom";
 // import products from "../../../Info/productos.json";
-import css from "./Home.module.css";
+
 import Paginated from "../Paginated/Paginated";
 import { setCurrentPage, getAllProducts } from "../../../redux/actions-types";
+
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -24,6 +27,7 @@ export default function Home() {
 
   return (
     <div className={css.principalDivHome}>
+      <Filter/>
       <div>
         <Paginated
           allProducts={allProducts}
