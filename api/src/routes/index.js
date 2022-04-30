@@ -13,5 +13,9 @@ router.use("/products", require("./products"));
 // router.use("/products", require("./productsByName"));
 router.use("/products/detail", require("./productsDetail"));
 router.use("/allproducts", require("./getAllProducts"));
+router.use("/products/create", require("./postProduct"));
+
+
+
 
 module.exports = router;
