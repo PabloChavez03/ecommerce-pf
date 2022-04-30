@@ -1,19 +1,19 @@
 import React from "react";
 import style from "./ProductCardModal.module.css";
 
-const ProductCardModal = ({ name }) => {
+const ProductCardModal = ({ name, color, price, size, image }) => {
 	/** FALTA AGREGAR LOS OTROS DATOS, SOLO ESTOY RENDERIZANDO EL NAME */
 
 	return (
 		<div className={style.cardModalContainer}>
-			<div>imagen</div>
+			<img className={style.cardModalImg} src={image} alt='imagen_product' />
 			<div className={style.cardModalInfoContainer}>
 				<p className={style.cardModalTitle}>{name}</p>
-				<p>Color: Red</p>
-				<p>Talla: XL</p>
+				<p>Color: {color}</p>
+				<p>Talla: {size}</p>
 				<div className={style.cardModalInfoPrice}>
 					<p className={style.cardModalInfo}>
-						Precio: <span>$ 300</span>
+						Precio: <span>$ {price}</span>
 					</p>
 					<p className={style.cardModalInfo}>
 						Cantidad:
@@ -22,7 +22,7 @@ const ProductCardModal = ({ name }) => {
 						</span>
 					</p>
 					<p className={style.cardModalInfo}>
-						Total: <span>$ 300</span>
+						Total: <span>$</span>
 					</p>
 				</div>
 			</div>
