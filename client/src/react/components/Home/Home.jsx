@@ -5,25 +5,24 @@ import Footer from "../Footer/Footer";
 import css from "./Home.module.css";
 import Filter from "../Filters/Filter";
 import { NavLink } from "react-router-dom";
-// import products from "../../../Info/productos.json";
-
 import Paginated from "../Paginated/Paginated";
-import { setCurrentPage, getAllProducts } from "../../../redux/actions-types";
+import { setCurrentPage, getAllProducts, setDetails } from "../../../redux/actions-types";
 
 
 export default function Home() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
   const currentPage = useSelector((state) => state.currentPage);
-  const [productsPerPage] = useState(9); //me guarda la cantidad de recetas por pagina.
-  const lastProduct = currentPage * productsPerPage; //indice de la ultima receta.
-  const firstProduct = lastProduct - productsPerPage; //indice de la primer receta.
+  const [productsPerPage] = useState(9);
+  const lastProduct = currentPage * productsPerPage;
+  const firstProduct = lastProduct - productsPerPage;
   const productsCurent = allProducts.slice(firstProduct, lastProduct);
   const [render, setRender] = useState()
 
   useEffect(() => {
     dispatch(getAllProducts());
     dispatch(setCurrentPage(1));
+    dispatch(setDetails());
   }, [dispatch]);
 
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./ProductCardModal.module.css";
 
-const ProductCardModal = ({ name, color, price, size, image }) => {
+const ProductCardModal = ({ name, color, currentPrice, brandSize, image }) => {
 	/** FALTA AGREGAR LOS OTROS DATOS, SOLO ESTOY RENDERIZANDO EL NAME */
 
 	return (
@@ -10,10 +10,10 @@ const ProductCardModal = ({ name, color, price, size, image }) => {
 			<div className={style.cardModalInfoContainer}>
 				<p className={style.cardModalTitle}>{name}</p>
 				<p>Color: {color}</p>
-				<p>Talla: {size}</p>
+				<p>Talla: {brandSize}</p>
 				<div className={style.cardModalInfoPrice}>
 					<p className={style.cardModalInfo}>
-						Precio: <span>$ {price}</span>
+						Precio: <span>$ {currentPrice}</span>
 					</p>
 					<p className={style.cardModalInfo}>
 						Cantidad:
