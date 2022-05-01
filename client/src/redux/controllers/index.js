@@ -9,10 +9,20 @@ export const urlAllProduct = async () => {
         console.log(err);
     }
 };
-
-export const currentbrands = async () => {
+////////////////////////Mostrar los datos de la Api///////////////////////////
+export const urlProdutcGender = async (gender) => {
     try {
-        const data = await urlAllProduct();
+        return await axios
+            .get(`http://localhost:3001/products/genre?genrename=${gender}`)
+            .then(res => res.data)
+    } catch (err) {
+        console.log(err);
+    }
+}
+/////////////////////////Mostrar todas las marcas que tiene///////////////////////////
+export const currentbrands = async (gender) => {
+    try {
+        const data = await urlProdutcGender(gender);
         let marcaArray = []
         data.forEach(item => {
             if (!marcaArray.includes(item.brandName)) {
@@ -25,19 +35,21 @@ export const currentbrands = async () => {
         console.log(err);
     }
 }
-export const filterbrands =  (brand,allProducts) => {
+/////////////////////////////Mostrar los productos filtrados por marca///////////////////////////////
+export const filterbrands = (brand, allProducts) => {
     try {
-        const data =  allProducts;
+        const data = allProducts;
         let databrand = []
         data.forEach(item => {
             if (item.brandName === brand) {
                 databrand.push(item);
             }
         })
-   
-        return  databrand;
+
+        return databrand;
 
     } catch (err) {
         console.log(err);
     }
 }
+

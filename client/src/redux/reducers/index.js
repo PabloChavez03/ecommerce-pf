@@ -12,9 +12,10 @@ import {
   SET_DETAILS,
   GET_ALL_CATEGORIES,
   GET_CATEGORY_BY_ID,
-  SET_SELECT
+  SET_SELECT,
+  GET_FILTERS_GENDER_PRODUCT
 } from "../actions-creators";
-import { filterbrands } from "../controllers";
+import {  filterbrands } from "../controllers";
 
 const initialState = {
   products: [],
@@ -24,7 +25,8 @@ const initialState = {
   currentPage: 1,
   details: {},
   categories: [],
-  select: ""
+  select: "",
+  newgenders: []
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -67,7 +69,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
         brands: payload,
       }
     case GET_FILTERS_BRANDS:
-      const allProducts = [...state.allOfProducts];
+      const allProducts = [...state.newgenders]
       if (payload === "Marca") {
         return {
           ...state,
@@ -131,6 +133,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
         return {
           ...state,
           select: payload
+        };
+      case GET_FILTERS_GENDER_PRODUCT:
+        return {
+          ...state,
+          products: payload,
+          newgenders: payload
         };
     default:
       return { ...state };

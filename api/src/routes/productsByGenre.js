@@ -3,8 +3,8 @@ const { getGenderFilterByProduc } = require("../controllers/productsByGenreGette
 const router = Router();
 
 router.get('/', async (req, res) => {
-    const { genreName } = req.query
-    let data = await getGenderFilterByProduc(genreName)
+    const { genrename } = req.query
+    let data = await getGenderFilterByProduc(genrename)
     try {
         data
             ? res.status(200).json(data)

@@ -1,20 +1,21 @@
 import {
-	GET_PRODUCT_BY_NAME,
-	ADD_PRODUCT_TO_CART,
-	REMOVE_PRODUCT_FROM_CART,
-	CHANGE_CART_QUANTITY,
-	SET_CURRENT_PAGE,
-	GET_ALL_PRODUCTS,
-	GET_CURRENT_BRANDS,
-	GET_FILTERS_BRANDS,
+  GET_PRODUCT_BY_NAME,
+  ADD_PRODUCT_TO_CART,
+  REMOVE_PRODUCT_FROM_CART,
+  CHANGE_CART_QUANTITY,
+  SET_CURRENT_PAGE,
+  GET_ALL_PRODUCTS,
+  GET_CURRENT_BRANDS,
+  GET_FILTERS_BRANDS,
   ORDER_BY_PRICE,
   GET_DETAILS,
   SET_DETAILS,
   GET_ALL_CATEGORIES,
   GET_CATEGORY_BY_ID,
-  SET_SELECT
+  SET_SELECT,
+  GET_FILTERS_GENDER_PRODUCT
 } from "../actions-creators";
-import { currentbrands } from "../controllers";
+import { currentbrands, urlProdutcGender } from "../controllers";
 import axios from "axios";
 
 
@@ -132,3 +133,11 @@ export const setSelect = (select) => {
     });
   };
 };
+
+export const getFiltersGenderProduct = (payload) => async (dispatch) => {
+  let dataGender = await urlProdutcGender(payload)
+  return dispatch({
+    type: GET_FILTERS_GENDER_PRODUCT,
+    payload: dataGender,
+  })
+}

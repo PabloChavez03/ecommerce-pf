@@ -4,13 +4,19 @@ import { useSelector, useDispatch } from "react-redux";
 import Footer from "../Footer/Footer";
 import css from "./Home.module.css";
 import Filter from "../Filters/Filter";
-import { NavLink } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 import Paginated from "../Paginated/Paginated";
-import { setCurrentPage, getAllProducts, setDetails } from "../../../redux/actions-types";
+import {
+  getFiltersGenderProduct, setCurrentPage,
+  setDetails
+} from "../../../redux/actions-types";
 
 
 export default function Home() {
   const dispatch = useDispatch();
+  const [params] = useSearchParams();
+  const gender = params.get('gender');
+
   const allProducts = useSelector((state) => state.products);
   const productFilter = useSelector((state) => state.productFilter);
   const currentPage = useSelector((state) => state.currentPage);
@@ -22,10 +28,10 @@ export default function Home() {
   const [render, setRender] = useState();
   
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getFiltersGenderProduct(gender))
     dispatch(setCurrentPage(1));
     dispatch(setDetails());
-  }, [dispatch]);
+  }, [dispatch, gender]);
 
   return (
     <div className={css.principalDivHome}>
@@ -40,7 +46,7 @@ export default function Home() {
           lastProduct={lastProduct}
           firstProduct={firstProduct}
           productsPerPage={productsPerPage}
-        /> 
+        />
       </div>
       <div className={css.cardContainer}>
         {/* Necesitamos el hardcode*/}
@@ -49,15 +55,15 @@ export default function Home() {
             return (
               <div key={index}>
                 <NavLink to={`/detail/${product.id}`} style={{ textDecoration: "none" }}>
-			        	<Cards
-                  name={product.name}
-                  image={product.image}
-                  isOffertPrice={product.isOffertPrice}
-                  previousPrice={product.previousPrice}
-                  currentPrice={product.currentPrice}
-                />
-			</NavLink>
-                
+                  <Cards
+                    name={product.name}
+                    image={product.image}
+                    isOffertPrice={product.isOffertPrice}
+                    previousPrice={product.previousPrice}
+                    currentPrice={product.currentPrice}
+                  />
+                </NavLink>
+
               </div>
             );
           })

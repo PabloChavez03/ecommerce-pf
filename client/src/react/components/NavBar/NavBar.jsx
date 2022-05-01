@@ -70,7 +70,7 @@ export default function NavBar() {
 			<div className='nav__down'>
 				<div className={`nav__down__links ${toogleMenu ? "menuActived" : ""}`}>
 					<ul>
-						<NavLink to={"/home"} onClick={handleClickForHiddingBurguer}>
+						<NavLink to={"/"} onClick={handleClickForHiddingBurguer}>
 							<li>Home</li>
 						</NavLink>
 						<NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
