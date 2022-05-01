@@ -3,6 +3,7 @@
 	background: #fff;
 	padding: 10px 15px;
 	gap: 10px;
+	margin-bottom: 10px;
 }
 
 .cardModalInfoContainer {
@@ -31,4 +32,8 @@
 
 .cardModalInfo span {
 	font-weight: 400;
+}
+
+.cardModalImg {
+	width: 75px;
 }
