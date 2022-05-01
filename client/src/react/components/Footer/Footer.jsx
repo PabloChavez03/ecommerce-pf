@@ -5,8 +5,9 @@ import whatsapp from "./images/whatsapp.png";
 
 function Footer() {
   const handleClickButton = (event) => {
-    alert("Funcionalidad en desarrollo!")
-  }
+    alert("Funcionalidad en desarrollo!");
+  };
+  
   return (
     <div>
       <NavLink to={"/"}>
