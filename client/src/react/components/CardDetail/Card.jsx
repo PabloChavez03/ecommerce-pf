@@ -3,79 +3,94 @@ import { useDispatch } from "react-redux";
 import style from "./CardDetail.module.css";
 import { addProductToCart } from "../../../redux/actions-types";
 
-export default function Card({id,name,description,gender,brand,images,previousPrice,isOffertProduct,currentPrice,variants}) {
-    const dispatch = useDispatch();
-    const [imageCurrent, setImageCurrent] = useState("");
-    const [productToCart, setProductToCart] = useState({
-        name,
-        image: images[0],
-        currentPrice,
-        color: variants.map((e)=>e.color).join(""),
-        brandSize: variants.map((e)=>e.brandSize).join(""),
-    })
-    useEffect(()=>{
-        setImageCurrent(`https://${images[0]}`)
-    },[images])
+export default function Card({
+	id,
+	name,
+	description,
+	gender,
+	brand,
+	images,
+	previousPrice,
+	isOffertProduct,
+	currentPrice,
+	variants,
+}) {
+	const dispatch = useDispatch();
+	const [imageCurrent, setImageCurrent] = useState("");
+	const [productToCart, setProductToCart] = useState({
+		name,
+		image: images[0],
+		currentPrice,
+		color: variants.map((e) => e.color).join(""),
+		brandSize: variants.map((e) => e.brandSize).join(""),
+		quantity: 1,
+		totalPrice: currentPrice,
+	});
+	useEffect(() => {
+		setImageCurrent(`https://${images[0]}`);
+	}, [images]);
 
-    const handleImgChange = (event) => {
+	const handleImgChange = (event) => {
 		event.preventDefault();
 		setImageCurrent(event.target.src);
 	};
 
-    const handleAddCart = (event) => {
+	const handleAddCart = (event) => {
 		event.preventDefault();
 		dispatch(addProductToCart(productToCart));
 	};
 
+	return (
+		<div className={style.cardDetailContainer}>
+			<div className={style.cardDetailImgContainer}>
+				<div>
+					{images.length
+						? images.map((image) => (
+								<div key={image}>
+									<img
+										className={style.cardCarouselImg}
+										src={`https://${image}`}
+										alt='Img Product'
+										onClick={(e) => handleImgChange(e)}
+									/>
+								</div>
+						  ))
+						: null}
+				</div>
+			</div>
+			<div>
+				<img
+					className={style.cardPrimaryImg}
+					src={imageCurrent}
+					alt='Img Principal'
+				/>
+			</div>
+			<h3>{name}</h3>
+			<p>{description}</p>
+			<h4>Género:</h4>
+			<h4>{gender}</h4>
+			<h4>Marca:</h4>
+			<h4>{brand}</h4>
 
-    return (
-        <div className={style.cardDetailContainer}>
-            <div className={style.cardDetailImgContainer}>
-            <div>
-                 {images.length
-                    ? images.map((image) => (
-                            <div key={image}>
-                                <img
-                                    className={style.cardCarouselImg}
-                                    src={`https://${image}`}
-                                    alt='Img Product'
-                                    onClick={(e) => handleImgChange(e)}
-                                />
-                            </div>
-                      ))
-                    : null}
-            </div>
-            </div>
-            <div>
-                 <img
-                    className={style.cardPrimaryImg}
-                    src={imageCurrent}
-                    alt='Img Principal'
-                />
-            </div>
-            <h3>{name}</h3>
-            <p>{description}</p>
-            <h4>Género:</h4>
-            <h4>{gender}</h4>
-            <h4>Marca:</h4>
-            <h4>{brand}</h4>
+			<h4>Precio</h4>
+			{isOffertProduct ? (
+				<div>
+					<h5>Precio anterior: {previousPrice}</h5>
+					<h5>Precio de oferta: {currentPrice}</h5>
+				</div>
+			) : (
+				<h5>{currentPrice}</h5>
+			)}
 
-            <h4>Precio</h4>
-            {isOffertProduct?
-                <div>
-                    <h5>Precio anterior: {previousPrice}</h5>
-                    <h5>Precio de oferta: {currentPrice}</h5>
-                </div>:<h5>{currentPrice}</h5>}
+			<h4>Color:</h4>
+			{<h4>{variants[0].color}</h4>}
 
-            <h4>Color:</h4>
-            {<h4>{variants[0].color}</h4>}
+			<h4>Talle:</h4>
+			{<h4>{variants[0].brandSize}</h4>}
 
-            <h4>Talle:</h4>
-            {<h4>{variants[0].brandSize}</h4>}
-
-            <button className={(e)=>handleAddCart(e)}>Agregar al carrito</button>
-        </div>
-    )
+			<button onClick={(e) => handleAddCart(e)}>Agregar al carrito</button>
+		</div>
+	);
 }
 
 // return (
@@ -193,4 +208,3 @@ export default function Card({id,name,description,gender,brand,images,previousPr
 //         <div>
 //             <h2>Productos relacionados</h2>
 //             <div>
-            
