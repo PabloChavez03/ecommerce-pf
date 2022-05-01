@@ -20,10 +20,11 @@ function FiltersByMark({ setCurrentPage }) {
 
     function handleFilterByMark(e) {
         e.preventDefault();
-        dispatch(getFiltersBrands(e.target.value))
-        setCurrentPage(1)
-        setValue(e.target.value)
-    }
+        dispatch(getFiltersBrands(e.target.value));
+        setCurrentPage(1);
+        setValue(e.target.value);
+    };
+
     return (
         <div>
             <select name='selectbrands' value={value} onChange={(e) => handleFilterByMark(e)}>

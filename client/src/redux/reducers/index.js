@@ -27,7 +27,7 @@ const initialState = {
 	categories: [],
 	select: "",
 	newgenders: [],
-	subTotal: 0,
+	subTotal: 0
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -76,12 +76,14 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				return {
 					...state,
 					productFilter: allProducts,
+					select: payload
 				};
 			} else {
 				let dataBrands = filterbrands(payload, allProducts);
 				return {
 					...state,
 					productFilter: dataBrands,
+					select: payload
 				};
 			}
 		case GET_DETAILS:
@@ -92,12 +94,13 @@ export default function rootReducer(state = initialState, { type, payload }) {
 		case SET_DETAILS:
 			return {
 				...state,
-				details: {},
+				details: payload,
 			};
 		case ORDER_BY_PRICE:
+			let productsSort = state.select === "" ? state.products : state.productFilter;
 			let arr =
 				payload === "high"
-					? state.products?.sort(function (a, b) {
+					? productsSort?.sort(function (a, b) {
 							if (a.currentPrice < b.currentPrice) {
 								return 1;
 							}
@@ -105,9 +108,9 @@ export default function rootReducer(state = initialState, { type, payload }) {
 								return -1;
 							} else {
 								return 0;
-							}
+							};
 					  })
-					: state.products?.sort(function (a, b) {
+					: productsSort?.sort(function (a, b) {
 							if (a.currentPrice > b.currentPrice) {
 								return 1;
 							}
@@ -115,12 +118,19 @@ export default function rootReducer(state = initialState, { type, payload }) {
 								return -1;
 							} else {
 								return 0;
-							}
+							};
 					  });
-			return {
-				...state,
-				products: arr,
-			};
+			if(state.select === "" ) {
+				return {
+					...state,
+					products: arr,
+					};
+			} else {
+				return {
+					...state,
+					productFilter: arr
+				};
+			};	
 		case GET_ALL_CATEGORIES:
 			return {
 				...state,
@@ -129,12 +139,8 @@ export default function rootReducer(state = initialState, { type, payload }) {
 		case GET_CATEGORY_BY_ID:
 			return {
 				...state,
-				productFilter: payload,
-			};
-		case SET_SELECT:
-			return {
-				...state,
-				select: payload,
+				productFilter: payload[0],
+				select: payload[1]
 			};
 		case GET_FILTERS_GENDER_PRODUCT:
 			return {

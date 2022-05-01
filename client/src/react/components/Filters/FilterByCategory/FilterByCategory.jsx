@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCategories, getCategoryById, setCurrentPage, setSelect } from "../../../../redux/actions-types";
+import { getAllCategories, getCategoryById, setCurrentPage } from "../../../../redux/actions-types";
 
 export default function FilterByCategory() {
     const dispatch = useDispatch();
@@ -16,15 +16,13 @@ export default function FilterByCategory() {
         if(event.target.value !== "selectCategory") {
             dispatch(getCategoryById(event.target.value));
             dispatch(setCurrentPage(1));
-            dispatch(setSelect(event.target.value));
             console.log(event.target.value)
         }
-        
     };
 
     return (
         <div>
-            <select onClick={(e)=>handleChangeSelect(e)}>
+            <select onChange={(e)=>handleChangeSelect(e)}>
                 <option value={"selectCategory"}>Seleccionar Categoría</option>
                 {
                     allCategories.length?allCategories.map((e)=>(
