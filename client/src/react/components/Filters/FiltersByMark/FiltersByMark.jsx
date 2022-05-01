@@ -24,7 +24,7 @@ function FiltersByMark({ setCurrentPage }) {
     return (
         <div>
             <select name='selectbrands' value={value} onChange={(e) => handleFilterByMark(e)}>
-                <option value={'Marca'}>Marca</option>
+                <option value={'Marca'}>Seleccionar Marca</option>
                 {brandsAll?.map(item => (<option key={item} value={item}>{item}</option>))}
             </select>
         </div>

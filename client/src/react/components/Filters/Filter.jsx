@@ -1,4 +1,5 @@
 import React from 'react'
+import FilterByCategory from './FilterByCategory/FilterByCategory'
 import FiltersByMark from './FiltersByMark/FiltersByMark'
 import OrderByPrice from './OrderByPrice/OrderByPrice'
 
@@ -11,10 +12,11 @@ function Filter({ setRender, setCurrentPage }) {
         setRender={setRender}
         setCurrentPage={setCurrentPage}
       />
+      <FilterByCategory/>
       <FiltersByMark
         setCurrentPage={setCurrentPage}
       />
-
+      
     </div>
   )
 }

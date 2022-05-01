@@ -10,6 +10,9 @@ import {
   ORDER_BY_PRICE,
   GET_DETAILS,
   SET_DETAILS,
+  GET_ALL_CATEGORIES,
+  GET_CATEGORY_BY_ID,
+  SET_SELECT
 } from "../actions-creators";
 import { currentbrands } from "../controllers";
 import axios from "axios";
@@ -36,6 +39,7 @@ export const removeProductFromCart = (product) => {
     return dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: product });
   };
 };
+
 export const changeCartQuantity = (product) => {
   return async function (dispatch) {
     return dispatch({ type: CHANGE_CART_QUANTITY, payload: product });
@@ -64,7 +68,7 @@ export function orderByPrice(payload) {
     type: ORDER_BY_PRICE,
     payload,
   };
-}
+};
 
 export const getDetails = (productId) => {
   return async function (dispatch) {
@@ -90,12 +94,41 @@ export const getCurrentBrands = () => async (dispatch) => {
 	return dispatch({
 		type: GET_CURRENT_BRANDS,
 		payload: brands
-	})
-}
+	});
+};
+
 export const getFiltersBrands = (payload) => {
-	
 	return {
 		type: GET_FILTERS_BRANDS,
 		payload
-	}
-}
+	};
+};
+
+export const getAllCategories = () => {
+  return async function(dispatch) {
+    const allCategories = await axios.get("http://localhost:3001/categories");
+    return dispatch({
+      type: GET_ALL_CATEGORIES,
+      payload: allCategories.data
+    });
+  };
+};
+
+export const getCategoryById = (idCategory) => {
+  return async function(dispatch) {
+    const category = await axios.get(`http://localhost:3001/products?categoryId=${idCategory}`);
+    return dispatch({
+      type: GET_CATEGORY_BY_ID,
+      payload: category.data
+    });
+  };
+};
+
+export const setSelect = (select) => {
+  return async function(dispatch) {
+    return dispatch({
+      type: SET_SELECT,
+      payload: select
+    });
+  };
+};

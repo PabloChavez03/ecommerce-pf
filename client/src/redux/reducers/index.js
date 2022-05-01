@@ -10,18 +10,21 @@ import {
   ORDER_BY_PRICE,
   GET_DETAILS,
   SET_DETAILS,
-
+  GET_ALL_CATEGORIES,
+  GET_CATEGORY_BY_ID,
+  SET_SELECT
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
 const initialState = {
-  allOfProducts: [],
   products: [],
   productFilter: [],
   cartItems: [],
   brands: [],
   currentPage: 1,
   details: {},
+  categories: [],
+  select: ""
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -29,7 +32,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case GET_PRODUCT_BY_NAME:
       return {
         ...state,
-        products: payload,
         productFilter: payload,
       };
     case ADD_PRODUCT_TO_CART:
@@ -58,7 +60,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         products: payload,
-        allOfProducts: payload
       };
     case GET_CURRENT_BRANDS:
       return {
@@ -66,20 +67,19 @@ export default function rootReducer(state = initialState, { type, payload }) {
         brands: payload,
       }
     case GET_FILTERS_BRANDS:
-      const allProducts = [...state.allOfProducts]
+      const allProducts = [...state.allOfProducts];
       if (payload === "Marca") {
         return {
           ...state,
-          products: allProducts
-        }
+          productFilter: allProducts
+        };
       } else {
-        let databrands = filterbrands(payload,allProducts)
-
+        let dataBrands = filterbrands(payload,allProducts);
         return {
           ...state,
-          products: databrands,
-        }
-      }
+          productFilter: dataBrands,
+        };
+      };
     case GET_DETAILS:
       return {
         ...state,
@@ -117,7 +117,22 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         products: arr,
       };
+      case GET_ALL_CATEGORIES:
+        return {
+          ...state,
+          categories: payload
+        };
+      case GET_CATEGORY_BY_ID:
+        return {
+          ...state,
+          productFilter: payload
+        };
+      case SET_SELECT:
+        return {
+          ...state,
+          select: payload
+        };
     default:
       return { ...state };
-  }
-}
+  };
+};

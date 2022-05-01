@@ -12,13 +12,15 @@ import { setCurrentPage, getAllProducts, setDetails } from "../../../redux/actio
 export default function Home() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
+  const productFilter = useSelector((state) => state.productFilter);
   const currentPage = useSelector((state) => state.currentPage);
+  const select = useSelector((state) => state.select);
   const [productsPerPage] = useState(9);
   const lastProduct = currentPage * productsPerPage;
   const firstProduct = lastProduct - productsPerPage;
-  const productsCurent = allProducts.slice(firstProduct, lastProduct);
-  const [render, setRender] = useState()
-
+  const productsCurent = select === "" ? allProducts.slice(firstProduct, lastProduct) : productFilter.slice(firstProduct, lastProduct);
+  const [render, setRender] = useState();
+  
   useEffect(() => {
     dispatch(getAllProducts());
     dispatch(setCurrentPage(1));

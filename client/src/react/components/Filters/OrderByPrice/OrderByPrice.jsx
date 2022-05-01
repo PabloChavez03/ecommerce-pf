@@ -13,9 +13,9 @@ function OrderByPrice({setRender, setCurrentPage}) {
   return (
     <div> 
     <select onChange={(e) => handleOrderByPrice(e)}>
-    <option >Order By Price!</option>
-    <option  value="high">Highest Price</option>
-    <option  value="low">Lowest Price</option>
+    <option >Orden por Precio</option>
+    <option  value="high">Mayor Precio</option>
+    <option  value="low">Menor Precio</option>
   </select>
   </div>
   )
