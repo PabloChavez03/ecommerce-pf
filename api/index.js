@@ -23,6 +23,7 @@ const { conn } = require("./src/db.js");
 
 const setDDBBcategories = require("./src/controllers/categoriesDbSetter.js");
 const getDDBBproducts = require("./src/controllers/productsDbGetter.js");
+//const { getAPIproducts } = require("./src/controllers/productsPost.js");
 
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {

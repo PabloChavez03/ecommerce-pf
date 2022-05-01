@@ -1,19 +1,31 @@
 const axios = require("axios");
 const adaptCategory = require("./categoriesAdapter");
+//////////////////////////////////////////////////
+const fs = require('fs');
+const json_categories = fs.readFileSync('src/data/categories.json', 'utf-8');
+let categories = JSON.parse(json_categories);
+//////////////////////////////////////////////////
 
 async function getAPIcategories() {
-	const options = {
 
-    method: "GET",
-    url: "https://asos2.p.rapidapi.com/categories/list",
-    headers: {
-      "X-RapidAPI-Host": "asos2.p.rapidapi.com",
-      "X-RapidAPI-Key": "8fd290f142msha910e016bf6105fp134a44jsnc9cf0818de6f",
-    },
-  };
-	return await axios(options)
-		.then(({ data }) => adaptCategory(data))
-		.catch((e) => e.message);
+	if (categories.length === 0) {
+		const options = {
+			method: "GET",
+			url: "https://asos2.p.rapidapi.com/categories/list",
+			headers: {
+				'X-RapidAPI-Host': 'asos2.p.rapidapi.com',
+				'X-RapidAPI-Key': '38740551f8msh9cdf697f1473412p1dbea0jsnf76410f1a466'
+			},
+		};
+
+		const data = axios(options)
+			.then(({ data }) => adaptCategory(data))
+			.catch((e) => e.message);
+		categories = data;
+		const json_categories = JSON.stringify(categories);
+		fs.writeFileSync('src/data/categories.json', json_categories, 'utf-8');
+	}
+	return categories///JSON
 }
 
 module.exports = getAPIcategories;

@@ -15,7 +15,6 @@ import {
 import { filterbrands } from "../controllers";
 
 const initialState = {
-
   allOfProducts: [],
   products: [],
   productFilter: [],
