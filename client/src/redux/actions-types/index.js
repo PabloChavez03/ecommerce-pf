@@ -1,15 +1,19 @@
 import {
-  GET_PRODUCT_BY_NAME,
-  ADD_PRODUCT_TO_CART,
-  REMOVE_PRODUCT_FROM_CART,
-  CHANGE_CART_QUANTITY,
-  SET_CURRENT_PAGE,
-  GET_ALL_PRODUCTS,
+	GET_PRODUCT_BY_NAME,
+	ADD_PRODUCT_TO_CART,
+	REMOVE_PRODUCT_FROM_CART,
+	CHANGE_CART_QUANTITY,
+	SET_CURRENT_PAGE,
+	GET_ALL_PRODUCTS,
+	GET_CURRENT_BRANDS,
+	GET_FILTERS_BRANDS,
   ORDER_BY_PRICE,
   GET_DETAILS,
   SET_DETAILS,
 } from "../actions-creators";
+import { currentbrands } from "../controllers";
 import axios from "axios";
+
 
 export const getProductByName = (nameProduct) => {
   return async function (dispatch) {
@@ -80,3 +84,18 @@ export const setDetails = () => {
     type: SET_DETAILS,
   };
 };
+
+export const getCurrentBrands = () => async (dispatch) => {
+	let brands = await currentbrands();
+	return dispatch({
+		type: GET_CURRENT_BRANDS,
+		payload: brands
+	})
+}
+export const getFiltersBrands = (payload) => {
+	
+	return {
+		type: GET_FILTERS_BRANDS,
+		payload
+	}
+}

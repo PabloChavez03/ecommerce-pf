@@ -11,8 +11,6 @@ async function getAPIcategories() {
       "X-RapidAPI-Key": "8fd290f142msha910e016bf6105fp134a44jsnc9cf0818de6f",
     },
   };
-
-
 	return await axios(options)
 		.then(({ data }) => adaptCategory(data))
 		.catch((e) => e.message);

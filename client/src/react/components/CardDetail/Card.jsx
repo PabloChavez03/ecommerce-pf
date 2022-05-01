@@ -68,22 +68,12 @@ export default function Card({id,name,description,gender,brand,images,previousPr
                 </div>:<h5>{currentPrice}</h5>}
 
             <h4>Color:</h4>
-            {variants.length?
-                variants.map(e=>(
-                    <div>
-                        <h4>{e.color}</h4>
-                    </div>
-            )):<p>Genérico</p>}
+            {<h4>{variants[0].color}</h4>}
 
             <h4>Talle:</h4>
-            {variants.length?
-                variants.map(e=>(
-                    <div>
-                        <p>{e.brandSize}</p>
-                    </div>
-            )):<p>Único</p>}
+            {<h4>{variants[0].brandSize}</h4>}
 
-            <button>Agregar al carrito</button>
+            <button className={(e)=>handleAddCart(e)}>Agregar al carrito</button>
         </div>
     )
 }
