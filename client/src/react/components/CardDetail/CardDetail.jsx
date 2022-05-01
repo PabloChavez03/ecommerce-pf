@@ -104,10 +104,19 @@ export default function CardDetail() {
 		dispatch(addProductToCart(productFilterCart));
 	};
 
+
+	/**Creando evento para la imagen */
+	// const handleImgChange = (event) => {
+	// 	event.preventDefault();
+	// 	console.log(event.target.src);
+	// 	setImageCurrent(event.target.src);
+	// };
+
 	// const handleAddCart = (event) => {
 	// 	event.preventDefault();
 	// 	dispatch(addProductToCart(productFilterCart));
 	// }
+
 
 	return (
 		<div className={style.cardDetailContainer}>
