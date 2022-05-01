@@ -12,8 +12,10 @@ import {
 	SET_DETAILS,
 	GET_ALL_CATEGORIES,
 	GET_CATEGORY_BY_ID,
-	SET_SELECT,
 	GET_FILTERS_GENDER_PRODUCT,
+	POST_PRODUCT,
+	UPDATE_PRODUCT,
+	DELETE_PRODUCT
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 

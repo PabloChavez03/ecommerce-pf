@@ -103,7 +103,32 @@ export const getFiltersBrands = (payload) => {
 	return {
 		type: GET_FILTERS_BRANDS,
 		payload
-	};
+}};
+
+  export const postProduct = (info) => {
+    return function (dispatch) {
+      const postProduct = axios
+        .post("http://localhost:3001/products/create", info)
+        .then((response) => response);
+      return postProduct;
+    };
+  };
+  
+  export const updateProduct = (id, info) => {
+    return function (dispatch) {
+      const updateProduct = axios
+        .patch(`http://localhost:3001/products/update/${id}`, info)
+        .then((response) => response);
+      return updateProduct;
+    };
+  };
+  
+  export const deleteProduct = (id) => {
+    return function (dispatch) {
+      return axios
+        .delete(`http://localhost:3001/products/update/${id}`)
+        .then((response) => response);
+    };
 };
 
 export const getAllCategories = () => {
