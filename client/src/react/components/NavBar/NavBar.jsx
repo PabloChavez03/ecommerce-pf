@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import CartIcon from "../svg/CartIcon";
 import AccountIcon from "../svg/AccountIcon";
+import CreateIcon from "../svg/CreateIcon";
 
 import "./NavBar.scss";
 
@@ -32,26 +33,29 @@ export default function NavBar() {
 	};
 
 	return (
-		<nav className='nav'>
-			<div className='nav__up'>
-				<div className='nav__up__left'>
-					<span className='nav__up__left__burguer' onClick={handleBurguerClick}>
-						<span className='nav__up__left__burguer_bar'></span>
-						<span className='nav__up__left__burguer_bar'></span>
-						<span className='nav__up__left__burguer_bar'></span>
-						<span className='nav__up__left__burguer_bar'></span>
+		<nav className="nav">
+			<div className="nav__up">
+				<div className="nav__up__left">
+					<span className="nav__up__left__burguer" onClick={handleBurguerClick}>
+						<span className="nav__up__left__burguer_bar"></span>
+						<span className="nav__up__left__burguer_bar"></span>
+						<span className="nav__up__left__burguer_bar"></span>
+						<span className="nav__up__left__burguer_bar"></span>
 					</span>
 					<NavLink to={"/"} style={{ textDecoration: "none" }}>
-						<h1 className='nav__up__left__logo'>CLOTHES 22</h1>
+						<h1 className="nav__up__left__logo">CLOTHES 22</h1>
 					</NavLink>
 				</div>
 
-				<div className='nav__up__searchBar'>
+				<div className="nav__up__searchBar">
 					<SearchBar />
 				</div>
 
-				<div className='nav__up__features'>
+				<div className="nav__up__features">
 					{/* <WishListIcon /> */}
+					<NavLink to={"/creation"}>
+						<CreateIcon />
+					</NavLink>
 
 					<div onClick={(e) => handleModalStatus(e)}>
 						{/* <NavLink exact to={"/cart"} onClick={handleClickForHiddingBurguer}> */}
@@ -67,7 +71,7 @@ export default function NavBar() {
 				</div>
 			</div>
 
-			<div className='nav__down'>
+			<div className="nav__down">
 				<div className={`nav__down__links ${toogleMenu ? "menuActived" : ""}`}>
 					<ul>
 						<NavLink to={"/home"} onClick={handleClickForHiddingBurguer}>
@@ -80,7 +84,7 @@ export default function NavBar() {
 				</div>
 			</div>
 
-			<div className='nav__searchBar'>
+			<div className="nav__searchBar">
 				<SearchBar />
 			</div>
 		</nav>
