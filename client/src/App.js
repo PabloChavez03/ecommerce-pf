@@ -17,11 +17,11 @@ function App() {
 					<Route path={"/"} element={<Landing />} />
 					<Route path={"/home"} element={<Home />} />
 					<Route path={"/detail/:productId"} element={<CardDetail />} />
-					{/* Ruta /creation provisoria para poder ver como esta quedando el formulario. */}
 					<Route path={"/creation"} element={<ProductCreate />} />
 					<Route path={"/about"} element={<Construction />} />
 					<Route path={"/account"} element={<Construction />} />
 					<Route path={"/cart"} element={<ShoppingCart />} />
+					<Route path={"/construction"} element={<Construction />} />
 				</Routes>
 		</BrowserRouter>
 	);
