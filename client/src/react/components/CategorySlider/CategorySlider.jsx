@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from "./Slider/Slider";
 
+
 function CategorySlider() {
   let arr = [
     {
@@ -25,7 +26,7 @@ function CategorySlider() {
   return (
     <div>
       {arr?.map((e) => {
-        return <Slider key={e.name} category={e} />;
+        return <Slider key={e.name} gender={e.name} category={e} />;
       })}
     </div>
   );

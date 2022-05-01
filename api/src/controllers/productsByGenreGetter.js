@@ -1,7 +1,6 @@
 const { getAllDbInfo } = require('./getAllInfo');
 
 async function getGenderFilterByProduc(genreName) {
-
     try {
         let toLower = genreName.toLowerCase()
         let product = await getAllDbInfo()
@@ -17,7 +16,7 @@ async function getGenderFilterByProduc(genreName) {
             ]
         }
         return array;
-    } catch (error) {
+    } catch (err) {
         return new TypeError(err)
     }
 }

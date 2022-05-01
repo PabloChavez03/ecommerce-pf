@@ -64,7 +64,6 @@ export default function NavBar() {
 						{/* </NavLink> */}
 					</div>
 					<Modal status={statusModal} setStatus={setStatusModal} />
-
 					<NavLink to={"/account"} onClick={handleClickForHiddingBurguer}>
 						<AccountIcon />
 					</NavLink>
@@ -74,8 +73,14 @@ export default function NavBar() {
 			<div className="nav__down">
 				<div className={`nav__down__links ${toogleMenu ? "menuActived" : ""}`}>
 					<ul>
-						<NavLink to={"/home"} onClick={handleClickForHiddingBurguer}>
+						<NavLink to={"/"} onClick={handleClickForHiddingBurguer}>
 							<li>Home</li>
+						</NavLink>
+						<NavLink to={`/home?gender=Men`} onClick={handleClickForHiddingBurguer} >
+							<li>Man</li>
+						</NavLink>
+						<NavLink to={`/home?gender=Women`} onClick={handleClickForHiddingBurguer} >
+							<li>Women</li>
 						</NavLink>
 						<NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
 							<li>About</li>
