@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import { getCurrentBrands, getFiltersBrands } from '../../../../redux/actions-types';
 
 function FiltersByMark({ setCurrentPage }) {
     const [value, setValue] = useState('Marca');
+    const [params] = useSearchParams();
+    const gender = params.get('gender')
     ///Dispatch reducer
     const dispatch = useDispatch();
     /////Reducer
@@ -11,7 +14,7 @@ function FiltersByMark({ setCurrentPage }) {
         (state) => state.brands
     );
     useEffect(() => {
-        dispatch(getCurrentBrands())
+        dispatch(getCurrentBrands(gender))
     }, [dispatch])
 
 

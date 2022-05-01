@@ -10,12 +10,13 @@ import {
   ORDER_BY_PRICE,
   GET_DETAILS,
   SET_DETAILS,
+  GET_FILTERS_GENDER_PRODUCT,
 
 } from "../actions-creators";
-import { filterbrands } from "../controllers";
+import {  filterbrands } from "../controllers";
 
 const initialState = {
-  allOfProducts: [],
+  newgenders: [],
   products: [],
   productFilter: [],
   cartItems: [],
@@ -58,7 +59,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         products: payload,
-        allOfProducts: payload
       };
     case GET_CURRENT_BRANDS:
       return {
@@ -66,14 +66,14 @@ export default function rootReducer(state = initialState, { type, payload }) {
         brands: payload,
       }
     case GET_FILTERS_BRANDS:
-      const allProducts = [...state.allOfProducts]
+      const allProducts = [...state.newgenders]
       if (payload === "Marca") {
         return {
           ...state,
           products: allProducts
         }
       } else {
-        let databrands = filterbrands(payload,allProducts)
+        let databrands = filterbrands(payload, allProducts)
 
         return {
           ...state,
@@ -117,6 +117,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         products: arr,
       };
+    case GET_FILTERS_GENDER_PRODUCT:
+      return {
+        ...state,
+        products: payload,
+        newgenders: payload
+      }
     default:
       return { ...state };
   }

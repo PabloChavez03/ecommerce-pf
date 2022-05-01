@@ -3,14 +3,18 @@ import "./Slider.css";
 import BtnSlider from "./BtnSlider";
 import { NavLink } from "react-router-dom";
 
-export default function Slider({ category }) {
+export default function Slider({ gender, category }) {
   const [slideIndex, setSlideIndex] = useState(1);
+
+  ///////////////////////////////////////
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
     }, 3000);
     return () => clearInterval(interval);
   });
+
+  //////////////////////////////////////////////
   const nextSlide = () => {
     if (slideIndex !== category?.img.length) {
       setSlideIndex(slideIndex + 1);
@@ -30,6 +34,7 @@ export default function Slider({ category }) {
   const moveDot = (index) => {
     setSlideIndex(index);
   };
+
 
   return (
     <div className="container-slider">
@@ -57,7 +62,7 @@ export default function Slider({ category }) {
           );
         })}
       </div>
-      <NavLink to={"/home"} style={{ textDecoration: "none" }}>
+      <NavLink to={`/home?gender=${gender}`} style={{ textDecoration: "none" }}>
         <button className="btn-show-more">Show more!</button>
       </NavLink>
     </div>
