@@ -17,9 +17,5 @@ router.use("/allproducts", require("./getAllProducts"));
 router.use("/products/create", require("./postProduct"));
 router.use("/products/update", require("./updateProduct"));
 router.use("/products/delete", require("./deleteProduct"));
-<<<<<<< HEAD
-=======
-
->>>>>>> 50ad8be39dae62375d480e435302bbaf492f7028
 
 module.exports = router;
