@@ -12,7 +12,6 @@ import ProductCreate from "./react/components/CreationProduct/ProductCreate";
 function App() {
 	return (
 		<BrowserRouter>
-			<>
 				<NavBar />
 				<Routes>
 					<Route path={"/"} element={<Landing />} />
@@ -24,7 +23,6 @@ function App() {
 					<Route path={"/account"} element={<Construction />} />
 					<Route path={"/cart"} element={<ShoppingCart />} />
 				</Routes>
-			</>
 		</BrowserRouter>
 	);
 }

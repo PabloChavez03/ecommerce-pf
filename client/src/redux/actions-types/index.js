@@ -84,9 +84,10 @@ export const getDetails = (productId) => {
   };
 };
 
-export const setDetails = () => {
+export const setDetails = (obj = {}) => {
   return {
     type: SET_DETAILS,
+    payload: obj
   };
 };
 
@@ -102,7 +103,32 @@ export const getFiltersBrands = (payload) => {
 	return {
 		type: GET_FILTERS_BRANDS,
 		payload
-	};
+}};
+
+  export const postProduct = (info) => {
+    return function (dispatch) {
+      const postProduct = axios
+        .post("http://localhost:3001/products/create", info)
+        .then((response) => response);
+      return postProduct;
+    };
+  };
+  
+  export const updateProduct = (id, info) => {
+    return function (dispatch) {
+      const updateProduct = axios
+        .patch(`http://localhost:3001/products/update/${id}`, info)
+        .then((response) => response);
+      return updateProduct;
+    };
+  };
+  
+  export const deleteProduct = (id) => {
+    return function (dispatch) {
+      return axios
+        .delete(`http://localhost:3001/products/update/${id}`)
+        .then((response) => response);
+    };
 };
 
 export const getAllCategories = () => {
@@ -118,18 +144,10 @@ export const getAllCategories = () => {
 export const getCategoryById = (idCategory) => {
   return async function(dispatch) {
     const category = await axios.get(`http://localhost:3001/products?categoryId=${idCategory}`);
+    console.log(category)
     return dispatch({
       type: GET_CATEGORY_BY_ID,
-      payload: category.data
-    });
-  };
-};
-
-export const setSelect = (select) => {
-  return async function(dispatch) {
-    return dispatch({
-      type: SET_SELECT,
-      payload: select
+      payload: [category.data, idCategory]
     });
   };
 };

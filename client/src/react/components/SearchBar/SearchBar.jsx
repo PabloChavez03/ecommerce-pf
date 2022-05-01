@@ -13,8 +13,12 @@ export default function SearchBar() {
 
 	const handleClickSearch = (event) => {
 		event.preventDefault();
-		dispatch(getProductByName(search));
-		setSearch("");
+		if(event.target.value === "") {
+			alert("Debe ingresar un producto a buscar!")
+		} else {
+			dispatch(getProductByName(search));
+			setSearch("");
+		};
 	};
 
 	return (

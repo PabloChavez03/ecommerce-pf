@@ -16,7 +16,6 @@ export default function Home() {
   const dispatch = useDispatch();
   const [params] = useSearchParams();
   const gender = params.get('gender');
-
   const allProducts = useSelector((state) => state.products);
   const productFilter = useSelector((state) => state.productFilter);
   const currentPage = useSelector((state) => state.currentPage);
