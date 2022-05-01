@@ -4,10 +4,13 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { postProduct } from "../../../redux/actions-types";
 
-import s from "./ProductCreate.module.css";
-
 // Components
 import AddImages from "./components/AddImages";
+import AddInfo from "./components/AddInfo";
+import AddVariants from "./components/AddVariants";
+
+// Utils
+import s from "./ProductCreate.module.css";
 import { handleDeleteImg } from "./handlers";
 
 // const validateImg = (urlImg) => {
@@ -56,6 +59,7 @@ function validate(input) {
 		errors.brand = <i>"Debe ingresar una marca!"</i>;
 		// errors.button = true;
 	}
+
 	if (!input.category || input.category === "") {
 		errors.category = <i>"Debe ingresar una marca!"</i>;
 		// errors.button = true;
@@ -79,7 +83,6 @@ export default function ProductCreate() {
 		colour: "",
 		gender: "",
 		brand: "",
-		isOffertProduct: false,
 		category: "",
 		info: {
 			aboutMe: "",
@@ -247,7 +250,7 @@ export default function ProductCreate() {
 				</div>
 
 				<div>
-					<label>gender: </label>
+					<label>Gender: </label>
 					<select
 						type="text"
 						placeholder="Ingrese fenero!!"
@@ -261,43 +264,30 @@ export default function ProductCreate() {
 					</select>
 				</div>
 
-				<fieldset>
-					<legend>info</legend>
-
-					<label for="name">About Me:</label>
-					<input
-						type="text"
-						name="aboutMe"
-						value={input.info.aboutMe}
-						onChange={(e) => handleChange(e)}
-					/>
-
-					<label for="sizeAndFit">Size And Fit</label>
-					<input
-						type="text"
-						name="sizeAndFit"
-						value={input.info.sizeAndFit}
-						onChange={(e) => handleChange(e)}
-					/>
-
-					<label for="sizeAndFit">Size And Fit:</label>
-					<input
-						type="text"
-						name="careInfo"
-						value={input.info.sizeAndFit}
-						onChange={(e) => handleChange(e)}
-					/>
-				</fieldset>
-
 				<div>
-					<label>variants: </label>
-					<input
-						type="checkbox"
-						placeholder="Ingrese el nombre!!"
-						name="variants"
-						value={input.variants}
+					<AddInfo
+						input={input}
+						setInput={setInput}
+						errors={errors}
+						setError={setError}
+						validate={validate}
 					/>
+
+					<fieldset>
+						<legend>Información adicional actual: </legend>
+						{(input.info.aboutMe ||
+							input.info.sizeAndFit ||
+							input.info.careInfo) && (
+							<div>
+								<p>About me: {input.info.aboutMe}</p>
+								<p>Size and Fit: {input.info.sizeAndFit}</p>
+								<p>Care info: {input.info.careInfo}</p>
+							</div>
+						)}
+					</fieldset>
 				</div>
+
+				<AddVariants />
 
 				<button type="submit">Crear Producto</button>
 			</form>
