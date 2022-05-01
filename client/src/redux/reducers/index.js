@@ -5,15 +5,22 @@ import {
   CHANGE_CART_QUANTITY,
   SET_CURRENT_PAGE,
   GET_ALL_PRODUCTS,
+  GET_CURRENT_BRANDS,
+  GET_FILTERS_BRANDS,
   ORDER_BY_PRICE,
   GET_DETAILS,
   SET_DETAILS,
+
 } from "../actions-creators";
+import { filterbrands } from "../controllers";
 
 const initialState = {
+
+  allOfProducts: [],
   products: [],
   productFilter: [],
   cartItems: [],
+  brands: [],
   currentPage: 1,
   details: {},
 };
@@ -52,7 +59,28 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         products: payload,
+        allOfProducts: payload
       };
+    case GET_CURRENT_BRANDS:
+      return {
+        ...state,
+        brands: payload,
+      }
+    case GET_FILTERS_BRANDS:
+      const allProducts = [...state.allOfProducts]
+      if (payload === "Marca") {
+        return {
+          ...state,
+          products: allProducts
+        }
+      } else {
+        let databrands = filterbrands(payload,allProducts)
+
+        return {
+          ...state,
+          products: databrands,
+        }
+      }
     case GET_DETAILS:
       return {
         ...state,
@@ -67,25 +95,25 @@ export default function rootReducer(state = initialState, { type, payload }) {
       let arr =
         payload === "high"
           ? state.products?.sort(function (a, b) {
-              if (a.currentPrice < b.currentPrice) {
-                return 1;
-              }
-              if (a.currentPrice > b.currentPrice) {
-                return -1;
-              } else {
-                return 0;
-              }
-            })
+            if (a.currentPrice < b.currentPrice) {
+              return 1;
+            }
+            if (a.currentPrice > b.currentPrice) {
+              return -1;
+            } else {
+              return 0;
+            }
+          })
           : state.products?.sort(function (a, b) {
-              if (a.currentPrice > b.currentPrice) {
-                return 1;
-              }
-              if (a.currentPrice < b.currentPrice) {
-                return -1;
-              } else {
-                return 0;
-              }
-            });
+            if (a.currentPrice > b.currentPrice) {
+              return 1;
+            }
+            if (a.currentPrice < b.currentPrice) {
+              return -1;
+            } else {
+              return 0;
+            }
+          });
       return {
         ...state,
         products: arr,
