@@ -90,8 +90,8 @@ export const setDetails = () => {
   };
 };
 
-export const getCurrentBrands = () => async (dispatch) => {
-	let brands = await currentbrands();
+export const getCurrentBrands = (gender) => async (dispatch) => {
+	let brands = await currentbrands(gender);
 	return dispatch({
 		type: GET_CURRENT_BRANDS,
 		payload: brands

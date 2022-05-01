@@ -15,7 +15,7 @@ function FiltersByMark({ setCurrentPage }) {
     );
     useEffect(() => {
         dispatch(getCurrentBrands(gender))
-    }, [dispatch])
+    }, [dispatch,gender])
 
 
     function handleFilterByMark(e) {
