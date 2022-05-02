@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getProductByName } from "../../../redux/actions-types";
+import lupa from "./images/lupa-de-busqueda.png";
+import style from "./SearchBar.module.css";
 
 export default function SearchBar() {
 	const dispatch = useDispatch();
@@ -31,6 +33,7 @@ export default function SearchBar() {
 					onChange={(e) => handleChangeInput(e)}
 				/>
 				<button onClick={(e) => handleClickSearch(e)}>Buscar</button>
+				{/* <img className={style.imgSearch} src={lupa} alt="Search" onClick={(e)=>handleClickSearch(e)}/> */}
 			</form>
 		</div>
 	);
