@@ -30,7 +30,6 @@ const initialState = {
   select: "",
   newgenders: [],
   subTotal: 0,
-  gender: ""
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -171,19 +170,10 @@ export default function rootReducer(state = initialState, { type, payload }) {
         };
       }
     case GET_ALL_CATEGORIES:
-      if(state.gender === "women") {
-        let categoryFilter = payload.filter((e)=>e.genre === "women");
-        return {
-          ...state,
-          categories: categoryFilter
-        }
-      } else {
-        let categoryFilter = payload.filter((e)=>e.genre === "men");
-        return {
-          ...state,
-          categories: categoryFilter
-        }
-      }
+      return {
+        ...state,
+        categories: payload,
+      };
     case GET_CATEGORY_BY_ID:
       return {
         ...state,
@@ -197,8 +187,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
         products: payload,
         newgenders: payload,
         select: "",
-        currentPage: 1,
-        gender: payload[0].Categories[0].genre
+        currentPage: 1
       };
     default:
       return { ...state };

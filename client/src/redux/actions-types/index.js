@@ -14,7 +14,7 @@ import {
   GET_CATEGORY_BY_ID,
   GET_FILTERS_GENDER_PRODUCT
 } from "../actions-creators";
-import { currentbrands, urlProdutcGender } from "../controllers";
+import { currentbrands, currentcategory, urlProdutcGender } from "../controllers";
 import axios from "axios";
 
 
@@ -91,58 +91,58 @@ export const setDetails = (obj = {}) => {
 };
 
 export const getCurrentBrands = (gender) => async (dispatch) => {
-	let brands = await currentbrands(gender);
-	return dispatch({
-		type: GET_CURRENT_BRANDS,
-		payload: brands
-	});
+  let brands = await currentbrands(gender);
+  return dispatch({
+    type: GET_CURRENT_BRANDS,
+    payload: brands
+  });
 };
 
 export const getFiltersBrands = (payload) => {
-	return {
-		type: GET_FILTERS_BRANDS,
-		payload
-}};
-
-  export const postProduct = (info) => {
-    return function (dispatch) {
-      const postProduct = axios
-        .post("http://localhost:3001/products/create", info)
-        .then((response) => response);
-      return postProduct;
-    };
-  };
-  
-  export const updateProduct = (id, info) => {
-    return function (dispatch) {
-      const updateProduct = axios
-        .patch(`http://localhost:3001/products/update/${id}`, info)
-        .then((response) => response);
-      return updateProduct;
-    };
-  };
-  
-  export const deleteProduct = (id) => {
-    return function (dispatch) {
-      return axios
-        .delete(`http://localhost:3001/products/update/${id}`)
-        .then((response) => response);
-    };
+  return {
+    type: GET_FILTERS_BRANDS,
+    payload
+  }
 };
 
-export const getAllCategories = () => {
-  return async function(dispatch) {
-    const allCategories = await axios.get("http://localhost:3001/categories");
-    console.log(allCategories)
+export const postProduct = (info) => {
+  return function (dispatch) {
+    const postProduct = axios
+      .post("http://localhost:3001/products/create", info)
+      .then((response) => response);
+    return postProduct;
+  };
+};
+
+export const updateProduct = (id, info) => {
+  return function (dispatch) {
+    const updateProduct = axios
+      .patch(`http://localhost:3001/products/update/${id}`, info)
+      .then((response) => response);
+    return updateProduct;
+  };
+};
+
+export const deleteProduct = (id) => {
+  return function (dispatch) {
+    return axios
+      .delete(`http://localhost:3001/products/update/${id}`)
+      .then((response) => response);
+  };
+};
+
+export const getAllCategories = (gender) => {
+  return async function (dispatch) {
+    const allCategories = await currentcategory(gender);
     return dispatch({
       type: GET_ALL_CATEGORIES,
-      payload: allCategories.data
+      payload: allCategories
     });
   };
 };
 
 export const getCategoryById = (idCategory) => {
-  return async function(dispatch) {
+  return async function (dispatch) {
     const category = await axios.get(`http://localhost:3001/products?categoryId=${idCategory}`);
     return dispatch({
       type: GET_CATEGORY_BY_ID,
