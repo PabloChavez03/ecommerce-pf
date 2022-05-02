@@ -38,6 +38,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         productFilter: payload,
+        select: "name"
       };
     case ADD_PRODUCT_TO_CART:
       let cartProductAux = state.cartItems.find((e) => e.id === payload.id);
@@ -180,6 +181,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         products: payload,
         newgenders: payload,
+        select: ""
       };
     default:
       return { ...state };

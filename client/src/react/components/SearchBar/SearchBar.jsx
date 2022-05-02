@@ -15,7 +15,7 @@ export default function SearchBar() {
 
 	const handleClickSearch = (event) => {
 		event.preventDefault();
-		if(event.target.value === "") {
+		if(search === "") {
 			alert("Debe ingresar un producto a buscar!")
 		} else {
 			dispatch(getProductByName(search));

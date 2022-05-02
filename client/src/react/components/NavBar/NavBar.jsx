@@ -79,7 +79,7 @@ export default function NavBar() {
               to={`/home?gender=Men`}
               onClick={handleClickForHiddingBurguer}
             >
-              <li>Man</li>
+              <li>Men</li>
             </NavLink>
             <NavLink
               to={`/home?gender=Women`}
