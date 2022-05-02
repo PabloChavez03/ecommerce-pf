@@ -16,6 +16,7 @@ import {
   POST_PRODUCT,
   UPDATE_PRODUCT,
   DELETE_PRODUCT,
+  GET_ALL_CATEGORIES_FOR_FORM,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -30,6 +31,7 @@ const initialState = {
   select: "",
   newgenders: [],
   subTotal: 0,
+  categoriesForForm: [],
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -201,6 +203,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
       };
+    case GET_ALL_CATEGORIES_FOR_FORM:
+      return {
+        ...state,
+        categoriesForForm: payload,
+      }
     default:
       return { ...state };
   }
