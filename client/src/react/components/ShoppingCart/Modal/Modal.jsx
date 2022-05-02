@@ -6,12 +6,18 @@ import ProductCardModal from "../CardModal/ProductCardModal";
 import style from "./Modal.module.css";
 
 const Modal = ({ status, setStatus }) => {
-
 	const cartData = useSelector((state) => state.cartItems);
+	// const subTotal = useSelector((state) => state.subTotal);
 
-	console.log(cartData);
-
-
+	let subtotalCart = 0
+	// console.log(cartData);
+	cartData.forEach(function(a){subtotalCart += (a.currentPrice * a.quantity);});
+	
+	const handleClickBag = (event) => {
+		event.preventDefault();
+		alert("Funcionalidad en desarrollo!");
+	};
+	
 	return (
 		<>
 			{status && (
@@ -23,12 +29,19 @@ const Modal = ({ status, setStatus }) => {
 						</div>
 
 						<div className={style.modalCartContainer}>
-
 							{cartData &&
 								cartData.map((product) => {
 									return (
 										<div key={product.id}>
-											<ProductCardModal name={product.name} />
+											<ProductCardModal
+												id={product.id}
+												name={product.name}
+												price={product.currentPrice}
+												color={product.color}
+												size={product.brandSize}
+												image={product.image}
+												quantity={product.quantity}
+											/>
 										</div>
 									);
 								})}
@@ -38,13 +51,13 @@ const Modal = ({ status, setStatus }) => {
 
 						<div className={style.saleInfoContainer}>
 							<div className={style.saleInfo}>
-								<p>SUB TOTAL</p>
-								<span>$500.00</span>
+								<p>SUBTOTAL</p>
+								<span>$ {subtotalCart.toFixed(2) }</span>
 							</div>
 						</div>
 
 						<div className={style.modalButtonContainer}>
-							<button className={style.modalButton}>
+							<button className={style.modalButton} onClick={(e)=>handleClickBag(e)}>
 								VER BOLSA DE COMPRAS
 							</button>
 						</div>

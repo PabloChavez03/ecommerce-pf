@@ -1,88 +1,119 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 
 import SearchBar from "../SearchBar/SearchBar";
 import CartIcon from "../svg/CartIcon";
 import AccountIcon from "../svg/AccountIcon";
+import CreateIcon from "../svg/CreateIcon";
+import Modal from "../ShoppingCart/Modal/Modal";
 
 import "./NavBar.scss";
 
-import Modal from "../ShoppingCart/Modal/Modal";
-
 export default function NavBar() {
-	/**State para el modal */
+
+	let location = useLocation();
+
 	const [statusModal, setStatusModal] = useState(false);
 
-	const handleModalStatus = (e) => {
-		e.preventDefault();
-		setStatusModal(true);
-	};
 
-	/** Fin modal */
+  const handleModalStatus = (e) => {
+    e.preventDefault();
+    setStatusModal(true);
+  };
 
-	const [toogleMenu, setToogleMenu] = useState(false);
+  /** Fin modal */
 
-	const handleBurguerClick = (e) => {
-		e.preventDefault();
-		setToogleMenu(!toogleMenu);
-	};
+  const [toogleMenu, setToogleMenu] = useState(false);
 
-	const handleClickForHiddingBurguer = (e) => {
-		setToogleMenu(false);
-	};
+  const handleBurguerClick = (e) => {
+    e.preventDefault();
+    setToogleMenu(!toogleMenu);
+  };
 
-	return (
-		<nav className='nav'>
-			<div className='nav__up'>
-				<div className='nav__up__left'>
-					<span className='nav__up__left__burguer' onClick={handleBurguerClick}>
-						<span className='nav__up__left__burguer_bar'></span>
-						<span className='nav__up__left__burguer_bar'></span>
-						<span className='nav__up__left__burguer_bar'></span>
-						<span className='nav__up__left__burguer_bar'></span>
-					</span>
-					<NavLink to={"/"} style={{ textDecoration: "none" }}>
-						<h1 className='nav__up__left__logo'>CLOTHES 22</h1>
-					</NavLink>
-				</div>
+  const handleClickForHiddingBurguer = (e) => {
+    setToogleMenu(false);
+  };
 
-				<div className='nav__up__searchBar'>
-					<SearchBar />
-				</div>
+  return (
+    <nav className="nav">
+      <div className="nav__up">
+        <div className="nav__up__left">
+          <span className="nav__up__left__burguer" onClick={handleBurguerClick}>
+            <span className="nav__up__left__burguer_bar"></span>
+            <span className="nav__up__left__burguer_bar"></span>
+            <span className="nav__up__left__burguer_bar"></span>
+            <span className="nav__up__left__burguer_bar"></span>
+          </span>
+          <NavLink to={"/"} style={{ textDecoration: "none" }}>
+            <h1 className="nav__up__left__logo">CLOTHES 22</h1>
+          </NavLink>
+        </div>
 
-				<div className='nav__up__features'>
-					{/* <WishListIcon /> */}
+        <div className="nav__up__searchBar">
+          <SearchBar />
+        </div>
 
-					<div onClick={(e) => handleModalStatus(e)}>
-						{/* <NavLink exact to={"/cart"} onClick={handleClickForHiddingBurguer}> */}
-						<CartIcon />
-						{/**Insertando el componente modal */}
-						{/* </NavLink> */}
-					</div>
-					<Modal status={statusModal} setStatus={setStatusModal} />
+        <div className="nav__up__features">
+          {/* <WishListIcon /> */}
+          <Link to={"/creation"}>
+            <CreateIcon />
+          </Link>
 
-					<NavLink to={"/account"} onClick={handleClickForHiddingBurguer}>
-						<AccountIcon />
-					</NavLink>
-				</div>
-			</div>
+          <div className="icon_cart" onClick={(e) => handleModalStatus(e)}>
+            {/* <NavLink exact to={"/cart"} onClick={handleClickForHiddingBurguer}> */}
+            <CartIcon />
+            {/**Insertando el componente modal */}
+            {/* </NavLink> */}
+          </div>
+          <Modal status={statusModal} setStatus={setStatusModal} />
+          <NavLink to={"/account"} onClick={handleClickForHiddingBurguer}>
+            <AccountIcon />
+          </NavLink>
+        </div>
+      </div>
 
-			<div className='nav__down'>
-				<div className={`nav__down__links ${toogleMenu ? "menuActived" : ""}`}>
-					<ul>
-						<NavLink to={"/home"} onClick={handleClickForHiddingBurguer}>
-							<li>Home</li>
-						</NavLink>
-						<NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
-							<li>About</li>
-						</NavLink>
-					</ul>
-				</div>
-			</div>
+      <div className="nav__down">
+        <div className={`nav__down__links ${toogleMenu ? "menuActived" : ""}`}>
+          <ul>
+            <NavLink to={"/"} onClick={handleClickForHiddingBurguer}>
+              <li>Home</li>
+            </NavLink>
 
-			<div className='nav__searchBar'>
-				<SearchBar />
-			</div>
-		</nav>
-	);
+            <Link
+              to={"/home?gender=Men"}
+              className={
+                `${location.pathname}${location.search}` === "/home?gender=Men"
+                  ? "active"
+                  : ""
+              }
+              onClick={handleClickForHiddingBurguer}
+            >
+              <li>Men</li>
+            </Link>
+
+            <Link
+              to={"/home?gender=Women"}
+              className={
+                `${location.pathname}${location.search}` ===
+                "/home?gender=Women"
+                  ? "active"
+                  : ""
+              }
+              onClick={handleClickForHiddingBurguer}
+            >
+              <li>Women</li>
+            </Link>
+
+            <NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
+              <li>About</li>
+            </NavLink>
+          </ul>
+        </div>
+      </div>
+
+      <div className="nav__searchBar">
+        <SearchBar />
+      </div>
+    </nav>
+  );
 }

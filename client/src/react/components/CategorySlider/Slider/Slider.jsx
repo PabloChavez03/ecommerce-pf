@@ -3,14 +3,18 @@ import "./Slider.css";
 import BtnSlider from "./BtnSlider";
 import { NavLink } from "react-router-dom";
 
-export default function Slider({ category }) {
+export default function Slider({ gender, category }) {
   const [slideIndex, setSlideIndex] = useState(1);
+
+  ///////////////////////////////////////
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
     }, 3000);
     return () => clearInterval(interval);
   });
+
+  //////////////////////////////////////////////
   const nextSlide = () => {
     if (slideIndex !== category?.img.length) {
       setSlideIndex(slideIndex + 1);
@@ -31,6 +35,7 @@ export default function Slider({ category }) {
     setSlideIndex(index);
   };
 
+
   return (
     <div className="container-slider">
       {category?.img.map((obj, index) => {
@@ -39,7 +44,7 @@ export default function Slider({ category }) {
             key={obj}
             className={slideIndex === index + 1 ? "slide active-anim" : "slide"}
           >
-            <img src={category?.img[index]} />
+            <img src={category?.img[index]} alt="Img Landing"/>
           </div>
         );
       })}
@@ -57,8 +62,8 @@ export default function Slider({ category }) {
           );
         })}
       </div>
-      <NavLink to={"/home"} style={{ textDecoration: "none" }}>
-        <button className="btn-show-more">Show more!</button>
+      <NavLink to={`/home?gender=${gender}`} style={{ textDecoration: "none" }}>
+        <button className="btn-show-more">SHOW MORE</button>
       </NavLink>
     </div>
   );

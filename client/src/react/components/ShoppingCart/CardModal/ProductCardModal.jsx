@@ -1,35 +1,69 @@
 import React from "react";
 import style from "./ProductCardModal.module.css";
+import { useDispatch } from "react-redux";
+import {
+  removeProductFromCart,
+  changeCartQuantity,
+} from "../../../../redux/actions-types";
 
-const ProductCardModal = ({ name }) => {
-	/** FALTA AGREGAR LOS OTROS DATOS, SOLO ESTOY RENDERIZANDO EL NAME */
+const ProductCardModal = ({
+  id,
+  name,
+  color,
+  price,
+  size,
+  image,
+  quantity,
+}) => {
+  /** FALTA AGREGAR LOS OTROS DATOS, SOLO ESTOY RENDERIZANDO EL NAME */
+  const dispatch = useDispatch();
+  
+  const handleRemove = () => {
+    dispatch(removeProductFromCart(id));
+  };
+  const handleQtyChange = (e) => {
+    e.preventDefault();
+    dispatch(changeCartQuantity(e.target.value, id));
+  };
 
-	return (
-		<div className={style.cardModalContainer}>
-			<div>imagen</div>
-			<div className={style.cardModalInfoContainer}>
-				<p className={style.cardModalTitle}>{name}</p>
-				<p>Color: Red</p>
-				<p>Talla: XL</p>
-				<div className={style.cardModalInfoPrice}>
-					<p className={style.cardModalInfo}>
-						Precio: <span>$ 300</span>
-					</p>
-					<p className={style.cardModalInfo}>
-						Cantidad:
-						<span>
-							<span> - </span>1<span> + </span>
-						</span>
-					</p>
-					<p className={style.cardModalInfo}>
-						Total: <span>$ 300</span>
-					</p>
-				</div>
-			</div>
+  return (
+    <div className={style.cardModalContainer}>
+      <img
+        className={style.cardModalImg}
+        src={"https://" + image}
+        alt="imagen_product"
+      />
+      <div className={style.cardModalInfoContainer}>
+        <p className={style.cardModalTitle}>{name}</p>
+        <p>Color: {color}</p>
+        <p>Talla: {size}</p>
+        <div className={style.cardModalInfoPrice}>
+          <p className={style.cardModalInfo}>
+            Precio: <span>$ {price.toFixed(2)}</span>
+          </p>
+          <p className={style.cardModalInfo}>
+            Cantidad:
+            <span>
+              <button className={style.btnMasMenos} value={"-"} onClick={(e) => handleQtyChange(e)}>
+                {" "}
+                -{" "}
+              </button>
+              <span className={style.quantity}>{quantity}</span>
+              <button className={style.btnMasMenos} value={"+"} onClick={(e) => handleQtyChange(e)}>
+                {" "}
+                +{" "}
+              </button>
+            </span>
+          </p>
+          <p className={style.cardModalInfo}>
+            Total: <span>$ {(price * quantity).toFixed(2)}</span>
+          </p>
+        </div>
+      </div>
 
-			<span>X</span>
-		</div>
-	);
+      <span onClick={() => handleRemove()}>X</span>
+    </div>
+  );
 };
 
 export default ProductCardModal;

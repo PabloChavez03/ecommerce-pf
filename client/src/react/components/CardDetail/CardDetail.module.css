@@ -1,0 +1,99 @@
+.cardDetailContainer {
+    width: 100%;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+    border: 1px solid rgb(40, 38, 38);
+    box-shadow: 5px 8px 15px rgba(51, 50, 50, 0.611);
+    width: 80%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    padding: 10px;
+}
+
+.cardDetailImgContainer {
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	align-items: center;
+}
+
+.cardCarouselImg {
+	width: 75px;
+	cursor: pointer;
+}
+
+.cardPrimaryImg {
+	width: 350px;
+}
+
+.buttonAdd {
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    background: black;
+    color: #f1f1f1;
+    border: 1px solid #f1f1f1a4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;margin-left: auto ;
+    margin-right: auto;
+}
+.selectcontainer{
+    display: flex;
+    justify-content: space-around;
+}
+.selects {
+    width: 40%;
+	cursor: pointer;
+	margin: 15px;
+    padding: 5px 7px;
+    color: rgb(70, 67, 67);
+    font-weight: bold;
+    border: 1px solid rgb(41, 41, 41) ;
+    border-radius: 3px;
+    cursor: pointer;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+.divInfo {
+	display: grid;
+}
+
+.price {
+    color: rgb(40, 38, 38);
+    font-size: 20px;
+}
+.name {
+    color: rgb(101, 98, 98);
+
+}
+.generoMarca {
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+}
+.generoMarca h4 {
+    display: flex;
+    justify-content: start;
+    color: rgb(101, 98, 98);
+}
+.description {
+    text-decoration: none;
+    color: rgb(101, 98, 98);
+}
+.description a {
+    color: rgb(101, 98, 98);
+    text-decoration: none;
+
+}
+.description ul {
+    color: rgb(64, 62, 62);
+    margin-left: 35px;
+}
