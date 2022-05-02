@@ -21,16 +21,19 @@ export const handleSubmitAddImage = (
 	setCanAddImage,
 ) => {
 	e.preventDefault();
+
+	const regex = /^(https:\/\/|http:\/\/|www\.)/gm;
+
 	setInput({
 		...input,
-		images: [...input.images, urlImage],
+		images: [...input.images, urlImage.replace(regex, "")],
 	});
 	setError(
-    validate({
-      ...input,
-      images: [...input.images, urlImage],
-    })
-  );
+		validate({
+			...input,
+			images: [...input.images, urlImage.replace(regex, "")],
+		}),
+	);
 	setCanAddImage(false);
 };
 
