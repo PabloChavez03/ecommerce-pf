@@ -104,6 +104,7 @@ export default function Card({
 					alt='Img Principal'
 				/>
 			</div>
+			<div className={style.divInfo}>
 			<h3>{name}</h3>
 			<p>{description}</p>
 			<h4>Género:</h4>
@@ -138,6 +139,7 @@ export default function Card({
 				<button onClick={(e)=>handleClick(e)} value="+">+</button>
 			</div> */}
 			<button className={style.buttonAdd} onClick={(e) => handleAddCart(e)}>AGREGAR AL CARRITO</button>
+		</div>
 		</div>
 	);
 };
