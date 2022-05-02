@@ -61,22 +61,22 @@ export default function Card({
 		}
 	};
 
-	const handleClick = (event) => {
-		event.preventDefault();
-		if(event.target.value === "-") {
-			setProductToCart({
-				...productToCart,
-				quantity: productToCart.quantity - 1,
+	// const handleClick = (event) => {
+	// 	event.preventDefault();
+	// 	if(event.target.value === "-") {
+	// 		setProductToCart({
+	// 			...productToCart,
+	// 			quantity: productToCart.quantity - 1,
 			
-			});
-		} else {
-			setProductToCart({
-				...productToCart,
-				quantity: productToCart.quantity + 1,
+	// 		});
+	// 	} else {
+	// 		setProductToCart({
+	// 			...productToCart,
+	// 			quantity: productToCart.quantity + 1,
 			
-			});
-		};
-	};
+	// 		});
+	// 	};
+	// };
 
 
 	return (
@@ -136,11 +136,11 @@ export default function Card({
 					<option key={e} value={e} name={e}>{e}</option>
 				)):null}
 			</select>
-			<div>
+			{/* <div>
 				<button onClick={(e)=>handleClick(e)} value="-" disabled={productToCart.quantity <= 1 ? true : false}>-</button>
 				<p>{productToCart.quantity}</p>
 				<button onClick={(e)=>handleClick(e)} value="+">+</button>
-			</div>
+			</div> */}
 			<button onClick={(e) => handleAddCart(e)}>Agregar al carrito</button>
 		</div>
 	);
