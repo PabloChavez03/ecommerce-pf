@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import CreateIcon from "../../svg/CreateIcon";
 import { handleSizeChange, handleSubmitAddSize } from "../handlers";
+import s from "./AddVariants.module.css";
 
 function AddVariants({ input, setInput }) {
 	const [canAddVariant, setCanAddVariant] = useState(false);
@@ -10,16 +11,17 @@ function AddVariants({ input, setInput }) {
 	});
 
 	return (
-		<div>
+		<div className={s.container}>
 			<label>Add variant:</label>
 			<span onClick={(e) => setCanAddVariant(!canAddVariant)}>
 				<CreateIcon />
 			</span>
 
 			{canAddVariant ? (
-				<div>
+				<div className={s.addVariantsContainer}>
 					<label htmlFor="size">Add size: </label>
 					<input
+						className={s.input}
 						type="text"
 						id="size"
 						name="size"
@@ -28,6 +30,7 @@ function AddVariants({ input, setInput }) {
 
 					<button
 						// disabled={urlError.length && true}
+						className={s.button}
 						onClick={(e) =>
 							handleSubmitAddSize(
 								e,
