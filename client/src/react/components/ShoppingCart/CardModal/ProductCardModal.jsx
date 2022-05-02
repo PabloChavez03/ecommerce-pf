@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./ProductCardModal.module.css";
 import { useDispatch } from "react-redux";
-import {removeProductFromCart} from '../../../../redux/actions-types'
+import {removeProductFromCart, changeCartQuantity} from '../../../../redux/actions-types'
 
 
 const ProductCardModal = ({
@@ -19,9 +19,11 @@ const ProductCardModal = ({
   const handleRemove = () => {
 	dispatch(removeProductFromCart(id))
 };
-// const handleQtyChange=(e) => {
-
-// }
+const handleQtyChange=(e) => {
+	e.preventDefault()
+	console.log(e.target.value)
+	dispatch(changeCartQuantity(e.target.value , id))
+}
 
   return (
     <div className={style.cardModalContainer}>
@@ -41,9 +43,9 @@ const ProductCardModal = ({
           <p className={style.cardModalInfo}>
             Cantidad:
             <span>
-              <span> - </span>
-              {quantity}
-              <span> + </span>
+              <button value={'-'} onClick={(e)=>handleQtyChange(e)}> - </button>
+              <span>{quantity}</span>
+              <button value={'+'} onClick={(e)=>handleQtyChange(e)}> + </button>
             </span>
           </p>
           <p className={style.cardModalInfo}>
