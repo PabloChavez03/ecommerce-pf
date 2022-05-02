@@ -7,8 +7,9 @@ import style from "./Modal.module.css";
 
 const Modal = ({ status, setStatus }) => {
 	const cartData = useSelector((state) => state.cartItems);
+	const subTotal = useSelector((state) => state.subTotal);
 
-	// console.log(cartData);
+	console.log(cartData);
 
 	return (
 		<>
@@ -27,10 +28,12 @@ const Modal = ({ status, setStatus }) => {
 										<div key={product.name}>
 											<ProductCardModal
 												name={product.name}
-												price={product.price}
+												price={product.currentPrice}
 												color={product.color}
-												size={product.size}
-												image={product.default_image}
+												size={product.brandSize}
+												image={product.image}
+												quantity={product.quantity}
+												totalPrice={product.totalPrice}
 											/>
 										</div>
 									);
@@ -42,7 +45,7 @@ const Modal = ({ status, setStatus }) => {
 						<div className={style.saleInfoContainer}>
 							<div className={style.saleInfo}>
 								<p>SUB TOTAL</p>
-								<span>$500.00</span>
+								<span>$ {subTotal}</span>
 							</div>
 						</div>
 

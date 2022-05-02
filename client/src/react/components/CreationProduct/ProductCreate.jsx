@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { getCategories, postProduct } from "../../../redux/actions-types";
+import { getAllCategories, postProduct } from "../../../redux/actions-types";
 
 import s from "./ProductCreate.module.css";
 
@@ -61,11 +61,12 @@ export default function ProductCreate() {
   const [canAddImage, setCanAddImage] = useState(false);
 
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(getAllCategories());
   }, [dispatch]);
 
 	//Categorias para devolver keys
-  let categories = useSelector((state) => state.allCategories);
+  let categories = useSelector((state) => state.categories);
+	console.log(categories)
 
   const initialState = {
     name: "",
@@ -125,25 +126,6 @@ export default function ProductCreate() {
     );
   }
 
-	 function handleImageOnChange(e) {
-     const value = e.target.value;
-     e.preventDefault();
-     setInput((prev) => ({
-       ...prev,
-       images: [...input.images, value],
-     }));
-     // console.log(value)
-
-     //set Error a revisar
-
-     setError(
-       validate({
-         ...input,
-         images: [...input.images,value],
-       })
-     );
-   }
-
   function handleDeleteSelectCategory(e) {
     const value = e.target.value;
     e.preventDefault();
@@ -175,6 +157,7 @@ export default function ProductCreate() {
     });
   }
 
+	//para futuros keyPress
   // const handleKeyPress = (e) => {
   // 	if (e.key === "Enter") {
   // 		setInput({
