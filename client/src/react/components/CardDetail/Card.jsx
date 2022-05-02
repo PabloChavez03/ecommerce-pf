@@ -17,8 +17,8 @@ export default function Card({
 }) {
 	const dispatch = useDispatch();
 	const [imageCurrent, setImageCurrent] = useState("");
-	const sizes = variants.map((e)=>e.brandSize);
-	let colours = variants.map((e)=>e.color);
+	const sizes = variants.map((e) => e.brandSize);
+	let colours = variants.map((e) => e.color);
 	let set = new Set(colours);
 	colours = [...set];
 
@@ -67,13 +67,13 @@ export default function Card({
 	// 		setProductToCart({
 	// 			...productToCart,
 	// 			quantity: productToCart.quantity - 1,
-			
+
 	// 		});
 	// 	} else {
 	// 		setProductToCart({
 	// 			...productToCart,
 	// 			quantity: productToCart.quantity + 1,
-			
+
 	// 		});
 	// 	};
 	// };
@@ -81,19 +81,21 @@ export default function Card({
 
 	return (
 		<div className={style.cardDetailContainer}>
+
+
 			<div className={style.cardDetailImgContainer}>
 				<div>
 					{images.length
 						? images.map((image) => (
-								<div key={image}>
-									<img
-										className={style.cardCarouselImg}
-										src={`https://${image}`}
-										alt='Img Product'
-										onClick={(e) => handleImgChange(e)}
-									/>
-								</div>
-						  ))
+							<div key={image}>
+								<img
+									className={style.cardCarouselImg}
+									src={`https://${image}`}
+									alt='Img Product'
+									onClick={(e) => handleImgChange(e)}
+								/>
+							</div>
+						))
 						: null}
 				</div>
 			</div>
@@ -104,41 +106,51 @@ export default function Card({
 					alt='Img Principal'
 				/>
 			</div>
-			<h3>{name}</h3>
-			<p>{description}</p>
-			<h4>Género:</h4>
-			<h4>{gender}</h4>
-			<h4>Marca:</h4>
-			<h4>{brand}</h4>
-
-			<h4>Precio</h4>
+			<div>
+			<h3 className={style.name}>{name}</h3>
 			{isOffertProduct ? (
-				<div>
-					<h5>Precio anterior: {previousPrice}</h5>
-					<h5>Precio de oferta: {currentPrice}</h5>
+					<div>
+						<h5>Precio anterior: {previousPrice}</h5>
+						<h5>Precio de oferta: {currentPrice}</h5>
+					</div>
+				) : (
+					<h1 className={style.price}>${currentPrice}</h1>
+				)}
+				 <div ><p className={style.description} dangerouslySetInnerHTML={{__html: description}}></p></div>
+				
+				<div className={style.generoMarca}>
+				<h4 >Género: {gender}</h4>
+				<h4 >Marca: {brand}</h4>
 				</div>
-			) : (
-				<h5>{currentPrice}</h5>
-			)}
-			<select className={style.selects} name='color' onChange={(e) => handleChangeSelect(e)}>
-				<option>Color</option>
-				{colours.length?colours.map((e)=>(
-					<option key={e} value={e} name={e}>{e}</option>
-				)):null}
-			</select>
-			<select className={style.selects} name='size' onChange={(e) => handleChangeSelect(e)}>
-				<option>Talle</option>
-				{sizes.length?sizes.map((e)=>(
-					<option key={e} value={e} name={e}>{e}</option>
-				)):null}
-			</select>
-			{/* <div>
+				<div className={style.selectcontainer}>
+					<select className={style.selects} name='color' onChange={(e) => handleChangeSelect(e)}>
+						<option>Color</option>
+						{colours.length ? colours.map((e) => (
+							<option key={e} value={e} name={e}>{e}</option>
+						)) : null}
+					</select>
+					<select className={style.selects} name='size' onChange={(e) => handleChangeSelect(e)}>
+						<option>Talle</option>
+						{sizes.length ? sizes.map((e) => (
+							<option key={e} value={e} name={e}>{e}</option>
+						)) : null}
+					</select>
+				</div>
+
+
+				{/* <div>
 				<button onClick={(e)=>handleClick(e)} value="-" disabled={productToCart.quantity <= 1 ? true : false}>-</button>
 				<p>{productToCart.quantity}</p>
 				<button onClick={(e)=>handleClick(e)} value="+">+</button>
 			</div> */}
-			<button className={style.buttonAdd} onClick={(e) => handleAddCart(e)}>AGREGAR AL CARRITO</button>
+				<button className={style.buttonAdd} onClick={(e) => handleAddCart(e)}>AGREGAR AL CARRITO</button>
+
+			</div>
+
+
+
 		</div>
+		
 	);
 };
 
@@ -180,7 +192,6 @@ export default function Card({
 //                 />
 //             </div>
 //         </div>
-
 //         <div>
 //             <h1>{name}</h1>
 //             <h3>Precio $ {isOffertPrice?previousPrice:currentPrice}</h3>

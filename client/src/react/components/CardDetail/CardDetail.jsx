@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import style from "./CardDetail.module.css";
+//import style from "./CardDetail.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetails } from "../../../redux/actions-types";
@@ -16,7 +16,7 @@ export default function CardDetail() {
   const productDetail = useSelector((state) => state.details);
 
   return (
-    <div className={style.cardDetailContainer}>
+    <div>
       {productDetail.name ? (
         <div>
           <Card
