@@ -56,7 +56,7 @@ export default function NavBar() {
             <CreateIcon />
           </NavLink>
 
-          <div onClick={(e) => handleModalStatus(e)}>
+          <div className="icon_cart" onClick={(e) => handleModalStatus(e)}>
             {/* <NavLink exact to={"/cart"} onClick={handleClickForHiddingBurguer}> */}
             <CartIcon />
             {/**Insertando el componente modal */}
