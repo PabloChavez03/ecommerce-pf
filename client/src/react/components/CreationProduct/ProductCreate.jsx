@@ -11,7 +11,7 @@ import AddVariants from "./components/AddVariants";
 
 // Utils
 import s from "./ProductCreate.module.css";
-import { handleDeleteImg } from "./handlers";
+import { handleDeleteImg, handleSizeDelete } from "./handlers";
 
 // const validateImg = (urlImg) => {
 //   const regex = /.*\.(gif|jpe?g|bmp|png)$/gim;
@@ -287,7 +287,26 @@ export default function ProductCreate() {
 					</fieldset>
 				</div>
 
-				<AddVariants />
+				<div>
+					<AddVariants input={input} setInput={setInput} />
+					{input.variants.length ? (
+						<fieldset>
+							<legend>Variants: </legend>
+							{input.variants.map((el, idx) => {
+								return (
+									<div key={`${el.brandSize}${idx}`}>
+										<p>{el.brandSize}</p>
+										<button onClick={(e) => handleSizeDelete(e, el, input, setInput)}>
+											Eliminar
+										</button>
+									</div>
+								);
+							})}
+						</fieldset>
+					) : (
+						""
+					)}
+				</div>
 
 				<button type="submit">Crear Producto</button>
 			</form>

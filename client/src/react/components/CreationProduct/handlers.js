@@ -70,3 +70,34 @@ export const handleSubmitInfo = (
 };
 
 /** input.variants handlers */
+export const handleSizeChange = (e, size, setSize, input) => {
+	const { value } = e.target;
+	e.preventDefault();
+	setSize({
+		brandSize: value,
+	});
+};
+
+export const handleSubmitAddSize = (
+	e,
+	input,
+	setInput,
+	size,
+	setSize,
+	setCanAddVariant,
+) => {
+	e.preventDefault();
+	setInput({
+		...input,
+		variants: [...input.variants, size],
+	});
+	setCanAddVariant(false);
+};
+
+export const handleSizeDelete = (e, elClicked, input, setInput) => {
+	e.preventDefault();
+	setInput({
+		...input,
+		variants: input.variants.filter((el) => el !== elClicked),
+	});
+};
