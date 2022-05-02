@@ -2,11 +2,12 @@ import React from 'react'
 import FilterByCategory from './FilterByCategory/FilterByCategory'
 import FiltersByMark from './FiltersByMark/FiltersByMark'
 import OrderByPrice from './OrderByPrice/OrderByPrice'
+import css from './Filter.module.css'
 
 function Filter({ setRender, setCurrentPage }) {
 
   return (
-    <div>
+    <div className={css.container}>
 
       <OrderByPrice
         setRender={setRender}
