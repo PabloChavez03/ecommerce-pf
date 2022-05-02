@@ -10,7 +10,7 @@ export default function SearchBar() {
 
 	const handleChangeInput = (event) => {
 		event.preventDefault();
-		setSearch(event.target.value);
+		setSearch(event.target.value.toUpperCase());
 	};
 
 	const handleClickSearch = (event) => {
@@ -32,7 +32,7 @@ export default function SearchBar() {
 					placeholder="Ingrese producto a buscar..."
 					onChange={(e) => handleChangeInput(e)}
 				/>
-				<button onClick={(e) => handleClickSearch(e)}>Buscar</button>
+				<button onClick={(e) => handleClickSearch(e)}>BUSCAR</button>
 				{/* <img className={style.imgSearch} src={lupa} alt="Search" onClick={(e)=>handleClickSearch(e)}/> */}
 			</form>
 		</div>
