@@ -30,6 +30,7 @@ const initialState = {
   select: "",
   newgenders: [],
   subTotal: 0,
+  gender: ""
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -110,6 +111,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
           ...state,
           productFilter: allProducts,
           select: payload,
+          currentPage: 1
         };
       } else {
         let dataBrands = filterbrands(payload, allProducts);
@@ -117,6 +119,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
           ...state,
           productFilter: dataBrands,
           select: payload,
+          currentPage: 1
         };
       }
     case GET_DETAILS:
@@ -158,30 +161,44 @@ export default function rootReducer(state = initialState, { type, payload }) {
         return {
           ...state,
           products: arr,
+          currentPage: 1
         };
       } else {
         return {
           ...state,
           productFilter: arr,
+          currentPage: 1
         };
       }
     case GET_ALL_CATEGORIES:
-      return {
-        ...state,
-        categories: payload,
-      };
+      if(state.gender === "women") {
+        let categoryFilter = payload.filter((e)=>e.genre === "women");
+        return {
+          ...state,
+          categories: categoryFilter
+        }
+      } else {
+        let categoryFilter = payload.filter((e)=>e.genre === "men");
+        return {
+          ...state,
+          categories: categoryFilter
+        }
+      }
     case GET_CATEGORY_BY_ID:
       return {
         ...state,
         productFilter: payload[0],
         select: payload[1],
+        currentPage: 1
       };
     case GET_FILTERS_GENDER_PRODUCT:
       return {
         ...state,
         products: payload,
         newgenders: payload,
-        select: ""
+        select: "",
+        currentPage: 1,
+        gender: payload[0].Categories[0].genre
       };
     default:
       return { ...state };

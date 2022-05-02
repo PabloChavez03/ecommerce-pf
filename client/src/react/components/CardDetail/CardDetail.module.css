@@ -36,6 +36,7 @@
     align-items: center;
     cursor: pointer;
     font-weight: bold;
+	font-size: 17px;
 }
 
 .selects {

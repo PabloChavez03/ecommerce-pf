@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {useSelector, useDispatch} from 'react-redux';
 import { setCurrentPage } from "../../../redux/actions-types";
 import style from "./Paginated.module.css";
@@ -16,7 +16,7 @@ export default function Paginated({productsToPaginated, productsPerPage}) {
     for (let i = 1; i <= Math.ceil(productsToPaginated.length / productsPerPage); i++) {
             numberPage.push(i);
     };
-    
+
     const handleClickNumberPage = (event) => {
         dispatch(setCurrentPage(parseInt(event.target.id)));
     };

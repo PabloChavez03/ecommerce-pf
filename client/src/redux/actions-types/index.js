@@ -133,6 +133,7 @@ export const getFiltersBrands = (payload) => {
 export const getAllCategories = () => {
   return async function(dispatch) {
     const allCategories = await axios.get("http://localhost:3001/categories");
+    console.log(allCategories)
     return dispatch({
       type: GET_ALL_CATEGORIES,
       payload: allCategories.data
@@ -143,7 +144,6 @@ export const getAllCategories = () => {
 export const getCategoryById = (idCategory) => {
   return async function(dispatch) {
     const category = await axios.get(`http://localhost:3001/products?categoryId=${idCategory}`);
-    console.log(category)
     return dispatch({
       type: GET_CATEGORY_BY_ID,
       payload: [category.data, idCategory]
