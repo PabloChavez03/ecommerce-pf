@@ -25,15 +25,15 @@ const Modal = ({ status, setStatus }) => {
 							{cartData &&
 								cartData.map((product) => {
 									return (
-										<div key={product.name}>
+										<div key={product.id}>
 											<ProductCardModal
+												id={product.id}
 												name={product.name}
 												price={product.currentPrice}
 												color={product.color}
 												size={product.brandSize}
 												image={product.image}
 												quantity={product.quantity}
-												totalPrice={product.totalPrice}
 											/>
 										</div>
 									);

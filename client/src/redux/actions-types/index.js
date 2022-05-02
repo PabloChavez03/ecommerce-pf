@@ -34,9 +34,9 @@ export const addProductToCart = (product) => {
   };
 };
 
-export const removeProductFromCart = (product) => {
+export const removeProductFromCart = (id) => {
   return async function (dispatch) {
-    return dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: product });
+    return dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: id });
   };
 };
 

@@ -48,7 +48,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 		case REMOVE_PRODUCT_FROM_CART:
 			return {
 				...state,
-				cartItems: state.cartItems.filter((e) => e.id !== payload.id),
+				cartItems: state.cartItems.filter((e) => e.id !== payload),
 			};
 		case CHANGE_CART_QUANTITY:
 			return {
