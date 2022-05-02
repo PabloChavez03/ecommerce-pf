@@ -75,7 +75,6 @@ export const currentcategory = async (gender) => {
                 newCategory.push(item)
             }
         })
-        console.log(newCategory)
         return newCategory
     } catch (err) {
         console.log(err)

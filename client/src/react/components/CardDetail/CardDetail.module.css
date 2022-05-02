@@ -1,7 +1,9 @@
 .cardDetailContainer {
+    width: 100%;
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(3, 1fr);
 	margin-top: 25px;
+    border: 1px solid red;
 }
 
 .cardDetailImgContainer {
@@ -22,23 +24,22 @@
 
 
 .buttonAdd {
-	top: 80%;
-    left: 70%;
     width: 200px;
     height: 50px;
     border-radius: 25px;
     background: black;
     color: #f1f1f1;
     border: 1px solid #f1f1f1a4;
-    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: bold;margin-left: auto ;
+    margin-right: auto;
 }
 
 .selects {
+    width: 40%;
 	cursor: pointer;
 	margin: 15px;
     padding: 5px 7px;

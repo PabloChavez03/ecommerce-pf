@@ -16,7 +16,7 @@ export default function CardDetail() {
   const productDetail = useSelector((state) => state.details);
 
   return (
-    <div className={style.cardDetailContainer}>
+    <div>
       {productDetail.name ? (
         <div>
           <Card
