@@ -46,6 +46,9 @@
 				margin-right: 0.5rem;
 			}
 		}
+		.icon_cart {
+			cursor: pointer;
+		}
 	}
 
 	&__down {
@@ -86,7 +89,7 @@
 			}
 
 			.active {
-				color: $accent-color;
+				color: black;
 			}
 		}
 

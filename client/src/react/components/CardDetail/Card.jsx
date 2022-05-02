@@ -17,15 +17,21 @@ export default function Card({
 }) {
 	const dispatch = useDispatch();
 	const [imageCurrent, setImageCurrent] = useState("");
+	const sizes = variants.map((e)=>e.brandSize);
+	let colours = variants.map((e)=>e.color);
+	let set = new Set(colours);
+	colours = [...set];
+
 	const [productToCart, setProductToCart] = useState({
 		name,
 		image: images[0],
 		currentPrice,
-		color: variants.map((e) => e.color).join(""),
-		brandSize: variants.map((e) => e.brandSize).join(""),
+		color: colours[0],
+		brandSize: sizes[0],
 		quantity: 1,
-		totalPrice: currentPrice,
+		id
 	});
+
 	useEffect(() => {
 		setImageCurrent(`https://${images[0]}`);
 	}, [images]);
@@ -39,6 +45,39 @@ export default function Card({
 		event.preventDefault();
 		dispatch(addProductToCart(productToCart));
 	};
+
+	const handleChangeSelect = (event) => {
+		event.preventDefault();
+		if (event.target.name === "color") {
+			setProductToCart({
+				...productToCart,
+				color: event.target.value,
+			});
+		} else if (event.target.name === "size") {
+			setProductToCart({
+				...productToCart,
+				brandSize: event.target.value,
+			});
+		}
+	};
+
+	// const handleClick = (event) => {
+	// 	event.preventDefault();
+	// 	if(event.target.value === "-") {
+	// 		setProductToCart({
+	// 			...productToCart,
+	// 			quantity: productToCart.quantity - 1,
+			
+	// 		});
+	// 	} else {
+	// 		setProductToCart({
+	// 			...productToCart,
+	// 			quantity: productToCart.quantity + 1,
+			
+	// 		});
+	// 	};
+	// };
+
 
 	return (
 		<div className={style.cardDetailContainer}>
@@ -81,17 +120,27 @@ export default function Card({
 			) : (
 				<h5>{currentPrice}</h5>
 			)}
-
-			<h4>Color:</h4>
-			{<h4>{variants[0].color}</h4>}
-
-			<h4>Talle:</h4>
-			{<h4>{variants[0].brandSize}</h4>}
-
-			<button onClick={(e) => handleAddCart(e)}>Agregar al carrito</button>
+			<select className={style.selects} name='color' onChange={(e) => handleChangeSelect(e)}>
+				<option>Color</option>
+				{colours.length?colours.map((e)=>(
+					<option key={e} value={e} name={e}>{e}</option>
+				)):null}
+			</select>
+			<select className={style.selects} name='size' onChange={(e) => handleChangeSelect(e)}>
+				<option>Talle</option>
+				{sizes.length?sizes.map((e)=>(
+					<option key={e} value={e} name={e}>{e}</option>
+				)):null}
+			</select>
+			{/* <div>
+				<button onClick={(e)=>handleClick(e)} value="-" disabled={productToCart.quantity <= 1 ? true : false}>-</button>
+				<p>{productToCart.quantity}</p>
+				<button onClick={(e)=>handleClick(e)} value="+">+</button>
+			</div> */}
+			<button className={style.buttonAdd} onClick={(e) => handleAddCart(e)}>AGREGAR AL CARRITO</button>
 		</div>
 	);
-}
+};
 
 // return (
 //     <div className={style.cardDetailContainer}>
