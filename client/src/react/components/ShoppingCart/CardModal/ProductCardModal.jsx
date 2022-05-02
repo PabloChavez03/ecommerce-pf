@@ -15,9 +15,13 @@ const ProductCardModal = ({
 }) => {
   /** FALTA AGREGAR LOS OTROS DATOS, SOLO ESTOY RENDERIZANDO EL NAME */
 	const dispatch = useDispatch()
+	
   const handleRemove = () => {
 	dispatch(removeProductFromCart(id))
 };
+// const handleQtyChange=(e) => {
+
+// }
 
   return (
     <div className={style.cardModalContainer}>

@@ -40,11 +40,22 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				productFilter: payload,
 			};
 		case ADD_PRODUCT_TO_CART:
+			let cartProductAux = state.cartItems.find((e) => e.id === payload.id)
+			if(cartProductAux){ 
+			const prevCart = state.cartItems.filter((e) => e.id !== payload.id)
+			cartProductAux.quantity++
+				return {
+					...state,
+					cartItems: [...prevCart, cartProductAux],
+					subTotal: Number(state.subTotal +Math.round(( cartProductAux.currentPrice*cartProductAux.quantity))),
+				};
+			}else{
 			return {
 				...state,
 				cartItems: [...state.cartItems, payload],
-				subTotal: Number(state.subTotal + payload.totalPrice),
+				subTotal: Number(state.subTotal +Math.round(( payload.currentPrice*payload.quantity))),
 			};
+		};
 		case REMOVE_PRODUCT_FROM_CART:
 			return {
 				...state,

@@ -9,7 +9,7 @@ const Modal = ({ status, setStatus }) => {
 	const cartData = useSelector((state) => state.cartItems);
 	const subTotal = useSelector((state) => state.subTotal);
 
-	console.log(cartData);
+	// console.log(cartData);
 
 	return (
 		<>
