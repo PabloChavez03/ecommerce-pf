@@ -2,6 +2,7 @@ import { useState } from "react";
 import { handleChangeMoreInfo, handleSubmitInfo } from "../handlers";
 
 import CreateIcon from "../../svg/CreateIcon";
+import s from "./AddInfo.module.css";
 
 export default function AddInfo({
 	input,
@@ -18,7 +19,7 @@ export default function AddInfo({
 	});
 
 	return (
-		<fieldset>
+		<fieldset className={s.container}>
 			<legend>Aditional Info</legend>
 			<span
 				onClick={() => {
@@ -29,9 +30,10 @@ export default function AddInfo({
 			</span>
 
 			{addMoreInfo ? (
-				<div>
+				<div className={s.addInfoContainer}>
 					<label htmlFor="aboutMe">About Me:</label>
 					<input
+						className={s.input}
 						type="text"
 						name="aboutMe"
 						id="aboutMe"
@@ -41,6 +43,7 @@ export default function AddInfo({
 
 					<label htmlFor="sizeAndFit">Size And Fit</label>
 					<input
+						className={s.input}
 						type="text"
 						name="sizeAndFit"
 						id="sizeAndFit"
@@ -50,6 +53,7 @@ export default function AddInfo({
 
 					<label htmlFor="careInfo">Care info:</label>
 					<input
+						className={s.input}
 						type="text"
 						name="careInfo"
 						value={moreInfo.careInfo}
@@ -57,6 +61,7 @@ export default function AddInfo({
 					/>
 
 					<button
+						className={s.button}
 						onClick={(e) =>
 							handleSubmitInfo(
 								e,

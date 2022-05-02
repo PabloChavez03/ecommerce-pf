@@ -44,7 +44,7 @@ export default function AddImages({
 			</span>
 
 			{canAddImage ? (
-				<div>
+				<div className={s.containerImageUrl}>
 					<label htmlFor="imageUrl">Add URL image: </label>
 					<input
 						id="imageUrl"

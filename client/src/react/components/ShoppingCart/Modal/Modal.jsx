@@ -52,7 +52,7 @@ const Modal = ({ status, setStatus }) => {
 						<div className={style.saleInfoContainer}>
 							<div className={style.saleInfo}>
 								<p>SUBTOTAL</p>
-								<span>$ {subtotalCart}</span>
+								<span>$ {subtotalCart.toFixed(2) }</span>
 							</div>
 						</div>
 

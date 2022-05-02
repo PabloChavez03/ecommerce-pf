@@ -47,7 +47,6 @@ export default function Home() {
         />
       </div>
       <div className={css.cardContainer}>
-        {/* Necesitamos el hardcode*/}
         {productsCurent.length ? (
           productsCurent.map((product, index) => {
             return (
@@ -61,7 +60,6 @@ export default function Home() {
                     currentPrice={product.currentPrice}
                   />
                 </NavLink>
-
               </div>
             );
           })
