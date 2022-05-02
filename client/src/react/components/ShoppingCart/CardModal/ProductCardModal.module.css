@@ -36,4 +36,22 @@
 
 .cardModalImg {
 	width: 75px;
+	height: 120px
+}
+
+.btnMasMenos {
+	border: none;
+	font-weight: bold;
+	background-color: transparent;
+	margin: 0px 3px;
+	font-size: 14px;
+	color: rgb(85, 77, 77);
+	cursor: pointer;
+}
+
+.quantity {
+	border: 1px solid rgb(129, 120, 120);
+	border-radius: 4px;
+	padding: 0px 10px ;
+	cursor: default;
 }

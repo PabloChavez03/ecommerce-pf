@@ -39,24 +39,24 @@ const ProductCardModal = ({
         <p>Talla: {size}</p>
         <div className={style.cardModalInfoPrice}>
           <p className={style.cardModalInfo}>
-            Precio: <span>$ {price}</span>
+            Precio: <span>$ {price.toFixed(2)}</span>
           </p>
           <p className={style.cardModalInfo}>
             Cantidad:
             <span>
-              <span value={"-"} onClick={(e) => handleQtyChange(e)}>
+              <button className={style.btnMasMenos} value={"-"} onClick={(e) => handleQtyChange(e)}>
                 {" "}
                 -{" "}
-              </span>
-              <span>{quantity}</span>
-              <span value={"+"} onClick={(e) => handleQtyChange(e)}>
+              </button>
+              <span className={style.quantity}>{quantity}</span>
+              <button className={style.btnMasMenos} value={"+"} onClick={(e) => handleQtyChange(e)}>
                 {" "}
                 +{" "}
-              </span>
+              </button>
             </span>
           </p>
           <p className={style.cardModalInfo}>
-            Total: <span>$ {price * quantity}</span>
+            Total: <span>$ {(price * quantity).toFixed(2)}</span>
           </p>
         </div>
       </div>
