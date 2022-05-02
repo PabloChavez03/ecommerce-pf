@@ -16,7 +16,6 @@ export default function Paginated({productsToPaginated, productsPerPage}) {
     for (let i = 1; i <= Math.ceil(productsToPaginated.length / productsPerPage); i++) {
             numberPage.push(i);
     };
-    console.log(numberPage)
     
     const handleClickNumberPage = (event) => {
         dispatch(setCurrentPage(parseInt(event.target.id)));

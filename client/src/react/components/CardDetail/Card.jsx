@@ -26,8 +26,8 @@ export default function Card({
 		name,
 		image: images[0],
 		currentPrice,
-		color: "",
-		brandSize: "",
+		color: colours[0],
+		brandSize: sizes[0],
 		quantity: 1,
 		id
 	});
@@ -120,17 +120,13 @@ export default function Card({
 			) : (
 				<h5>{currentPrice}</h5>
 			)}
-
-			<h4>Color:</h4>
-			<select name='color' onChange={(e) => handleChangeSelect(e)}>
+			<select className={style.selects} name='color' onChange={(e) => handleChangeSelect(e)}>
 				<option>Color</option>
 				{colours.length?colours.map((e)=>(
 					<option key={e} value={e} name={e}>{e}</option>
 				)):null}
 			</select>
-
-			<h4>Talle:</h4>
-			<select name='size' onChange={(e) => handleChangeSelect(e)}>
+			<select className={style.selects} name='size' onChange={(e) => handleChangeSelect(e)}>
 				<option>Talle</option>
 				{sizes.length?sizes.map((e)=>(
 					<option key={e} value={e} name={e}>{e}</option>
@@ -141,7 +137,7 @@ export default function Card({
 				<p>{productToCart.quantity}</p>
 				<button onClick={(e)=>handleClick(e)} value="+">+</button>
 			</div> */}
-			<button onClick={(e) => handleAddCart(e)}>Agregar al carrito</button>
+			<button className={style.buttonAdd} onClick={(e) => handleAddCart(e)}>AGREGAR AL CARRITO</button>
 		</div>
 	);
 };
