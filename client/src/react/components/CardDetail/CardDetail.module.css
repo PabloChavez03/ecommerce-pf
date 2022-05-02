@@ -35,7 +35,10 @@
     font-weight: bold;margin-left: auto ;
     margin-right: auto;
 }
-
+.selectcontainer{
+    display: flex;
+    justify-content: space-around;
+}
 .selects {
     width: 40%;
 	cursor: pointer;

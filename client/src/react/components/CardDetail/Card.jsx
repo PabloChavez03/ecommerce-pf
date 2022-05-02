@@ -119,7 +119,7 @@ export default function Card({
 				) : (
 					<h4>Precio: ${currentPrice}</h4>
 				)}
-				<div>
+				<div className={style.selectcontainer}>
 					<select className={style.selects} name='color' onChange={(e) => handleChangeSelect(e)}>
 						<option>Color</option>
 						{colours.length ? colours.map((e) => (
