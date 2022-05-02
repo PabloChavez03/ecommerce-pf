@@ -75,9 +75,8 @@ export default function Card({
 				quantity: productToCart.quantity + 1,
 			
 			});
-
-		}
-	}
+		};
+	};
 
 
 	return (
