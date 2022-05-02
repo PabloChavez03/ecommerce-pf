@@ -23,7 +23,6 @@ const ProductCardModal = ({
   };
   const handleQtyChange = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
     dispatch(changeCartQuantity(e.target.value, id));
   };
 
