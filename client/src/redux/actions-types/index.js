@@ -12,7 +12,8 @@ import {
   SET_DETAILS,
   GET_ALL_CATEGORIES,
   GET_CATEGORY_BY_ID,
-  GET_FILTERS_GENDER_PRODUCT
+  GET_FILTERS_GENDER_PRODUCT,
+  GET_ALL_CATEGORIES_FOR_FORM
 } from "../actions-creators";
 import { currentbrands, currentcategory, urlProdutcGender } from "../controllers";
 import axios from "axios";
@@ -149,6 +150,16 @@ export const getAllCategories = (gender) => {
     return dispatch({
       type: GET_ALL_CATEGORIES,
       payload: allCategories
+    });
+  };
+};
+
+export const getAllCategoriesForForm = () => {
+  return async function (dispatch) {
+    const allCategories = await axios.get("http://localhost:3001/categories");
+    return dispatch({
+      type: GET_ALL_CATEGORIES_FOR_FORM,
+      payload: allCategories.data,
     });
   };
 };
