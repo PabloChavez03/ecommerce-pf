@@ -55,11 +55,25 @@ export default function Card({
 		} else if (event.target.name === "size") {
 			setProductToCart({
 				...productToCart,
-				size: event.target.value,
+				brandSize: event.target.value,
 			});
 		}
 	};
 
+	const handleClick = (event) => {
+		event.preventDefault();
+		if(event.target.value === "-") {
+			setProductToCart({
+				...productToCart,
+				quantity: productToCart.quantity - 1,
+			});
+		} else {
+			setProductToCart({
+				...productToCart,
+				quantity: productToCart.quantity + 1,
+			});
+		}
+	}
 
 
 	return (
@@ -119,10 +133,15 @@ export default function Card({
 					<option key={e} value={e} name={e}>{e}</option>
 				)):null}
 			</select>
+			<div>
+				<button onClick={(e)=>handleClick(e)} value="-" disabled={productToCart.quantity <= 1 ? true : false}>-</button>
+				<p>{productToCart.quantity}</p>
+				<button onClick={(e)=>handleClick(e)} value="+">+</button>
+			</div>
 			<button onClick={(e) => handleAddCart(e)}>Agregar al carrito</button>
 		</div>
 	);
-}
+};
 
 // return (
 //     <div className={style.cardDetailContainer}>
