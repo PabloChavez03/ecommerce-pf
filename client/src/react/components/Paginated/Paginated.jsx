@@ -46,14 +46,12 @@ export default function Paginated({productsToPaginated, productsPerPage}) {
     return (
         <div>
             {
-                productsToPaginated.length && <nav>
+                productsToPaginated.length >= 1 && <nav>
                 <ul className={style.numberPage}>
                     <img className={style.imgPrev} src={prev} alt="Previous" onClick={(e)=>handlePrevPage(e)}/>
                     {/* <button onClick={handlePrevPage} disabled={parseInt(currentPage) === 1 ? true : false}>{"<<"} </button> */}
                     {
                             numberPage.length >= 1?numberPage.map((n,i) => {
-                                
-                                
                                 if(n < maxLimitNumberPage+1 && n > minLimitNumberPage) {
                                 return (<li className={parseInt(currentPage) === parseInt(n) ? style.active : null}
                                 key={n} id={n} onClick={(e)=>handleClickNumberPage(e)}>{n}
