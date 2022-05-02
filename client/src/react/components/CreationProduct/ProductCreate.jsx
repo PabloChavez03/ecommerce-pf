@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { getAllCategories, postProduct } from "../../../redux/actions-types";
+import { getAllCategoriesForForm, postProduct } from "../../../redux/actions-types";
 
 // Components
 import AddImages from "./components/AddImages";
@@ -64,11 +64,12 @@ export default function ProductCreate() {
   const [canAddImage, setCanAddImage] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllCategories());
+    dispatch(getAllCategoriesForForm());
   }, [dispatch]);
 
   //Categorias para devolver keys
-  let categories = useSelector((state) => state.categories);
+  let categories = useSelector((state) => state.categoriesForForm);
+	// console.log(categories)
 
   const initialState = {
     name: "",
