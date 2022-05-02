@@ -20,7 +20,7 @@ function Footer() {
       <NavLink to={"/construction"}> */}
         <img src={whatsapp} alt="Whatsapp" onClick={(e)=>handleClickButton(e)}/>
       {/* </NavLink> */}
-    </div>
+      </div>
   );
 };
 

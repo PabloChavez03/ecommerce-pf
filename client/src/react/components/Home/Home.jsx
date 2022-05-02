@@ -70,8 +70,6 @@ export default function Home() {
           <p>No hay productos disponibles.</p>
         )}
       </div>
-
-      <Footer />
     </div>
   );
 }

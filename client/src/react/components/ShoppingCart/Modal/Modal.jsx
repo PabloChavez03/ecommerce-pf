@@ -7,10 +7,12 @@ import style from "./Modal.module.css";
 
 const Modal = ({ status, setStatus }) => {
 	const cartData = useSelector((state) => state.cartItems);
-	const subTotal = useSelector((state) => state.subTotal);
+	// const subTotal = useSelector((state) => state.subTotal);
 
-	console.log(cartData);
-
+	let subtotalCart = 0
+	// console.log(cartData);
+	cartData.forEach(function(a){subtotalCart += (a.currentPrice * a.quantity);});
+	
 	return (
 		<>
 			{status && (
@@ -44,8 +46,8 @@ const Modal = ({ status, setStatus }) => {
 
 						<div className={style.saleInfoContainer}>
 							<div className={style.saleInfo}>
-								<p>SUB TOTAL</p>
-								<span>$ {subTotal}</span>
+								<p>SUBTOTAL</p>
+								<span>$ {subtotalCart}</span>
 							</div>
 						</div>
 

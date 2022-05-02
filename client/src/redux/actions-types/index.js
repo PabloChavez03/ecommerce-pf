@@ -40,9 +40,9 @@ export const removeProductFromCart = (id) => {
   };
 };
 
-export const changeCartQuantity = (product) => {
+export const changeCartQuantity = (sign, id) => {
   return async function (dispatch) {
-    return dispatch({ type: CHANGE_CART_QUANTITY, payload: product });
+    return dispatch({ type: CHANGE_CART_QUANTITY, payload: [sign, id] });
   };
 };
 

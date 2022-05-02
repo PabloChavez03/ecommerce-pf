@@ -8,6 +8,7 @@ import Home from "./react/components/Home/Home.jsx";
 import Landing from "./react/components/Landing/Landing";
 import NavBar from "./react/components/NavBar/NavBar";
 import ProductCreate from "./react/components/CreationProduct/ProductCreate";
+import Footer from "./react/components/Footer/Footer";
 
 function App() {
 	return (
@@ -23,6 +24,7 @@ function App() {
 					<Route path={"/cart"} element={<ShoppingCart />} />
 					<Route path={"/construction"} element={<Construction />} />
 				</Routes>
+				<Footer/>
 		</BrowserRouter>
 	);
 }
