@@ -147,6 +147,7 @@ export default function Card({
 
 
 		</div>
+		
 	);
 };
 
@@ -188,7 +189,6 @@ export default function Card({
 //                 />
 //             </div>
 //         </div>
-
 //         <div>
 //             <h1>{name}</h1>
 //             <h3>Precio $ {isOffertPrice?previousPrice:currentPrice}</h3>

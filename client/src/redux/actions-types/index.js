@@ -90,6 +90,18 @@ export const setDetails = (obj = {}) => {
   };
 };
 
+// export const getCategories = () => {
+//   return async function (dispatch) {
+//     const { data } = await axios.get("http://localhost:3001/categories");
+//     const titles = data?.map(el => el);
+//     // console.log(titles)
+//     return dispatch({
+//       type: GET_CATEGORIES,
+//       payload: titles,
+//     })
+//   }
+// }
+
 export const getCurrentBrands = (gender) => async (dispatch) => {
   let brands = await currentbrands(gender);
   return dispatch({
@@ -144,7 +156,6 @@ export const getAllCategories = (gender) => {
 export const getCategoryById = (idCategory) => {
   return async function (dispatch) {
     const category = await axios.get(`http://localhost:3001/products?categoryId=${idCategory}`);
-
     return dispatch({
       type: GET_CATEGORY_BY_ID,
       payload: [category.data, idCategory]

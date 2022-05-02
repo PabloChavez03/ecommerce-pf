@@ -33,7 +33,7 @@ const initialState = {
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
-  switch (type) {
+	switch (type) {
     case GET_PRODUCT_BY_NAME:
       return {
         ...state,
@@ -110,6 +110,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
           ...state,
           productFilter: allProducts,
           select: payload,
+          currentPage: 1
         };
       } else {
         let dataBrands = filterbrands(payload, allProducts);
@@ -117,6 +118,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
           ...state,
           productFilter: dataBrands,
           select: payload,
+          currentPage: 1
         };
       }
     case GET_DETAILS:
@@ -158,11 +160,13 @@ export default function rootReducer(state = initialState, { type, payload }) {
         return {
           ...state,
           products: arr,
+          currentPage: 1
         };
       } else {
         return {
           ...state,
           productFilter: arr,
+          currentPage: 1
         };
       }
     case GET_ALL_CATEGORIES:
@@ -175,13 +179,27 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         productFilter: payload[0],
         select: payload[1],
+        currentPage: 1
       };
     case GET_FILTERS_GENDER_PRODUCT:
       return {
         ...state,
         products: payload,
         newgenders: payload,
-        select: ""
+        select: "",
+        currentPage: 1
+      };
+    case POST_PRODUCT:
+      return {
+        ...state,
+      };
+    case UPDATE_PRODUCT:
+      return {
+        ...state,
+      };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
       };
     default:
       return { ...state };

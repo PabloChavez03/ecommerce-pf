@@ -3,7 +3,6 @@
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	margin-top: 25px;
-    border: 1px solid red;
 }
 
 .cardDetailImgContainer {
@@ -21,7 +20,6 @@
 .cardPrimaryImg {
 	width: 350px;
 }
-
 
 .buttonAdd {
     width: 200px;
@@ -48,4 +46,10 @@
     border: 1px solid rgb(41, 41, 41) ;
     border-radius: 3px;
     cursor: pointer;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+.divInfo {
+	display: grid;
 }
