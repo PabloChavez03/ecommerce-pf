@@ -17,15 +17,20 @@ export default function Card({
 }) {
 	const dispatch = useDispatch();
 	const [imageCurrent, setImageCurrent] = useState("");
+	const sizes = variants.map((e)=>e.brandSize);
+	let colours = variants.map((e)=>e.color);
+	let set = new Set(colours);
+	colours = [...set];
 	const [productToCart, setProductToCart] = useState({
 		name,
 		image: images[0],
 		currentPrice,
-		color: variants.map((e) => e.color).join(""),
-		brandSize: variants.map((e) => e.brandSize).join(""),
+		color: "",
+		brandSize: "",
 		quantity: 1,
 		totalPrice: currentPrice,
 	});
+
 	useEffect(() => {
 		setImageCurrent(`https://${images[0]}`);
 	}, [images]);
@@ -39,6 +44,23 @@ export default function Card({
 		event.preventDefault();
 		dispatch(addProductToCart(productToCart));
 	};
+
+	const handleChangeSelect = (event) => {
+		event.preventDefault();
+		if (event.target.name === "color") {
+			setProductToCart({
+				...productToCart,
+				color: event.target.value,
+			});
+		} else if (event.target.name === "size") {
+			setProductToCart({
+				...productToCart,
+				size: event.target.value,
+			});
+		}
+	};
+
+
 
 	return (
 		<div className={style.cardDetailContainer}>
@@ -83,11 +105,20 @@ export default function Card({
 			)}
 
 			<h4>Color:</h4>
-			{<h4>{variants[0].color}</h4>}
+			<select name='color' onChange={(e) => handleChangeSelect(e)}>
+				<option>Color</option>
+				{colours.length?colours.map((e)=>(
+					<option key={e} value={e} name={e}>{e}</option>
+				)):null}
+			</select>
 
 			<h4>Talle:</h4>
-			{<h4>{variants[0].brandSize}</h4>}
-
+			<select name='size' onChange={(e) => handleChangeSelect(e)}>
+				<option>Talle</option>
+				{sizes.length?sizes.map((e)=>(
+					<option key={e} value={e} name={e}>{e}</option>
+				)):null}
+			</select>
 			<button onClick={(e) => handleAddCart(e)}>Agregar al carrito</button>
 		</div>
 	);
