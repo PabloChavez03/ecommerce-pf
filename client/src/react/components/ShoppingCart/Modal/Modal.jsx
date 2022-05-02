@@ -13,6 +13,11 @@ const Modal = ({ status, setStatus }) => {
 	// console.log(cartData);
 	cartData.forEach(function(a){subtotalCart += (a.currentPrice * a.quantity);});
 	
+	const handleClickBag = (event) => {
+		event.preventDefault();
+		alert("Funcionalidad en desarrollo!");
+	};
+	
 	return (
 		<>
 			{status && (
@@ -52,7 +57,7 @@ const Modal = ({ status, setStatus }) => {
 						</div>
 
 						<div className={style.modalButtonContainer}>
-							<button className={style.modalButton}>
+							<button className={style.modalButton} onClick={(e)=>handleClickBag(e)}>
 								VER BOLSA DE COMPRAS
 							</button>
 						</div>

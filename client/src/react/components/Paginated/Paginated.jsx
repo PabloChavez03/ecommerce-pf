@@ -5,7 +5,7 @@ import style from "./Paginated.module.css";
 import prev from "./images/left.png";
 import next from "./images/arrow-right.png";
 
-export default function Paginated({allProducts, productsPerPage}) {
+export default function Paginated({productsToPaginated, productsPerPage}) {
     const dispatch = useDispatch();
     const currentPage = useSelector((state) => state.currentPage);
     const [limitNumberPage] = useState(5);
@@ -13,9 +13,10 @@ export default function Paginated({allProducts, productsPerPage}) {
     const [minLimitNumberPage, setminLimitNumberPage] = useState(0);
     const numberPage = [];
 
-    for (let i = 1; i <= Math.ceil(allProducts.length / productsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(productsToPaginated.length / productsPerPage); i++) {
             numberPage.push(i);
     };
+    console.log(numberPage)
     
     const handleClickNumberPage = (event) => {
         dispatch(setCurrentPage(parseInt(event.target.id)));
@@ -23,7 +24,7 @@ export default function Paginated({allProducts, productsPerPage}) {
 
     const handleNextPage = (event) => {
         event.preventDefault();
-        if((currentPage+1) !== Math.ceil(allProducts.length / productsPerPage)) {
+        if((currentPage+1) !== Math.ceil(productsToPaginated.length / productsPerPage)) {
             dispatch(setCurrentPage(parseInt(currentPage + 1)))
             if(currentPage + 1 > maxLimitNumberPage) {
                 setmaxLimitNumberPage(maxLimitNumberPage + limitNumberPage);
@@ -46,7 +47,7 @@ export default function Paginated({allProducts, productsPerPage}) {
     return (
         <div>
             {
-                allProducts.length && <nav>
+                productsToPaginated.length && <nav>
                 <ul className={style.numberPage}>
                     <img className={style.imgPrev} src={prev} alt="Previous" onClick={(e)=>handlePrevPage(e)}/>
                     {/* <button onClick={handlePrevPage} disabled={parseInt(currentPage) === 1 ? true : false}>{"<<"} </button> */}
@@ -66,7 +67,7 @@ export default function Paginated({allProducts, productsPerPage}) {
                     <img className={style.imgNext} src={next} alt="Previous" onClick={(e)=>handleNextPage(e)}/>
                     {/* <button 
                     onClick={handleNextPage}
-                    disabled={parseInt(currentPage) === Math.ceil(allProducts.length / productsPerPage) ? true : false}>{">>"}</button> */}
+                    disabled={parseInt(currentPage) === Math.ceil(productsToPaginated.length / productsPerPage) ? true : false}>{">>"}</button> */}
                 </ul>
             </nav>
             }

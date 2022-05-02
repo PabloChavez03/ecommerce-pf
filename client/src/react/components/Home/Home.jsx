@@ -11,7 +11,6 @@ import {
   setDetails
 } from "../../../redux/actions-types";
 
-
 export default function Home() {
   const dispatch = useDispatch();
   const [params] = useSearchParams();
@@ -41,7 +40,7 @@ export default function Home() {
       />
       <div>
         <Paginated
-          allProducts={allProducts}
+          productsToPaginated={select !== "" ? productsCurent : allProducts}
           lastProduct={lastProduct}
           firstProduct={firstProduct}
           productsPerPage={productsPerPage}
