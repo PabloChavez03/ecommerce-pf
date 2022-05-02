@@ -10,7 +10,6 @@ import Modal from "../ShoppingCart/Modal/Modal";
 import "./NavBar.scss";
 
 export default function NavBar() {
-<<<<<<< HEAD
 	let location = useLocation();
 	console.log(
 		`${location.pathname}${location.search}` === "/home?gender=Women",
@@ -18,10 +17,6 @@ export default function NavBar() {
 
 	/**State para el modal */
 	const [statusModal, setStatusModal] = useState(false);
-=======
-  /**State para el modal */
-  const [statusModal, setStatusModal] = useState(false);
->>>>>>> ff169874cc50b94681a42458b6182410b12611cb
 
   const handleModalStatus = (e) => {
     e.preventDefault();
