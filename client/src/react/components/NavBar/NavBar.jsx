@@ -10,18 +10,12 @@ import Modal from "../ShoppingCart/Modal/Modal";
 import "./NavBar.scss";
 
 export default function NavBar() {
-<<<<<<< HEAD
-	let location = useLocation();
-	console.log(
-		`${location.pathname}${location.search}` === "/home?gender=Women",
-	);
+  let location = useLocation();
+  console.log(
+    `${location.pathname}${location.search}` === "/home?gender=Women"
+  );
 
-	/**State para el modal */
-	const [statusModal, setStatusModal] = useState(false);
-=======
-  /**State para el modal */
   const [statusModal, setStatusModal] = useState(false);
->>>>>>> ff169874cc50b94681a42458b6182410b12611cb
 
   const handleModalStatus = (e) => {
     e.preventDefault();
@@ -60,11 +54,11 @@ export default function NavBar() {
           <SearchBar />
         </div>
 
-				<div className="nav__up__features">
-					{/* <WishListIcon /> */}
-					<Link to={"/creation"}>
-						<CreateIcon />
-					</Link>
+        <div className="nav__up__features">
+          {/* <WishListIcon /> */}
+          <Link to={"/creation"}>
+            <CreateIcon />
+          </Link>
 
           <div className="icon_cart" onClick={(e) => handleModalStatus(e)}>
             {/* <NavLink exact to={"/cart"} onClick={handleClickForHiddingBurguer}> */}
@@ -79,44 +73,44 @@ export default function NavBar() {
         </div>
       </div>
 
-			<div className="nav__down">
-				<div className={`nav__down__links ${toogleMenu ? "menuActived" : ""}`}>
-					<ul>
-						<NavLink to={"/"} onClick={handleClickForHiddingBurguer}>
-							<li>Home</li>
-						</NavLink>
+      <div className="nav__down">
+        <div className={`nav__down__links ${toogleMenu ? "menuActived" : ""}`}>
+          <ul>
+            <NavLink to={"/"} onClick={handleClickForHiddingBurguer}>
+              <li>Home</li>
+            </NavLink>
 
-						<Link
-							to={"/home?gender=Men"}
-							className={
-								`${location.pathname}${location.search}` === "/home?gender=Men"
-									? "active"
-									: ""
-							}
-							onClick={handleClickForHiddingBurguer}
-						>
-							<li>Men</li>
-						</Link>
+            <Link
+              to={"/home?gender=Men"}
+              className={
+                `${location.pathname}${location.search}` === "/home?gender=Men"
+                  ? "active"
+                  : ""
+              }
+              onClick={handleClickForHiddingBurguer}
+            >
+              <li>Men</li>
+            </Link>
 
-						<Link
-							to={"/home?gender=Women"}
-							className={
-								`${location.pathname}${location.search}` ===
-								"/home?gender=Women"
-									? "active"
-									: ""
-							}
-							onClick={handleClickForHiddingBurguer}
-						>
-							<li>Women</li>
-						</Link>
+            <Link
+              to={"/home?gender=Women"}
+              className={
+                `${location.pathname}${location.search}` ===
+                "/home?gender=Women"
+                  ? "active"
+                  : ""
+              }
+              onClick={handleClickForHiddingBurguer}
+            >
+              <li>Women</li>
+            </Link>
 
-						<NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
-							<li>About</li>
-						</NavLink>
-					</ul>
-				</div>
-			</div>
+            <NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
+              <li>About</li>
+            </NavLink>
+          </ul>
+        </div>
+      </div>
 
       <div className="nav__searchBar">
         <SearchBar />
