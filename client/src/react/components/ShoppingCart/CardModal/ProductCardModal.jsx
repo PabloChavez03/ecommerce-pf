@@ -44,15 +44,15 @@ const ProductCardModal = ({
           <p className={style.cardModalInfo}>
             Cantidad:
             <span>
-              <button value={"-"} onClick={(e) => handleQtyChange(e)}>
+              <span value={"-"} onClick={(e) => handleQtyChange(e)}>
                 {" "}
                 -{" "}
-              </button>
+              </span>
               <span>{quantity}</span>
-              <button value={"+"} onClick={(e) => handleQtyChange(e)}>
+              <span value={"+"} onClick={(e) => handleQtyChange(e)}>
                 {" "}
                 +{" "}
-              </button>
+              </span>
             </span>
           </p>
           <p className={style.cardModalInfo}>
