@@ -12,7 +12,6 @@ import {
   SET_DETAILS,
   GET_ALL_CATEGORIES,
   GET_CATEGORY_BY_ID,
-  SET_SELECT,
   GET_FILTERS_GENDER_PRODUCT
 } from "../actions-creators";
 import { currentbrands, urlProdutcGender } from "../controllers";

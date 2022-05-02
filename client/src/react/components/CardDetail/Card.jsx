@@ -21,6 +21,7 @@ export default function Card({
 	let colours = variants.map((e)=>e.color);
 	let set = new Set(colours);
 	colours = [...set];
+
 	const [productToCart, setProductToCart] = useState({
 		name,
 		image: images[0],
@@ -28,7 +29,7 @@ export default function Card({
 		color: "",
 		brandSize: "",
 		quantity: 1,
-		totalPrice: currentPrice,
+		id
 	});
 
 	useEffect(() => {
@@ -66,12 +67,15 @@ export default function Card({
 			setProductToCart({
 				...productToCart,
 				quantity: productToCart.quantity - 1,
+			
 			});
 		} else {
 			setProductToCart({
 				...productToCart,
 				quantity: productToCart.quantity + 1,
+			
 			});
+
 		}
 	}
 
