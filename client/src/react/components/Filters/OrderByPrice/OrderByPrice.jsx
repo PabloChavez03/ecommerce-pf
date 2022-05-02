@@ -7,7 +7,6 @@ function OrderByPrice({setRender, setCurrentPage}) {
     function handleOrderByPrice(e) {
         e.preventDefault();
         dispatch(orderByPrice(e.target.value));
-        console.log(e.target.value)
         setRender(`set order by ${e.target.value}`);
         setCurrentPage(1);
       }

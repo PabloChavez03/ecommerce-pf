@@ -12,10 +12,9 @@ import {
   SET_DETAILS,
   GET_ALL_CATEGORIES,
   GET_CATEGORY_BY_ID,
-  SET_SELECT,
-  GET_FILTERS_GENDER_PRODUCT,
+  GET_FILTERS_GENDER_PRODUCT
 } from "../actions-creators";
-import { currentbrands, urlProdutcGender } from "../controllers";
+import { currentbrands, currentcategory, urlProdutcGender } from "../controllers";
 import axios from "axios";
 
 
@@ -35,15 +34,15 @@ export const addProductToCart = (product) => {
   };
 };
 
-export const removeProductFromCart = (product) => {
+export const removeProductFromCart = (id) => {
   return async function (dispatch) {
-    return dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: product });
+    return dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: id });
   };
 };
 
-export const changeCartQuantity = (product) => {
+export const changeCartQuantity = (sign, id) => {
   return async function (dispatch) {
-    return dispatch({ type: CHANGE_CART_QUANTITY, payload: product });
+    return dispatch({ type: CHANGE_CART_QUANTITY, payload: [sign, id] });
   };
 };
 
@@ -76,7 +75,7 @@ export const getDetails = (productId) => {
     const productDetail = await axios.get(
       `http://localhost:3001/products/detail/${productId}`
     );
-    console.log(productDetail);
+    // console.log(productDetail);
     return dispatch({
       type: GET_DETAILS,
       payload: productDetail.data,
@@ -104,59 +103,59 @@ export const setDetails = (obj = {}) => {
 // }
 
 export const getCurrentBrands = (gender) => async (dispatch) => {
-	let brands = await currentbrands(gender);
-	return dispatch({
-		type: GET_CURRENT_BRANDS,
-		payload: brands
-	});
+  let brands = await currentbrands(gender);
+  return dispatch({
+    type: GET_CURRENT_BRANDS,
+    payload: brands
+  });
 };
 
 export const getFiltersBrands = (payload) => {
-	return {
-		type: GET_FILTERS_BRANDS,
-		payload
-}};
-
-  export const postProduct = (info) => {
-    return function (dispatch) {
-      const postProduct = axios
-        .post("http://localhost:3001/products/create", info)
-        .then((response) => response);
-      return postProduct;
-    };
-  };
-  
-  export const updateProduct = (id, info) => {
-    return function (dispatch) {
-      const updateProduct = axios
-        .patch(`http://localhost:3001/products/update/${id}`, info)
-        .then((response) => response);
-      return updateProduct;
-    };
-  };
-  
-  export const deleteProduct = (id) => {
-    return function (dispatch) {
-      return axios
-        .delete(`http://localhost:3001/products/update/${id}`)
-        .then((response) => response);
-    };
+  return {
+    type: GET_FILTERS_BRANDS,
+    payload
+  }
 };
 
-export const getAllCategories = () => {
-  return async function(dispatch) {
-    const allCategories = await axios.get("http://localhost:3001/categories");
+export const postProduct = (info) => {
+  return function (dispatch) {
+    const postProduct = axios
+      .post("http://localhost:3001/products/create", info)
+      .then((response) => response);
+    return postProduct;
+  };
+};
+
+export const updateProduct = (id, info) => {
+  return function (dispatch) {
+    const updateProduct = axios
+      .patch(`http://localhost:3001/products/update/${id}`, info)
+      .then((response) => response);
+    return updateProduct;
+  };
+};
+
+export const deleteProduct = (id) => {
+  return function (dispatch) {
+    return axios
+      .delete(`http://localhost:3001/products/update/${id}`)
+      .then((response) => response);
+  };
+};
+
+export const getAllCategories = (gender) => {
+  return async function (dispatch) {
+    const allCategories = await currentcategory(gender);
     return dispatch({
       type: GET_ALL_CATEGORIES,
-      payload: allCategories.data
+      payload: allCategories
     });
   };
 };
 
 export const getCategoryById = (idCategory) => {
-  return async function(dispatch) {
+  return async function (dispatch) {
     const category = await axios.get(`http://localhost:3001/products?categoryId=${idCategory}`);
-    console.log(category)
     return dispatch({
       type: GET_CATEGORY_BY_ID,
       payload: [category.data, idCategory]
