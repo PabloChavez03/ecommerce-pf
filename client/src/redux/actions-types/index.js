@@ -13,7 +13,7 @@ import {
   GET_ALL_CATEGORIES,
   GET_CATEGORY_BY_ID,
   SET_SELECT,
-  GET_FILTERS_GENDER_PRODUCT
+  GET_FILTERS_GENDER_PRODUCT,
 } from "../actions-creators";
 import { currentbrands, urlProdutcGender } from "../controllers";
 import axios from "axios";
@@ -90,6 +90,18 @@ export const setDetails = (obj = {}) => {
     payload: obj
   };
 };
+
+// export const getCategories = () => {
+//   return async function (dispatch) {
+//     const { data } = await axios.get("http://localhost:3001/categories");
+//     const titles = data?.map(el => el);
+//     // console.log(titles)
+//     return dispatch({
+//       type: GET_CATEGORIES,
+//       payload: titles,
+//     })
+//   }
+// }
 
 export const getCurrentBrands = (gender) => async (dispatch) => {
 	let brands = await currentbrands(gender);
