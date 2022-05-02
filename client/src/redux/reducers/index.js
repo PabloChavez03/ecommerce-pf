@@ -1,35 +1,35 @@
 import {
-	ADD_PRODUCT_TO_CART,
-	GET_PRODUCT_BY_NAME,
-	REMOVE_PRODUCT_FROM_CART,
-	CHANGE_CART_QUANTITY,
-	SET_CURRENT_PAGE,
-	GET_ALL_PRODUCTS,
-	GET_CURRENT_BRANDS,
-	GET_FILTERS_BRANDS,
-	ORDER_BY_PRICE,
-	GET_DETAILS,
-	SET_DETAILS,
-	GET_ALL_CATEGORIES,
-	GET_CATEGORY_BY_ID,
-	GET_FILTERS_GENDER_PRODUCT,
-	POST_PRODUCT,
-	UPDATE_PRODUCT,
-	DELETE_PRODUCT
+  ADD_PRODUCT_TO_CART,
+  GET_PRODUCT_BY_NAME,
+  REMOVE_PRODUCT_FROM_CART,
+  CHANGE_CART_QUANTITY,
+  SET_CURRENT_PAGE,
+  GET_ALL_PRODUCTS,
+  GET_CURRENT_BRANDS,
+  GET_FILTERS_BRANDS,
+  ORDER_BY_PRICE,
+  GET_DETAILS,
+  SET_DETAILS,
+  GET_ALL_CATEGORIES,
+  GET_CATEGORY_BY_ID,
+  GET_FILTERS_GENDER_PRODUCT,
+  POST_PRODUCT,
+  UPDATE_PRODUCT,
+  DELETE_PRODUCT,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
 const initialState = {
-	products: [],
-	productFilter: [],
-	cartItems: [],
-	brands: [],
-	currentPage: 1,
-	details: {},
-	categories: [],
-	select: "",
-	newgenders: [],
-	subTotal: 0
+  products: [],
+  productFilter: [],
+  cartItems: [],
+  brands: [],
+  currentPage: 1,
+  details: {},
+  categories: [],
+  select: "",
+  newgenders: [],
+  subTotal: 0,
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -38,24 +38,55 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         productFilter: payload,
+        select: "name"
       };
     case ADD_PRODUCT_TO_CART:
-      return {
-        ...state,
-        cartItems: [...state.cartItems, payload],
-        subTotal: Number(state.subTotal + payload.totalPrice),
-      };
+      let cartProductAux = state.cartItems.find((e) => e.id === payload.id);
+      if (cartProductAux) {
+        const prevCart = state.cartItems.filter((e) => e.id !== payload.id);
+        cartProductAux.quantity++;
+        return {
+          ...state,
+          cartItems: [...prevCart, cartProductAux],
+          subTotal: Number(
+            state.subTotal +
+              Math.round(cartProductAux.currentPrice * cartProductAux.quantity)
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          cartItems: [...state.cartItems, payload],
+          subTotal: Number(
+            state.subTotal + Math.round(payload.currentPrice * payload.quantity)
+          ),
+        };
+      }
     case REMOVE_PRODUCT_FROM_CART:
       return {
         ...state,
-        cartItems: state.cartItems.filter((e) => e.id !== payload.id),
+        cartItems: state.cartItems.filter((e) => e.id !== payload),
       };
     case CHANGE_CART_QUANTITY:
+      let cartChangeQty = state.cartItems.find((e) => e.id === payload[1]);
+      let change;
+      const prevCartAux = state.cartItems.filter((e) => e.id !== payload[1]);
+      if (payload[0] === "-") {
+        if (cartChangeQty.quantity === 1) {
+          return {
+            ...state,
+            cartItems: state.cartItems.filter((e) => e.id !== payload[1]),
+          };
+        }
+        cartChangeQty.quantity--;
+        change = [...prevCartAux, cartChangeQty];
+      } else {
+        cartChangeQty.quantity++;
+        change = [...prevCartAux, cartChangeQty];
+      }
       return {
         ...state,
-        cartItems: state.cartItems.filter((e) =>
-          e.id !== payload.id ? (e.quantity = payload.quantity) : e.quantity
-        ),
+        cartItems: change,
       };
     case SET_CURRENT_PAGE:
       return {
@@ -79,6 +110,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
           ...state,
           productFilter: allProducts,
           select: payload,
+          currentPage: 1
         };
       } else {
         let dataBrands = filterbrands(payload, allProducts);
@@ -86,6 +118,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
           ...state,
           productFilter: dataBrands,
           select: payload,
+          currentPage: 1
         };
       }
     case GET_DETAILS:
@@ -127,11 +160,13 @@ export default function rootReducer(state = initialState, { type, payload }) {
         return {
           ...state,
           products: arr,
+          currentPage: 1
         };
       } else {
         return {
           ...state,
           productFilter: arr,
+          currentPage: 1
         };
       }
     case GET_ALL_CATEGORIES:
@@ -144,12 +179,15 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         productFilter: payload[0],
         select: payload[1],
+        currentPage: 1
       };
     case GET_FILTERS_GENDER_PRODUCT:
       return {
         ...state,
         products: payload,
         newgenders: payload,
+        select: "",
+        currentPage: 1
       };
     case POST_PRODUCT:
       return {

@@ -44,7 +44,7 @@ export default function Slider({ gender, category }) {
             key={obj}
             className={slideIndex === index + 1 ? "slide active-anim" : "slide"}
           >
-            <img src={category?.img[index]} />
+            <img src={category?.img[index]} alt="Img Landing"/>
           </div>
         );
       })}
@@ -63,7 +63,7 @@ export default function Slider({ gender, category }) {
         })}
       </div>
       <NavLink to={`/home?gender=${gender}`} style={{ textDecoration: "none" }}>
-        <button className="btn-show-more">Show more!</button>
+        <button className="btn-show-more">SHOW MORE</button>
       </NavLink>
     </div>
   );

@@ -19,3 +19,33 @@
 .cardPrimaryImg {
 	width: 350px;
 }
+
+
+.buttonAdd {
+	top: 80%;
+    left: 70%;
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    background: black;
+    color: #f1f1f1;
+    border: 1px solid #f1f1f1a4;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+	font-size: 17px;
+}
+
+.selects {
+	cursor: pointer;
+	margin: 15px;
+    padding: 5px 7px;
+    color: rgb(70, 67, 67);
+    font-weight: bold;
+    border: 1px solid rgb(41, 41, 41) ;
+    border-radius: 3px;
+    cursor: pointer;
+}

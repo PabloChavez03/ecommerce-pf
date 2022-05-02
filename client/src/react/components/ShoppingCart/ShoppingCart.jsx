@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Cart() {
     const products = useSelector((state)=>state.cartItems);
@@ -21,9 +21,9 @@ export default function Cart() {
 
     return(
         <div>
-            <Link to={"/home"}>
-                <button>X</button>
-            </Link>
+            <NavLink to={"/home"}>
+                <button> X </button>
+            </NavLink>
             {
                 products.length === 0 ? <h4>El carrito se encuentra vacío</h4> : products.map((p)=>(
                     <div>

@@ -71,6 +71,7 @@
     border: 3px solid #f1f1f1;
     margin: 0 5px;
     background: #f1f1f1;
+    cursor: pointer;
   }
   .dot.active {
     background: rgb(32, 32, 32);
@@ -78,9 +79,9 @@
   .btn-show-more{
     top: 80%;
     left: 70%;
-    width: 100px;
+    width: 120px;
     height: 50px;
-    border-radius: 20%;
+    border-radius: 25px;
     background: #161616c2;
     color: #f1f1f1;
     border: 1px solid #f1f1f1a4;
@@ -89,4 +90,5 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    font-weight: bold;
   }
