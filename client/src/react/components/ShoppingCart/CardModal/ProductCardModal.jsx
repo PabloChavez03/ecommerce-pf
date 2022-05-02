@@ -1,11 +1,13 @@
 import React from "react";
 import style from "./ProductCardModal.module.css";
 import { useDispatch } from "react-redux";
-import {removeProductFromCart, changeCartQuantity} from '../../../../redux/actions-types'
-
+import {
+  removeProductFromCart,
+  changeCartQuantity,
+} from "../../../../redux/actions-types";
 
 const ProductCardModal = ({
-	id,
+  id,
   name,
   color,
   price,
@@ -14,16 +16,16 @@ const ProductCardModal = ({
   quantity,
 }) => {
   /** FALTA AGREGAR LOS OTROS DATOS, SOLO ESTOY RENDERIZANDO EL NAME */
-	const dispatch = useDispatch()
-	
+  const dispatch = useDispatch();
+  
   const handleRemove = () => {
-	dispatch(removeProductFromCart(id))
-};
-const handleQtyChange=(e) => {
-	e.preventDefault()
-	console.log(e.target.value)
-	dispatch(changeCartQuantity(e.target.value , id))
-}
+    dispatch(removeProductFromCart(id));
+  };
+  const handleQtyChange = (e) => {
+    e.preventDefault();
+    console.log(e.target.value);
+    dispatch(changeCartQuantity(e.target.value, id));
+  };
 
   return (
     <div className={style.cardModalContainer}>
@@ -43,18 +45,24 @@ const handleQtyChange=(e) => {
           <p className={style.cardModalInfo}>
             Cantidad:
             <span>
-              <button value={'-'} onClick={(e)=>handleQtyChange(e)}> - </button>
+              <button value={"-"} onClick={(e) => handleQtyChange(e)}>
+                {" "}
+                -{" "}
+              </button>
               <span>{quantity}</span>
-              <button value={'+'} onClick={(e)=>handleQtyChange(e)}> + </button>
+              <button value={"+"} onClick={(e) => handleQtyChange(e)}>
+                {" "}
+                +{" "}
+              </button>
             </span>
           </p>
           <p className={style.cardModalInfo}>
-            Total: <span>$ {price*quantity}</span>
+            Total: <span>$ {price * quantity}</span>
           </p>
         </div>
       </div>
 
-      <span onClick={()=>handleRemove()}>X</span>
+      <span onClick={() => handleRemove()}>X</span>
     </div>
   );
 };
