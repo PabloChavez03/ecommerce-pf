@@ -1,10 +1,9 @@
 const axios = require("axios");
 const adaptCategory = require("./categoriesAdapter");
-//////////////////////////////////////////////////
 const fs = require('fs');
 const json_categories = fs.readFileSync('src/data/categories.json', 'utf-8');
 let categories = JSON.parse(json_categories);
-//////////////////////////////////////////////////
+
 
 async function getAPIcategories() {
 

@@ -33,7 +33,7 @@ const initialState = {
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
-  switch (type) {
+	switch (type) {
     case GET_PRODUCT_BY_NAME:
       return {
         ...state,
@@ -188,6 +188,18 @@ export default function rootReducer(state = initialState, { type, payload }) {
         newgenders: payload,
         select: "",
         currentPage: 1
+      };
+    case POST_PRODUCT:
+      return {
+        ...state,
+      };
+    case UPDATE_PRODUCT:
+      return {
+        ...state,
+      };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
       };
     default:
       return { ...state };
