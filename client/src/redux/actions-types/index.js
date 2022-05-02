@@ -6,6 +6,7 @@ import {
   CHANGE_CART_QUANTITY,
   SET_CURRENT_PAGE,
   GET_ALL_PRODUCTS,
+  GET_CATEGORIES,
 } from "../actions-creators";
 
 export const getProductByName = (nameProduct) => {
@@ -78,3 +79,15 @@ export const deleteProduct = (id) => {
       .then((response) => response);
   };
 };
+
+export const getCategories = () => {
+  return async function (dispatch) {
+    const { data } = await axios.get("http://localhost:3001/categories");
+    const titles = data?.map(el => el);
+    // console.log(titles)
+    return dispatch({
+      type: GET_CATEGORIES,
+      payload: titles,
+    })
+  }
+}

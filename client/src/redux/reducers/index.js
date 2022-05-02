@@ -8,6 +8,7 @@ import {
   POST_PRODUCT,
   UPDATE_PRODUCT,
   DELETE_PRODUCT,
+  GET_CATEGORIES,
 } from "../actions-creators";
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   productFilter: [],
   cartItems: [],
   currentPage: 1,
+  allCategories: [], 
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -65,6 +67,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
       };
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        allCategories: payload,
+      }
     default:
       return { ...state };
   }
