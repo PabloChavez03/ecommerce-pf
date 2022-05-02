@@ -1,0 +1,14 @@
+.searchContainer button {
+    background-color: rgb(219, 219, 219);
+    margin-left: 10px;
+    border: 1px solid rgb(160, 159, 159);
+    padding: 2px 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.searchContainer input {
+    border: 1px solid rgb(160, 159, 159);
+    border-radius: 3px;
+    padding: 2px 5px;
+}

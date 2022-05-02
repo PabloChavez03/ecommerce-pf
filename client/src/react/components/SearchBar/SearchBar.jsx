@@ -25,7 +25,7 @@ export default function SearchBar() {
 
 	return (
 		<div>
-			<form>
+			<form className={style.searchContainer}>
 				<input
 					value={search}
 					type={"search"}
