@@ -107,18 +107,21 @@ export default function Card({
 				/>
 			</div>
 			<div>
-				<h3>{name}</h3>
-				<p>{description}</p>
-				<h4>Género: {gender}</h4>
-				<h4>Marca: {brand}</h4>
-				{isOffertProduct ? (
+			<h3 className={style.name}>{name}</h3>
+			{isOffertProduct ? (
 					<div>
 						<h5>Precio anterior: {previousPrice}</h5>
 						<h5>Precio de oferta: {currentPrice}</h5>
 					</div>
 				) : (
-					<h4>Precio: ${currentPrice}</h4>
+					<h1 className={style.price}>${currentPrice}</h1>
 				)}
+				
+				<p>{description}</p>
+				<div className={style.generoMarca}>
+				<h4 >Género: {gender}</h4>
+				<h4 >Marca: {brand}</h4>
+				</div>
 				<div className={style.selectcontainer}>
 					<select className={style.selects} name='color' onChange={(e) => handleChangeSelect(e)}>
 						<option>Color</option>

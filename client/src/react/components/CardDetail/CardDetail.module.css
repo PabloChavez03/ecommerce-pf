@@ -3,6 +3,11 @@
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	margin-top: 25px;
+    border: 1px solid rgb(40, 38, 38);
+    box-shadow: 5px 8px 15px rgba(51, 50, 50, 0.611);
+    width: 80%;
+    margin-left: 10%;
+    padding: 10px;
 }
 
 .cardDetailImgContainer {
@@ -55,4 +60,24 @@
 
 .divInfo {
 	display: grid;
+}
+
+.price {
+    color: rgb(40, 38, 38);
+    font-size: 20px;
+}
+.name {
+    color: rgb(101, 98, 98);
+
+}
+.generoMarca {
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+}
+.generoMarca h4 {
+    display: flex;
+    justify-content: center;
+
 }
