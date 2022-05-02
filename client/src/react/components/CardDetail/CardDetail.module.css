@@ -81,6 +81,19 @@
 }
 .generoMarca h4 {
     display: flex;
-    justify-content: center;
+    justify-content: start;
+    color: rgb(101, 98, 98);
+}
+.description {
+    text-decoration: none;
+    color: rgb(101, 98, 98);
+}
+.description a {
+    color: rgb(101, 98, 98);
+    text-decoration: none;
 
+}
+.description ul {
+    color: rgb(64, 62, 62);
+    margin-left: 35px;
 }

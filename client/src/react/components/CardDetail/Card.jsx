@@ -116,8 +116,8 @@ export default function Card({
 				) : (
 					<h1 className={style.price}>${currentPrice}</h1>
 				)}
+				 <div ><p className={style.description} dangerouslySetInnerHTML={{__html: description}}></p></div>
 				
-				<p>{description}</p>
 				<div className={style.generoMarca}>
 				<h4 >Género: {gender}</h4>
 				<h4 >Marca: {brand}</h4>
