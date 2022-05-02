@@ -75,7 +75,7 @@ export const getDetails = (productId) => {
     const productDetail = await axios.get(
       `http://localhost:3001/products/detail/${productId}`
     );
-    console.log(productDetail);
+    // console.log(productDetail);
     return dispatch({
       type: GET_DETAILS,
       payload: productDetail.data,

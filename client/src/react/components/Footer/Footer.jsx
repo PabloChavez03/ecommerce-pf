@@ -2,7 +2,7 @@ import React from "react";
 //import { NavLink } from "react-router-dom";
 import instagram from "./images/instagram.png";
 import whatsapp from "./images/whatsapp.png";
-import about from "./images/equipo.png";
+import about from "./images/informacion.png";
 import css from './Footer.module.css'
 
 function Footer() {
@@ -12,20 +12,18 @@ function Footer() {
 
   return (
     <div className={css.container} >
-      {/* <NavLink to={"/"}> */}
-      <img src={about} alt="Instagram" onClick={(e)=>handleClickButton(e)}/>
-      {/* </NavLink> */}
-      {/* <NavLink to={"/construction"}> */}
-      <div className={css.img}>{/* <NavLink to={"/construction"}> */}
-        <img src={instagram} alt="Instagram" onClick={(e)=>handleClickButton(e)}/>
-      {/* </NavLink>
-      <NavLink to={"/construction"}> */}
-        <img src={whatsapp} alt="Whatsapp" onClick={(e)=>handleClickButton(e)}/>
-      {/* </NavLink> */}
-      </div>
+    
+      <img className={css.about} src={about} alt="About" onClick={(e)=>handleClickButton(e)}/>
+     
       
+      <div className={css.img}>
+        <img src={instagram} alt="Instagram" onClick={(e)=>handleClickButton(e)}/>
+     
+        <img src={whatsapp} alt="Whatsapp" onClick={(e)=>handleClickButton(e)}/>
+   
+      </div>
+
     </div>
   );
 };
-
 export default Footer;
