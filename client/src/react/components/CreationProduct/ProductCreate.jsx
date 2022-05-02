@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { postProduct } from "../../../redux/actions-types";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { getAllCategories, postProduct } from "../../../redux/actions-types";
 
 // Components
 import AddImages from "./components/AddImages";
@@ -12,14 +12,6 @@ import AddVariants from "./components/AddVariants";
 // Utils
 import s from "./ProductCreate.module.css";
 import { handleDeleteImg, handleSizeDelete } from "./handlers";
-
-// const validateImg = (urlImg) => {
-//   const regex = /.*\.(gif|jpe?g|bmp|png)$/gim;
-//   return regex.test(urlImg);
-// };
-// const deepHouseMatute = () => {
-//     return parseInt(Math.random() + Date.now())
-// }
 
 function validate(input) {
 	let errors = {};
@@ -55,12 +47,11 @@ function validate(input) {
 		errors.gender = <i>"Debe ingresar un genero!"</i>;
 		// errors.button = true;
 	}
-	if (!input.brand || input.brand === "") {
-		errors.brand = <i>"Debe ingresar una marca!"</i>;
+	if (!input.brandName || input.brandName === "") {
+		errors.brandName = <i>"Debe ingresar una marca!"</i>;
 		// errors.button = true;
 	}
-
-	if (!input.category || input.category === "") {
+	if (!input.category.length) {
 		errors.category = <i>"Debe ingresar una marca!"</i>;
 		// errors.button = true;
 	}
@@ -72,8 +63,15 @@ export default function ProductCreate() {
 	const navigate = useNavigate();
 	const [canAddImage, setCanAddImage] = useState(false);
 
-	const [errors, setError] = useState({});
-	const [input, setInput] = useState({
+	useEffect(() => {
+		dispatch(getAllCategories());
+	}, [dispatch]);
+
+	//Categorias para devolver keys
+	let categories = useSelector((state) => state.categories);
+	console.log(categories);
+
+	const initialState = {
 		name: "",
 		description: "",
 		images: [],
@@ -83,14 +81,20 @@ export default function ProductCreate() {
 		colour: "",
 		gender: "",
 		brand: "",
-		category: "",
+		category: [],
 		info: {
 			aboutMe: "",
 			sizeAndFit: "",
 			careInfo: "",
 		},
 		variants: [],
-	});
+	};
+
+	const [errors, setError] = useState({});
+	const [input, setInput] = useState(initialState);
+	let demoCategories = [];
+	demoCategories = categories.filter((el) => input.category.includes(el.id));
+	// console.log(demoCategories)
 
 	function handleChange(e) {
 		setInput({
@@ -105,26 +109,44 @@ export default function ProductCreate() {
 		);
 	}
 
+	function handleSelectCategoryOnChange(e) {
+		const value = e.target.value;
+		e.preventDefault();
+		setInput((prev) => ({
+			...prev,
+			category: [...input.category, Number(value)],
+		}));
+		// console.log(value)
+
+		//set Error a revisar
+
+		setError(
+			validate({
+				...input,
+				category: [...input.category, Number(value)],
+			}),
+		);
+	}
+
+	function handleDeleteSelectCategory(e) {
+		const value = e.target.value;
+		e.preventDefault();
+		setInput((prev) => ({
+			...prev,
+			category: prev.category.filter((el) => el !== Number(value)),
+		}));
+
+		setError(
+			validate({
+				...input,
+				category: input.category.filter((el) => el !== Number(value)),
+			}),
+		);
+	}
+
 	function handleSubmit(e) {
 		e.preventDefault();
 		dispatch(postProduct({ ...input, category: 6455 }));
-		setInput({
-			name: "",
-			description: "",
-			images: [],
-			previousPrice: 0,
-			isOffertPrice: false,
-			currentPrice: 0,
-			brandName: "",
-			colour: "",
-			gender: "",
-			info: {
-				aboutMe: "",
-				sizeAndFit: "",
-				careInfo: "",
-			},
-			variants: [],
-		});
 		navigate("/home");
 		alert("Producto creado con exito!");
 		console.log(input);
@@ -136,6 +158,18 @@ export default function ProductCreate() {
 			[e.target.name]: !input.isOffertPrice,
 		});
 	}
+
+	//para futuros keyPress
+	// const handleKeyPress = (e) => {
+	// 	if (e.key === "Enter") {
+	// 		setInput({
+	// 			...input,
+	// 			category: [...input.category, e.target.value],
+	// 		})
+	// 		console.log(e)
+	// 		console.log(input.category)
+	// 	}
+	// }
 
 	return (
 		<div>
@@ -265,6 +299,35 @@ export default function ProductCreate() {
 				</div>
 
 				<div>
+					{demoCategories?.map((el) => (
+						<div key={el.id}>
+							<span key={el.id} value={el.id}>
+								{el.title}
+							</span>
+							<button
+								value={el.id}
+								onClick={(e) => handleDeleteSelectCategory(e)}
+							>
+								x
+							</button>
+						</div>
+					))}
+				</div>
+
+				<div>
+					<label>Categories: </label>
+					<select onChange={handleSelectCategoryOnChange}>
+						<optgroup value="categories" label="Categorias">
+							{categories?.map((el) => (
+								<option value={el.id} key={el.id} name={el.title}>
+									{el.title}
+								</option>
+							))}
+						</optgroup>
+					</select>
+				</div>
+
+				<div>
 					<AddInfo
 						input={input}
 						setInput={setInput}
@@ -296,7 +359,9 @@ export default function ProductCreate() {
 								return (
 									<div key={`${el.brandSize}${idx}`}>
 										<p>{el.brandSize}</p>
-										<button onClick={(e) => handleSizeDelete(e, el, input, setInput)}>
+										<button
+											onClick={(e) => handleSizeDelete(e, el, input, setInput)}
+										>
 											Eliminar
 										</button>
 									</div>
@@ -308,7 +373,12 @@ export default function ProductCreate() {
 					)}
 				</div>
 
-				<button type="submit">Crear Producto</button>
+				<button
+					hidden={Object.values(errors).length === 0 ? false : true}
+					type="submit"
+				>
+					Crear Producto
+				</button>
 			</form>
 		</div>
 	);

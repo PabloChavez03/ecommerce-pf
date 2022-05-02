@@ -25,6 +25,12 @@ export const handleSubmitAddImage = (
 		...input,
 		images: [...input.images, urlImage],
 	});
+	setError(
+    validate({
+      ...input,
+      images: [...input.images, urlImage],
+    })
+  );
 	setCanAddImage(false);
 };
 
