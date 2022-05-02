@@ -1,22 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { postProduct } from "../../../redux/actions-types";
-
-import s from "./ProductCreate.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { getAllCategories, postProduct } from "../../../redux/actions-types";
 
 // Components
 import AddImages from "./components/AddImages";
-import { handleDeleteImg } from "./handlers";
+import AddInfo from "./components/AddInfo";
+import AddVariants from "./components/AddVariants";
 
-// const validateImg = (urlImg) => {
-//   const regex = /.*\.(gif|jpe?g|bmp|png)$/gim;
-//   return regex.test(urlImg);
-// };
-// const deepHouseMatute = () => {
-//     return parseInt(Math.random() + Date.now())
-// }
+// Utils
+import s from "./ProductCreate.module.css";
+import { handleDeleteImg, handleSizeDelete } from "./handlers";
 
 function validate(input) {
 	let errors = {};
@@ -52,11 +47,11 @@ function validate(input) {
 		errors.gender = <i>"Debe ingresar un genero!"</i>;
 		// errors.button = true;
 	}
-	if (!input.brand || input.brand === "") {
-		errors.brand = <i>"Debe ingresar una marca!"</i>;
+	if (!input.brandName || input.brandName === "") {
+		errors.brandName = <i>"Debe ingresar una marca!"</i>;
 		// errors.button = true;
 	}
-	if (!input.category || input.category === "") {
+	if (!input.category.length) {
 		errors.category = <i>"Debe ingresar una marca!"</i>;
 		// errors.button = true;
 	}
@@ -68,8 +63,14 @@ export default function ProductCreate() {
 	const navigate = useNavigate();
 	const [canAddImage, setCanAddImage] = useState(false);
 
-	const [errors, setError] = useState({});
-	const [input, setInput] = useState({
+	useEffect(() => {
+		dispatch(getAllCategories());
+	}, [dispatch]);
+
+	//Categorias para devolver keys
+	let categories = useSelector((state) => state.categories);
+
+	const initialState = {
 		name: "",
 		description: "",
 		images: [],
@@ -78,16 +79,21 @@ export default function ProductCreate() {
 		currentPrice: 0,
 		colour: "",
 		gender: "",
-		brand: "",
-		isOffertProduct: false,
-		category: "",
+		brandName: "",
+		category: [],
 		info: {
 			aboutMe: "",
 			sizeAndFit: "",
 			careInfo: "",
 		},
 		variants: [],
-	});
+	};
+
+	const [errors, setError] = useState({});
+	const [input, setInput] = useState(initialState);
+	let demoCategories = [];
+	demoCategories = categories.filter((el) => input.category.includes(el.id));
+	// console.log(demoCategories)
 
 	function handleChange(e) {
 		setInput({
@@ -102,29 +108,46 @@ export default function ProductCreate() {
 		);
 	}
 
+	function handleSelectCategoryOnChange(e) {
+		const value = e.target.value;
+		e.preventDefault();
+		setInput((prev) => ({
+			...prev,
+			category: [...input.category, Number(value)],
+		}));
+		// console.log(value)
+
+		//set Error a revisar
+
+		setError(
+			validate({
+				...input,
+				category: [...input.category, Number(value)],
+			}),
+		);
+	}
+
+	function handleDeleteSelectCategory(e) {
+		const value = e.target.value;
+		e.preventDefault();
+		setInput((prev) => ({
+			...prev,
+			category: prev.category.filter((el) => el !== Number(value)),
+		}));
+
+		setError(
+			validate({
+				...input,
+				category: input.category.filter((el) => el !== Number(value)),
+			}),
+		);
+	}
+
 	function handleSubmit(e) {
 		e.preventDefault();
-		dispatch(postProduct({ ...input, category: 6455 }));
-		setInput({
-			name: "",
-			description: "",
-			images: [],
-			previousPrice: 0,
-			isOffertPrice: false,
-			currentPrice: 0,
-			brandName: "",
-			colour: "",
-			gender: "",
-			info: {
-				aboutMe: "",
-				sizeAndFit: "",
-				careInfo: "",
-			},
-			variants: [],
-		});
-		navigate("/home");
+		dispatch(postProduct(input));
+		navigate("/");
 		alert("Producto creado con exito!");
-		console.log(input);
 	}
 
 	function handleCheck(e) {
@@ -134,12 +157,25 @@ export default function ProductCreate() {
 		});
 	}
 
+	//para futuros keyPress
+	// const handleKeyPress = (e) => {
+	// 	if (e.key === "Enter") {
+	// 		setInput({
+	// 			...input,
+	// 			category: [...input.category, e.target.value],
+	// 		})
+	// 		console.log(e)
+	// 		console.log(input.category)
+	// 	}
+	// }
+
 	return (
-		<div>
+		<div className={s.container}>
 			<form onSubmit={(e) => handleSubmit(e)}>
-				<div>
+				<div className={s.name}>
 					<label>Name: </label>
 					<input
+						className={s.input}
 						type="text"
 						placeholder="Ingrese el nombre!!"
 						name="name"
@@ -149,15 +185,16 @@ export default function ProductCreate() {
 					{errors.name && <p>{errors.name}</p>}
 				</div>
 
-				<div>
+				<div className={s.description}>
 					<label>Description: </label>
-					<input
+					<textarea
+						className={s.input}
 						type="text"
 						placeholder="Ingrese descripcion!!"
 						name="description"
 						value={input.description}
 						onChange={(e) => handleChange(e)}
-					/>
+					></textarea>
 					{errors.description && <p>{errors.description}</p>}
 				</div>
 
@@ -181,7 +218,10 @@ export default function ProductCreate() {
 										>
 											Eliminar
 										</button>
-										<img src={el} alt={`Added img number ${idx + 1}`} />
+										<img
+											src={`https://${el}`}
+											alt={`Added img number ${idx + 1}`}
+										/>
 									</div>
 								);
 						  })
@@ -189,20 +229,9 @@ export default function ProductCreate() {
 				</div>
 
 				<div>
-					<label>Previous Price: </label>
-					<input
-						type="number"
-						placeholder="Ingrese precio!!"
-						name="previousPrice"
-						value={input.previousPrice}
-						onChange={(e) => handleChange(e)}
-					/>
-					{errors.previousPrice && <p>{errors.previousPrice}</p>}
-				</div>
-
-				<div>
 					<label>isOffertPrice: </label>
 					<input
+						className={s.input}
 						type="checkbox"
 						name="isOffertPrice"
 						value={input.isOffertPrice}
@@ -210,9 +239,25 @@ export default function ProductCreate() {
 					/>
 				</div>
 
+				{input.isOffertPrice && (
+					<div>
+						<label>Previous Price: </label>
+						<input
+							className={s.input}
+							type="number"
+							placeholder="Ingrese precio!!"
+							name="previousPrice"
+							value={input.previousPrice}
+							onChange={(e) => handleChange(e)}
+						/>
+						{errors.previousPrice && <p>{errors.previousPrice}</p>}
+					</div>
+				)}
+
 				<div>
 					<label>Current Price: </label>
 					<input
+						className={s.input}
 						type="number"
 						placeholder="Ingrese precio!!"
 						name="currentPrice"
@@ -225,18 +270,20 @@ export default function ProductCreate() {
 				<div>
 					<label>Brand Name: </label>
 					<input
+						className={s.input}
 						type="text"
 						placeholder="Ingrese marca!!"
-						name="brand"
-						value={input.brand}
+						name="brandName"
+						value={input.brandName}
 						onChange={(e) => handleChange(e)}
 					/>
-					{errors.brand && <p>{errors.brand}</p>}
+					{errors.brandName && <p>{errors.brandName}</p>}
 				</div>
 
 				<div>
 					<label>Colour: </label>
 					<input
+						className={s.input}
 						type="text"
 						placeholder="Ingrese color!!"
 						name="colour"
@@ -247,7 +294,7 @@ export default function ProductCreate() {
 				</div>
 
 				<div>
-					<label>gender: </label>
+					<label>Gender: </label>
 					<select
 						type="text"
 						placeholder="Ingrese fenero!!"
@@ -261,45 +308,98 @@ export default function ProductCreate() {
 					</select>
 				</div>
 
-				<fieldset>
-					<legend>info</legend>
-
-					<label for="name">About Me:</label>
-					<input
-						type="text"
-						name="aboutMe"
-						value={input.info.aboutMe}
-						onChange={(e) => handleChange(e)}
-					/>
-
-					<label for="sizeAndFit">Size And Fit</label>
-					<input
-						type="text"
-						name="sizeAndFit"
-						value={input.info.sizeAndFit}
-						onChange={(e) => handleChange(e)}
-					/>
-
-					<label for="sizeAndFit">Size And Fit:</label>
-					<input
-						type="text"
-						name="careInfo"
-						value={input.info.sizeAndFit}
-						onChange={(e) => handleChange(e)}
-					/>
-				</fieldset>
-
 				<div>
-					<label>variants: </label>
-					<input
-						type="checkbox"
-						placeholder="Ingrese el nombre!!"
-						name="variants"
-						value={input.variants}
-					/>
+					<label>Categories: </label>
+					<select onChange={handleSelectCategoryOnChange}>
+						<optgroup value="categories" label="Man">
+							{categories
+								?.filter((el) => el.genre === "men")
+								.map((el) => (
+									<option value={el.id} key={el.id} name={el.title}>
+										{el.title}
+									</option>
+								))}
+						</optgroup>
+						<optgroup value="categories" label="Woman">
+							{categories
+								?.filter((el) => el.genre === "women")
+								.map((el) => (
+									<option value={el.id} key={el.id} name={el.title}>
+										{el.title}
+									</option>
+								))}
+						</optgroup>
+					</select>
 				</div>
 
-				<button type="submit">Crear Producto</button>
+				<div>
+					{demoCategories?.map((el) => (
+						<div key={el.id}>
+							<span key={el.id} value={el.id}>
+								{el.title}
+							</span>
+							<button
+								value={el.id}
+								onClick={(e) => handleDeleteSelectCategory(e)}
+							>
+								x
+							</button>
+						</div>
+					))}
+				</div>
+
+				<div>
+					<AddInfo
+						input={input}
+						setInput={setInput}
+						errors={errors}
+						setError={setError}
+						validate={validate}
+					/>
+
+					<fieldset>
+						<legend>Información adicional actual: </legend>
+						{(input.info.aboutMe ||
+							input.info.sizeAndFit ||
+							input.info.careInfo) && (
+							<div>
+								<p>About me: {input.info.aboutMe}</p>
+								<p>Size and Fit: {input.info.sizeAndFit}</p>
+								<p>Care info: {input.info.careInfo}</p>
+							</div>
+						)}
+					</fieldset>
+				</div>
+
+				<div>
+					<AddVariants input={input} setInput={setInput} />
+					{input.variants.length ? (
+						<fieldset>
+							<legend>Variants: </legend>
+							{input.variants.map((el, idx) => {
+								return (
+									<div key={`${el.brandSize}${idx}`}>
+										<p>{el.brandSize}</p>
+										<button
+											onClick={(e) => handleSizeDelete(e, el, input, setInput)}
+										>
+											Eliminar
+										</button>
+									</div>
+								);
+							})}
+						</fieldset>
+					) : (
+						""
+					)}
+				</div>
+
+				<button
+					// hidden={Object.values(errors).length !== 0 ? false : true}
+					type="submit"
+				>
+					Crear Producto
+				</button>
 			</form>
 		</div>
 	);

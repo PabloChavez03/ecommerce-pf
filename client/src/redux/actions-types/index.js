@@ -90,6 +90,18 @@ export const setDetails = (obj = {}) => {
   };
 };
 
+// export const getCategories = () => {
+//   return async function (dispatch) {
+//     const { data } = await axios.get("http://localhost:3001/categories");
+//     const titles = data?.map(el => el);
+//     // console.log(titles)
+//     return dispatch({
+//       type: GET_CATEGORIES,
+//       payload: titles,
+//     })
+//   }
+// }
+
 export const getCurrentBrands = (gender) => async (dispatch) => {
   let brands = await currentbrands(gender);
   return dispatch({
