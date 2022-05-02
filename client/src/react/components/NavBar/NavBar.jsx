@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 
 import SearchBar from "../SearchBar/SearchBar";
 import CartIcon from "../svg/CartIcon";
@@ -11,6 +11,11 @@ import "./NavBar.scss";
 import Modal from "../ShoppingCart/Modal/Modal";
 
 export default function NavBar() {
+	let location = useLocation();
+	console.log(
+		`${location.pathname}${location.search}` === "/home?gender=Women",
+	);
+
 	/**State para el modal */
 	const [statusModal, setStatusModal] = useState(false);
 
@@ -53,9 +58,9 @@ export default function NavBar() {
 
 				<div className="nav__up__features">
 					{/* <WishListIcon /> */}
-					<NavLink to={"/creation"}>
+					<Link to={"/creation"}>
 						<CreateIcon />
-					</NavLink>
+					</Link>
 
 					<div onClick={(e) => handleModalStatus(e)}>
 						{/* <NavLink exact to={"/cart"} onClick={handleClickForHiddingBurguer}> */}
@@ -76,12 +81,32 @@ export default function NavBar() {
 						<NavLink to={"/"} onClick={handleClickForHiddingBurguer}>
 							<li>Home</li>
 						</NavLink>
-						<NavLink to={`/home?gender=Men`} onClick={handleClickForHiddingBurguer} >
-							<li>Man</li>
-						</NavLink>
-						<NavLink to={`/home?gender=Women`} onClick={handleClickForHiddingBurguer} >
+
+						<Link
+							to={"/home?gender=Men"}
+							className={
+								`${location.pathname}${location.search}` === "/home?gender=Men"
+									? "active"
+									: ""
+							}
+							onClick={handleClickForHiddingBurguer}
+						>
+							<li>Men</li>
+						</Link>
+
+						<Link
+							to={"/home?gender=Women"}
+							className={
+								`${location.pathname}${location.search}` ===
+								"/home?gender=Women"
+									? "active"
+									: ""
+							}
+							onClick={handleClickForHiddingBurguer}
+						>
 							<li>Women</li>
-						</NavLink>
+						</Link>
+
 						<NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
 							<li>About</li>
 						</NavLink>
