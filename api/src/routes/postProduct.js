@@ -29,7 +29,7 @@ router.post("", async (req, res) => {
 			where: {
 				id,
 				name,
-				image: images[0],
+				image: `https://${images[0]}`,
 				previousPrice,
 				isOffertPrice,
 				currentPrice,
@@ -38,8 +38,10 @@ router.post("", async (req, res) => {
 			},
 		});
 
-		let categoryDDBB = await Category.findByPk(category);
-		await productCreated.addCategory(categoryDDBB);
+		category.forEach(async (el) => {
+			let categoryDDBB = await Category.findByPk(el);
+			await productCreated.addCategory(categoryDDBB);
+		});
 
 		// if (created) {
 		// 	res.status(200).send("Creado con exito en tabla Product!");
@@ -63,14 +65,16 @@ router.post("", async (req, res) => {
 				previousPrice,
 				isOffertProduct: isOffertPrice,
 				currentPrice,
-				variants,
+				variants: variants.map((el) => {
+					return { ...el, colour: colour };
+				}),
 			},
 		});
 
-		let productDDBB = await Product.findByPk(id);
-		console.log(productDDBB);
-
-		await productCreated.setProduct(productDDBB);
+		category.forEach(async (el) => {
+			let productDDBB = await Product.findByPk(id);
+			await productCreated.setProduct(productDDBB);
+		});
 
 		if (created) {
 			res.status(200).send("Detalles creados exitosamente!");

@@ -7,6 +7,8 @@ import {
 } from "../handlers";
 import CreateIcon from "../../svg/CreateIcon";
 
+import s from "./AddImages.module.css"
+
 export default function AddImages({
 	canAddImage,
 	setCanAddImage,
@@ -33,7 +35,7 @@ export default function AddImages({
 	};
 
 	return (
-		<div>
+		<div className={s.container}>
 			<label>Add image:</label>
 			<span
 				onClick={(e) => handleShowAddingImage(e, canAddImage, setCanAddImage)}
