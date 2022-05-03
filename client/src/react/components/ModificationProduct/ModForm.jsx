@@ -8,7 +8,7 @@ function ModForm() {
         <h1>ModForm</h1>
         
         </div>
-  )
-}
+  );
+};
 
 export default ModForm

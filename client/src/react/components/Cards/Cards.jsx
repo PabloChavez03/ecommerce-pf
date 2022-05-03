@@ -26,8 +26,9 @@ export default function Cards({
       <NavLink to={`/modification/${id}`} style={{ textDecoration: "none" }}>
         <button>modificar producto</button>
       </NavLink>
-
-      <button>eliminar</button>
+      <NavLink to={`/delete/${id}`} style={{ textDecoration: "none" }}>
+      <button>Eliminar ítem</button>
+      </NavLink>
       {/* <button onClick={(e)=>handleClickAddCart(e)}>Agregar al carrito</button> */}
     </div>
   );
