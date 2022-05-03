@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import CardDetail from "./react/components/CardDetail/CardDetail";
-import ShoppingCart from "./react/components/ShoppingCart/ShoppingCart";
 import Construction from "./react/components/Construction/Construction";
 // import CreationProduct from "./react/components/CreationProduct/CreationProduct";
 import Home from "./react/components/Home/Home.jsx";
@@ -21,7 +20,6 @@ function App() {
 					<Route path={"/creation"} element={<ProductCreate />} />
 					<Route path={"/about"} element={<Construction />} />
 					<Route path={"/account"} element={<Construction />} />
-					<Route path={"/cart"} element={<ShoppingCart />} />
 					<Route path={"/construction"} element={<Construction />} />
 				</Routes>
 				<Footer/>
