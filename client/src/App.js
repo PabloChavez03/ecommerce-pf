@@ -22,9 +22,9 @@ function App() {
 				<Route path={"/about"} element={<Construction />} />
 				<Route path={"/account"} element={<Construction />} />
 				<Route path={"/construction"} element={<Construction />} />
-				<Route path={"/modification/:productId"} element={<ModForm/>} />
-				<Route path={"/admin"} element={<Admin />} />
-				<Route path={"/delete/:productId"} element={<DeleteProduct/>} />
+				<Route path={"/modification/:productId"} element={<ModForm />} />
+				<Route path={"/admin/*"} element={<Admin />} />
+				<Route path={"/delete/:productId"} element={<DeleteProduct />} />
 			</Routes>
 
 			<Footer />

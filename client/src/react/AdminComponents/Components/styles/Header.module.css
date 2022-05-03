@@ -1,0 +1,25 @@
+.headerContainer {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	padding: 15px 30px;
+	background-color: #0253cc;
+	color: white;
+	position: sticky;
+	top: 0;
+}
+
+.headerButton {
+	padding: 10px 25px;
+	background: rgba(256, 256, 256, 0.1);
+	border: none;
+	border-radius: 5px;
+	color: white;
+	font-weight: 500;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.headerButton:hover {
+	background: rgba(256, 256, 256, 0.2);
+}
