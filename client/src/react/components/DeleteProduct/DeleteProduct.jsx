@@ -16,13 +16,13 @@ export default function DeleteProduct() {
     event.preventDefault();
     dispatch(deleteProduct(productId));
     alert("Producto eliminado exitosamente");
-    navigate("/")
+    navigate("/");
   };
 
   return (
     <div>
       <div>
-      <NavLink to={`/home?gender=${gender}`} style={{ textDecoration: "none" }}>
+        <NavLink to={`/home?gender=${gender}`} style={{ textDecoration: "none" }}>
           <button>ATRAS</button>
         </NavLink>
         <h4>Confirma la eliminación del producto?</h4>
