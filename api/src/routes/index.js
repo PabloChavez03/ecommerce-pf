@@ -15,7 +15,10 @@ router.use('/products/genre', require('./productsByGenre.js'))
 router.use("/products/detail", require("./productsDetail"));
 router.use("/allproducts", require("./getAllProducts"));
 router.use("/products/create", require("./postProduct"));
-router.use("/products/update", require("./updateProduct"));
+// router.use("/products/update", require("./updateProduct"));
 router.use("/products/delete", require("./deleteProduct"));
+router.use("/users/create", require("./userPost"));
+router.use("/users/login", require("./loguin"));
+
 
 module.exports = router;
