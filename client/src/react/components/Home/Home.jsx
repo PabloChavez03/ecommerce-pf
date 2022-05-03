@@ -62,6 +62,7 @@ export default function Home() {
 									style={{ textDecoration: "none" }}
 								>
 									<Cards
+										id={product.id}
 										name={product.name}
 										image={product.image}
 										isOffertPrice={product.isOffertPrice}
@@ -69,6 +70,7 @@ export default function Home() {
 										currentPrice={product.currentPrice}
 									/>
 								</NavLink>
+
 							</div>
 						);
 					})
