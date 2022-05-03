@@ -21,6 +21,8 @@ export default function Cards({
         {isOffertPrice ? <h4>{`Precio de oferta $ ${currentPrice}`}</h4> : null}
       </div>
       <h5 className={css.title}>{name}</h5>
+      <button>modificar producto</button>
+      <button>eliminar</button>
       {/* <button onClick={(e)=>handleClickAddCart(e)}>Agregar al carrito</button> */}
     </div>
   );
