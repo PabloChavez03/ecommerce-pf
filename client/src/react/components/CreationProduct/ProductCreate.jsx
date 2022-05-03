@@ -15,6 +15,7 @@ import AddVariants from "./components/AddVariants";
 // Utils
 import s from "./ProductCreate.module.css";
 import { handleDeleteImg, handleSizeDelete } from "./handlers";
+import NavBar from "../NavBar/NavBar";
 
 function validate(input) {
 	let errors = {};
@@ -108,7 +109,7 @@ export default function ProductCreate() {
 			validate({
 				...input,
 				[e.target.name]: e.target.value,
-			}),
+			})
 		);
 	}
 
@@ -127,7 +128,7 @@ export default function ProductCreate() {
 			validate({
 				...input,
 				category: [...input.category, Number(value)],
-			}),
+			})
 		);
 	}
 
@@ -143,7 +144,7 @@ export default function ProductCreate() {
 			validate({
 				...input,
 				category: input.category.filter((el) => el !== Number(value)),
-			}),
+			})
 		);
 	}
 
@@ -180,14 +181,15 @@ export default function ProductCreate() {
 
 	return (
 		<div className={s.container}>
+			<NavBar />
 			<form onSubmit={(e) => handleSubmit(e)}>
 				<div className={s.name}>
 					<label>Name: </label>
 					<input
 						className={s.input}
-						type="text"
-						placeholder="Ingrese el nombre!!"
-						name="name"
+						type='text'
+						placeholder='Ingrese el nombre!!'
+						name='name'
 						value={input.name}
 						onChange={(e) => handleChange(e)}
 					/>
@@ -198,9 +200,9 @@ export default function ProductCreate() {
 					<label>Description: </label>
 					<textarea
 						className={s.input}
-						type="text"
-						placeholder="Ingrese descripcion!!"
-						name="description"
+						type='text'
+						placeholder='Ingrese descripcion!!'
+						name='description'
 						value={input.description}
 						onChange={(e) => handleChange(e)}
 					></textarea>
@@ -245,8 +247,8 @@ export default function ProductCreate() {
 					<label>Is an offert product? </label>
 					<input
 						className={s.offertProduct}
-						type="checkbox"
-						name="isOffertPrice"
+						type='checkbox'
+						name='isOffertPrice'
 						value={input.isOffertPrice}
 						onChange={(e) => handleCheck(e)}
 					/>
@@ -257,9 +259,9 @@ export default function ProductCreate() {
 						<label>Previous Price: </label>
 						<input
 							className={s.input}
-							type="number"
-							placeholder="Ingrese precio!!"
-							name="previousPrice"
+							type='number'
+							placeholder='Ingrese precio!!'
+							name='previousPrice'
 							value={input.previousPrice}
 							onChange={(e) => handleChange(e)}
 						/>
@@ -271,9 +273,9 @@ export default function ProductCreate() {
 					<label>Current Price: </label>
 					<input
 						className={s.input}
-						type="number"
-						placeholder="Ingrese precio!!"
-						name="currentPrice"
+						type='number'
+						placeholder='Ingrese precio!!'
+						name='currentPrice'
 						value={input.currentPrice}
 						onChange={(e) => handleChange(e)}
 					/>
@@ -284,9 +286,9 @@ export default function ProductCreate() {
 					<label>Brand Name: </label>
 					<input
 						className={s.input}
-						type="text"
-						placeholder="Ingrese marca!!"
-						name="brandName"
+						type='text'
+						placeholder='Ingrese marca!!'
+						name='brandName'
 						value={input.brandName}
 						onChange={(e) => handleChange(e)}
 					/>
@@ -297,9 +299,9 @@ export default function ProductCreate() {
 					<label>Colour: </label>
 					<input
 						className={s.input}
-						type="text"
-						placeholder="Ingrese color!!"
-						name="colour"
+						type='text'
+						placeholder='Ingrese color!!'
+						name='colour'
 						value={input.colour}
 						onChange={(e) => handleChange(e)}
 					/>
@@ -310,9 +312,9 @@ export default function ProductCreate() {
 					<label>Gender: </label>
 					<select
 						className={s.input}
-						type="text"
-						placeholder="Ingrese fenero!!"
-						name="gender"
+						type='text'
+						placeholder='Ingrese fenero!!'
+						name='gender'
 						value={input.gender}
 						onChange={(e) => handleChange(e)}
 					>
@@ -325,7 +327,7 @@ export default function ProductCreate() {
 				<div>
 					<label>Categories: </label>
 					<select className={s.input} onChange={handleSelectCategoryOnChange}>
-						<optgroup value="categories" label="Man">
+						<optgroup value='categories' label='Man'>
 							{categories
 								?.filter((el) => el.genre === "men")
 								.map((el) => (
@@ -334,7 +336,7 @@ export default function ProductCreate() {
 									</option>
 								))}
 						</optgroup>
-						<optgroup value="categories" label="Woman">
+						<optgroup value='categories' label='Woman'>
 							{categories
 								?.filter((el) => el.genre === "women")
 								.map((el) => (
@@ -421,7 +423,7 @@ export default function ProductCreate() {
 
 				<button
 					hidden={Object.values(errors).length === 0 ? false : true}
-					type="submit"
+					type='submit'
 				>
 					Crear Producto
 				</button>

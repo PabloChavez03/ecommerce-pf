@@ -1,0 +1,10 @@
+.navContainer {
+	/* background: red; */
+	height: 75vh;
+
+	position: fixed;
+}
+
+.listContainer {
+	list-style: none;
+}
