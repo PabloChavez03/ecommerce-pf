@@ -181,7 +181,6 @@ export default function ProductCreate() {
 
 	return (
 		<div className={s.container}>
-			<NavBar />
 			<form onSubmit={(e) => handleSubmit(e)}>
 				<div className={s.name}>
 					<label>Name: </label>
