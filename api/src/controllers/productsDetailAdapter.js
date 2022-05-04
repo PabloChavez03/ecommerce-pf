@@ -5,22 +5,13 @@ async function adaptProductsDetail(product) {
 		description: product.description,
 		info: product.info,
 		gender: product.gender,
-		brand: product.brand.name,
+		brandName: product.brand.name,
 		images: product.media.images.map((el) => el.url),
-		previousPrice: product.price.rrp.value,
 		isOffertProduct: product.price.isOutletPrice,
+		previousPrice: product.price.rrp.value,
 		currentPrice: product.price.current.value,
-		variants: product.variants?.map((el) => {
-			return {
-				name: el.name,
-				brandSize: el.brandSize,
-				sizeDescription: el.displaySizeText,
-				isLowInStock: el.isLowInStock,
-				isInStock: el.isInStock,
-				isAvailable: el.isAvailable,
-				color: el.colour,
-			};
-		}),
+		color: product.variants[0].colour,
+		variants: product.variants?.map((el) => el.brandSize),
 	};
 }
 

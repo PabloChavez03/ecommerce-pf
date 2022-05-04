@@ -10,9 +10,15 @@ async function getDDBBproducts(productId) {
 	} else {
 		await setDDBBproductDetail(productId);
 
-		return await ProductDetail.findByPk(productId).catch((e) =>
+		const productDetail = await ProductDetail.findByPk(productId).catch((e) =>
 			console.error("findByPk detailDB getter service.", e.message),
 		);
+
+		if (productDetail) {
+			return productDetail;
+		} else {
+			return;
+		}
 	}
 }
 

@@ -1,34 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import style from "./CardDetail.module.css";
 import { addProductToCart } from "../../../redux/actions-types";
+import { NavLink } from "react-router-dom";
 
 export default function Card({
   id,
   name,
   description,
   gender,
-  brand,
+  brandName,
   images,
   previousPrice,
   isOffertProduct,
   currentPrice,
+  color,
   variants,
   info,
 }) {
   const dispatch = useDispatch();
   const [imageCurrent, setImageCurrent] = useState("");
   const sizes = variants.map((e) => e.brandSize);
-  let colours = variants.map((e) => e.color);
-  let set = new Set(colours);
-  colours = [...set];
 
   const [productToCart, setProductToCart] = useState({
     name,
     image: images[0],
     currentPrice,
-    color: colours[0],
+    color,
     brandSize: sizes[0],
     quantity: 1,
     id,
@@ -64,15 +62,9 @@ export default function Card({
   };
 
   return (
-    <div className={style.container}>
-      <div className={style.cardDetailContainer}>
-        <img
-          className={style.cardPrimaryImg}
-          src={imageCurrent}
-          alt="Img Principal"
-        />
-
-        <div className={style.cardDetailImgContainer}>
+    <div className={style.cardDetailContainer}>
+      <div className={style.cardDetailImgContainer}>
+        <div>
           {images.length
             ? images.map((image) => (
                 <div key={image}>
@@ -87,7 +79,14 @@ export default function Card({
             : null}
         </div>
       </div>
-      <div className={style.mainInfo}>
+      <div>
+        <img
+          className={style.cardPrimaryImg}
+          src={imageCurrent}
+          alt="Img Principal"
+        />
+      </div>
+      <div>
         <h3 className={style.name}>{name}</h3>
         {isOffertProduct ? (
           <div>
@@ -106,23 +105,10 @@ export default function Card({
 
         <div className={style.generoMarca}>
           <h4>Género: {gender}</h4>
-          <h4>Marca: {brand}</h4>
+          <h4>Marca: {brandName}</h4>
+          <h4>Color: {color}</h4>
         </div>
         <div className={style.selectcontainer}>
-          <select
-            className={style.selects}
-            name="color"
-            onChange={(e) => handleChangeSelect(e)}
-          >
-            <option>Color</option>
-            {colours.length
-              ? colours.map((e) => (
-                  <option key={e} value={e} name={e}>
-                    {e}
-                  </option>
-                ))
-              : null}
-          </select>
           <select
             className={style.selects}
             name="size"
@@ -138,7 +124,6 @@ export default function Card({
               : null}
           </select>
         </div>
-
         <div className={style.info}>
           <p>
             <b>Aditional info:</b>{" "}
@@ -153,18 +138,15 @@ export default function Card({
             dangerouslySetInnerHTML={{ __html: info.sizeAndFit }}
           ></p>
         </div>
-        <div className={style.btns}>
-          <button className={style.buttonAdd} onClick={(e) => handleAddCart(e)}>
-            AGREGAR AL CARRITO
-          </button>
-
-          <NavLink
-            to={`/home?gender=${gender}`}
-            style={{ textDecoration: "none" }}
-          >
-            <button className={style.buttonBack}>ATRAS</button>
-          </NavLink>
-        </div>
+        <button className={style.buttonAdd} onClick={(e) => handleAddCart(e)}>
+          AGREGAR AL CARRITO
+        </button>
+        <NavLink
+          to={`/home?gender=${gender}`}
+          style={{ textDecoration: "none" }}
+        >
+          <button className={style.buttonBack}>ATRAS</button>
+        </NavLink>
       </div>
     </div>
   );

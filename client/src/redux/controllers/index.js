@@ -3,7 +3,7 @@ const axios = require('axios');
 export const urlAllProduct = async () => {
     try {
         return await axios
-            .get("http://localhost:3001/allproducts")
+            .get("/allproducts")
             .then((res) => res.data);
     } catch (err) {
         console.log(err);
@@ -13,7 +13,7 @@ export const urlAllProduct = async () => {
 export const urlProdutcGender = async (gender) => {
     try {
         return await axios
-            .get(`http://localhost:3001/products/genre?genrename=${gender}`)
+            .get(`/products/genre?genrename=${gender}`)
             .then(res => res.data)
     } catch (err) {
         console.log(err);

@@ -3,12 +3,12 @@ async function adaptListProducts({ products }) {
 		return {
 			id: product.id,
 			name: product.name,
-			image: `https://${product.imageUrl}`,
-			previousPrice: product.price.rrp.value,
+			image: product.imageUrl,
 			isOffertPrice: product.price.isOutletPrice,
+			previousPrice: product.price.rrp.value,
 			currentPrice: product.price.current.value,
 			brandName: product.brandName,
-			colour: product.colour,
+			color: product.colour,
 		};
 	});
 }
