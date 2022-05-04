@@ -1,21 +1,23 @@
 import React from "react";
-import Header from "../Components/Header";
+import HeaderAdmin from "../Components/HeaderAdmin";
 import NavAdmin from "../Components/NavAdmin";
 import style from "./styles/Admin.module.css";
 import { Routes, Route } from "react-router-dom";
+import HomeAdmin from "./HomeAdmin";
+import ProductCreate from "../../components/CreationProduct/ProductCreate.jsx";
 
 const Admin = () => {
 	return (
 		<div>
-			<Header />
+			<HeaderAdmin />
 			<div className={style.mainContainer}>
 				<div className={style.sectionNavContainer}>
 					<NavAdmin />
 				</div>
 				<div className={style.sectionInfoContainer}>
 					<Routes>
-						<Route path={"/"} element={<p>home del admin</p>} />
-						<Route path={"saludo"} element={<p>hola</p>} />
+						<Route path={"/"} element={<HomeAdmin />} />
+						<Route path={"/producto"} element={<ProductCreate />} />
 					</Routes>
 				</div>
 			</div>

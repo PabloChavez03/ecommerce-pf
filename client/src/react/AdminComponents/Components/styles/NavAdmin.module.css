@@ -1,10 +1,17 @@
 .navContainer {
 	/* background: red; */
 	height: 75vh;
-
 	position: fixed;
 }
 
 .listContainer {
 	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.navLink {
+	text-decoration: none;
+	color: #333;
 }
