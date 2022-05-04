@@ -17,9 +17,9 @@ router.patch("/restar", async (req, res) => {
 	// 	},
 	// ];
 
-	await productsChanged.forEach(async (product) => {
+	for (let product of productsChanged) {
 		const { id, brandSize, quantity } = product;
-		// let productFound = await Product.findByPk(id);
+		let productFound = await Product.findByPk(id);
 		let productDetailFound = await ProductDetail.findByPk(id);
 
 		console.log("Anterior", productDetailFound.variants);
@@ -37,17 +37,16 @@ router.patch("/restar", async (req, res) => {
 		});
 
 		await productDetailFound.save();
-		console.log("Despues", productDetailFound.variants);
-	});
 
-	const isThereProducts = productDetailFound.variants.reduce(
-		(totalStock, variant) => totalStock + variant.stock,
-		0,
-	);
+		const isThereProducts = productDetailFound.variants.reduce(
+			(totalStock, variant) => totalStock + variant.stock,
+			0,
+		);
 
-	if (isThereProducts <= 1) {
-		await productFound.update({ isInStock: false });
-		await productFound.save();
+		if (isThereProducts < 1) {
+			await productFound.update({ isInStock: false });
+			await productFound.save();
+		}
 	}
 
 	res.status(200).send("Stock actualizado");
@@ -56,36 +55,37 @@ router.patch("/restar", async (req, res) => {
 router.patch("/sumar", async (req, res) => {
 	const { productsChanged } = req.body;
 
-	try {
-		await productsChanged.forEach(async (product) => {
-			const { id, brandSize, quantity } = product;
+	for (let product of productsChanged) {
+		const { id, brandSize, quantity } = product;
 
-			let productFound = await Product.findByPk(id);
-			let productDetailFound = await ProductDetail.findByPk(id);
+		let productFound = await Product.findByPk(id);
+		let productDetailFound = await ProductDetail.findByPk(id);
 
-			productDetailFound.variants = await productDetailFound.variants.map(
-				(variant) => {
-					if (variant.brandSize === brandSize) {
-						return {
-							...variant,
-							stock: variant.stock + quantity,
-							isInStock: variant.stock + quantity > 0 ? true : false,
-						};
-					}
+		productDetailFound.variants = await productDetailFound.variants.map(
+			(variant) => {
+				if (variant.brandSize === brandSize) {
+					return {
+						...variant,
+						stock: variant.stock + quantity,
+						isInStock: variant.stock + quantity > 0 ? true : false,
+					};
+				}
 
-					return variant;
-				},
-			);
+				return variant;
+			},
+		);
 
-			await productDetailFound.save();
-		});
+		await productDetailFound.save();
 
-		// if (productDetailFound.variants.reduce((acc, cur) => {}, false)) {
-		// 	productFound.update({ isInStock: false });
-		// 	await productFound.save();
-		// }
-	} catch (e) {
-		console.log(e);
+		const isThereProducts = productDetailFound.variants.reduce(
+			(totalStock, variant) => totalStock + variant.stock,
+			0,
+		);
+
+		if (isThereProducts > 1) {
+			await productFound.update({ isInStock: true });
+			await productFound.save();
+		}
 	}
 
 	res.status(200).send("Stock actualizado");
