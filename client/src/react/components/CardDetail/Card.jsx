@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import style from "./CardDetail.module.css";
 import { addProductToCart } from "../../../redux/actions-types";
+import { NavLink } from "react-router-dom";
 
 export default function Card({
   id,
@@ -140,6 +141,12 @@ export default function Card({
         <button className={style.buttonAdd} onClick={(e) => handleAddCart(e)}>
           AGREGAR AL CARRITO
         </button>
+        <NavLink
+          to={`/home?gender=${gender}`}
+          style={{ textDecoration: "none" }}
+        >
+          <button className={style.buttonBack}>ATRAS</button>
+        </NavLink>
       </div>
     </div>
   );
