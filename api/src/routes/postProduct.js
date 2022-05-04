@@ -18,7 +18,7 @@ router.post("", async (req, res) => {
     variants,
     category,
   } = req.body;
-
+  //----------------------------AUTHORIZATION--------------------------------------------------------
   const authorization = req.get("authorization");
 
   let token = null;
@@ -38,6 +38,7 @@ router.post("", async (req, res) => {
   if (!token || !decodedToken.id) {
     return res.status(401).json({ error: "token is missing or invalid!" });
   }
+//------------------------------------------------------------------------------------
 
   var newId = function () {
     return parseInt((Math.random() + Date.now()).toString().substring(7));
