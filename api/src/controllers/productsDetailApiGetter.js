@@ -8,13 +8,19 @@ function getApiProductsDetail(productId) {
 		params: { id: `${productId}` },
 		headers: {
 			"X-RapidAPI-Host": "asos2.p.rapidapi.com",
-			"X-RapidAPI-Key": "0273117bdemsh8a49419096b60cap11ae6bjsn9c0b8c140d69",
+			"X-RapidAPI-Key": "1593137eefmshe7c517b722ec534p1f965bjsn7b5f4f39690c",
 		},
 	};
 
 	return axios
 		.request(options)
-		.then(({ data }) => adaptProductsDetail(data))
+		.then(({ data }) => {
+			if (data.name) {
+				return adaptProductsDetail(data);
+			} else {
+				return [];
+			}
+		})
 		.catch(function (error) {
 			console.error(error.message);
 		});

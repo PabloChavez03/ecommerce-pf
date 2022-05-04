@@ -5,14 +5,12 @@ module.exports = (sequelize) => {
 		"Category",
 		{
 			id: {
-				// Category
 				type: DataTypes.INTEGER,
 				allowNull: false,
 				unique: true,
 				primaryKey: true,
 			},
 			title: {
-				// Name
 				type: DataTypes.STRING,
 				allowNull: false,
 			},

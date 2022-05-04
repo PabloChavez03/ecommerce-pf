@@ -10,7 +10,6 @@ module.exports = (sequelize) => {
 			id: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
-				autoIncrement: true,
 				unique: true,
 				primaryKey: true,
 			},
@@ -28,29 +27,35 @@ module.exports = (sequelize) => {
 			},
 			gender: {
 				type: DataTypes.STRING,
+				allowNull: false,
 			},
-			brand: {
+			brandName: {
 				type: DataTypes.STRING,
+				allowNull: false,
 			},
 			images: {
 				type: DataTypes.ARRAY(DataTypes.STRING),
 				allowNull: false,
 			},
-			previousPrice: {
-				type: DataTypes.FLOAT,
-				allowNull: true,
-			},
 			isOffertProduct: {
 				type: DataTypes.BOOLEAN,
 				allowNull: true,
 			},
-			currentPrice: {
+			previousPrice: {
 				type: DataTypes.FLOAT,
 				allowNull: true,
 			},
+			currentPrice: {
+				type: DataTypes.FLOAT,
+				allowNull: false,
+			},
+			color: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
 			variants: {
 				type: DataTypes.ARRAY(DataTypes.JSON),
-				allowNull: true,
+				allowNull: false,
 			},
 		},
 		{
