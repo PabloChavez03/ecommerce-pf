@@ -24,8 +24,7 @@ export const getProductByName = (nameProduct) => {
     const { data } = await axios.get(
       `/products?productName=${nameProduct}`
     );
-    //Acá iria la constante creada donde guardamos el listado de productos que coinciden con el nombre.
-    return dispatch({ type: GET_PRODUCT_BY_NAME, payload: data }); //nameProduct provisoriamente hasta que tengamos creada la constante que trae los productos.
+    return dispatch({ type: GET_PRODUCT_BY_NAME, payload: data });
   };
 };
 
