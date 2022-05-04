@@ -7,8 +7,6 @@ import NavBar from "../NavBar/NavBar";
 import Card from "./Card";
 import style from "./CardDetail.module.css";
 
-
-
 export default function CardDetail() {
 	const dispatch = useDispatch();
 	const { productId } = useParams();
@@ -24,7 +22,10 @@ export default function CardDetail() {
 			<NavBar />
 			{productDetail.name ? (
 				<div>
-					<NavLink to={`/home?gender=${productDetail.gender}`} style={{ textDecoration: "none" }}>
+					<NavLink
+						to={`/home?gender=${productDetail.gender}`}
+						style={{ textDecoration: "none" }}
+					>
 						<button className={style.buttonAdd}>ATRAS</button>
 					</NavLink>
 					<Card
@@ -32,11 +33,12 @@ export default function CardDetail() {
 						name={productDetail.name}
 						description={productDetail.description}
 						gender={productDetail.gender}
-						brand={productDetail.brand}
+						brandName={productDetail.brandName}
 						images={productDetail.images}
 						previousPrice={productDetail.previousPrice}
 						isOffertProduct={productDetail.isOffertProduct}
 						currentPrice={productDetail.currentPrice}
+						color={productDetail.color}
 						variants={productDetail.variants}
 					/>
 				</div>

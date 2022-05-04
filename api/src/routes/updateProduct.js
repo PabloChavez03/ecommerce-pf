@@ -29,8 +29,6 @@ router.patch("/:id", async (req, res) => {
 	);
 
 	if (product) {
-		console.log("Modificando producto...");
-
 		await product
 			.update({
 				id,
@@ -56,7 +54,6 @@ router.patch("/:id", async (req, res) => {
 		await product.save();
 
 		if (productDetail) {
-			console.log("Modificando detalles...");
 			await productDetail
 				.update({
 					id,

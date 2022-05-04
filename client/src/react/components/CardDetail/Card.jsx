@@ -8,28 +8,29 @@ export default function Card({
 	name,
 	description,
 	gender,
-	brand,
+	brandName,
 	images,
 	previousPrice,
 	isOffertProduct,
 	currentPrice,
+	color,
 	variants,
 }) {
 	const dispatch = useDispatch();
 	const [imageCurrent, setImageCurrent] = useState("");
 	const sizes = variants.map((e) => e.brandSize);
-	let colours = variants.map((e) => e.color);
-	let set = new Set(colours);
-	colours = [...set];
+	// let colours = variants.map((e) => e.color);
+	// let set = new Set(colours);
+	// colours = [...set];
 
 	const [productToCart, setProductToCart] = useState({
 		name,
 		image: images[0],
 		currentPrice,
-		color: colours[0],
+		color,
 		brandSize: sizes[0],
 		quantity: 1,
-		id
+		id,
 	});
 
 	useEffect(() => {
@@ -78,24 +79,21 @@ export default function Card({
 	// 	};
 	// };
 
-
 	return (
 		<div className={style.cardDetailContainer}>
-
-
 			<div className={style.cardDetailImgContainer}>
 				<div>
 					{images.length
 						? images.map((image) => (
-							<div key={image}>
-								<img
-									className={style.cardCarouselImg}
-									src={`https://${image}`}
-									alt='Img Product'
-									onClick={(e) => handleImgChange(e)}
-								/>
-							</div>
-						))
+								<div key={image}>
+									<img
+										className={style.cardCarouselImg}
+										src={`https://${image}`}
+										alt="Img Product"
+										onClick={(e) => handleImgChange(e)}
+									/>
+								</div>
+						  ))
 						: null}
 				</div>
 			</div>
@@ -103,12 +101,12 @@ export default function Card({
 				<img
 					className={style.cardPrimaryImg}
 					src={imageCurrent}
-					alt='Img Principal'
+					alt="Img Principal"
 				/>
 			</div>
 			<div>
-			<h3 className={style.name}>{name}</h3>
-			{isOffertProduct ? (
+				<h3 className={style.name}>{name}</h3>
+				{isOffertProduct ? (
 					<div>
 						<h5>Precio anterior: {previousPrice}</h5>
 						<h5>Precio de oferta: {currentPrice}</h5>
@@ -116,43 +114,54 @@ export default function Card({
 				) : (
 					<h1 className={style.price}>${currentPrice}</h1>
 				)}
-				 <div ><p className={style.description} dangerouslySetInnerHTML={{__html: description}}></p></div>
-				
+				<div>
+					<p
+						className={style.description}
+						dangerouslySetInnerHTML={{ __html: description }}
+					></p>
+				</div>
+
 				<div className={style.generoMarca}>
-				<h4 >Género: {gender}</h4>
-				<h4 >Marca: {brand}</h4>
+					<h4>Género: {gender}</h4>
+					<h4>Marca: {brandName}</h4>
+					<h4>Color: {color}</h4>
 				</div>
 				<div className={style.selectcontainer}>
-					<select className={style.selects} name='color' onChange={(e) => handleChangeSelect(e)}>
+
+					{/* <select className={style.selects} name='color' onChange={(e) => handleChangeSelect(e)}>
 						<option>Color</option>
 						{colours.length ? colours.map((e) => (
 							<option key={e} value={e} name={e}>{e}</option>
 						)) : null}
-					</select>
-					<select className={style.selects} name='size' onChange={(e) => handleChangeSelect(e)}>
+					</select> */}
+					<select
+						className={style.selects}
+						name="size"
+						onChange={(e) => handleChangeSelect(e)}
+					>
 						<option>Talle</option>
-						{sizes.length ? sizes.map((e) => (
-							<option key={e} value={e} name={e}>{e}</option>
-						)) : null}
+						{sizes.length
+							? sizes.map((e) => (
+									<option key={e} value={e} name={e}>
+										{e}
+									</option>
+							  ))
+							: null}
 					</select>
 				</div>
-
 
 				{/* <div>
 				<button onClick={(e)=>handleClick(e)} value="-" disabled={productToCart.quantity <= 1 ? true : false}>-</button>
 				<p>{productToCart.quantity}</p>
 				<button onClick={(e)=>handleClick(e)} value="+">+</button>
 			</div> */}
-				<button className={style.buttonAdd} onClick={(e) => handleAddCart(e)}>AGREGAR AL CARRITO</button>
-
+				<button className={style.buttonAdd} onClick={(e) => handleAddCart(e)}>
+					AGREGAR AL CARRITO
+				</button>
 			</div>
-
-
-
 		</div>
-		
 	);
-};
+}
 
 // return (
 //     <div className={style.cardDetailContainer}>
