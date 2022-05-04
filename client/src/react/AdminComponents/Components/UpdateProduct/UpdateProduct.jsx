@@ -40,7 +40,7 @@ export default function UpdateProduct() {
   return (
     <div>
 
-      <div>
+     <div>
         <h4>Nombre</h4>
         <input
           placeholder="Nombre del producto" 
@@ -71,7 +71,7 @@ export default function UpdateProduct() {
         <div>
 
         </div>
-      </div>
+      </div> 
     </div>
   );
 };
