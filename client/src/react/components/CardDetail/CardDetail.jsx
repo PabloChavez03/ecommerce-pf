@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 //import style from "./CardDetail.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getDetails } from "../../../redux/actions-types";
 import NavBar from "../NavBar/NavBar";
 import Card from "./Card";
@@ -24,9 +24,6 @@ export default function CardDetail() {
 			<NavBar />
 			{productDetail.name ? (
 				<div>
-					<NavLink to={`/home?gender=${productDetail.gender}`} style={{ textDecoration: "none" }}>
-						<button className={style.buttonAdd}>ATRAS</button>
-					</NavLink>
 					<Card
 						id={productDetail.id}
 						name={productDetail.name}
@@ -38,6 +35,7 @@ export default function CardDetail() {
 						isOffertProduct={productDetail.isOffertProduct}
 						currentPrice={productDetail.currentPrice}
 						variants={productDetail.variants}
+						info={productDetail.info}
 					/>
 				</div>
 			) : (

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cards from "../Cards/Cards";
 import { useSelector, useDispatch } from "react-redux";
-import Footer from "../Footer/Footer";
 import css from "./Home.module.css";
 import Filter from "../Filters/Filter";
 import { NavLink, useSearchParams } from "react-router-dom";
