@@ -1,9 +1,11 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 // import Construction from "../Construction/Construction";
 import css from "./Cards.module.css";
 
 export default function Cards({
+  id,
   name,
   image,
   isOffertPrice,
@@ -15,7 +17,7 @@ export default function Cards({
   // )
   return (
     <div className={css.container}>
-      <img src={image} alt="Product Img" />
+        <img src={image} alt="Product Img" />
       <div className={css.price}>
         <h3>{isOffertPrice ? previousPrice : `$ ${currentPrice} `}</h3>
         {isOffertPrice ? <h4>{`Precio de oferta $ ${currentPrice}`}</h4> : null}
