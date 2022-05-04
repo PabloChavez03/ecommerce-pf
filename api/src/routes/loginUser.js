@@ -8,37 +8,35 @@ router.post("/", async (req, res) => {
   const { user_name, user_password } = req.body;
 
   try {
-     const user = await Users.findOne({ where: { user_name } });
+    const user = await Users.findOne({ where: { user_name } });
 
-     //   console.log(user)
+    //   console.log(user)
 
-     const passwordCorrect =
-       user === null
-         ? false
-         : await bcrypt.compare(user_password, user.user_password);
+    const passwordCorrect =
+      user === null
+        ? false
+        : await bcrypt.compare(user_password, user.user_password);
 
-     if (!(user &&passwordCorrect)) {
-       res.status(401).json({
-         error: "invalid user or password",
-       });
-     }
+    const userForToken = {
+      id: user.legajo_user,
+      username: user.user_name,
+    };
 
-     const userForToken = {
-       id: user.legajo_user,
-       username: user.user_name,
-     };
+    const token = jwt.sign(userForToken, process.env.SECRET);
 
-     const token = jwt.sign(userForToken, process.env.SECRET);
-
-     res.send({
-       rol: user.rol,
-       username: user.user_name,
-       token,
-     });
-
+    if (!(user && passwordCorrect)) {
+      res.status(401).json({
+        error: "invalid user or password",
+      });
+    } else {
+      res.status(200).send({
+        rol: user.rol,
+        username: user.user_name,
+        token,
+      });
+    }
   } catch (error) {
-
-    res.status(500).json({ error: error})
+    res.status(500).json({ error: error });
   }
 });
 

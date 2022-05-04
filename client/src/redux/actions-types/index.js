@@ -139,7 +139,7 @@ export const updateProduct = (id, info) => {
 export const deleteProduct = (id) => {
   return function (dispatch) {
     return axios
-      .delete(`http://localhost:3001/products/update/${id}`)
+      .delete(`http://localhost:3001/products/delete/${id}`)
       .then((response) => response);
   };
 };

@@ -1,22 +1,24 @@
 const { Router } = require("express");
-const { Product } = require("../db");
+const { Product, ProductDetail } = require("../db");
 const router = Router();
 
-
 router.delete("/:id", async (req, res) => {
-    const {id} = req.params;
-    console.log(req.params)
+	const { id } = req.params;
+	console.log(req.params);
 
-    // try {
-        const deleted = await Product.destroy({
-            where: {
-                id
-            }
-        });
-        res.status(200).send(`${deleted} Eliminado`)
-    // } catch (error) {
-    //     return new TypeError(error)
-    // }
+	const deleted = await Product.destroy({
+		where: {
+			id,
+		},
+	});
+
+	await ProductDetail.destroy({
+		where: {
+			id,
+		},
+	});
+
+	await res.status(200).send(`${deleted} Eliminado`);
 });
 
 module.exports = router;
