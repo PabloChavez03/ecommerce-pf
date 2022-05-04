@@ -13,6 +13,9 @@ const NavAdmin = () => {
 					<NavLink className={style.navLink} to={"/admin/producto"}>
 						Producto
 					</NavLink>
+					<NavLink className={style.navLink} to={"/admin/allproducts"}>
+						Todos los productos
+					</NavLink>
 				</ul>
 			</nav>
 		</>
