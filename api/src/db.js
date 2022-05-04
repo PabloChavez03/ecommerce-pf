@@ -17,6 +17,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 // 		},
 // 	},
 // );
+
 let sequelize =
       process.env.NODE_ENV === "production"
         ? new Sequelize({
@@ -39,7 +40,6 @@ let sequelize =
               },
               keepAlive: true,
             },
-            // ssl: true,
           })
         : new Sequelize(
             `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,

@@ -181,34 +181,40 @@ export default function ProductCreate() {
 
 	return (
 		<div className={s.container}>
-			<form onSubmit={(e) => handleSubmit(e)}>
-				<div className={s.name}>
-					<label>Name: </label>
-					<input
-						className={s.input}
-						type='text'
-						placeholder='Ingrese el nombre!!'
-						name='name'
-						value={input.name}
-						onChange={(e) => handleChange(e)}
-					/>
-					{errors.name && <p>{errors.name}</p>}
+			<form className={s.form} onSubmit={(e) => handleSubmit(e)}>
+
+				<div className={s.sectionOne}>
+
+					<div className={s.name}>
+						<label>Name: </label>
+						<input
+							className={s.input}
+							type='text'
+							placeholder='Ingrese el nombre!!'
+							name='name'
+							value={input.name}
+							onChange={(e) => handleChange(e)}
+						/>
+						{errors.name && <p>{errors.name}</p>}
+					</div>
+
+					<div className={s.description}>
+						<label>Description: </label>
+						<textarea
+							className={s.input}
+							type='text'
+							placeholder='Ingrese descripcion!!'
+							name='description'
+							value={input.description}
+							onChange={(e) => handleChange(e)}
+						></textarea>
+						{errors.description && <p>{errors.description}</p>}
+					</div>
+
 				</div>
 
-				<div className={s.description}>
-					<label>Description: </label>
-					<textarea
-						className={s.input}
-						type='text'
-						placeholder='Ingrese descripcion!!'
-						name='description'
-						value={input.description}
-						onChange={(e) => handleChange(e)}
-					></textarea>
-					{errors.description && <p>{errors.description}</p>}
-				</div>
 
-				<div>
+				<div className={s.sectionTwo}>
 					<AddImages
 						canAddImage={canAddImage}
 						setCanAddImage={setCanAddImage}
@@ -242,88 +248,94 @@ export default function ProductCreate() {
 					</div>
 				</div>
 
-				<div>
-					<label>Is an offert product? </label>
-					<input
-						className={s.offertProduct}
-						type='checkbox'
-						name='isOffertPrice'
-						value={input.isOffertPrice}
-						onChange={(e) => handleCheck(e)}
-					/>
-				</div>
-
-				{input.isOffertPrice && (
+				<div className={s.sectionThree}>
 					<div>
-						<label>Previous Price: </label>
+						<label>Is an offert product? </label>
+						<input
+							className={s.offertProduct}
+							type='checkbox'
+							name='isOffertPrice'
+							value={input.isOffertPrice}
+							onChange={(e) => handleCheck(e)}
+						/>
+					</div>
+
+					{input.isOffertPrice && (
+						<div>
+							<label>Previous Price: </label>
+							<input
+								className={s.input}
+								type='number'
+								placeholder='Ingrese precio!!'
+								name='previousPrice'
+								value={input.previousPrice}
+								onChange={(e) => handleChange(e)}
+							/>
+							{errors.previousPrice && <p>{errors.previousPrice}</p>}
+						</div>
+					)}
+
+					<div>
+						<label>Current Price: </label>
 						<input
 							className={s.input}
 							type='number'
 							placeholder='Ingrese precio!!'
-							name='previousPrice'
-							value={input.previousPrice}
+							name='currentPrice'
+							value={input.currentPrice}
 							onChange={(e) => handleChange(e)}
 						/>
-						{errors.previousPrice && <p>{errors.previousPrice}</p>}
+						{errors.currentPrice && <p>{errors.currentPrice}</p>}
 					</div>
-				)}
 
-				<div>
-					<label>Current Price: </label>
-					<input
-						className={s.input}
-						type='number'
-						placeholder='Ingrese precio!!'
-						name='currentPrice'
-						value={input.currentPrice}
-						onChange={(e) => handleChange(e)}
-					/>
-					{errors.currentPrice && <p>{errors.currentPrice}</p>}
 				</div>
 
-				<div>
-					<label>Brand Name: </label>
-					<input
-						className={s.input}
-						type='text'
-						placeholder='Ingrese marca!!'
-						name='brandName'
-						value={input.brandName}
-						onChange={(e) => handleChange(e)}
-					/>
-					{errors.brandName && <p>{errors.brandName}</p>}
-				</div>
+				<div className={s.sectionFour}>
+					<div>
+						<label>Brand Name: </label>
+						<input
+							className={s.input}
+							type='text'
+							placeholder='Ingrese marca!!'
+							name='brandName'
+							value={input.brandName}
+							onChange={(e) => handleChange(e)}
+						/>
+						{errors.brandName && <p>{errors.brandName}</p>}
+					</div>
 
-				<div>
-					<label>Colour: </label>
-					<input
-						className={s.input}
-						type='text'
-						placeholder='Ingrese color!!'
-						name='colour'
-						value={input.colour}
-						onChange={(e) => handleChange(e)}
-					/>
-					{errors.colour && <p>{errors.colour}</p>}
-				</div>
+					<div>
+						<label>Colour: </label>
+						<input
+							className={s.input}
+							type='text'
+							placeholder='Ingrese color!!'
+							name='colour'
+							value={input.colour}
+							onChange={(e) => handleChange(e)}
+						/>
+						{errors.colour && <p>{errors.colour}</p>}
+					</div>
+				
 
-				<div>
-					<label>Gender: </label>
-					<select
-						className={s.input}
-						type='text'
-						placeholder='Ingrese fenero!!'
-						name='gender'
-						value={input.gender}
-						onChange={(e) => handleChange(e)}
-					>
-						<option>Seleccionar</option>
-						<option value={"men"}>Men</option>
-						<option value={"women"}>Women</option>
-					</select>
-				</div>
 
-				<div>
+					<div>
+						<label>Gender: </label>
+						<select
+							className={s.input}
+							type='text'
+							placeholder='Ingrese fenero!!'
+							name='gender'
+							value={input.gender}
+							onChange={(e) => handleChange(e)}
+						>
+							<option>Seleccionar</option>
+							<option value={"men"}>Men</option>
+							<option value={"women"}>Women</option>
+						</select>
+					</div>
+				</div>
+				<div className={s.sectionFive} >
 					<label>Categories: </label>
 					<select className={s.input} onChange={handleSelectCategoryOnChange}>
 						<optgroup value='categories' label='Man'>
@@ -345,9 +357,8 @@ export default function ProductCreate() {
 								))}
 						</optgroup>
 					</select>
-				</div>
+					<div className={s.categoriesContainerGeneral}>
 
-				<div className={s.categoriesContainerGeneral}>
 					{demoCategories?.map((el) => (
 						<div key={el.id} className={s.categoriesContainer}>
 							<span key={el.id} value={el.id} className={s.spanCategory}>
@@ -363,69 +374,73 @@ export default function ProductCreate() {
 						</div>
 					))}
 				</div>
-
-				<div>
-					<AddInfo
-						input={input}
-						setInput={setInput}
-						errors={errors}
-						setError={setError}
-						validate={validate}
-					/>
-
-					<fieldset className={s.showInfo}>
-						<legend>Información adicional actual: </legend>
-						{(input.info.aboutMe ||
-							input.info.sizeAndFit ||
-							input.info.careInfo) && (
-							<div>
-								<p>
-									<span className={s.titulo}>About me:</span>{" "}
-									{input.info.aboutMe}
-								</p>
-								<p>
-									<span className={s.titulo}>Size and Fit:</span>{" "}
-									{input.info.sizeAndFit}
-								</p>
-								<p>
-									<span className={s.titulo}>Care info:</span>{" "}
-									{input.info.careInfo}
-								</p>
-							</div>
-						)}
-					</fieldset>
 				</div>
 
-				<div>
-					<AddVariants input={input} setInput={setInput} />
-					{input.variants.length ? (
+				
+				<div className={s.sectionSix} >
+					<div>
+						<AddInfo
+							input={input}
+							setInput={setInput}
+							errors={errors}
+							setError={setError}
+							validate={validate}
+						/>
+
 						<fieldset className={s.showInfo}>
-							<legend>Variants: </legend>
-							{input.variants.map((el, idx) => {
-								return (
-									<div key={`${el.brandSize}${idx}`} className={s.eachVariant}>
-										<p>{el.brandSize}</p>
-										<button
-											className={s.buttonCategory}
-											onClick={(e) => handleSizeDelete(e, el, input, setInput)}
-										>
-											x
-										</button>
-									</div>
-								);
-							})}
+							<legend>Información adicional actual: </legend>
+							{(input.info.aboutMe ||
+								input.info.sizeAndFit ||
+								input.info.careInfo) && (
+								<div>
+									<p>
+										<span className={s.titulo}>About me:</span>{" "}
+										{input.info.aboutMe}
+									</p>
+									<p>
+										<span className={s.titulo}>Size and Fit:</span>{" "}
+										{input.info.sizeAndFit}
+									</p>
+									<p>
+										<span className={s.titulo}>Care info:</span>{" "}
+										{input.info.careInfo}
+									</p>
+								</div>
+							)}
 						</fieldset>
-					) : (
-						""
-					)}
-				</div>
+					</div>
 
-				<button
-					hidden={Object.values(errors).length === 0 ? false : true}
-					type='submit'
-				>
-					Crear Producto
-				</button>
+					<div>
+						<AddVariants input={input} setInput={setInput} />
+						{input.variants.length ? (
+							<fieldset className={s.showInfo}>
+								<legend>Variants: </legend>
+								{input.variants.map((el, idx) => {
+									return (
+										<div key={`${el.brandSize}${idx}`} className={s.eachVariant}>
+											<p>{el.brandSize}</p>
+											<button
+												className={s.buttonCategory}
+												onClick={(e) => handleSizeDelete(e, el, input, setInput)}
+											>
+												x
+											</button>
+										</div>
+									);
+								})}
+							</fieldset>
+						) : (
+							""
+						)}
+					</div>
+
+					<button
+						type='submit'
+						className={Object.values(errors).length === 0 ? s.btn : s.btnDisable}
+					>
+						Crear Producto
+					</button>
+				</div>
 			</form>
 		</div>
 	);
