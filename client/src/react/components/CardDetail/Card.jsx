@@ -62,9 +62,15 @@ export default function Card({
   };
 
   return (
-    <div className={style.cardDetailContainer}>
-      <div className={style.cardDetailImgContainer}>
-        <div>
+    <div className={style.container}>
+      <div className={style.cardDetailContainer}>
+        <img
+          className={style.cardPrimaryImg}
+          src={imageCurrent}
+          alt="Img Principal"
+        />
+
+        <div className={style.cardDetailImgContainer}>
           {images.length
             ? images.map((image) => (
                 <div key={image}>
@@ -79,14 +85,7 @@ export default function Card({
             : null}
         </div>
       </div>
-      <div>
-        <img
-          className={style.cardPrimaryImg}
-          src={imageCurrent}
-          alt="Img Principal"
-        />
-      </div>
-      <div>
+      <div className={style.mainInfo}>
         <h3 className={style.name}>{name}</h3>
         {isOffertProduct ? (
           <div>
@@ -124,6 +123,7 @@ export default function Card({
               : null}
           </select>
         </div>
+
         <div className={style.info}>
           <p>
             <b>Aditional info:</b>{" "}
@@ -138,15 +138,19 @@ export default function Card({
             dangerouslySetInnerHTML={{ __html: info.sizeAndFit }}
           ></p>
         </div>
-        <button className={style.buttonAdd} onClick={(e) => handleAddCart(e)}>
-          AGREGAR AL CARRITO
-        </button>
-        <NavLink
-          to={`/home?gender=${gender}`}
-          style={{ textDecoration: "none" }}
-        >
-          <button className={style.buttonBack}>ATRAS</button>
-        </NavLink>
+
+        <div className={style.btns}>
+          <button className={style.buttonAdd} onClick={(e) => handleAddCart(e)}>
+            AGREGAR AL CARRITO
+          </button>
+
+          <NavLink
+            to={`/home?gender=${gender}`}
+            style={{ textDecoration: "none" }}
+          >
+            <button className={style.buttonBack}>ATRAS</button>
+          </NavLink>
+        </div>
       </div>
     </div>
   );
