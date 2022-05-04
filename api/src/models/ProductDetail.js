@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
 			},
 			info: {
 				type: DataTypes.JSON,
-				allowNull: false,
+				allowNull: true,
 			},
 			gender: {
 				type: DataTypes.STRING,

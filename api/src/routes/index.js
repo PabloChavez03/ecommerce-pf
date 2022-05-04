@@ -13,8 +13,14 @@ router.use("/products/create", require("./postProduct"));
 router.use("/products/update", require("./updateProduct"));
 router.use("/products/delete", require("./deleteProduct"));
 router.use("/allproducts", require("./getAllProducts"));
+router.use("/products/genre", require("./productsByGenre.js"));
+
 router.use("/carrito", require("./carrito"));
 router.use("/client", require("./client"));
-router.use("/products/genre", require("./productsByGenre.js"));
+
+router.use("/users/create", require("./userPost"));
+router.use("/users/login", require("./loguin"));
+router.use("/users/update", require("./userUpdate"));
+router.use("/users/delete", require("./userDelete"));
 
 module.exports = router;
