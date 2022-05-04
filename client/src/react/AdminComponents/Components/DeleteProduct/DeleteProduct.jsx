@@ -1,9 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import { deleteProduct } from "../../../redux/actions-types";
-import NavAdmin from "../../AdminComponents/Components/NavAdmin";
-
+import { deleteProduct } from "../../../../redux/actions-types";
+import NavAdmin from "../NavAdmin";
 export default function DeleteProduct() {
   const { productId } = useParams();
   const dispatch = useDispatch();

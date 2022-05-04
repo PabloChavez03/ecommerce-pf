@@ -5,9 +5,9 @@ import style from "./styles/Admin.module.css";
 import { Routes, Route } from "react-router-dom";
 import HomeAdmin from "./HomeAdmin";
 import ProductCreate from "../../components/CreationProduct/ProductCreate.jsx";
-import AllProducts from "../Components/AllProducts";
-import DeleteProduct from "../../components/DeleteProduct/DeleteProduct";
-import UpdateProduct from "../../components/UpdateProduct/UpdateProduct";
+import AllProducts from "../Components/CardsAdmin/AllProducts";
+import DeleteProduct from "../Components/DeleteProduct/DeleteProduct";
+import UpdateProduct from "../Components/UpdateProduct/UpdateProduct";
 
 const Admin = () => {
 	return (

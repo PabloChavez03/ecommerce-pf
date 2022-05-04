@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
-import NavAdmin from '../../AdminComponents/Components/NavAdmin';
-import { getDetails } from '../../../redux/actions-types';
+import { getDetails } from '../../../../redux/actions-types';
 
 export default function UpdateProduct() {
   const { productId } = useParams();

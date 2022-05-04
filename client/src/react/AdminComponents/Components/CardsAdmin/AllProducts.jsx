@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../../redux/actions-types";
+import { getAllProducts } from "../../../../redux/actions-types";
 import CardAdmin from "./CardAdmin";
+import style from './CardAdmin.module.css';
+
 
 export default function AllProducts() {
   const dispatch = useDispatch();
@@ -12,16 +14,15 @@ export default function AllProducts() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className={style.container} >
       {allProducts.length
         ? allProducts.map((e) => (
-            <div key={e.id}>
               <CardAdmin
+                key={e.id}
                 id={e.id}
                 name={e.name}
                 currentPrice={e.currentPrice}
               />
-            </div>
           ))
         : null}
     </div>
