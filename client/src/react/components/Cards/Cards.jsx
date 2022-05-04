@@ -17,7 +17,7 @@ export default function Cards({
   // )
   return (
     <div className={css.container}>
-        <img src={image} alt="Product Img" />
+        <img src={`https://${image}`} alt="Product Img" />
       <div className={css.price}>
         <h3>{isOffertPrice ? previousPrice : `$ ${currentPrice} `}</h3>
         {isOffertPrice ? <h4>{`Precio de oferta $ ${currentPrice}`}</h4> : null}

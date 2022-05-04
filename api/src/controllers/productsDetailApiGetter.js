@@ -14,7 +14,13 @@ function getApiProductsDetail(productId) {
 
 	return axios
 		.request(options)
-		.then(({ data }) => adaptProductsDetail(data))
+		.then(({ data }) => {
+			if (data.name) {
+				return adaptProductsDetail(data);
+			} else {
+				return [];
+			}
+		})
 		.catch(function (error) {
 			console.error(error.message);
 		});

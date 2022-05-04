@@ -8,7 +8,9 @@ router.get("/:productId", async (req, res) => {
 
 	const productsDetailFound = await getDDBBproductDetail(productId);
 
-	res.status(200).send(productsDetailFound);
+	productsDetailFound
+		? res.status(200).send(productsDetailFound)
+		: res.status(404).send("Not found");
 });
 
 module.exports = router;
