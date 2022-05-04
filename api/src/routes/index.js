@@ -19,6 +19,8 @@ router.use("/products/create", require("./postProduct"));
 router.use("/products/delete", require("./deleteProduct"));
 router.use("/users/create", require("./userPost"));
 router.use("/users/login", require("./loguin"));
+router.use("/users/update", require("./userUpdate"));
+router.use("/users/delete", require("./userDelete"));
 
 
 module.exports = router;
