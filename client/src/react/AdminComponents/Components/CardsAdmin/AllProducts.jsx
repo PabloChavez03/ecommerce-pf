@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../../../redux/actions-types";
+import { getAllProducts, setCurrentPage } from "../../../../redux/actions-types";
+import Filter from "../../../components/Filters/Filter";
+import Paginated from "../../../components/Paginated/Paginated";
 import CardAdmin from "./CardAdmin";
 import style from './CardAdmin.module.css';
 
@@ -8,6 +10,17 @@ import style from './CardAdmin.module.css';
 export default function AllProducts() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
+  const productFilter = useSelector((state) => state.productFilter);
+	const currentPage = useSelector((state) => state.currentPage);
+	const select = useSelector((state) => state.select);
+	const [productsPerPage] = useState(40);
+	const lastProduct = currentPage * productsPerPage;
+	const firstProduct = lastProduct - productsPerPage;
+	const productsCurent =
+		select === ""
+			? allProducts.slice(firstProduct, lastProduct)
+			: productFilter.slice(firstProduct, lastProduct);
+	const [render, setRender] = useState();
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -15,8 +28,21 @@ export default function AllProducts() {
 
   return (
     <div className={style.container} >
-      {allProducts.length
-        ? allProducts.map((e , index) => (
+      {/* <Filter
+				setRender={setRender}
+				setCurrentPage={setCurrentPage}
+				render={render}
+			/> */}
+			
+				<Paginated
+					productsToPaginated={select !== "" ? productsCurent : allProducts}
+					lastProduct={lastProduct}
+					firstProduct={firstProduct}
+					productsPerPage={productsPerPage}
+				/>
+			<div className={style.cardsContainer}>
+      {productsCurent.length
+        ? productsCurent.map((e , index) => (
               <CardAdmin
                 key={index}
                 id={e.id}
@@ -25,6 +51,7 @@ export default function AllProducts() {
               />
           ))
         : null}
+        </div>
     </div>
   );
 }

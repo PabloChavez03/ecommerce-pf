@@ -1,24 +1,30 @@
 .container {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    color: rgb(37, 36, 36);
+    
+}
+.cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 40px;
 }
  
 .cardContainer {
     border: 1px solid rgba(235, 229, 229, 0.554);
     background-color: rgba(249, 247, 247, 0.72);
     width: 35vw; 
-    min-height: 60px;
-    margin: 2px 10px ;
+    min-height: 80px;
+    margin: 6px 10px ;
     display: flex;
     flex-direction: column;
     justify-content: center;
     border-radius: 3px;
+    box-shadow: 0px 3px 3px rgba(41, 40, 40, 0.666);
 }
 .cardContainer h4 {
     width: fit-content;
     margin: auto;
-    
 }
 .cardContainer div {
     display: flex;
