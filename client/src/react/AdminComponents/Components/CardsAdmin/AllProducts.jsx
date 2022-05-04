@@ -16,9 +16,9 @@ export default function AllProducts() {
   return (
     <div className={style.container} >
       {allProducts.length
-        ? allProducts.map((e) => (
+        ? allProducts.map((e , index) => (
               <CardAdmin
-                key={e.id}
+                key={index}
                 id={e.id}
                 name={e.name}
                 currentPrice={e.currentPrice}
