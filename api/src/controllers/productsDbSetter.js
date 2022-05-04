@@ -1,6 +1,6 @@
 const getAPIproducts = require("./productsApiGetter");
 
-const { Product, Category } = require("../db");
+const { Product, Category, Variants } = require("../db");
 
 async function setDDBBproducts(categoryId) {
 	const products = await getAPIproducts(categoryId);
@@ -10,16 +10,17 @@ async function setDDBBproducts(categoryId) {
 	);
 
 	await products.forEach(async (product) => {
-		const [newProduct, created] = await Product.findOrCreate({
+		const [newProduct, productCreated] = await Product.findOrCreate({
 			where: {
 				id: product.id,
 				name: product.name,
 				image: product.image,
-				previousPrice: product.previousPrice,
 				isOffertPrice: product.isOffertPrice,
+				previousPrice: product.previousPrice,
 				currentPrice: product.currentPrice,
 				brandName: product.brandName,
-				colour: product.colour,
+				color: product.color,
+				isInStock: true,
 			},
 		}).catch((e) => console.log(e));
 
