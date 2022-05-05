@@ -34,7 +34,8 @@ router.use("/product/review", require("./review"));
 router.use("/users/update", adminMaster, require("./userUpdate"));
 router.use("/users/delete", adminMaster, require("./userDelete"));
 
-//-------------------------------------------------------------
+//----------------------Mercado Pago---------------------------------------
+router.use("/mercadopago", require("./mercadoPago"));
 
 /* ¡¡¡ACLARACION!!! Para poder utilizar las rutas de ADMIN deberan de registrarse o en su defecto comentar el middleware de adminMaster*/
 
