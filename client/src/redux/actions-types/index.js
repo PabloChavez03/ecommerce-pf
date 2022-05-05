@@ -13,9 +13,10 @@ import {
   GET_ALL_CATEGORIES,
   GET_CATEGORY_BY_ID,
   GET_FILTERS_GENDER_PRODUCT,
-  GET_ALL_CATEGORIES_FOR_FORM
+  GET_ALL_CATEGORIES_FOR_FORM,
+  CHAT_BOT
 } from "../actions-creators";
-import { currentbrands, currentcategory, urlProdutcGender } from "../controllers";
+import { chatBot, currentbrands, currentcategory, urlProdutcGender } from "../controllers";
 import axios from "axios";
 
 
@@ -178,5 +179,13 @@ export const getFiltersGenderProduct = (payload) => async (dispatch) => {
   return dispatch({
     type: GET_FILTERS_GENDER_PRODUCT,
     payload: dataGender,
+  })
+}
+export const getChatBot = (payload) => async (dispatch) => {
+  let data = await chatBot(payload);
+ 
+  return dispatch({
+    type: CHAT_BOT,
+    payload: data,
   })
 }

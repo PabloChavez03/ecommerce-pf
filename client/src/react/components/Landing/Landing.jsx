@@ -1,5 +1,6 @@
 import React from "react";
 import CategorySlider from "../CategorySlider/CategorySlider";
+import ChatBot from "../ChatBot/ChatBot";
 import NavBar from "../NavBar/NavBar";
 
 function Landing() {
@@ -7,6 +8,7 @@ function Landing() {
 		<div>
 			<NavBar />
 			<CategorySlider />
+			<ChatBot/>
 		</div>
 	);
 }
