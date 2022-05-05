@@ -11,7 +11,7 @@ const { chat_bot,
 const router = Router();
 
 router.get("/", async (req, res) => {
-    chat_bot(req.body.dataString)
+    chat_bot(req.query.dataString)
         .then(item => res.json(item))
 });
 /**                    EMISOR                          */
