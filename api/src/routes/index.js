@@ -4,7 +4,7 @@ const { Router } = require("express");
 
 const router = Router();
 
-const authMaster = require("../middleware/authMaster");
+const { authMaster,isAdmin } = require("../middleware/authMaster");
 
 // Modularizando las rutas
 
@@ -26,12 +26,12 @@ router.use("/users/client/update", require("./updateClient"));
 router.use("/users/create", require("./userCreate"));
 router.use("/users/login", require("./loginUser"));
 router.use("/users/client/delete", authMaster, require("./deleteClient"));
-router.use("/products/create", authMaster, require("./postProduct"));
-router.use("/products/update", authMaster, require("./updateProduct"));
-router.use("/products/delete", authMaster, require("./deleteProduct"));
-router.use("/product/stock", authMaster, require("./updateStock"));
-router.use("/users/update", authMaster, require("./userUpdate"));
-router.use("/users/delete", authMaster, require("./userDelete"));
+router.use("/products/create", [authMaster, isAdmin], require("./postProduct"));
+router.use("/products/update", [authMaster, isAdmin], require("./updateProduct"));
+router.use("/products/delete", [authMaster, isAdmin], require("./deleteProduct"));
+router.use("/product/stock", [authMaster, isAdmin], require("./updateStock"));
+router.use("/users/update", [authMaster, isAdmin], require("./userUpdate"));
+router.use("/users/delete", [authMaster, isAdmin], require("./userDelete"));
 
 //-------------------------------------------------------------
 

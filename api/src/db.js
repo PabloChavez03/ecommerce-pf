@@ -122,7 +122,7 @@ Product.hasOne(Carrito);
 Carrito.belongsTo(Product);
 
 //Role-User
-Users.hasMany(Role);
+Users.hasOne(Role);
 Role.belongsTo(Users);
 
 module.exports = {

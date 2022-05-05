@@ -20,16 +20,16 @@ router.post("/", async (req, res) => {
       await user.setRole(foundRol);
     } else {
       const roleClient = await Role.findOne({ where: { name: "client" } });
-      await user.setRole(roleClient.id);
+      await user.setRole(roleClient);
     }
 
     const createdUser = await user.save();
 
     createdUser
-      ? res.status(200).json(user.rol + "creado")
+      ? res.status(200).json(user + "creado")
       : res.sendStatus(404);
   } catch (error) {
-    res.status(500).json({ error: error.parent.detail });
+    res.status(500).json({ error });
   }
 });
 

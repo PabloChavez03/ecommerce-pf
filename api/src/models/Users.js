@@ -17,10 +17,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(),
         allowNull: false,
       },
-      rol: {
-        type: DataTypes.STRING(),
-        allowNull: false,
-      },
     },
     { timestamps: false }
   );
