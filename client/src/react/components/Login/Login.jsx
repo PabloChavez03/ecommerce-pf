@@ -5,6 +5,27 @@ import style from "./Login.module.css";
 const Login = () => {
 	const [activeCreate, setActiveCreate] = useState(false);
 
+	const [newUser, setNewUser] = useState({
+		phone: "",
+		dni_client: "",
+		email: "",
+		login_name: "",
+		login_password: "",
+		name: "",
+		lastname: "",
+		address: "",
+		isRegistered: true,
+	});
+
+	const handleChangeInputNewUser = (e) => {
+		e.preventDefault();
+		setNewUser({
+			...newUser,
+			[e.target.name]: e.target.value,
+		});
+	};
+	console.log(newUser);
+
 	const handleChangeActive = (e) => {
 		e.preventDefault();
 		if (activeCreate) {
@@ -59,20 +80,69 @@ const Login = () => {
 							<h2 className={style.formTitle}>Crear Cuenta</h2>
 							<form>
 								<div className={style.formInputContainer}>
+									<label className={style.formLabel}>NOMBRE</label>
+									<input
+										className={style.formInput}
+										type='text'
+										name='name'
+										value={newUser.name}
+										placeholder='Nombre'
+										onChange={(e) => handleChangeInputNewUser(e)}
+									/>
+								</div>
+								<div className={style.formInputContainer}>
+									<label className={style.formLabel}>APELLIDO</label>
+									<input
+										className={style.formInput}
+										type='text'
+										name='lastname'
+										value={newUser.lastname}
+										placeholder='Apellido'
+										onChange={(e) => handleChangeInputNewUser(e)}
+									/>
+								</div>
+								<div className={style.formInputContainer}>
+									<label className={style.formLabel}>DNI</label>
+									<input
+										className={style.formInput}
+										type='number'
+										name='dni_client'
+										value={newUser.dni_client}
+										placeholder='DNI'
+										onChange={(e) => handleChangeInputNewUser(e)}
+									/>
+								</div>
+								<div className={style.formInputContainer}>
 									<label className={style.formLabel}>CORREO ELECTRÓNICO</label>
 									<input
 										className={style.formInput}
 										type='text'
 										name='email'
+										value={newUser.email}
 										placeholder='Email'
+										onChange={(e) => handleChangeInputNewUser(e)}
+									/>
+								</div>
+								<div className={style.formInputContainer}>
+									<label className={style.formLabel}>USUARIO</label>
+									<input
+										className={style.formInput}
+										type='text'
+										name='login_name'
+										value={newUser.login_name}
+										placeholder='Usuario'
+										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
 								<div className={style.formInputContainer}>
 									<label className={style.formLabel}>CONTRASEÑA</label>
 									<input
 										className={style.formInput}
-										type='text'
+										type='password'
+										name='login_password'
+										value={newUser.login_password}
 										placeholder='Contraseña'
+										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
 								<div className={style.formInputContainer}>
@@ -81,8 +151,30 @@ const Login = () => {
 									</label>
 									<input
 										className={style.formInput}
-										type='text'
+										type='password'
 										placeholder='Repetir contraseña'
+									/>
+								</div>
+								<div className={style.formInputContainer}>
+									<label className={style.formLabel}>CELULAR</label>
+									<input
+										className={style.formInput}
+										type='number'
+										name='phone'
+										value={newUser.phone}
+										placeholder='Celular'
+										onChange={(e) => handleChangeInputNewUser(e)}
+									/>
+								</div>
+								<div className={style.formInputContainer}>
+									<label className={style.formLabel}>DIRECCION</label>
+									<input
+										className={style.formInput}
+										type='text'
+										name='address'
+										value={newUser.address}
+										placeholder='Direccion'
+										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
 								<button
