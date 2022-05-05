@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import { deleteProduct } from "../../../redux/actions-types";
-
+import { deleteProduct } from "../../../../redux/actions-types";
+import NavAdmin from "../NavAdmin";
 export default function DeleteProduct() {
   const { productId } = useParams();
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export default function DeleteProduct() {
   return (
     <div>
       <div>
-        <NavLink to={`/home?gender=${gender}`} style={{ textDecoration: "none" }}>
+        <NavLink to={`/admin`} style={{ textDecoration: "none" }}>
           <button>ATRAS</button>
         </NavLink>
         <h4>Confirma la eliminación del producto?</h4>

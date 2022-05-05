@@ -8,8 +8,6 @@ import Landing from "./react/components/Landing/Landing";
 import ProductCreate from "./react/components/CreationProduct/ProductCreate";
 import Footer from "./react/components/Footer/Footer";
 import Admin from "./react/AdminComponents/Pages/Admin";
-import ModForm from "./react/components/ModificationProduct/ModForm";
-import DeleteProduct from "./react/components/DeleteProduct/DeleteProduct";
 
 function App() {
 	return (
@@ -22,9 +20,7 @@ function App() {
 				<Route path={"/about"} element={<Construction />} />
 				<Route path={"/account"} element={<Construction />} />
 				<Route path={"/construction"} element={<Construction />} />
-				<Route path={"/modification/:productId"} element={<ModForm />} />
 				<Route path={"/admin/*"} element={<Admin />} />
-				<Route path={"/delete/:productId"} element={<DeleteProduct />} />
 			</Routes>
 
 			<Footer />

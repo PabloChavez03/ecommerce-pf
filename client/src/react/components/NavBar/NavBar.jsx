@@ -55,7 +55,7 @@ export default function NavBar() {
 
         <div className="nav__up__features">
           {/* <WishListIcon /> */}
-          <Link to={"/creation"}>
+          <Link to={"/admin"}>
             <CreateIcon />
           </Link>
 

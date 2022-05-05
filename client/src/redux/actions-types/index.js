@@ -22,10 +22,9 @@ import axios from "axios";
 export const getProductByName = (nameProduct) => {
   return async function (dispatch) {
     const { data } = await axios.get(
-      `http://localhost:3001/products?productName=${nameProduct}`
+      `/products?productName=${nameProduct}`
     );
-    //Acá iria la constante creada donde guardamos el listado de productos que coinciden con el nombre.
-    return dispatch({ type: GET_PRODUCT_BY_NAME, payload: data }); //nameProduct provisoriamente hasta que tengamos creada la constante que trae los productos.
+    return dispatch({ type: GET_PRODUCT_BY_NAME, payload: data });
   };
 };
 
@@ -56,7 +55,7 @@ export const setCurrentPage = (numberPage) => {
 
 export const getAllProducts = () => {
   return async function (dispatch) {
-    const allProducts = await axios.get("http://localhost:3001/allproducts");
+    const allProducts = await axios.get("/allproducts");
     return dispatch({
       type: GET_ALL_PRODUCTS,
       payload: allProducts.data,
@@ -74,7 +73,7 @@ export function orderByPrice(payload) {
 export const getDetails = (productId) => {
   return async function (dispatch) {
     const productDetail = await axios.get(
-      `http://localhost:3001/products/detail/${productId}`
+      `/products/detail/${productId}`
     );
     // console.log(productDetail);
     return dispatch({
@@ -121,7 +120,7 @@ export const getFiltersBrands = (payload) => {
 export const postProduct = (info) => {
   return function (dispatch) {
     const postProduct = axios
-      .post("http://localhost:3001/products/create", info)
+      .post("/products/create", info)
       .then((response) => response);
     return postProduct;
   };
@@ -130,7 +129,7 @@ export const postProduct = (info) => {
 export const updateProduct = (id, info) => {
   return function (dispatch) {
     const updateProduct = axios
-      .patch(`http://localhost:3001/products/update/${id}`, info)
+      .patch(`/products/update/${id}`, info)
       .then((response) => response);
     return updateProduct;
   };
@@ -139,7 +138,7 @@ export const updateProduct = (id, info) => {
 export const deleteProduct = (id) => {
   return function (dispatch) {
     return axios
-      .delete(`http://localhost:3001/products/delete/${id}`)
+      .delete(`/products/delete/${id}`)
       .then((response) => response);
   };
 };
@@ -156,7 +155,7 @@ export const getAllCategories = (gender) => {
 
 export const getAllCategoriesForForm = () => {
   return async function (dispatch) {
-    const allCategories = await axios.get("http://localhost:3001/categories");
+    const allCategories = await axios.get("/categories");
     return dispatch({
       type: GET_ALL_CATEGORIES_FOR_FORM,
       payload: allCategories.data,
@@ -166,7 +165,7 @@ export const getAllCategoriesForForm = () => {
 
 export const getCategoryById = (idCategory) => {
   return async function (dispatch) {
-    const category = await axios.get(`http://localhost:3001/products?categoryId=${idCategory}`);
+    const category = await axios.get(`/products?categoryId=${idCategory}`);
     return dispatch({
       type: GET_CATEGORY_BY_ID,
       payload: [category.data, idCategory]

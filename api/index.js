@@ -29,8 +29,8 @@ const getDDBBproducts = require("./src/controllers/productsDbGetter.js");
 conn
 	.sync({ force: false })
 	.then(() => {
-		server.listen(3001, async () => {
-			// Categories
+		server.listen(process.env.PORT || 5000, async () => {
+			// // Categories
 			await setDDBBcategories();
 
 			// Men
@@ -94,4 +94,4 @@ conn
 			console.log("Listening on 3001"); // eslint-disable-line no-console
 		});
 	})
-	.catch((e) => console.log(e.message));
+	.catch((e) => console.log(e));
