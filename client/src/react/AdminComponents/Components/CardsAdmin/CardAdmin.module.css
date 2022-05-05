@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    
+}
+.cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+ 
+.cardContainer {
+    border: 1px solid rgba(235, 229, 229, 0.554);
+    background-color: rgba(249, 247, 247, 0.72);
+    width: 35vw; 
+    min-height: 80px;
+    margin: 6px 10px ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 3px;
+    box-shadow: 0px 3px 3px rgba(41, 40, 40, 0.666);
+}
+.cardContainer h4 {
+    width: fit-content;
+    margin: auto;
+}
+.cardContainer div {
+    display: flex;
+    justify-content: end;
+    
+}
+.btn {
+    margin-right: 15px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    width: 30px;
+    height: 25px;
+}

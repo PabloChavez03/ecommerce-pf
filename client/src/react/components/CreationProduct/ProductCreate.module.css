@@ -1,11 +1,59 @@
 .container {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 	padding: 1rem;
-	margin: auto;
+	margin:  auto;
 	max-width: 1000px;
+	border: 1px solid rgb(186, 185, 185);
+	box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.566);
+	border-radius: 5px;
+}
+.form{
+	display: flex;
+	flex-wrap: wrap;
+}
+.sectionOne{
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0px auto;
+}
+.sectionTwo {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+
+}
+.sectionThree {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0px auto;
+}
+.sectionFour {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0px auto;
+}
+.sectionFive {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+.sectionSix {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 }
 
 .input {
@@ -20,12 +68,15 @@
 .name {
 	display: flex;
 	flex-direction: column;
+	margin:  0px auto;
 	padding: 0.5rem;
+	max-width: 400px;
 }
 
 .description {
 	display: flex;
 	flex-direction: column;
+	margin: 0px auto;
 	padding: 0.5rem;
 }
 
@@ -42,7 +93,7 @@
 }
 
 .imagen {
-	max-width: 300px;
+	max-width: 100px;
 	position: relative;
 	border-radius: 0.5rem;
 }
@@ -51,6 +102,7 @@
 	position: absolute;
 	z-index: 10;
 	margin: 0.5rem;
+	margin-top: 80px;
 	background-color: transparent;
 	border: 2px solid #c03636;
 	color: #c03636;
@@ -122,4 +174,41 @@
 svg {
 	width: 60px;
 	cursor: pointer;
+}
+
+.btn {
+	background-color: #000000d7;
+	border: 2px solid #000000ab;
+	color: #fff;
+	font-weight: bold;
+	padding: 0.5rem 1rem;
+	margin: 0.5rem;
+	border-radius: 0.5rem;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.btn:hover {
+	background-color: #1b5808;
+	color: #fff;
+	border: 2px solid #1b5808;
+
+}
+.btnDisable {
+	background-color: #00000040;
+	border: 2px solid #0000000f;
+	color: #fff;
+	font-weight: bold;
+	padding: 0.5rem 1rem;
+	margin: 0.5rem;
+	border-radius: 0.5rem;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.btnDisable:hover {
+	background-color: #58110884;
+	color: #fff;
+	border: 2px solid #5811086b;
+
 }

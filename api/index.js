@@ -29,10 +29,11 @@ const getDDBBproducts = require("./src/controllers/productsDbGetter.js");
 conn
 	.sync({ force: false })
 	.then(() => {
-		server.listen(3001, async () => {
-			// Categories
-			//await setDDBBcategories();
+		server.listen(process.env.PORT || 5000, async () => {
 
+			// // Categories
+
+			//await setDDBBcategories();
 			// // Men
 			// /** Clothing */
 			// await getDDBBproducts(7616);

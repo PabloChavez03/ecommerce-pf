@@ -23,12 +23,6 @@ export default function Cards({
         {isOffertPrice ? <h4>{`Precio de oferta $ ${currentPrice}`}</h4> : null}
       </div>
       <h5 className={css.title}>{name}</h5>
-      <NavLink to={`/modification/${id}`} style={{ textDecoration: "none" }}>
-        <button>modificar producto</button>
-      </NavLink>
-      <NavLink to={`/delete/${id}`} style={{ textDecoration: "none" }}>
-      <button>Eliminar ítem</button>
-      </NavLink>
       {/* <button onClick={(e)=>handleClickAddCart(e)}>Agregar al carrito</button> */}
     </div>
   );
