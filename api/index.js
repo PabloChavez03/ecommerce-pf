@@ -30,7 +30,7 @@ conn
 	.sync({ force: false })
 	.then(() => {
 		server.listen(process.env.PORT || 5000, async () => {
-			// Categories
+			// // Categories
 			await setDDBBcategories();
 
 			// Men

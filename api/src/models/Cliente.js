@@ -10,6 +10,11 @@ module.exports = (sequelize) => {
 				primaryKey: true,
 				unique: true,
 			},
+			dni_client: {
+				type: DataTypes.BIGINT(),
+				allowNull: false,
+				unique: true,
+			},
 			email: {
 				type: DataTypes.STRING(),
 				allowNull: false,

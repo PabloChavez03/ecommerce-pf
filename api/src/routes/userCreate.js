@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
       rol,
     });
 
-    // const createdUser = await user.save();
+     const createdUser = await user.save();
 
     createdUser
       ? res.status(200).json(createdUser + "creado")
