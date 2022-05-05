@@ -51,6 +51,7 @@ export default function AllProducts() {
                 id={e.id}
                 name={e.name}
                 currentPrice={e.currentPrice}
+                isInStock={e.isInStock}
               />
           ))
         : <p>No se encontraron productos</p>}

@@ -4,24 +4,38 @@ const { Router } = require("express");
 
 const router = Router();
 
+const adminMaster = require("../middleware/adminMaster");
+
 // Modularizando las rutas
 
+//----------------  for all  ----------------------------------
 router.use("/categories", require("./categories"));
 router.use("/products", require("./productsByCategory"));
 router.use("/products/detail", require("./productsDetail"));
-router.use("/products/create", require("./postProduct"));
-router.use("/products/update", require("./updateProduct"));
-router.use("/products/delete", require("./deleteProduct"));
 router.use("/allproducts", require("./getAllProducts"));
 router.use("/products/genre", require("./productsByGenre.js"));
 
 router.use("/carrito", require("./carrito"));
-router.use("/client", require("./client"));
-
-router.use("/users/create", require("./userPost"));
-
 router.use("/users/login", require("./loginUser"));
+router.use("/users/create", require("./userCreate"));
+
+//----------------  for client  -------------------------------
+// router.use("/client", require("./client"));
+router.use("/users/client/create", require("./createClient"));
+router.use("/users/client/update", require("./updateClient"));
+router.use("/users/client/delete", require("./deleteClient"));
+
+//----------------  for admin  --------------------------------
+router.use("/products/create", require("./postProduct"));
+router.use("/products/update", require("./updateProduct"));
+router.use("/products/delete", require("./deleteProduct"));
+router.use("/product/stock", require("./updateStock"));
+router.use("/product/review", require("./review"));
 router.use("/users/update", require("./userUpdate"));
 router.use("/users/delete", require("./userDelete"));
+
+//-------------------------------------------------------------
+
+/* ¡¡¡ACLARACION!!! Para poder utilizar las rutas de ADMIN deberan de registrarse o en su defecto comentar el middleware de adminMaster*/
 
 module.exports = router;

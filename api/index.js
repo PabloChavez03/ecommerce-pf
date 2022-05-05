@@ -94,4 +94,4 @@ conn
 			console.log("Listening on 3001"); // eslint-disable-line no-console
 		});
 	})
-	.catch((e) => console.log(e.message));
+	.catch((e) => console.log(e));

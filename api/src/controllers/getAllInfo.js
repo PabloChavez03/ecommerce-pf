@@ -4,9 +4,6 @@ const getAllDbInfo = async () => {
 	let allInfo = await Product.findAll({
 		include: {
 			model: Category,
-			through: {
-				attributes: [],
-			},
 		},
 	});
 	return allInfo;

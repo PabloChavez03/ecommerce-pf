@@ -8,7 +8,7 @@ function getApiProductsDetail(productId) {
 		params: { id: `${productId}` },
 		headers: {
 			"X-RapidAPI-Host": "asos2.p.rapidapi.com",
-			"X-RapidAPI-Key": "1593137eefmshe7c517b722ec534p1f965bjsn7b5f4f39690c",
+			"X-RapidAPI-Key": "b4419db468mshc852c1556d25a25p17fe32jsndbc31541a7c3",
 		},
 	};
 

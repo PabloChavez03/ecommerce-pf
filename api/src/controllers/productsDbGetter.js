@@ -4,12 +4,11 @@ const { Product, Category } = require("../db");
 
 async function getDDBBproducts(categoryId) {
 	const products = await Product.findAll({
+		where: {
+			CategoryId: categoryId,
+		},
 		include: {
 			model: Category,
-			where: { id: categoryId },
-			through: {
-				attributes: [],
-			},
 		},
 	});
 
@@ -18,12 +17,11 @@ async function getDDBBproducts(categoryId) {
 	} else {
 		await setDDBBproducts(categoryId);
 		return await Product.findAll({
+			where: {
+				CategoryId: categoryId,
+			},
 			include: {
 				model: Category,
-				where: { id: categoryId },
-				through: {
-					attributes: [],
-				},
 			},
 		}).catch((e) => console.log(e.message));
 	}

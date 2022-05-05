@@ -17,6 +17,7 @@ export default function Home() {
 	const [params] = useSearchParams();
 	const gender = params.get("gender");
 	let allProducts = useSelector((state) => state.products);
+	console.log(allProducts)
 	const productFilter = useSelector((state) => state.productFilter);
 	const currentPage = useSelector((state) => state.currentPage);
 	const select = useSelector((state) => state.select);
@@ -25,8 +26,8 @@ export default function Home() {
 	const firstProduct = lastProduct - productsPerPage;
 	const productsCurent =
 		select === ""
-			? allProducts.slice(firstProduct, lastProduct)
-			: productFilter.slice(firstProduct, lastProduct);
+			? allProducts?.slice(firstProduct, lastProduct)
+			: productFilter?.slice(firstProduct, lastProduct);
 	const [render, setRender] = useState();
 
 	useEffect(() => {
