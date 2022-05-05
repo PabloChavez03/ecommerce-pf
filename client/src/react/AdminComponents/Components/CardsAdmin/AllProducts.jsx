@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, setCurrentPage } from "../../../../redux/actions-types";
 import Filter from "../../../components/Filters/Filter";
 import Paginated from "../../../components/Paginated/Paginated";
+import SearchProducts from "../SearchProducts/SearchProducts";
 import CardAdmin from "./CardAdmin";
 import style from './CardAdmin.module.css';
-
 
 export default function AllProducts() {
   const dispatch = useDispatch();
@@ -40,6 +40,7 @@ export default function AllProducts() {
 					firstProduct={firstProduct}
 					productsPerPage={productsPerPage}
 				/>
+        <SearchProducts/>
 			<div className={style.cardsContainer}>
       {productsCurent.length
         ? productsCurent.map((e , index) => (
@@ -50,7 +51,7 @@ export default function AllProducts() {
                 currentPrice={e.currentPrice}
               />
           ))
-        : null}
+        : <p>No se encontraron productos</p>}
         </div>
     </div>
   );

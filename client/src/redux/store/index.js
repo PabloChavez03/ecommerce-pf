@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-import rootReducer from "../reducers";
+import reducer from "../reducers/index";
 
 //el thunk recibe las actions-creators que son functions
 const middleware = [thunk];
 
 const store = configureStore({
-	reducer: rootReducer,
+	reducer: reducer,
 	middleware: middleware,
 	devTools: true,
 });

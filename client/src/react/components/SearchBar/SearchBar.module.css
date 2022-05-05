@@ -30,3 +30,9 @@
     transform: scale(1.05);
     border: 1px solid rgba(64, 59, 59, 0.579);
 }
+
+.imgSearch {
+    width: 30px;
+    margin: 7px;
+    justify-content: center;
+}
