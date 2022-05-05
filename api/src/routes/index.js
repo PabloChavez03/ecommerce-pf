@@ -17,19 +17,15 @@ router.use("/products/genre", require("./productsByGenre.js"));
 router.use("/product/review", require("./review"));
 // router.use("/carrito", require("./carrito"));
 
-
-
-
 //----------------  for client  -------------------------------
-// router.use("/client", require("./client"));
 router.use("/users/client/login", require("./loginClient"));
 router.use("/users/client/create", require("./createClient"));
 router.use("/users/client/update", require("./updateClient"));
-router.use("/users/client/delete", require("./deleteClient"));
 
 //----------------  for admin  --------------------------------
 router.use("/users/create", require("./userCreate"));
 router.use("/users/login", require("./loginUser"));
+router.use("/users/client/delete", authMaster, require("./deleteClient"));
 router.use("/products/create", authMaster, require("./postProduct"));
 router.use("/products/update", authMaster, require("./updateProduct"));
 router.use("/products/delete", authMaster, require("./deleteProduct"));

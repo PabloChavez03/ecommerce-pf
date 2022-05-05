@@ -81,6 +81,8 @@ const {
 	Carrito,
 	Review,
 	Invoice,
+  Role,
+  Users,
 } = sequelize.models;
 
 // Aca vendrian las relaciones
@@ -118,6 +120,10 @@ Carrito.belongsTo(Cliente);
 //Carrito-Products
 Product.hasOne(Carrito);
 Carrito.belongsTo(Product);
+
+//Role-User
+Users.hasMany(Role);
+Role.belongsTo(Users);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
