@@ -15,9 +15,6 @@ router.use("/products/detail", require("./productsDetail"));
 router.use("/allproducts", require("./getAllProducts"));
 router.use("/products/genre", require("./productsByGenre.js"));
 
-router.use("/product/review", require("./review"));
-router.use("/product/stock", require("./updateStock"));
-
 router.use("/carrito", require("./carrito"));
 router.use("/users/login", require("./loginUser"));
 router.use("/users/create", require("./userCreate"));
@@ -29,12 +26,13 @@ router.use("/users/client/update", require("./updateClient"));
 router.use("/users/client/delete", require("./deleteClient"));
 
 //----------------  for admin  --------------------------------
-router.use("/products/create", require("./postProduct"));
-router.use("/products/update", require("./updateProduct"));
-router.use("/products/delete", require("./deleteProduct"));
-router.use("/product/stock", require("./updateStock"));
-router.use("/users/update", require("./userUpdate"));
-router.use("/users/delete", require("./userDelete"));
+router.use("/products/create", adminMaster, require("./postProduct"));
+router.use("/products/update", adminMaster, require("./updateProduct"));
+router.use("/products/delete", adminMaster, require("./deleteProduct"));
+router.use("/product/stock", adminMaster, require("./updateStock"));
+router.use("/product/review", require("./review"));
+router.use("/users/update", adminMaster, require("./userUpdate"));
+router.use("/users/delete", adminMaster, require("./userDelete"));
 
 //-------------------------------------------------------------
 
