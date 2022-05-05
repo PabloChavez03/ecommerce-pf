@@ -100,8 +100,12 @@ Order.hasOne(Invoice);
 Invoice.belongsTo(Order);
 
 //Product-Category
-Product.belongsToMany(Category, { through: "Product_Category" });
-Category.belongsToMany(Product, { through: "Product_Category" });
+Category.hasMany(Product);
+Product.belongsTo(Category);
+
+//ProductDetail-Category
+Category.hasMany(ProductDetail);
+ProductDetail.belongsTo(Category);
 
 //ProductDetail-Product
 Product.hasOne(ProductDetail);

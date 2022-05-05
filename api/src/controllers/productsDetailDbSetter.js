@@ -1,6 +1,6 @@
 const getAPIproductDetail = require("./productsDetailApiGetter");
 
-const { ProductDetail, Product } = require("../db");
+const { ProductDetail, Product, Category } = require("../db");
 
 async function setDDBBproducts(productId) {
 	// Bringing details from API
@@ -12,6 +12,12 @@ async function setDDBBproducts(productId) {
 		let productWithStock = await Product.findByPk(productId).catch((e) =>
 			console.log(e),
 		);
+
+		// console.log(productWithStock);
+
+		let category = await Category.findByPk(productWithStock.CategoryId);
+
+		// console.log(category);
 
 		// Creating on DDBB product details with stock
 		const [newProduct, _created] = await ProductDetail.findOrCreate({
@@ -37,6 +43,7 @@ async function setDDBBproducts(productId) {
 			},
 		}).catch((e) => console.log(e));
 
+		await newProduct.setCategory(category);
 		await newProduct.setProduct(productWithStock);
 	}
 }

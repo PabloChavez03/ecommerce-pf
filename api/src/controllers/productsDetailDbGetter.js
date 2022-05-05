@@ -11,6 +11,9 @@ async function getDDBBproducts(productId) {
 			{
 				model: Review,
 			},
+			{
+				model: Category,
+			},
 		],
 	});
 
@@ -26,6 +29,9 @@ async function getDDBBproducts(productId) {
 			include: [
 				{
 					model: Review,
+				},
+				{
+					model: Category,
 				},
 			],
 		}).catch((e) =>
