@@ -9,13 +9,13 @@ async function getAPIcategories() {
 
 	if (categories.length === 0) {
 		const options = {
-			method: "GET",
-			url: "https://asos2.p.rapidapi.com/categories/list",
-			headers: {
-				'X-RapidAPI-Host': 'asos2.p.rapidapi.com',
-				'X-RapidAPI-Key': '7ad0d3b962msh6e26138ba111494p18be12jsne10a2a98bd90'
-			},
-		};
+      method: "GET",
+      url: "https://asos2.p.rapidapi.com/categories/list",
+      headers: {
+        "X-RapidAPI-Host": "asos2.p.rapidapi.com",
+        "X-RapidAPI-Key": "94f1689d8emsh741ab8da132723bp121b58jsn2f30a124d7e5",
+      },
+    };
 
 		const data = axios(options)
 			.then(({ data }) => adaptCategory(data))
