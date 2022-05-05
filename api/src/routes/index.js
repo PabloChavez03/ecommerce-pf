@@ -4,7 +4,7 @@ const { Router } = require("express");
 
 const router = Router();
 
-const adminMaster = require("../middleware/adminMaster");
+const authMaster = require("../middleware/authMaster");
 
 // Modularizando las rutas
 
@@ -14,28 +14,31 @@ router.use("/products", require("./productsByCategory"));
 router.use("/products/detail", require("./productsDetail"));
 router.use("/allproducts", require("./getAllProducts"));
 router.use("/products/genre", require("./productsByGenre.js"));
+router.use("/product/review", require("./review"));
+// router.use("/carrito", require("./carrito"));
 
-router.use("/carrito", require("./carrito"));
-router.use("/users/login", require("./loginUser"));
-router.use("/users/create", require("./userCreate"));
+
+
 
 //----------------  for client  -------------------------------
 // router.use("/client", require("./client"));
+router.use("/users/client/login", require("./loginClient"));
 router.use("/users/client/create", require("./createClient"));
 router.use("/users/client/update", require("./updateClient"));
 router.use("/users/client/delete", require("./deleteClient"));
 
 //----------------  for admin  --------------------------------
-router.use("/products/create", require("./postProduct"));
-router.use("/products/update", require("./updateProduct"));
-router.use("/products/delete", require("./deleteProduct"));
-router.use("/product/stock", require("./updateStock"));
-router.use("/product/review", require("./review"));
-router.use("/users/update", require("./userUpdate"));
-router.use("/users/delete", require("./userDelete"));
+router.use("/users/create", require("./userCreate"));
+router.use("/users/login", require("./loginUser"));
+router.use("/products/create", authMaster, require("./postProduct"));
+router.use("/products/update", authMaster, require("./updateProduct"));
+router.use("/products/delete", authMaster, require("./deleteProduct"));
+router.use("/product/stock", authMaster, require("./updateStock"));
+router.use("/users/update", authMaster, require("./userUpdate"));
+router.use("/users/delete", authMaster, require("./userDelete"));
 
 //-------------------------------------------------------------
 
-/* ¡¡¡ACLARACION!!! Para poder utilizar las rutas de ADMIN deberan de registrarse o en su defecto comentar el middleware de adminMaster*/
+/* ¡¡¡ACLARACION!!! Para poder utilizar las rutas de ADMIN deberan de registrarse o en su defecto comentar el middleware de authMaster*/
 
 module.exports = router;

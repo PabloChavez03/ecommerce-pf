@@ -5,14 +5,14 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res) => {
-    const {  login_name, login_password} = req.body;
+  const { login_name, login_password } = req.body;
   try {
     const client = await Cliente.findOne({ where: { login_name } });
 
     //   console.log(user)
 
     const passwordCorrect =
-    client === null
+      client === null
         ? false
         : await bcrypt.compare(login_password, client.login_password);
 
@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({ error: `${error}` });
   }
 });
 
