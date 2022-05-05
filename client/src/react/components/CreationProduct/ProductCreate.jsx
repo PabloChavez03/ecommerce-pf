@@ -1,10 +1,9 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import {
 	getAllCategoriesForForm,
-	getDetails,
 	postProduct,
 } from "../../../redux/actions-types";
 
@@ -66,23 +65,16 @@ export default function ProductCreate() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [canAddImage, setCanAddImage] = useState(false);
-	const { productId } = useParams();
   
-	useEffect(()=>{
-	  dispatch(getDetails(productId));
-	}, [dispatch, productId]);
-
 	useEffect(() => {
 		dispatch(getAllCategoriesForForm());
 	}, [dispatch]);
-
-	const productToUpdate = useSelector((state)=>state.details);
 
 	//Categorias para devolver keys
 	//let categories = useSelector((state) => state.categoriesForForm);
 	// console.log(categories)
 
-	const initialState = productId === undefined ? {
+	const initialState = {
 		name: "",
 		description: "",
 		images: [],
@@ -99,19 +91,6 @@ export default function ProductCreate() {
 			careInfo: "",
 		},
 		variants: [],
-	} : {
-		name: productToUpdate.name,
-		description: productToUpdate.description,
-		images: productToUpdate.images,
-		previousPrice: productToUpdate.previousPrice,
-		isOffertPrice: productToUpdate.isOffertPrice,
-		currentPrice: productToUpdate.currentPrice,
-		color: productToUpdate.color,
-		gender: productToUpdate.gender,
-		brandName: productToUpdate.brandName,
-		// category: [],
-		info: productToUpdate.info,
-		variants: productToUpdate.variants,
 	};
 
 	const [input, setInput] = useState(initialState);
@@ -131,7 +110,7 @@ export default function ProductCreate() {
 				[e.target.name]: e.target.value,
 			})
 		);
-	}
+	};
 
 	// function handleSelectCategoryOnChange(e) {
 	// 	const value = e.target.value;
@@ -177,15 +156,15 @@ export default function ProductCreate() {
 			navigate("/");
 			alert("Producto creado con exito!");
 			navigate("/");
-		}
-	}
+		};
+	};
 
 	function handleCheck(e) {
 		setInput({
 			...input,
 			[e.target.name]: !input.isOffertPrice,
 		});
-	}
+	};
 
 	//para futuros keyPress
 	// const handleKeyPress = (e) => {
@@ -199,6 +178,17 @@ export default function ProductCreate() {
 	// 	}
 	// }
 
+	const handleChangeInfoAditional = (e)=> {
+		e.preventDefault();
+		setInput({
+			...input,
+			info: {
+				...input.info,
+				[e.target.name]:e.target.value
+			}
+		});
+	}
+
 	return (
 		<div className={s.container}>
 			<form className={s.form} onSubmit={(e) => handleSubmit(e)}>
@@ -210,7 +200,7 @@ export default function ProductCreate() {
 						<input
 							className={s.input}
 							type='text'
-							placeholder='Ingrese el nombre!!'
+							placeholder='Ingrese nombre'
 							name='name'
 							value={input.name}
 							onChange={(e) => handleChange(e)}
@@ -223,7 +213,7 @@ export default function ProductCreate() {
 						<textarea
 							className={s.input}
 							type='text'
-							placeholder='Ingrese descripcion!!'
+							placeholder='Ingrese descripción'
 							name='description'
 							value={input.description}
 							onChange={(e) => handleChange(e)}
@@ -286,7 +276,7 @@ export default function ProductCreate() {
 							<input
 								className={s.input}
 								type='number'
-								placeholder='Ingrese precio!!'
+								placeholder='Ingrese precio anterior'
 								name='previousPrice'
 								value={input.previousPrice}
 								onChange={(e) => handleChange(e)}
@@ -300,7 +290,7 @@ export default function ProductCreate() {
 						<input
 							className={s.input}
 							type='number'
-							placeholder='Ingrese precio!!'
+							placeholder='Ingrese precio'
 							name='currentPrice'
 							value={input.currentPrice}
 							onChange={(e) => handleChange(e)}
@@ -316,7 +306,7 @@ export default function ProductCreate() {
 						<input
 							className={s.input}
 							type='text'
-							placeholder='Ingrese marca!!'
+							placeholder='Ingrese marca'
 							name='brandName'
 							value={input.brandName}
 							onChange={(e) => handleChange(e)}
@@ -329,7 +319,7 @@ export default function ProductCreate() {
 						<input
 							className={s.input}
 							type='text'
-							placeholder='Ingrese color!!'
+							placeholder='Ingrese color'
 							name='color'
 							value={input.color}
 							onChange={(e) => handleChange(e)}
@@ -337,14 +327,12 @@ export default function ProductCreate() {
 						{errors.color && <p>{errors.color}</p>}
 					</div>
 				
-
-
 					<div>
 						<label>Género: </label>
 						<select
 							className={s.input}
 							type='text'
-							placeholder='Ingrese fenero!!'
+							placeholder='Ingrese género'
 							name='gender'
 							value={input.gender}
 							onChange={(e) => handleChange(e)}
@@ -353,6 +341,7 @@ export default function ProductCreate() {
 							<option value={"men"}>Hombre</option>
 							<option value={"women"}>Mujer</option>
 						</select>
+						<h5>Género seleccionado: {input.gender === "" ? "Seleccionar género" : input.gender === 'women' ? "Mujer" : "Hombre"}</h5>
 					</div>
 				</div>
 				{/* <div className={s.sectionFive} >
@@ -413,18 +402,17 @@ export default function ProductCreate() {
 								input.info.sizeAndFit ||
 								input.info.careInfo) && (
 								<div>
-									<p>
-										<span className={s.titulo}>About me:</span>{" "}
-										{input.info.aboutMe}
-									</p>
-									<p>
-										<span className={s.titulo}>Size and Fit:</span>{" "}
-										{input.info.sizeAndFit}
-									</p>
-									<p>
-										<span className={s.titulo}>Care info:</span>{" "}
-										{input.info.careInfo}
-									</p>
+									<label>About Me:</label>
+									<input type="text" value={input.info.aboutMe} name="aboutMe" className={s.input} onChange={(e) => handleChangeInfoAditional(e)}>
+									</input>
+									<br/>
+									<label>Size and Fit:</label>
+									<input type="text" value={input.info.sizeAndFit} name="sizeAndFit" className={s.input} onChange={(e) => handleChangeInfoAditional(e)}>
+									</input>
+									<br/>
+									<label>Care info:</label>
+									<input type="text" value={input.info.careInfo} name="careInfo" className={s.input} onChange={(e) => handleChangeInfoAditional(e)}>
+									</input>
 								</div>
 							)}
 						</fieldset>
@@ -453,23 +441,12 @@ export default function ProductCreate() {
 							""
 						)}
 					</div>
-
-
-					{
-						productId === undefined?
 						<button
 						type='submit'
 						className={Object.values(errors).length === 0 ? s.btn : s.btnDisable}
 					>
 						Crear Producto
-					</button> : 					<button
-						type='submit'
-						className={Object.values(errors).length === 0 ? s.btn : s.btnDisable}
-					>
-						Modificar Producto
-					</button>
-					}
-
+					</button> 
 				</div>
 			</form>
 		</div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts, setCurrentPage } from "../../../../redux/actions-types";
+import { getAllProducts, setDetails } from "../../../../redux/actions-types";
 import Filter from "../../../components/Filters/Filter";
 import Paginated from "../../../components/Paginated/Paginated";
 import SearchProducts from "../SearchProducts/SearchProducts";
@@ -24,7 +24,9 @@ export default function AllProducts() {
 
   useEffect(() => {
     dispatch(getAllProducts());
+    dispatch(setDetails());
   }, [dispatch]);
+
 
   return (
     <div className={style.container} >

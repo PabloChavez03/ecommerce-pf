@@ -6,6 +6,7 @@ import {
 	getAllCategoriesForForm,
 	getDetails,
 	postProduct,
+	setDetails,
 } from "../../../../redux/actions-types";
 
 // Components
@@ -62,7 +63,7 @@ function validate(input) {
 	return errors;
 }
 
-export default function ProductCreate() {
+export default function UpdateProduct() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [canAddImage, setCanAddImage] = useState(false);
@@ -72,37 +73,80 @@ export default function ProductCreate() {
 	  dispatch(getDetails(productId));
 	}, [dispatch, productId]);
 
-	useEffect(() => {
-		dispatch(getAllCategoriesForForm());
-	}, [dispatch]);
-
 	const productToUpdate = useSelector((state)=>state.details);
 
+	// useEffect(() => {
+	// 	dispatch(getAllCategoriesForForm());
+	// }, [dispatch]);
+
+	// useEffect(() => {
+	// 	dispatch(setDetails(productToUpdate));
+	// },[dispatch, productToUpdate,]);
+	
 	//Categorias para devolver keys
 	//let categories = useSelector((state) => state.categoriesForForm);
 	// console.log(categories)
+	// console.log(productToUpdate)
+	// const initialState = {
+	// 	name: productToUpdate.name,
+	// 	description: productToUpdate.description,
+	// 	images: productToUpdate.images,
+	// 	previousPrice: productToUpdate.previousPrice,
+	// 	isOffertPrice: productToUpdate.isOffertPrice,
+	// 	currentPrice: productToUpdate.currentPrice,
+	// 	color: productToUpdate.color,
+	// 	gender: productToUpdate.gender,
+	// 	brandName: productToUpdate.brandName,
+	// 	// category: [],
+	// 	info: productToUpdate.info,
+	// 	variants: productToUpdate.variants,
+	// };
 
-	const initialState = {
-		name: productToUpdate.name,
-		description: productToUpdate.description,
-		images: productToUpdate.images,
-		previousPrice: productToUpdate.previousPrice,
-		isOffertPrice: productToUpdate.isOffertPrice,
-		currentPrice: productToUpdate.currentPrice,
-		color: productToUpdate.color,
-		gender: productToUpdate.gender,
-		brandName: productToUpdate.brandName,
+	const stateErrors = {
+		name: "",
+		description: "",
+		images: [],
+		previousPrice: 0,
+		isOffertPrice: false,
+		currentPrice: 0,
+		color: "",
+		gender: "",
+		brandName: "",
 		// category: [],
-		info: productToUpdate.info,
-		variants: productToUpdate.variants,
+		info: {
+			aboutMe: "",
+			sizeAndFit: "",
+			careInfo: "",
+		},
+		variants: [],
 	};
-
-	const [input, setInput] = useState(initialState);
-	const [errors, setError] = useState(initialState);
+	const [input, setInput] = useState({
+		name: "",
+		description: "",
+		images: [],
+		previousPrice: 0,
+		isOffertPrice: false,
+		currentPrice: 0,
+		color: "",
+		gender: "",
+		brandName: "",
+		// category: [],
+		info: {
+			aboutMe: "",
+			sizeAndFit: "",
+			careInfo: "",
+		},
+		variants: [],
+	});
+	const [errors, setError] = useState(stateErrors);
 	// let demoCategories = [];
 	// demoCategories = categories.filter((el) => input.category.includes(el.id));
 	// console.log(demoCategories)
 
+	useEffect(() => {
+		setInput(productToUpdate);
+	},[productToUpdate])
+	
 	function handleChange(e) {
 		setInput({
 			...input,
@@ -170,6 +214,16 @@ export default function ProductCreate() {
 		});
 	}
 
+	const handleChangeInfoAditional = (e)=> {
+		e.preventDefault();
+		setInput({
+			...input,
+			info: {
+				...input.info,
+				[e.target.name]:e.target.value
+			}
+		});
+	}
 	//para futuros keyPress
 	// const handleKeyPress = (e) => {
 	// 	if (e.key === "Enter") {
@@ -194,7 +248,7 @@ export default function ProductCreate() {
 						<input
 							className={s.input}
 							type='text'
-							placeholder='Ingrese el nombre!!'
+							placeholder='Ingrese el nombre'
 							name='name'
 							value={input.name}
 							onChange={(e) => handleChange(e)}
@@ -207,7 +261,7 @@ export default function ProductCreate() {
 						<textarea
 							className={s.input}
 							type='text'
-							placeholder='Ingrese descripcion!!'
+							placeholder='Ingrese descripción'
 							name='description'
 							value={input.description}
 							onChange={(e) => handleChange(e)}
@@ -230,7 +284,7 @@ export default function ProductCreate() {
 					/>
 
 					<div className={s.imageContainerGlobal}>
-						{input.images.length
+						{input.images?.length
 							? input.images.map((el, idx) => {
 									return (
 										<div key={`addedImg${idx}`} className={s.imageContainer}>
@@ -248,7 +302,7 @@ export default function ProductCreate() {
 										</div>
 									);
 							  })
-							: ""}
+							: <p>No hay imagenes</p>}
 					</div>
 				</div>
 
@@ -270,12 +324,12 @@ export default function ProductCreate() {
 							<input
 								className={s.input}
 								type='number'
-								placeholder='Ingrese precio!!'
+								placeholder='Ingrese precio anterior'
 								name='previousPrice'
 								value={input.previousPrice}
 								onChange={(e) => handleChange(e)}
 							/>
-							{errors.previousPrice && <p>{errors.previousPrice}</p>}
+							{errors.previousPrice && input.previousPrice !== "" ? <p>{errors.previousPrice}</p>:""}
 						</div>
 					)}
 
@@ -284,7 +338,7 @@ export default function ProductCreate() {
 						<input
 							className={s.input}
 							type='number'
-							placeholder='Ingrese precio!!'
+							placeholder='Ingrese precio'
 							name='currentPrice'
 							value={input.currentPrice}
 							onChange={(e) => handleChange(e)}
@@ -300,7 +354,7 @@ export default function ProductCreate() {
 						<input
 							className={s.input}
 							type='text'
-							placeholder='Ingrese marca!!'
+							placeholder='Ingrese marca'
 							name='brandName'
 							value={input.brandName}
 							onChange={(e) => handleChange(e)}
@@ -313,7 +367,7 @@ export default function ProductCreate() {
 						<input
 							className={s.input}
 							type='text'
-							placeholder='Ingrese color!!'
+							placeholder='Ingrese color'
 							name='color'
 							value={input.color}
 							onChange={(e) => handleChange(e)}
@@ -328,7 +382,7 @@ export default function ProductCreate() {
 						<select
 							className={s.input}
 							type='text'
-							placeholder='Ingrese fenero!!'
+							placeholder='Ingrese género'
 							name='gender'
 							value={input.gender}
 							onChange={(e) => handleChange(e)}
@@ -337,6 +391,7 @@ export default function ProductCreate() {
 							<option value={"men"}>Hombre</option>
 							<option value={"women"}>Mujer</option>
 						</select>
+						<h5>Género seleccionado: {input.gender === "" ? "Seleccionar género" : input.gender === 'women' ? "Mujer" : "Hombre"}</h5>
 					</div>
 				</div>
 				{/* <div className={s.sectionFive} >
@@ -393,22 +448,21 @@ export default function ProductCreate() {
 
 						<fieldset className={s.showInfo}>
 							<legend>Información adicional actual: </legend>
-							{(input.info.aboutMe ||
-								input.info.sizeAndFit ||
-								input.info.careInfo) && (
+							{(input.info?.aboutMe ||
+								input.info?.sizeAndFit ||
+								input.info?.careInfo) && (
 								<div>
-									<p>
-										<span className={s.titulo}>About me:</span>{" "}
-										{input.info.aboutMe}
-									</p>
-									<p>
-										<span className={s.titulo}>Size and Fit:</span>{" "}
-										{input.info.sizeAndFit}
-									</p>
-									<p>
-										<span className={s.titulo}>Care info:</span>{" "}
-										{input.info.careInfo}
-									</p>
+									<label>About Me:</label>
+									<input type="text" value={input.info.aboutMe} name="aboutMe" className={s.input} onChange={(e) => handleChangeInfoAditional(e)}>
+									</input>
+									<br/>
+									<label>Size and Fit:</label>
+									<input type="text" value={input.info.sizeAndFit} name="sizeAndFit" className={s.input} onChange={(e) => handleChangeInfoAditional(e)}>
+									</input>
+									<br/>
+									<label>Care info:</label>
+									<input type="text" value={input.info.careInfo} name="careInfo" className={s.input} onChange={(e) => handleChangeInfoAditional(e)}>
+									</input>
 								</div>
 							)}
 						</fieldset>
@@ -416,7 +470,7 @@ export default function ProductCreate() {
 
 					<div>
 						<AddVariants input={input} setInput={setInput} />
-						{input.variants.length ? (
+						{input.variants?.length ? (
 							<fieldset className={s.showInfo}>
 								<legend>Variantes: </legend>
 								{input.variants.map((el, idx) => {

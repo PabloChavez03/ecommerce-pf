@@ -96,6 +96,26 @@ export const handleSubmitInfo = (
 // 		stock: value
 // 	});
 // };
+// export const handleSubmitAddSize = (
+// 	e,
+// 	input,
+// 	setInput,
+// 	variants,
+// 	setVariants,
+// 	setCanAddVariant,
+// ) => {
+// 	e.preventDefault();
+// 	setInput({
+// 		...input,
+// 		variants: [...input.variants, variants],
+// 	});
+// 	setCanAddVariant(false);
+// 	setVariants({
+// 		brandSize: "",
+// 		isInStock: true,
+// 		stock: ""
+// 	})
+// };
 export const handleSubmitAddSize = (
 	e,
 	input,
@@ -116,7 +136,6 @@ export const handleSubmitAddSize = (
 		stock: ""
 	})
 };
-
 export const handleSizeDelete = (e, elClicked, input, setInput) => {
 	e.preventDefault();
 	setInput({
