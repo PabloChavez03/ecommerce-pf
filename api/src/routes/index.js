@@ -14,6 +14,9 @@ router.use("/products", require("./productsByCategory"));
 router.use("/products/detail", require("./productsDetail"));
 router.use("/allproducts", require("./getAllProducts"));
 router.use("/products/genre", require("./productsByGenre.js"));
+
+
+
 router.use("/carrito", require("./carrito"));
 router.use("/users/login", require("./loginUser"));
 router.use("/users/create", require("./userCreate"));
@@ -29,6 +32,7 @@ router.use("/products/create", adminMaster, require("./postProduct"));
 router.use("/products/update", adminMaster, require("./updateProduct"));
 router.use("/products/delete", adminMaster, require("./deleteProduct"));
 router.use("/product/stock", adminMaster, require("./updateStock"));
+router.use("/product/review", require("./review"));
 router.use("/users/update", adminMaster, require("./userUpdate"));
 router.use("/users/delete", adminMaster, require("./userDelete"));
 
