@@ -11,6 +11,11 @@ module.exports = (sequelize) => {
         primaryKey: true,
         unique: true,
       },
+      dni_client:{
+        type: DataTypes.BIGINT(),
+        allowNull: false,
+        unique: true,
+    },
       email: {
         type: DataTypes.STRING(),
         allowNull: false,
@@ -41,7 +46,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       address: {
-        type: DataTypes.JSON(),
+        type: DataTypes.STRING(),
         allowNull: false,
       },
       isRegistered: {

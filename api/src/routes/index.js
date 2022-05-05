@@ -27,4 +27,5 @@ router.use("/users/update", require("./userUpdate"));
 router.use("/users/delete", require("./userDelete"));
 router.use("/users/client/create", require("./createClient"));
 router.use("/users/client/update", require("./updateClient"));
+router.use("/users/client/delete", require("./deleteClient"));
 module.exports = router;

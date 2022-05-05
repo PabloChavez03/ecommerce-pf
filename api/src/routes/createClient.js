@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 router.post("/", async (req, res) => {
   const {
     phone,
+    dni_client,
     email,
     login_name,
     login_password,
@@ -17,12 +18,15 @@ router.post("/", async (req, res) => {
   } = req.body;
   console.log(req.body);
 
+
+
   try {
     const saltRam = 10;
     const passwordHash = await bcrypt.hash(login_password, saltRam);
 
     const client = await Cliente.create({
       phone,
+      dni_client,
       email,
       login_name,
       login_password: passwordHash,
