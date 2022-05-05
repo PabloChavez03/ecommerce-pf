@@ -2,7 +2,6 @@ const { Router } = require("express");
 const { Cliente } = require("../db");
 const router = Router();
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken');
 
 router.post("/", async (req, res) => {
   const {
