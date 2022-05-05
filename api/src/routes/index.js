@@ -15,6 +15,7 @@ router.use("/products/delete", require("./deleteProduct"));
 router.use("/allproducts", require("./getAllProducts"));
 router.use("/products/genre", require("./productsByGenre.js"));
 
+router.use("/product/review", require("./review"));
 router.use("/product/stock", require("./updateStock"));
 
 router.use("/carrito", require("./carrito"));
