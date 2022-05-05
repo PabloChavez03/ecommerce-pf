@@ -1,21 +1,17 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   sequelize.define(
-    "Users",
+    "Role",
     {
-      legajo_user: {
-        type: DataTypes.BIGINT(),
+      id: {
+        type: DataTypes.UUID(),
+        defaultValue: DataTypes.UUIDV4(),
         primaryKey: true,
-        unique: true,
-        autoIncrement: true,
-      },
-      user_name: {
-        type: DataTypes.STRING(),
         allowNull: false,
       },
-      user_password: {
+      name: {
         type: DataTypes.STRING(),
-        allowNull: false,
+        allowNull: true,  
       },
     },
     { timestamps: false }

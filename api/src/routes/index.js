@@ -4,7 +4,7 @@ const { Router } = require("express");
 
 const router = Router();
 
-const adminMaster = require("../middleware/adminMaster");
+const { authMaster,isAdmin } = require("../middleware/authMaster");
 
 // Modularizando las rutas
 
@@ -14,29 +14,28 @@ router.use("/products", require("./productsByCategory"));
 router.use("/products/detail", require("./productsDetail"));
 router.use("/allproducts", require("./getAllProducts"));
 router.use("/products/genre", require("./productsByGenre.js"));
-
-router.use("/carrito", require("./carrito"));
-router.use("/users/login", require("./loginUser"));
-router.use("/users/create", require("./userCreate"));
+router.use("/product/review", require("./review"));
+// router.use("/carrito", require("./carrito"));
 
 //----------------  for client  -------------------------------
-// router.use("/client", require("./client"));
+router.use("/users/client/login", require("./loginClient"));
 router.use("/users/client/create", require("./createClient"));
 router.use("/users/client/update", require("./updateClient"));
-router.use("/users/client/delete", require("./deleteClient"));
 
 //----------------  for admin  --------------------------------
-router.use("/products/create", adminMaster, require("./postProduct"));
-router.use("/products/update", adminMaster, require("./updateProduct"));
-router.use("/products/delete", adminMaster, require("./deleteProduct"));
-router.use("/product/stock", adminMaster, require("./updateStock"));
-router.use("/product/review", require("./review"));
-router.use("/users/update", adminMaster, require("./userUpdate"));
-router.use("/users/delete", adminMaster, require("./userDelete"));
+router.use("/users/create", require("./userCreate"));
+router.use("/users/login", require("./loginUser"));
+router.use("/users/client/delete", authMaster, require("./deleteClient"));
+router.use("/products/create", [authMaster, isAdmin], require("./postProduct"));
+router.use("/products/update", [authMaster, isAdmin], require("./updateProduct"));
+router.use("/products/delete", [authMaster, isAdmin], require("./deleteProduct"));
+router.use("/product/stock", [authMaster, isAdmin], require("./updateStock"));
+router.use("/users/update", [authMaster, isAdmin], require("./userUpdate"));
+router.use("/users/delete", [authMaster, isAdmin], require("./userDelete"));
 
 //----------------------Mercado Pago---------------------------------------
 router.use("/mercadopago", require("./mercadoPago"));
 
-/* ¡¡¡ACLARACION!!! Para poder utilizar las rutas de ADMIN deberan de registrarse o en su defecto comentar el middleware de adminMaster*/
+/* ¡¡¡ACLARACION!!! Para poder utilizar las rutas de ADMIN deberan de registrarse o en su defecto comentar el middleware de authMaster*/
 
 module.exports = router;

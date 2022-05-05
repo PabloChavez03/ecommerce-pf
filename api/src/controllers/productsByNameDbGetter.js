@@ -6,9 +6,6 @@ async function getDDBBproductsByName(productName) {
 	const products = await Product.findAll({
 		include: {
 			model: Category,
-			through: {
-				attributes: [],
-			},
 		},
 	});
 

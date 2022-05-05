@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Users } = require("../db");
+const { Users, Role } = require("../db");
 const router = Router();
 const bcrypt = require("bcrypt");
 
@@ -13,16 +13,23 @@ router.post("/", async (req, res) => {
       legajo_user,
       user_name,
       user_password: passwordHash,
-      rol,
     });
 
-     const createdUser = await user.save();
+    if (rol) {
+      const foundRol = await Role.findOne({ where: { name: rol } });
+      await user.setRole(foundRol);
+    } else {
+      const roleClient = await Role.findOne({ where: { name: "client" } });
+      await user.setRole(roleClient);
+    }
+
+    const createdUser = await user.save();
 
     createdUser
-      ? res.status(200).json(createdUser + "creado")
+      ? res.status(200).json(user + "creado")
       : res.sendStatus(404);
   } catch (error) {
-    res.status(500).json({ error: error.parent.detail });
+    res.status(500).json({ error });
   }
 });
 
