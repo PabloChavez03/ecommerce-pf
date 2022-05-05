@@ -15,14 +15,12 @@ router.use("/products/detail", require("./productsDetail"));
 router.use("/allproducts", require("./getAllProducts"));
 router.use("/products/genre", require("./productsByGenre.js"));
 
-
-
 router.use("/carrito", require("./carrito"));
 router.use("/users/login", require("./loginUser"));
 router.use("/users/create", require("./userCreate"));
 
 //----------------  for client  -------------------------------
-router.use("/client", require("./client"));
+// router.use("/client", require("./client"));
 router.use("/users/client/create", require("./createClient"));
 router.use("/users/client/update", require("./updateClient"));
 router.use("/users/client/delete", require("./deleteClient"));

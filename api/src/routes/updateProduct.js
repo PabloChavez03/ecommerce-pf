@@ -44,7 +44,7 @@ router.patch("/:id", async (req, res) => {
 			.catch((e) => e.message);
 
 		let categoryDDBB = await Category.findByPk(category);
-		await product.addCategory(categoryDDBB);
+		await product.setCategory(categoryDDBB);
 
 		// category.forEach(async (el) => {
 		// 	let categoryDDBB = await Category.findByPk(el);
