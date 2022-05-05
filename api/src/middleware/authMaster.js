@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-module.exports = (req,res,next) => {
+
+const authMaster = (req,res,next) => {
   //----------------------------AUTHORIZATION--------------------------------------------------------
   const authorization = req.get("authorization");
 
@@ -24,3 +25,7 @@ module.exports = (req,res,next) => {
 
   next();
 }
+
+
+
+module.exports = authMaster;
