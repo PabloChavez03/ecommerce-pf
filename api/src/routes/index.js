@@ -26,13 +26,13 @@ router.use("/users/client/update", require("./updateClient"));
 router.use("/users/client/delete", require("./deleteClient"));
 
 //----------------  for admin  --------------------------------
-router.use("/products/create", adminMaster, require("./postProduct"));
-router.use("/products/update", adminMaster, require("./updateProduct"));
-router.use("/products/delete", adminMaster, require("./deleteProduct"));
-router.use("/product/stock", adminMaster, require("./updateStock"));
+router.use("/products/create", require("./postProduct"));
+router.use("/products/update", require("./updateProduct"));
+router.use("/products/delete", require("./deleteProduct"));
+router.use("/product/stock", require("./updateStock"));
 router.use("/product/review", require("./review"));
-router.use("/users/update", adminMaster, require("./userUpdate"));
-router.use("/users/delete", adminMaster, require("./userDelete"));
+router.use("/users/update", require("./userUpdate"));
+router.use("/users/delete", require("./userDelete"));
 
 //-------------------------------------------------------------
 

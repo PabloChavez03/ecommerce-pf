@@ -15,7 +15,7 @@ router.patch("/:id", async (req, res) => {
 		currentPrice,
 		color,
 		variants,
-		category,
+		CategoryId,
 	} = req.body;
 
 	let { id } = req.params;
@@ -40,11 +40,12 @@ router.patch("/:id", async (req, res) => {
 				brandName,
 				color,
 				isInStock: isThereProducts ? true : false,
+				CategoryId,
 			})
 			.catch((e) => e.message);
 
-		let categoryDDBB = await Category.findByPk(category);
-		await product.setCategory(categoryDDBB);
+		let categoryDDBB = await Category.findByPk(CategoryId);
+		if (categoryDDBB) await product.setCategory(categoryDDBB);
 
 		// category.forEach(async (el) => {
 		// 	let categoryDDBB = await Category.findByPk(el);
@@ -68,10 +69,14 @@ router.patch("/:id", async (req, res) => {
 					currentPrice,
 					color,
 					variants,
+					CategoryId,
 				})
 				.catch((e) => e.message);
 
 			await productDetail.save();
+
+			let categoryDDBB = await Category.findByPk(CategoryId);
+			if (categoryDDBB) await productDetail.setCategory(categoryDDBB);
 		}
 
 		res.status(201).send(`Producto modificado`);
