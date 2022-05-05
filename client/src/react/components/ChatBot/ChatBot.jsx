@@ -21,6 +21,7 @@ export default function ChatBot() {
     console.log(item);
     dispatch(getChatBot(item));
   };
+  console.log(dataChatBot)
   return (
     <div>
       {activeBtn ? (
