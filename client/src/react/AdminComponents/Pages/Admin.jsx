@@ -8,6 +8,7 @@ import ProductCreate from "../../components/CreationProduct/ProductCreate.jsx";
 import AllProducts from "../Components/CardsAdmin/AllProducts";
 import DeleteProduct from "../Components/DeleteProduct/DeleteProduct";
 import UpdateProduct from "../Components/UpdateProduct/UpdateProduct";
+import AdminCreate from "../Components/AdminCreate/AdminCreate";
 
 const Admin = () => {
 	return (
@@ -24,6 +25,7 @@ const Admin = () => {
 						<Route path={"/allproducts"} element={<AllProducts />} />
 						<Route path={"/delete/:productId"} element={<DeleteProduct />} />
 						<Route path={"/modification/:productId"} element={<UpdateProduct />} />
+						<Route path={"/admincreate"} element={<AdminCreate/>} />
 					</Routes>
 				</div>
 			</div>
