@@ -3,20 +3,20 @@ const adaptListProducts = require("./productsAdapter");
 
 async function getAPIproducts(categoryId) {
 	const options = {
-    method: "GET",
-    url: "https://asos2.p.rapidapi.com/products/v2/list",
-    params: {
-      store: "US",
-      offset: "0",
-      categoryId: `${categoryId}`,
-      limit: "48",
-      // q: query
-    },
-    headers: {
-      "X-RapidAPI-Host": "asos2.p.rapidapi.com",
-      "X-RapidAPI-Key": "eb54dd77f1msh905b4c74d0c9228p185e3bjsn3d4a4d9f9628",
-    },
-  };
+		method: "GET",
+		url: "https://asos2.p.rapidapi.com/products/v2/list",
+		params: {
+			store: "US",
+			offset: "0",
+			categoryId: `${categoryId}`,
+			limit: "48",
+			// q: query
+		},
+		headers: {
+			"X-RapidAPI-Host": "asos2.p.rapidapi.com",
+			"X-RapidAPI-Key": "94f1689d8emsh741ab8da132723bp121b58jsn2f30a124d7e5",
+		},
+	};
 
 	return axios(options)
 		.then(({ data }) => adaptListProducts(data))
