@@ -17,7 +17,6 @@ const Login = () => {
 	return (
 		<>
 			<NavBar />
-
 			<div className={style.loginContainer}>
 				{/**Ingresando usuario */}
 				<div className={style.formLogin}>
@@ -45,7 +44,12 @@ const Login = () => {
 								placeholder='Contraseña'
 							/>
 						</div>
-						<button className={style.formButtonLogin}>INGRESAR</button>
+						<button
+							className={style.formButtonLogin}
+							onClick={() => alert("Falta colocar funcionalidad")}
+						>
+							INGRESAR
+						</button>
 					</form>
 				</div>
 				{/**Creando usuario */}
@@ -81,7 +85,10 @@ const Login = () => {
 										placeholder='Repetir contraseña'
 									/>
 								</div>
-								<button className={style.formButtonCreateActive}>
+								<button
+									className={style.formButtonCreateActive}
+									onClick={() => alert("Falta colocar funcionalidad")}
+								>
 									CREAR Y CONTINUAR
 								</button>
 								<button
