@@ -56,20 +56,16 @@ export const filterbrands = (brand, allProducts) => {
 export const currentcategory = async (gender) => {
     try {
         const data = await urlProdutcGender(gender);//Women
-        let categoryArray = []
-        data.forEach(item => {
-            item.Categories.forEach(element => {
-                if (!categoryArray.includes(element)) {
-                    categoryArray.push(element)
-                }
-            })
+        let categoryArray = data.map(item => {
+            return item.Category
         })
         let hash = {};
         categoryArray = categoryArray.filter((current) => {
             var exists = !hash[current.id];
             hash[current.id] = true;
             return exists;
-        });let newCategory =[]
+        });
+        let newCategory =[]
         categoryArray.forEach(item=>{
             if(item.genre.toLowerCase()===gender.toLowerCase()){
                 newCategory.push(item)

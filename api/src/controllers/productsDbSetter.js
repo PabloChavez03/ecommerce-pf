@@ -1,6 +1,6 @@
 const getAPIproducts = require("./productsApiGetter");
 
-const { Product, Category, Variants } = require("../db");
+const { Product, Category } = require("../db");
 
 async function setDDBBproducts(categoryId) {
 	const products = await getAPIproducts(categoryId);
@@ -24,7 +24,7 @@ async function setDDBBproducts(categoryId) {
 			},
 		}).catch((e) => console.log(e));
 
-		newProduct.addCategories(category);
+		newProduct.setCategory(category);
 	});
 }
 

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getProductByName } from "../../../redux/actions-types";
-import lupa from "./images/lupa-de-busqueda.png";
 import style from "./SearchBar.module.css";
 
 export default function SearchBar() {

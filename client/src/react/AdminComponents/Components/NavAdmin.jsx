@@ -8,13 +8,16 @@ const NavAdmin = () => {
 			<nav className={style.navContainer}>
 				<ul className={style.listContainer}>
 					<NavLink className={style.navLink} to={"/admin"}>
-						Admin
+						Principal
 					</NavLink>
-					<NavLink className={style.navLink} to={"/admin/producto"}>
-						Producto
+					<NavLink className={style.navLink} to={"/admin/createproduct"}>
+						Crear Producto
 					</NavLink>
 					<NavLink className={style.navLink} to={"/admin/allproducts"}>
-						Todos los productos
+						Listado de Productos
+					</NavLink>
+					<NavLink className={style.navLink} to={"/admin/createadmin"}>
+						Crear Administrador
 					</NavLink>
 				</ul>
 			</nav>

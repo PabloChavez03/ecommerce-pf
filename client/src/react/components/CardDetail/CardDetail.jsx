@@ -16,12 +16,10 @@ export default function CardDetail() {
 	}, [dispatch, productId]);
 
 	const productDetail = useSelector((state) => state.details);
-
 	return (
 		<div>
 			<NavBar />
 			{productDetail.name ? (
-				<div>
 					<Card
 						id={productDetail.id}
 						name={productDetail.name}
@@ -36,7 +34,6 @@ export default function CardDetail() {
 						variants={productDetail.variants}
 						info={productDetail.info}
 					/>
-				</div>
 			) : (
 				<h1>Loading...</h1>
 			)}

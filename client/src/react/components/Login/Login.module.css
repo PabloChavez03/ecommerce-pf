@@ -1,0 +1,143 @@
+.loginContainer {
+	width: 100%;
+	min-height: calc(100vh - 200px);
+	display: flex;
+	flex-direction: column;
+	justify-items: center;
+	align-items: center;
+
+	background-color: #eef3f5;
+
+	padding: 20px 20px;
+	gap: 20px;
+}
+
+/* Ingresar usuario */
+.formLogin {
+	min-height: 550px;
+	max-width: 400px;
+	padding: 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	background-color: #fff;
+}
+
+.loginTitle {
+	font-size: 25px;
+}
+
+.loginInfoText {
+	color: #687880;
+	font-size: 15px;
+	margin-bottom: 20px;
+}
+
+.formInputContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.formLabel {
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.formInput {
+	width: 100%;
+	height: 45px;
+	border-radius: 20px;
+	border: 1px solid #aab0b5;
+	color: #263746;
+	padding: 0 20px;
+	font-size: 11px;
+}
+
+/*------------------------------*/
+/* Estilos generales de botones*/
+.formButtonLogin,
+.formButtonCreateActive,
+.formButtonBack {
+	width: 100%;
+	font-size: 13px;
+	padding: 14px 28px;
+	border-radius: 50px;
+	font-weight: 400;
+	text-align: center;
+	border: 1px solid transparent;
+	margin: 10px 0;
+	cursor: pointer;
+}
+/* Fin de estilo generales de botones*/
+
+.formTitle {
+	margin-bottom: 30px;
+}
+.formButtonLogin {
+	background-color: #ad0c36;
+	color: #fff;
+}
+
+/* Section Creando usuario */
+.formCreateUser {
+	min-height: 550px;
+	max-width: 400px;
+	padding: 40px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+/* Form para crear Activo */
+.formCreateActive {
+	display: flex;
+	flex-direction: column;
+}
+
+.formButtonCreateActive {
+	background-color: #687880;
+	color: #fff;
+}
+
+.formButtonBack {
+	background-color: transparent;
+}
+
+/* Form para crear No Activo*/
+
+.formCreateNotActive {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: flex-start;
+}
+
+.formListInfoContainer {
+	margin: 0 0 13px 20px;
+	font-size: 15px;
+	color: #687880;
+}
+
+.error {
+	color: deeppink;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
+@media (min-width: 760px) {
+	.loginContainer {
+		flex-direction: row;
+		justify-content: center;
+		align-items: flex-start;
+	}
+}
+
+@media (min-width: 900px) {
+	.loginContainer {
+		padding: 20px 100px;
+	}
+}

@@ -4,7 +4,6 @@ const router = Router();
 
 router.delete("/:id", async (req, res) => {
 	const { id } = req.params;
-	console.log(req.params);
 
 	const deleted = await Product.destroy({
 		where: {

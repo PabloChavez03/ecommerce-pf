@@ -1,37 +1,51 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { deleteProduct } from "../../../../redux/actions-types";
-import NavAdmin from "../NavAdmin";
+import back from "../../../components/svg/volver-flecha.png";
+import style from "./DeleteProduct.module.css";
+import alert from "../../../components/svg/advertencia.png";
+
 export default function DeleteProduct() {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const allProducts = useSelector((state)=> state.products);
-  let gender = allProducts.find((e)=> e.id === parseInt(productId));
-  gender = gender.Categories[0].genre;
-  gender = gender[0].toUpperCase() + gender.slice(1);
 
   const handleClickSi = (event) => {
     event.preventDefault();
     dispatch(deleteProduct(productId));
     alert("Producto eliminado exitosamente");
-    navigate("/");
+    navigate("/admin");
   };
 
   return (
-    <div>
-      <div>
-        <NavLink to={`/admin`} style={{ textDecoration: "none" }}>
-          <button>ATRAS</button>
+    <div className={style.container}>
+      <div className={style.imgContainer}>
+        <NavLink to={`/admin/allproducts`} style={{ textDecoration: "none" }}>
+        <img 
+            src={back}
+            alt="Img back"
+            className={style.img}
+          />
         </NavLink>
-        <h4>Confirma la eliminación del producto?</h4>
-        <h5>Advertencia: Los datos no podrán recuperarse.</h5>
-        <button onClick={(e) => handleClickSi(e)}>Si</button>
-        <NavLink to={`/`} style={{ textDecoration: "none" }}>
-          <button>No</button>
+        </div>
+        <div className={style.confirmation}>
+        <h2>Desea eliminar este producto?</h2>
+        <div>
+          <img 
+            src={alert}
+            alt="Img alert"
+            className={style.imgAlert}
+          />
+          <h5>ADVERTENCIA: Los datos no podrán recuperarse.</h5>
+        </div>
+        <div>
+        <button onClick={(e) => handleClickSi(e)} className={style.buttons}>Confirmar</button>
+        <NavLink to={`/admin/allproducts`} style={{ textDecoration: "none" }}>
+          <button className={style.buttons}>Cancelar</button>
         </NavLink>
-      </div>
+        </div>
+        </div>
     </div>
   );
 }

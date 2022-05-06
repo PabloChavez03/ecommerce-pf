@@ -79,30 +79,63 @@ export const handleSubmitInfo = (
 };
 
 /** input.variants handlers */
-export const handleSizeChange = (e, size, setSize, input) => {
-	const { value } = e.target;
-	e.preventDefault();
-	setSize({
-		brandSize: value,
-	});
-};
+// export const handleSizeChange = (e, variants, setVariants, input) => {
+// 	const { value } = e.target;
+// 	e.preventDefault();
+// 	setVariants({
+// 		...variants,
+// 		brandSize: value
+// 	});
+// };
 
+// export const handleStockChange = (e, variants, setVariants, input) => {
+// 	const { value } = e.target;
+// 	e.preventDefault();
+// 	setVariants({
+// 		...variants,
+// 		stock: value
+// 	});
+// };
+// export const handleSubmitAddSize = (
+// 	e,
+// 	input,
+// 	setInput,
+// 	variants,
+// 	setVariants,
+// 	setCanAddVariant,
+// ) => {
+// 	e.preventDefault();
+// 	setInput({
+// 		...input,
+// 		variants: [...input.variants, variants],
+// 	});
+// 	setCanAddVariant(false);
+// 	setVariants({
+// 		brandSize: "",
+// 		isInStock: true,
+// 		stock: ""
+// 	})
+// };
 export const handleSubmitAddSize = (
 	e,
 	input,
 	setInput,
-	size,
-	setSize,
+	variants,
+	setVariants,
 	setCanAddVariant,
 ) => {
 	e.preventDefault();
 	setInput({
 		...input,
-		variants: [...input.variants, size],
+		variants: [...input.variants, variants],
 	});
 	setCanAddVariant(false);
+	setVariants({
+		brandSize: "",
+		isInStock: true,
+		stock: ""
+	})
 };
-
 export const handleSizeDelete = (e, elClicked, input, setInput) => {
 	e.preventDefault();
 	setInput({
