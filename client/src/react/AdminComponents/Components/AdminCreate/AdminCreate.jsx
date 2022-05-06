@@ -22,6 +22,9 @@ const AdminCreate = () => {
 		submit: "",
 	  });
 
+	const [correct, setCorrect] = useState(false);
+	
+
 	  
 
 	function validate(input) {
@@ -30,17 +33,21 @@ const AdminCreate = () => {
 		if (input.user_name.length <= 4) {
 			errors.user_name = "Debe ingresar un nombre";
 		}else{errors.user_name = 'good'}
-		if (input.legajo_user.length <= 6) {
+		if (input.legajo_user.length <= 5) {
 			errors.legajo_user = "Debe ingresar un legajo!";
 		}else{errors.legajo_user = 'good'}
 		if (input.rol.length <= 3) {
-			errors.rol = "Debe ingresar un legajo!";
+			errors.rol = "Debe ingresar un Rol!";
 		}else{errors.rol = 'good'}
-		if (input.user_password.length <= 3 || input.user_password !== input.confirm_user_password) {
+		if (input.user_password.length <= 3 ) {
 			errors.user_password = "Debe ingresar una contraseña!";
 		}else{errors.user_password = 'good'}
+		
+		if (input.confirm_user_password !== newAdmin.user_password) {
+			errors.confirm_user_password = "Ambas contraseñas deben ser iguales!";
+		}else{errors.confirm_user_password = 'good'}
 
-		if(errors.user_name=== 'good' && errors.legajo_user=== 'good' && errors.rol=== 'good' && errors.user_password=== 'good' ){
+		if(errors.user_name=== 'good' && errors.legajo_user === 'good' && errors.rol=== 'good' && errors.user_password=== 'good' && errors.confirm_user_password=== 'good'){
 			errors.submit = 'we good'
 		}
 		return errors
@@ -62,8 +69,9 @@ const AdminCreate = () => {
 	};
 	const handleSubmit= (e)=>{ 
 		e.preventDefault();
+		setCorrect(true)
 		console.log(newAdmin)
-		if(error.submit !== 'we good'){return}
+		if(error.submit !== 'we good'){setActiveCreate(false); return }
 		alert('sumitie')
 	}
 
@@ -87,32 +95,35 @@ const AdminCreate = () => {
 					<form onSubmit={(e) => handleSubmit(e)}>
 					{activeCreate ? (
 						<div className={style.formCreateActive}>
-							<h2 className={style.formTitle}>Crear Cuenta Admin</h2>
+							<h2 className={style.formTitle}>Crear Usuario Admin</h2>
 							{/* <form> */}
 								
 								<div className={style.formInputContainer}>
 									<label className={style.formLabel}>CONTRASEÑA</label>
 									<input
-										className={error.user_password !== 'good' ?  style.error : style.formInput}
+										className={error.user_password !== 'good' && correct ?  style.error : style.formInput}
 										type='password'
 										name='user_password'
 										value={newAdmin.user_password}
 										placeholder='Contraseña'
 										onChange={(e) => handleChangeInputNewAdmin(e)}
 									/>
+									{error.user_password !== 'good' && correct ?  <p className={style.errMsj}>{error.user_password}</p> : <p>{' '}</p>}
+
 								</div>
 								<div className={style.formInputContainer}>
 									<label className={style.formLabel}>
 										CONFIRMAR CONTRASEÑA
 									</label>
 									<input
-										className={style.formInput}
+										className={error.confirm_user_password !== 'good' && correct ?  style.error : style.formInput}
 										name='confirm_user_password'
 										value={newAdmin.confirm_user_password}
 										type='password'
 										placeholder='Repetir contraseña'
 										onChange={(e) => handleChangeInputNewAdmin(e)}
 									/>
+									{error.confirm_user_password !== 'good' && correct ?  <p className={style.errMsj}>{error.confirm_user_password}</p> : <p>{''}</p>}
 								</div>
 								<button
 									className={style.formButtonCreateActive}
@@ -130,39 +141,45 @@ const AdminCreate = () => {
 						</div>
 					) : (
 						<div className={style.formCreateNotActive}>
-							<h2>Crear Cuenta Admin</h2>
+							<h2>Crear Usuario Admin</h2>
 							<div className={style.formInputContainer}>
 									<label className={style.formLabel}>USER NAME</label>
 									<input
-										className={error.user_name === 'good' ?  style.noError : style.formInput}
+										className={error.user_name !== 'good' && correct ?  style.error : style.formInput}
 										type='text'
 										name='user_name'
 										value={newAdmin.user_name}
 										placeholder='User Name'
 										onChange={(e) => handleChangeInputNewAdmin(e)}
 									/>
+									{error.user_name !== 'good' && correct ?  <p className={style.errMsj}>{error.user_name}</p> : <p>{' '}</p>}
+
 								</div>
 								<div className={style.formInputContainer}>
 									<label className={style.formLabel}>LEGAJO</label>
 									<input
-										className={style.formInput}
+										className={error.legajo_user !== 'good' && correct ?  style.error : style.formInput}
 										type='number'
 										name='legajo_user'
 										value={newAdmin.legajo_user}
 										placeholder='Legajo'
 										onChange={(e) => handleChangeInputNewAdmin(e)}
 									/>
+									{error.legajo_user !== 'good' && correct ?  <p className={style.errMsj}>{error.legajo_user}</p> : <p>{' '}</p>}
+
 								</div>
 								<div className={style.formInputContainer}>
 									<label className={style.formLabel}>ROL</label>
 									<input
-										className={style.formInput}
+										className={error.rol !== 'good' && correct ?  style.error : style.formInput}
 										type='text'
 										name='rol'
 										value={newAdmin.rol}
 										placeholder='Rol'
 										onChange={(e) => handleChangeInputNewAdmin(e)}
 									/>
+									{error.rol !== 'good' && correct ?  <p className={style.errMsj}>{error.rol}</p> : <p>{' '}</p>}
+
 								</div>
 							<button
 								className={style.formButtonCreateActive}

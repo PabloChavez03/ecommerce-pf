@@ -65,6 +65,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
         };
       }
     case REMOVE_PRODUCT_FROM_CART:
+      state.cartItems.forEach((e) => e.id === payload.id ? e.quantity = 0 : null)
       return {
         ...state,
         cartItems: state.cartItems.filter((e) => e.id !== payload),

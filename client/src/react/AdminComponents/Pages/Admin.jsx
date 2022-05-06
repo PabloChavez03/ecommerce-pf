@@ -25,7 +25,7 @@ const Admin = () => {
 						<Route path={"/allproducts"} element={<AllProducts />} />
 						<Route path={"/delete/:productId"} element={<DeleteProduct />} />
 						<Route path={"/modification/:productId"} element={<UpdateProduct />} />
-						<Route path={"/admincreate"} element={<AdminCreate/>} />
+						<Route path={"/createadmin"} element={<AdminCreate/>} />
 					</Routes>
 				</div>
 			</div>

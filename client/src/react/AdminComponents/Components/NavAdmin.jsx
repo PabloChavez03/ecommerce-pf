@@ -16,6 +16,9 @@ const NavAdmin = () => {
 					<NavLink className={style.navLink} to={"/admin/allproducts"}>
 						Listado de Productos
 					</NavLink>
+					<NavLink className={style.navLink} to={"/admin/createadmin"}>
+						Crear Administrador
+					</NavLink>
 				</ul>
 			</nav>
 		</>
