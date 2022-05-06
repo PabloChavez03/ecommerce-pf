@@ -76,3 +76,18 @@ export const currentcategory = async (gender) => {
         console.log(err)
     }
 }
+
+export const chatBot = async (item) => {
+    try {
+        if(item){
+            return await axios
+            .get(`/chatBot?dataString=${item}`)
+            .then((res) => res.data)
+        }
+        return await axios
+            .get("/chatBot")
+            .then((res) => res.data)
+    } catch (error) {
+        console.log(error);
+    }
+}

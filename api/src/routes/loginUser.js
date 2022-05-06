@@ -1,26 +1,30 @@
 const { Router } = require("express");
 const router = Router();
-const { Users } = require("../db");
+const { Users,Role } = require("../db");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res) => {
   const { user_name, user_password } = req.body;
 
   try {
     const user = await Users.findOne({ where: { user_name } });
-
-    //   console.log(user)
+    const roleOfUser = await Role.findOne({where: {UserUserName: user.user_name}})
+      // console.log(roleOfUser.id)
+      // console.log(user)
 
     const passwordCorrect =
       user === null
         ? false
-        : await bcrypt.compare(user_password, user.user_password);
+        : user_password === user.user_password/*await bcrypt.compare(user_password, user.user_password);*/
 
     const userForToken = {
-      id: user.legajo_user,
+      // id: user.legajo_user,
+      role: roleOfUser.id,
       username: user.user_name,
     };
+
+    console.log(userForToken)
 
     const token = jwt.sign(userForToken, process.env.SECRET);
 
@@ -30,7 +34,7 @@ router.post("/", async (req, res) => {
       });
     } else {
       res.status(200).send({
-        rol: user.rol,
+        rol: roleOfUser.name,
         username: user.user_name,
         token,
       });

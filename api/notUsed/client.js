@@ -1,7 +1,7 @@
 const route = require("express").Router();
 const {
   addClient,
-} = require("../controllers/client");
+} = require("../src/controllers/client");
 
 route.post("/", addClient);
 

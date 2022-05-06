@@ -37,8 +37,9 @@ export default function ShoppingBag() {
             <p>${envio}</p>
             <h2>Total:</h2>
             <p>${suma + envio}</p>
-
-            <button onClick={(e)=>handleClickSend(e)}>Finalizar compra</button>
+            <NavLink to={"/pay"}>
+                <button>Finalizar compra</button>
+            </NavLink>
             <br></br>
             <NavLink to={"/"}>
                 <button>Seguir comprando</button>

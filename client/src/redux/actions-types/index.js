@@ -14,8 +14,10 @@ import {
 	GET_CATEGORY_BY_ID,
 	GET_FILTERS_GENDER_PRODUCT,
 	GET_ALL_CATEGORIES_FOR_FORM,
+	CHAT_BOT
 } from "../actions-creators";
 import {
+	chatBot,
 	currentbrands,
 	currentcategory,
 	urlProdutcGender,
@@ -209,7 +211,14 @@ export function UserLogin(payload) {
 	};
 }
 
-
+export const getChatBot = (payload) => async (dispatch) => {
+  let data = await chatBot(payload);
+ 
+  return dispatch({
+    type: CHAT_BOT,
+    payload: data,
+  })
+}
 // export function filterBrandAdmin(payload){
 // 	return {
 // 		type: FILTER_BRAND_ADMIN,
