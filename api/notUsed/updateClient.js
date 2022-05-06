@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { Cliente } = require("../src/db");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const router = Router();
 
 router.patch("/:dni_client", async (req, res) => {
