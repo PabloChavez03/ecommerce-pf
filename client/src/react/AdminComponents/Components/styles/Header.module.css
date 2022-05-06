@@ -3,10 +3,13 @@
 	display: flex;
 	justify-content: space-between;
 	padding: 15px 30px;
-	background-color: #0253cc;
+	background-color: #000000f3;
 	color: white;
 	position: sticky;
 	top: 0;
+}
+.headerContainer h2 {
+	 color: white;
 }
 
 .headerButton {

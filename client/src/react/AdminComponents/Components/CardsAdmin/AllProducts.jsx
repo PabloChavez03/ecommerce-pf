@@ -34,15 +34,16 @@ export default function AllProducts() {
 				setCurrentPage={setCurrentPage}
 				render={render}
 			/> */}
-			
+			<div className={style.search}><div></div> <div></div><SearchProducts/></div>
+      
+        
 				<Paginated
 					productsToPaginated={select !== "" ? productsCurent : allProducts}
 					lastProduct={lastProduct}
 					firstProduct={firstProduct}
 					productsPerPage={productsPerPage}
 				/>
-        <SearchProducts/>
-        <FiltersAdmin/>
+       <div className={style.filter}><FiltersAdmin/></div>
 			<div className={style.cardsContainer}>
       {productsCurent.length
         ? productsCurent.map((e , index) => (
