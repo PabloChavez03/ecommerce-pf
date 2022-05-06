@@ -11,7 +11,7 @@ async function getAPIcategories() {
 			url: "https://asos2.p.rapidapi.com/categories/list",
 			headers: {
 				'X-RapidAPI-Host': 'asos2.p.rapidapi.com',
-				'X-RapidAPI-Key': '94f1689d8emsh741ab8da132723bp121b58jsn2f30a124d7e5'
+				'X-RapidAPI-Key': '7ad0d3b962msh6e2e02d56678cmsh0fcf8aeb8d74e27p1a6a9cjsnd2a9695f032e6138ba111494p18be12jsne10a2a98bd90'
 			},
 		};
 

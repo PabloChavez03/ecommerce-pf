@@ -15,7 +15,7 @@ async function getAPIproducts(productName) {
 		},
 		headers: {
 			"X-RapidAPI-Host": "asos2.p.rapidapi.com",
-			"X-RapidAPI-Key": "94f1689d8emsh741ab8da132723bp121b58jsn2f30a124d7e5",
+			"X-RapidAPI-Key": "e02d56678cmsh0fcf8aeb8d74e27p1a6a9cjsnd2a9695f032e",
 		},
 	};
 
