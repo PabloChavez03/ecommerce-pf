@@ -40,7 +40,7 @@ const authMaster = async (req, res, next) => {
 const isAdmin = async (req, res, next) => {
   // const user = await Users.findByPk(req.userId);
   const role = await Role.findByPk(req.role);
-  console.log(role.name);
+  // console.log(role.name);
   if (role.name === "admin") {
     next();
   } else {
