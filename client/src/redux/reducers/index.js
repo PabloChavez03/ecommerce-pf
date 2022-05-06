@@ -65,10 +65,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
         };
       }
     case REMOVE_PRODUCT_FROM_CART:
-      state.cartItems.forEach((e) => e.id === payload.id ? e.quantity = 0 : null)
+      let indexRemoveQty = state.cartItems.findIndex((e) => e.id === payload);
+      // let itemRemoveQty = state.cartItems[index];
+      state.cartItems[indexRemoveQty].quantity = 1
       return {
         ...state,
-        cartItems: state.cartItems.filter((e) => e.id !== payload),
+        cartItems: state.cartItems.filter((e) => e.id !== payload)
       };
     case CHANGE_CART_QUANTITY:
       let index = state.cartItems.findIndex((e) => e.id === payload[1]);
