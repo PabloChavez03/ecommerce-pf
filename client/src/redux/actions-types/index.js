@@ -197,3 +197,13 @@ export function createNewUserAdmin(payload) {
 		return newUserAdmin;
 	};
 }
+
+export function UserLogin(payload) {
+	return async function (dispatch) {
+		const userLogin = await axios.post(
+			"http://localhost:3001/users/login",
+			payload
+		);
+		return userLogin;
+	};
+}

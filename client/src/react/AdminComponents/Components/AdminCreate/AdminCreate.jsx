@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import style from "./AdminCreate.module.css";
+import { useDispatch } from "react-redux";
+import { createNewUserAdmin } from '../../../../redux/actions-types'
+import { useNavigate } from "react-router-dom";
 
 const AdminCreate = () => {
 	const [activeCreate, setActiveCreate] = useState(false);
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
 	const [newAdmin, setNewAdmin] = useState({
 		user_name: "",
@@ -72,6 +77,17 @@ const AdminCreate = () => {
 		setCorrect(true)
 		console.log(newAdmin)
 		if(error.submit !== 'we good'){setActiveCreate(false); return }
+		dispatch(
+			createNewUserAdmin(newAdmin)
+		)
+		setNewAdmin({
+		user_name: "",
+		legajo_user: "",
+		rol: "",
+		user_password: "",
+		confirm_user_password: "",
+		});
+		navigate('/admin')
 		alert('sumitie')
 	}
 

@@ -27,19 +27,11 @@ const getDDBBproducts = require("./src/controllers/productsDbGetter.js");
 
 // Syncing all the models at once.
 conn
-<<<<<<< HEAD
 	.sync({ force: false })
 	.then(() => {
 		server.listen(process.env.PORT || 5000, async () => {
 			// // Categories
 			// await setDDBBcategories();
-=======
-  .sync({ force: false })
-  .then(() => {
-    server.listen(process.env.PORT || 5000, async () => {
-      // // Categories
-      // await setDDBBcategories();
->>>>>>> 46fbb27d85ec1e27f3e99f86d2c2d7310bba1fbe
 
       // // Men
       // /** Clothing */
