@@ -16,10 +16,10 @@ import {
   POST_PRODUCT,
   UPDATE_PRODUCT,
   DELETE_PRODUCT,
-  GET_ALL_CATEGORIES_FOR_FORM
-} from "../actions-creators/index.js";
-import { filterbrands } from "../controllers/index.js";
-
+  GET_ALL_CATEGORIES_FOR_FORM,
+  CHAT_BOT,
+} from "../actions-creators";
+import { filterbrands } from "../controllers";
 
 const initialState = {
   products: [],
@@ -33,11 +33,11 @@ const initialState = {
   newgenders: [],
   subTotal: 0,
   categoriesForForm: [],
-
+  chatbot: {}
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
-    switch (type) {
+  switch (type) {
     case GET_PRODUCT_BY_NAME:
       return {
         ...state,
@@ -54,7 +54,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
           cartItems: [...prevCart, cartProductAux],
           subTotal: Number(
             state.subTotal +
-              Math.round(cartProductAux.currentPrice * cartProductAux.quantity)
+            Math.round(cartProductAux.currentPrice * cartProductAux.quantity)
           ),
         };
       } else {
@@ -141,25 +141,25 @@ export default function rootReducer(state = initialState, { type, payload }) {
       let arr =
         payload === "high"
           ? productsSort?.sort(function (a, b) {
-              if (a.currentPrice < b.currentPrice) {
-                return 1;
-              }
-              if (a.currentPrice > b.currentPrice) {
-                return -1;
-              } else {
-                return 0;
-              }
-            })
+            if (a.currentPrice < b.currentPrice) {
+              return 1;
+            }
+            if (a.currentPrice > b.currentPrice) {
+              return -1;
+            } else {
+              return 0;
+            }
+          })
           : productsSort?.sort(function (a, b) {
-              if (a.currentPrice > b.currentPrice) {
-                return 1;
-              }
-              if (a.currentPrice < b.currentPrice) {
-                return -1;
-              } else {
-                return 0;
-              }
-            });
+            if (a.currentPrice > b.currentPrice) {
+              return 1;
+            }
+            if (a.currentPrice < b.currentPrice) {
+              return -1;
+            } else {
+              return 0;
+            }
+          });
       if (state.select === "") {
         return {
           ...state,
@@ -209,6 +209,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         categoriesForForm: payload,
+      }
+    case CHAT_BOT:
+      return {
+        ...state,
+        chatbot: payload
       }
     default:
       return { ...state };
