@@ -76,7 +76,7 @@ export const getDetails = (productId) => {
     const productDetail = await axios.get(
       `/products/detail/${productId}`
     );
-        return dispatch({
+    return dispatch({
       type: GET_DETAILS,
       payload: productDetail.data,
     });
