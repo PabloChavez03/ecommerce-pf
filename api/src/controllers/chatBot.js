@@ -2,7 +2,7 @@ const { Chat_bot_emisor, Chat_bot_receptor } = require('../db')
 
 const chat_bot = async (data) => {
     let v1 = await emisor();
-    if(v1){
+    if (v1) {
         if (!data) {
             v1 = v1.find(item => item.id === 1)
             let v2 = []
@@ -19,11 +19,23 @@ const chat_bot = async (data) => {
             return plantilla
         }
         let dato = v1.find(item => item.name === data)
-        return dato;
-    }else{
-        return {"Info":"Dato undefined en la base de datos"}
+        let v2 = []
+        dato.chat_bot_receptors.forEach(item => {
+            v2.push(item.name)
+        })
+        let v3 = {
+            id: dato.id,
+            name: dato.name,
+            respuesta: dato.respuesta,
+            isActive: dato.isActive,
+            alternativa: [...v2]
+        }
+        return v3
+
+    } else {
+        return { "Info": "Dato undefined en la base de datos" }
     }
-    
+
 }
 //Mostrar todo los Emisor
 const emisor = async () => {
