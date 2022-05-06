@@ -6,7 +6,7 @@ const PaymentsInstance = new PaymentsController(new PaymentsService());
 
 
 
-router.post("/payment", async (req, res) => {
+router.get("/payment", async (req, res) => {
     PaymentsInstance.getPaymentLink(req, res);
 });
 
