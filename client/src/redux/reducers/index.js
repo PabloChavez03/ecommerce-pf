@@ -70,26 +70,23 @@ export default function rootReducer(state = initialState, { type, payload }) {
         cartItems: state.cartItems.filter((e) => e.id !== payload),
       };
     case CHANGE_CART_QUANTITY:
-      let cartChangeQty = state.cartItems.find((e) => e.id === payload[1]);
-      let change;
-      const prevCartAux = state.cartItems.filter((e) => e.id !== payload[1]);
-      if (payload[0] === "-") {
-        if (cartChangeQty.quantity === 1) {
+      let index = state.cartItems.findIndex((e) => e.id === payload[1]);
+      let item = state.cartItems[index];
+      if(payload[0] === "-") {
+        if(item.quantity === 1) {
           return {
             ...state,
-            cartItems: state.cartItems.filter((e) => e.id !== payload[1]),
+            cartItems: state.cartItems.filter((e) => e.id !== payload[1])
           };
         }
-        cartChangeQty.quantity--;
-        change = [...prevCartAux, cartChangeQty];
+      state.cartItems[index].quantity--
       } else {
-        cartChangeQty.quantity++;
-        change = [...prevCartAux, cartChangeQty];
+      state.cartItems[index].quantity++
       }
       return {
         ...state,
-        cartItems: change,
-      };
+        cartItems: [...state.cartItems]
+      }
     case SET_CURRENT_PAGE:
       return {
         ...state,

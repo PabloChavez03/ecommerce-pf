@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./ProductCardModal.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   removeProductFromCart,
   changeCartQuantity,
@@ -17,7 +17,7 @@ const ProductCardModal = ({
 }) => {
   /** FALTA AGREGAR LOS OTROS DATOS, SOLO ESTOY RENDERIZANDO EL NAME */
   const dispatch = useDispatch();
-  
+  const cartItems = useSelector((state) => state.cartItems);
   const handleRemove = () => {
     dispatch(removeProductFromCart(id));
   };
@@ -26,6 +26,9 @@ const ProductCardModal = ({
     dispatch(changeCartQuantity(e.target.value, id));
   };
 
+  useEffect(() => {
+
+  },[cartItems])
   return (
     <div className={style.cardModalContainer}>
       <img
@@ -39,7 +42,7 @@ const ProductCardModal = ({
         <p>Talla: {size}</p>
         <div className={style.cardModalInfoPrice}>
           <p className={style.cardModalInfo}>
-            Precio: <span>$ {price.toFixed(2)}</span>
+            Precio: <span>$ {price?.toFixed(2)}</span>
           </p>
           <p className={style.cardModalInfo}>
             Cantidad:
