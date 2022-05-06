@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import style from "./Login.module.css";
+import { useDispatch } from "react-redux";
+import {createNewUser, UserLogin} from '../../../redux/actions-types'
 
 const Login = () => {
 	const [activeCreate, setActiveCreate] = useState(false);
+	const dispatch = useDispatch()
+
 
 	const [newUser, setNewUser] = useState({
 		phone: "",
@@ -17,14 +21,33 @@ const Login = () => {
 		isRegistered: true,
 	});
 
+	const [error, setError] = useState({});
+
+	function validate(newUser) {
+		let errors = {};
+		if (!newUser.name) {errors.name = "Es necesario ingresar tu nombre"}else {
+			errors.name = 'good'
+		};
+		if(errors.name === 'good' ){
+			errors.submit = 'we good'
+		}
+		return errors;
+	}
+
 	const handleChangeInputNewUser = (e) => {
 		e.preventDefault();
 		setNewUser({
 			...newUser,
 			[e.target.name]: e.target.value,
 		});
+		setError(
+			validate({
+				...newUser,
+				[e.target.name]: e.target.value,
+			})
+		);
 	};
-	console.log(newUser);
+	// console.log(newUser);
 
 	const handleChangeActive = (e) => {
 		e.preventDefault();
@@ -34,7 +57,60 @@ const Login = () => {
 			setActiveCreate(true);
 		}
 	};
-
+	const handleSubmit= (e)=>{ 
+		e.preventDefault();
+		// setCorrect(true)
+		// console.log(newAdmin)
+		if(error.submit !== 'we good'){ return }
+		dispatch(
+			createNewUser(newUser)
+		)
+		setNewUser({
+			phone: "",
+			dni_client: "",
+			email: "",
+			login_name: "",
+			login_password: "",
+			name: "",
+			lastname: "",
+			address: "",
+			isRegistered: true,
+		});
+		alert('sumitie')
+	}
+	//////////////////////////// LOGIN ///////////////////////
+	const [login , setLogin] = useState({
+		user_name: "",
+		user_password: "",
+	});
+	const handleChangeInputLogin = (e) => {
+		e.preventDefault();
+		setLogin({
+			...login,
+			[e.target.name]: e.target.value,
+		});
+		// setLoginError(
+		// 	validate({
+		// 		...newUser,
+		// 		[e.target.name]: e.target.value,
+		// 	})
+		// );
+		console.log(login)
+	};
+	const handleLoginSubmit = (e)=> {
+		e.preventDefault();
+		// setCorrect(true)
+		// console.log(newAdmin)
+		// if(error.submit !== 'we good'){ return }
+		dispatch(
+			UserLogin(login)
+		)
+		console.log(login)
+		setLogin({
+		user_name: "",
+		user_password: "",
+		})
+	}
 	return (
 		<>
 			<NavBar />
@@ -46,14 +122,16 @@ const Login = () => {
 						Si haz comprado antes en Clothes 22, solo ingresa tu correo
 						electrónico y contraseña para acceder a tu cuenta.
 					</p>
-					<form>
+					<form onSubmit={(e)=>handleLoginSubmit(e)}>
 						<div className={style.formInputContainer}>
 							<label className={style.formLabel}>CORREO ELECTRÓNICO</label>
 							<input
 								className={style.formInput}
 								type='text'
-								name='email'
-								placeholder='Email'
+								name='user_name'
+								value={login.user_name}
+								placeholder='Name'
+								onChange={(e) => handleChangeInputLogin(e)}
 							/>
 						</div>
 						<div className={style.formInputContainer}>
@@ -61,13 +139,15 @@ const Login = () => {
 							<input
 								className={style.formInput}
 								type='password'
-								name='password'
+								name='user_password'
+								value={login.user_password}
 								placeholder='Contraseña'
+								onChange={(e) => handleChangeInputLogin(e)}
 							/>
 						</div>
 						<button
 							className={style.formButtonLogin}
-							onClick={() => alert("Falta colocar funcionalidad")}
+							// onClick={() => alert("Falta colocar funcionalidad")}
 						>
 							INGRESAR
 						</button>
@@ -78,7 +158,7 @@ const Login = () => {
 					{activeCreate ? (
 						<div className={style.formCreateActive}>
 							<h2 className={style.formTitle}>Crear Cuenta</h2>
-							<form>
+							<form onSubmit={(e)=>handleSubmit(e)}>
 								<div className={style.formInputContainer}>
 									<label className={style.formLabel}>NOMBRE</label>
 									<input
@@ -90,6 +170,7 @@ const Login = () => {
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
+								{error.name && <p className={style.error}>{error.name}</p>}
 								<div className={style.formInputContainer}>
 									<label className={style.formLabel}>APELLIDO</label>
 									<input
@@ -179,7 +260,7 @@ const Login = () => {
 								</div>
 								<button
 									className={style.formButtonCreateActive}
-									onClick={() => alert("Falta colocar funcionalidad")}
+									// onClick={() => alert("Falta colocar funcionalidad")}
 								>
 									CREAR Y CONTINUAR
 								</button>
