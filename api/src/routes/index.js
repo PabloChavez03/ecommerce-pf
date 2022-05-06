@@ -35,6 +35,7 @@ router.use("/users/delete", [authMaster, isAdmin], require("./userDelete"));
 
 //----------------------Mercado Pago---------------------------------------
 router.use("/mercadopago", require("./mercadoPago"));
+//-------------------------------------------------------------------------
 
 /* ¡¡¡ACLARACION!!! Para poder utilizar las rutas de ADMIN deberan de registrarse o en su defecto comentar el middleware de authMaster*/
 
