@@ -22,12 +22,12 @@ const authMaster = async (req, res, next) => {
   req.userId = decodedToken.id;
   req.role = decodedToken.role;
 
-  const user = await Users.findByPk(req.userId);
+  // const user = await Users.findByPk(req.userId);
   // console.log(decodedToken.id)
   // console.log(user)
-  if (!user) {
-    return res.status(401).son({ message: "user not found" });
-  }
+  // if (!user) {
+  //   return res.status(401).son({ message: "user not found" });
+  // }
 
   if (!token || !decodedToken.id) {
     return res.status(401).json({ error: "token is missing or invalid!" });
