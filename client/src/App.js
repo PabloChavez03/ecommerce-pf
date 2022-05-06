@@ -10,6 +10,7 @@ import Footer from "./react/components/Footer/Footer";
 import Admin from "./react/AdminComponents/Pages/Admin";
 import Login from "./react/components/Login/Login";
 import ShoppingBag from "./react/components/ShoppingCart/ShoppingBag/ShoppingBag";
+import PayPlataform from "./react/components/PayPlataform/PayPlataform";
 
 function App() {
 	return (
@@ -25,6 +26,7 @@ function App() {
 				<Route path={"/admin/*"} element={<Admin />} />
 				<Route path={"/login"} element={<Login />} />
 				<Route path={"/bag"} element={<ShoppingBag />} />
+				<Route path={"/pay"} element={<PayPlataform />} />
 			</Routes>
 
 			<Footer />
