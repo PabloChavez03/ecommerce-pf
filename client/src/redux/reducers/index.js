@@ -16,9 +16,9 @@ import {
   POST_PRODUCT,
   UPDATE_PRODUCT,
   DELETE_PRODUCT,
-  GET_ALL_CATEGORIES_FOR_FORM,
-} from "../actions-creators";
-import { filterbrands } from "../controllers";
+  GET_ALL_CATEGORIES_FOR_FORM
+} from "../actions-creators/index.js";
+import { filterbrands } from "../controllers/index.js";
 
 const initialState = {
   products: [],
@@ -31,11 +31,11 @@ const initialState = {
   select: "",
   newgenders: [],
   subTotal: 0,
-  categoriesForForm: [],
+  categoriesForForm: []
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
-	switch (type) {
+    switch (type) {
     case GET_PRODUCT_BY_NAME:
       return {
         ...state,
@@ -65,31 +65,29 @@ export default function rootReducer(state = initialState, { type, payload }) {
         };
       }
     case REMOVE_PRODUCT_FROM_CART:
+      state.cartItems.forEach((e) => e.id === payload.id ? e.quantity = 0 : null)
       return {
         ...state,
         cartItems: state.cartItems.filter((e) => e.id !== payload),
       };
     case CHANGE_CART_QUANTITY:
-      let cartChangeQty = state.cartItems.find((e) => e.id === payload[1]);
-      let change;
-      const prevCartAux = state.cartItems.filter((e) => e.id !== payload[1]);
-      if (payload[0] === "-") {
-        if (cartChangeQty.quantity === 1) {
+      let index = state.cartItems.findIndex((e) => e.id === payload[1]);
+      let item = state.cartItems[index];
+      if(payload[0] === "-") {
+        if(item.quantity === 1) {
           return {
             ...state,
-            cartItems: state.cartItems.filter((e) => e.id !== payload[1]),
+            cartItems: state.cartItems.filter((e) => e.id !== payload[1])
           };
         }
-        cartChangeQty.quantity--;
-        change = [...prevCartAux, cartChangeQty];
+      state.cartItems[index].quantity--
       } else {
-        cartChangeQty.quantity++;
-        change = [...prevCartAux, cartChangeQty];
+      state.cartItems[index].quantity++
       }
       return {
         ...state,
-        cartItems: change,
-      };
+        cartItems: [...state.cartItems]
+      }
     case SET_CURRENT_PAGE:
       return {
         ...state,

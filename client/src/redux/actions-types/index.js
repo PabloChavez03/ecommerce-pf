@@ -178,5 +178,5 @@ export const getFiltersGenderProduct = (payload) => async (dispatch) => {
   return dispatch({
     type: GET_FILTERS_GENDER_PRODUCT,
     payload: dataGender,
-  })
-}
+  });
+};
