@@ -1,0 +1,141 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 3px 5px 1px #00000020;
+}
+.nav__up {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+.nav__up__searchBar {
+  display: none;
+}
+.nav__up__left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-left: 0.5rem;
+}
+.nav__up__left__burguer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25.44px;
+  height: 19.97px;
+}
+.nav__up__left__burguer_bar {
+  height: 2px;
+  width: 100%;
+  background-color: #001311;
+  border-radius: 10px;
+}
+.nav__up__left__logo {
+  margin-left: 0.5rem;
+}
+.nav__up__features {
+  display: flex;
+}
+.nav__up__features svg {
+  width: 30px;
+  margin-right: 0.5rem;
+}
+.nav__up .icon_cart {
+  cursor: pointer;
+}
+.nav__down__links {
+  opacity: 0;
+  visibility: hidden;
+  z-index: -1;
+  display: block;
+  position: absolute;
+  overflow: hidden;
+  top: 49px;
+  left: 0;
+  width: 100%;
+  max-height: 0px;
+  transition-duration: 0.3s;
+}
+.nav__down__links ul {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+}
+.nav__down__links ul a {
+  color: black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.185);
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.nav__down__links ul a li {
+  letter-spacing: 1px;
+  padding: 1.1rem 0 0.5rem 1rem;
+}
+.nav__down__links ul a li:hover {
+  color: #90006f;
+}
+.nav__down__links .active {
+  color: black;
+}
+.nav__down .menuActived {
+  background-color: #fff;
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+  max-height: 2000px;
+  min-width: 100vh;
+}
+.nav__searchBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.1rem 0 0.5rem 1rem;
+}
+@media (min-width: 600px) {
+  .nav {
+    box-shadow: 0 3px 5px 1px #00000020;
+  }
+  .nav__up {
+    box-shadow: 0 3px 5px 1px #00000020;
+  }
+  .nav__up__searchBar {
+    display: inline;
+  }
+  .nav__up__left__burguer {
+    display: none;
+  }
+  .nav__up__left__logo {
+    margin: 1rem;
+  }
+  .nav__up__features svg {
+    width: 30px;
+    margin-right: 1.5rem;
+  }
+  .nav__down__links {
+    display: flex;
+    justify-content: center;
+    opacity: 1;
+    visibility: visible;
+    max-height: 2000px;
+    position: relative;
+    top: auto;
+    width: 100%;
+    z-index: 10;
+  }
+  .nav__down__links ul {
+    flex-direction: row;
+  }
+  .nav__down__links ul a {
+    border-bottom: none;
+  }
+  .nav__down__links ul a li {
+    padding: 1rem 0.5rem;
+  }
+  .nav__searchBar {
+    display: none;
+  }
+}

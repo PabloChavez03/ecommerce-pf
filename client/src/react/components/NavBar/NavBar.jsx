@@ -10,7 +10,7 @@ import AccountIcon from "../svg/AccountIcon";
 
 import Modal from "../ShoppingCart/Modal/Modal";
 
-import "./NavBar.scss";
+import "./NavBar.css";
 
 export default function NavBar() {
 
