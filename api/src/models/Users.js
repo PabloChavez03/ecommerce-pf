@@ -48,6 +48,7 @@ module.exports = (sequelize) => {
       isRegistered: {
         type: DataTypes.BOOLEAN(),
         allowNull: true,
+        defaultValue: true,
       },
     },
     { timestamps: false }
