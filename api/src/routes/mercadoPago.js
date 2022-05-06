@@ -4,11 +4,9 @@ const PaymentsController = require("../controllers/PaymentsController");
 const PaymentsService = require("../Services/PaymentsService");
 const PaymentsInstance = new PaymentsController(new PaymentsService());
 
-router.get("", async (req, res) => {
-    res.render()
-});
 
-router.get("/payment", async (req, res) => {
+
+router.post("/payment", async (req, res) => {
     PaymentsInstance.getPaymentLink(req, res);
 });
 
