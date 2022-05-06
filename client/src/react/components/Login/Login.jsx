@@ -17,12 +17,27 @@ const Login = () => {
 		isRegistered: true,
 	});
 
+	const [error, setError] = useState({});
+
+	function validate(newUser) {
+		let errors = {};
+		if (!newUser.name) errors.name = "Es necesario ingresar tu nombre";
+
+		return errors;
+	}
+
 	const handleChangeInputNewUser = (e) => {
 		e.preventDefault();
 		setNewUser({
 			...newUser,
 			[e.target.name]: e.target.value,
 		});
+		setError(
+			validate({
+				...newUser,
+				[e.target.name]: e.target.value,
+			})
+		);
 	};
 	console.log(newUser);
 
@@ -90,6 +105,7 @@ const Login = () => {
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
+								{error.name && <p className={style.error}>{error.name}</p>}
 								<div className={style.formInputContainer}>
 									<label className={style.formLabel}>APELLIDO</label>
 									<input
