@@ -30,7 +30,7 @@ const initialState = {
   currentPage: 1,
   details: {},
   categories: [],
-  select: "",
+  // select: "",
   newgenders: [],
   subTotal: 0,
   categoriesForForm: [],

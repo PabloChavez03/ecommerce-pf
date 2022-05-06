@@ -29,7 +29,7 @@ export default function Home() {
 			? allProducts?.slice(firstProduct, lastProduct)
 			: productFilter?.slice(firstProduct, lastProduct);
 	const [render, setRender] = useState();
-
+	console.log(productsCurent)
 	useEffect(() => {
 		dispatch(getFiltersGenderProduct(gender));
 		dispatch(setCurrentPage(1));
@@ -53,8 +53,8 @@ export default function Home() {
 				/>
 			</div>
 			<div className={css.cardContainer}>
-				{productsCurent.length ? (
-					productsCurent.map((product, index) => {
+				{productsCurent?.length ? (
+					productsCurent?.map((product, index) => {
 						return (
 							<div key={index}>
 								<NavLink
@@ -68,9 +68,10 @@ export default function Home() {
 										isOffertPrice={product.isOffertPrice}
 										previousPrice={product.previousPrice}
 										currentPrice={product.currentPrice}
+										color={product.color}
+										variants={product.variants}
 									/>
 								</NavLink>
-
 							</div>
 						);
 					})

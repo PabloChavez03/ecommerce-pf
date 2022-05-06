@@ -28,7 +28,6 @@ function App() {
 				<Route path={"/bag"} element={<ShoppingBag />} />
 				<Route path={"/pay"} element={<PayPlataform />} />
 			</Routes>
-
 			<Footer />
 		</BrowserRouter>
 	);
