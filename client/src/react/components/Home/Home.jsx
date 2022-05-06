@@ -11,6 +11,7 @@ import {
 	setDetails,
 } from "../../../redux/actions-types";
 import NavBar from "../NavBar/NavBar";
+import SearchBar from "../SearchBar/SearchBar";
 
 export default function Home() {
 	const dispatch = useDispatch();
@@ -34,10 +35,10 @@ export default function Home() {
 		dispatch(setCurrentPage(1));
 		dispatch(setDetails());
 	}, [dispatch, gender]);
-
 	return (
 		<div className={css.principalDivHome}>
 			<NavBar />
+			<SearchBar/>
 			<Filter
 				setRender={setRender}
 				setCurrentPage={setCurrentPage}

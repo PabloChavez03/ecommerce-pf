@@ -1,0 +1,39 @@
+[
+	{
+		"id": 1,
+		"name": "Menu de Respuestas",
+		"respuesta": "Hola soy el bot de respuesta rapida, elija una de estas opciones:",
+		"isActive": true,
+		"alternativa": [
+			"Problema de usuario",
+			"Servicio tecnico",
+			"Problemas de Compra"
+		]
+	},
+	{
+		"id": 2,
+		"name": "Problema de usuario",
+		"respuesta": "ASD XD",
+		"isActive": true,
+		"alternativa": [
+			"Menu de Respuestas"
+		]
+	},
+	{
+		"id": 4,
+		"name": "Servicio tecnico",
+		"respuesta": "asds",
+		"isActive": true,
+		"alternativa": [
+			"Menu de Respuestas",
+			"Problema de usuario"
+		]
+	},
+	{
+		"id": 3,
+		"name": "Problemas de Compra",
+		"respuesta": "Tiene problema al realizar una compra en la pagina. Porfavor contactar con atencion al cliente: empresa@Empresa.com",
+		"isActive": true,
+		"alternativa": []
+	}
+]

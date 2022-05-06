@@ -52,10 +52,6 @@ export default function NavBar() {
           </NavLink>
         </div>
 
-        <div className="nav__up__searchBar">
-          <SearchBar />
-        </div>
-
         <div className="nav__up__features">
           {/* <WishListIcon /> */}
           <Link to={"/admin"}>

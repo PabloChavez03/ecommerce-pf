@@ -14,13 +14,13 @@ async function getAPIproducts(categoryId) {
     },
     headers: {
       "X-RapidAPI-Host": "asos2.p.rapidapi.com",
-      "X-RapidAPI-Key": "e02d56678cmsh0fcf8aeb8d74e27p1a6a9cjsnd2a9695f032e",
+      "X-RapidAPI-Key": "4b263d20a9msha7e9b0bfbc799a1p11d5f6jsn447afdb350bc",
     },
   };
 
 	return axios(options)
 		.then(({ data }) => adaptListProducts(data))
 		.catch((e) => console.log(e.message));
-}
+};
 
 module.exports = getAPIproducts;

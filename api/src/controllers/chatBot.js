@@ -1,5 +1,39 @@
 const { Chat_bot_emisor, Chat_bot_receptor } = require('../db')
 
+const fs = require("fs");
+/////Emisor
+const json_emisor = fs.readFileSync("src/data/emisor.json", "utf-8")
+const emisorJson = JSON.parse(json_emisor);
+////Receptor
+const json_receptor = fs.readFileSync("src/data/receptor.json", "utf-8")
+const receptorJson = JSON.parse(json_receptor);
+//////
+const load_chat_bot = async () => {
+    let emisorDB = await Chat_bot_emisor.findAll();
+    let receptorDB = await Chat_bot_receptor.findAll()
+    console.log(emisorDB.length === 0);
+    console.log(receptorDB.length === 0);
+    if (receptorDB.length === 0) {
+        receptorJson.forEach(async (item) => {
+            const jane = await Chat_bot_receptor.build({ name: item.name, isActive: item.isActive });
+            jane.save();
+        })
+    }
+    if (emisorDB.length === 0) {
+        emisorJson.forEach(async (item) => {
+            const ChatEmisor = await Chat_bot_emisor.create({
+                name: item.name,
+                respuesta: item.respuesta,
+                isActive: item.isActive,
+            });
+            const emisorv1 = await Chat_bot_receptor.findAll({
+                where: { name: item.alternativa }
+            })
+            await ChatEmisor.addChat_bot_receptor(emisorv1);
+
+        })
+    }
+}
 const chat_bot = async (data) => {
     let v1 = await emisor();
     if (v1) {
@@ -168,5 +202,6 @@ module.exports = {
     allEmisor,
     addEmisor,
     updateEmisor,
-    deleteEmisor
+    deleteEmisor,
+    load_chat_bot
 }

@@ -39,9 +39,10 @@ const initialState = {
 export default function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
     case GET_PRODUCT_BY_NAME:
-      return {
+    let gender = state.products.find((e)=>e.Category.genre).Category.genre;
+    return {
         ...state,
-        productFilter: payload,
+        productFilter: payload.filter((e)=>e.Category.genre === gender),
         select: "name"
       };
     case ADD_PRODUCT_TO_CART:

@@ -24,6 +24,7 @@ const { conn } = require("./src/db.js");
 const setDDBBcategories = require("./src/controllers/categoriesDbSetter.js");
 const getDDBBproducts = require("./src/controllers/productsDbGetter.js");
 const createRoles = require("./src/controllers/createRoles.js");
+const { load_chat_bot } = require("./src/controllers/chatBot.js");
 //const { getAPIproducts } = require("./src/controllers/productsPost.js");
 
 // Syncing all the models at once.
@@ -31,8 +32,13 @@ conn
   .sync({ force: false })
   .then(() => {
     server.listen(process.env.PORT || 5000, async () => {
+      await load_chat_bot()
 
+<<<<<<< HEAD
       // // // Roles
+=======
+      // // Roles
+>>>>>>> a97ffbf34ba3380b60c97d70a91ed2c5314d61d9
       // await createRoles();
 
       // // // Categories
