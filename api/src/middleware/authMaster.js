@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
-const { Users,Role } = require('../db');
+const jwt = require("jsonwebtoken");
+const { Users, Role } = require("../db");
 
-const authMaster = async (req,res,next) => {
+const authMaster = async (req, res, next) => {
   //----------------------------AUTHORIZATION--------------------------------------------------------
   const authorization = req.get("authorization");
 
@@ -26,7 +26,7 @@ const authMaster = async (req,res,next) => {
   // console.log(decodedToken.id)
   // console.log(user)
   if (!user) {
-    return res.status(401).son({message: 'user not found'})
+    return res.status(401).son({ message: "user not found" });
   }
 
   if (!token || !decodedToken.id) {
@@ -40,26 +40,26 @@ const authMaster = async (req,res,next) => {
 const isAdmin = async (req, res, next) => {
   // const user = await Users.findByPk(req.userId);
   const role = await Role.findByPk(req.role);
-  if (role.name === 'admin') {
+  console.log(role.name);
+  if (role.name === "admin") {
     next();
+  } else {
+    return res.status(403).json({ message: "require admin role" });
   }
-
-  return res.status(403).json({message: 'require admin role'})
 
   // console.log(role)
 };
 
-const isClient = async (req,res,next) => {
+const isClient = async (req, res, next) => {
   const role = await Role.findByPk(req.role);
-  if (role.name === 'client') {
+  if (role.name === "client") {
     next();
   }
 
-  return res.status(403).json({message: ''})
-}
+  return res.status(403).json({ message: "" });
+};
 
 module.exports = {
   authMaster,
   isAdmin,
-  isClient,
 };
