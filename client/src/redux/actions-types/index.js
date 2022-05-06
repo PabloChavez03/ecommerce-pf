@@ -14,7 +14,8 @@ import {
 	GET_CATEGORY_BY_ID,
 	GET_FILTERS_GENDER_PRODUCT,
 	GET_ALL_CATEGORIES_FOR_FORM,
-	CHAT_BOT
+	CHAT_BOT,
+	GET_USER_DATA
 } from "../actions-creators";
 import {
 	chatBot,
@@ -189,7 +190,6 @@ export function createNewUser(payload) {
 			"http://localhost:3001/users/create",
 			payload
 		);
-		return newUser;
 	};
 }
 
@@ -199,7 +199,10 @@ export function UserLogin(payload) {
 			"http://localhost:3001/users/login",
 			payload
 		);
-		return userLogin;
+		return dispatch({
+			type: GET_USER_DATA,
+			payload: userLogin.data,
+		});
 	};
 }
 

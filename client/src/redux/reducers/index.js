@@ -18,6 +18,7 @@ import {
   DELETE_PRODUCT,
   GET_ALL_CATEGORIES_FOR_FORM,
   CHAT_BOT,
+  GET_USER_DATA,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -33,17 +34,18 @@ const initialState = {
   newgenders: [],
   subTotal: 0,
   categoriesForForm: [],
-  chatbot: {}
+  chatbot: {},
+  userData: {},
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
     case GET_PRODUCT_BY_NAME:
-    let gender = state.products.find((e)=>e.Category.genre).Category.genre;
-    return {
+      let gender = state.products.find((e) => e.Category.genre).Category.genre;
+      return {
         ...state,
-        productFilter: payload.filter((e)=>e.Category.genre === gender),
-        select: "name"
+        productFilter: payload.filter((e) => e.Category.genre === gender),
+        select: "name",
       };
     case ADD_PRODUCT_TO_CART:
       let cartProductAux = state.cartItems.find((e) => e.id === payload.id);
@@ -55,7 +57,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
           cartItems: [...prevCart, cartProductAux],
           subTotal: Number(
             state.subTotal +
-            Math.round(cartProductAux.currentPrice * cartProductAux.quantity)
+              Math.round(cartProductAux.currentPrice * cartProductAux.quantity)
           ),
         };
       } else {
@@ -70,29 +72,29 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case REMOVE_PRODUCT_FROM_CART:
       let indexRemoveQty = state.cartItems.findIndex((e) => e.id === payload);
       // let itemRemoveQty = state.cartItems[index];
-      state.cartItems[indexRemoveQty].quantity = 1
+      state.cartItems[indexRemoveQty].quantity = 1;
       return {
         ...state,
-        cartItems: state.cartItems.filter((e) => e.id !== payload)
+        cartItems: state.cartItems.filter((e) => e.id !== payload),
       };
     case CHANGE_CART_QUANTITY:
       let index = state.cartItems.findIndex((e) => e.id === payload[1]);
       let item = state.cartItems[index];
-      if(payload[0] === "-") {
-        if(item.quantity === 1) {
+      if (payload[0] === "-") {
+        if (item.quantity === 1) {
           return {
             ...state,
-            cartItems: state.cartItems.filter((e) => e.id !== payload[1])
+            cartItems: state.cartItems.filter((e) => e.id !== payload[1]),
           };
         }
-      state.cartItems[index].quantity--
+        state.cartItems[index].quantity--;
       } else {
-      state.cartItems[index].quantity++
+        state.cartItems[index].quantity++;
       }
       return {
         ...state,
-        cartItems: [...state.cartItems]
-      }
+        cartItems: [...state.cartItems],
+      };
     case SET_CURRENT_PAGE:
       return {
         ...state,
@@ -115,7 +117,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
           ...state,
           productFilter: allProducts,
           select: payload,
-          currentPage: 1
+          currentPage: 1,
         };
       } else {
         let dataBrands = filterbrands(payload, allProducts);
@@ -123,7 +125,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
           ...state,
           productFilter: dataBrands,
           select: payload,
-          currentPage: 1
+          currentPage: 1,
         };
       }
     case GET_DETAILS:
@@ -142,36 +144,36 @@ export default function rootReducer(state = initialState, { type, payload }) {
       let arr =
         payload === "high"
           ? productsSort?.sort(function (a, b) {
-            if (a.currentPrice < b.currentPrice) {
-              return 1;
-            }
-            if (a.currentPrice > b.currentPrice) {
-              return -1;
-            } else {
-              return 0;
-            }
-          })
+              if (a.currentPrice < b.currentPrice) {
+                return 1;
+              }
+              if (a.currentPrice > b.currentPrice) {
+                return -1;
+              } else {
+                return 0;
+              }
+            })
           : productsSort?.sort(function (a, b) {
-            if (a.currentPrice > b.currentPrice) {
-              return 1;
-            }
-            if (a.currentPrice < b.currentPrice) {
-              return -1;
-            } else {
-              return 0;
-            }
-          });
+              if (a.currentPrice > b.currentPrice) {
+                return 1;
+              }
+              if (a.currentPrice < b.currentPrice) {
+                return -1;
+              } else {
+                return 0;
+              }
+            });
       if (state.select === "") {
         return {
           ...state,
           products: arr,
-          currentPage: 1
+          currentPage: 1,
         };
       } else {
         return {
           ...state,
           productFilter: arr,
-          currentPage: 1
+          currentPage: 1,
         };
       }
     case GET_ALL_CATEGORIES:
@@ -184,7 +186,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         productFilter: payload[0],
         select: payload[1],
-        currentPage: 1
+        currentPage: 1,
       };
     case GET_FILTERS_GENDER_PRODUCT:
       return {
@@ -192,7 +194,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
         products: payload,
         newgenders: payload,
         select: "",
-        currentPage: 1
+        currentPage: 1,
       };
     case POST_PRODUCT:
       return {
@@ -210,12 +212,17 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         categoriesForForm: payload,
-      }
+      };
     case CHAT_BOT:
       return {
         ...state,
-        chatbot: payload
-      }
+        chatbot: payload,
+      };
+    case GET_USER_DATA:
+      return {
+        ...state,
+        userData: payload,
+      };
     default:
       return { ...state };
   }
