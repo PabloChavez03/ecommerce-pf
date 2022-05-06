@@ -10,11 +10,14 @@ const NavAdmin = () => {
 					<NavLink className={style.navLink} to={"/admin"}>
 						Principal
 					</NavLink>
-					<NavLink className={style.navLink} to={"/admin/producto"}>
+					<NavLink className={style.navLink} to={"/admin/createproduct"}>
 						Crear Producto
 					</NavLink>
 					<NavLink className={style.navLink} to={"/admin/allproducts"}>
 						Listado de Productos
+					</NavLink>
+					<NavLink className={style.navLink} to={"/admin/createadmin"}>
+						Crear Administrador
 					</NavLink>
 				</ul>
 			</nav>

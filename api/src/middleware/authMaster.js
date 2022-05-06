@@ -19,7 +19,7 @@ const authMaster = async (req, res, next) => {
     console.log(error);
   }
 
-  req.userId = decodedToken.id;
+  req.userName = decodedToken.username;
   req.role = decodedToken.role;
 
   // const user = await Users.findByPk(req.userId);
@@ -29,7 +29,7 @@ const authMaster = async (req, res, next) => {
   //   return res.status(401).son({ message: "user not found" });
   // }
 
-  if (!token || !decodedToken.id) {
+  if (!token || !decodedToken.username) {
     return res.status(401).json({ error: "token is missing or invalid!" });
   }
   //------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ const authMaster = async (req, res, next) => {
 const isAdmin = async (req, res, next) => {
   // const user = await Users.findByPk(req.userId);
   const role = await Role.findByPk(req.role);
-  console.log(role.name);
+  // console.log(role.name);
   if (role.name === "admin") {
     next();
   } else {

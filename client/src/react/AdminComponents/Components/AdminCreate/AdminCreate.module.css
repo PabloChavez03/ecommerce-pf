@@ -37,7 +37,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 .formLabel {
@@ -54,6 +54,26 @@
 	padding: 0 20px;
 	font-size: 11px;
 }
+.error {
+	width: 100%;
+	height: 45px;
+	border-radius: 20px;
+	border: 1px solid #aab0b5;
+	color: #263746;
+	padding: 0 20px;
+	font-size: 11px;
+	background-color: rgba(255, 0, 0, 0.247);
+}
+.errMsj{
+	font-size: 10px;
+	color: #263746;
+	border-bottom: 1px solid rgba(255, 0, 0, 0.247);
+	width: fit-content;
+	padding: 0 2px;
+
+}
+
+
 
 /*------------------------------*/
 /* Estilos generales de botones*/
@@ -122,17 +142,11 @@
 	color: #687880;
 }
 
-.error {
-	color: deeppink;
-	font-size: 12px;
-	margin-bottom: 10px;
-}
-
 @media (min-width: 760px) {
 	.loginContainer {
 		flex-direction: row;
 		justify-content: center;
-		align-items: flex-start;
+		align-items: center;
 	}
 }
 

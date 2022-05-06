@@ -3,14 +3,14 @@ const { Users } = require("../db");
 const router = Router();
 
 
-router.delete("/:legajo_user", async (req, res) => {
-    const {legajo_user} = req.params;
+router.delete("/:user_name", async (req, res) => {
+    const {user_name} = req.params;
     console.log(req.params)
 
     try {
         const deleted = await Users.destroy({
             where: {
-                legajo_user
+                user_name
             }
         });
         res.status(200).send(`${deleted} Usuario Eliminado`)

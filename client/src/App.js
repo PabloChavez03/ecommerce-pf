@@ -9,6 +9,7 @@ import ProductCreate from "./react/components/CreationProduct/ProductCreate";
 import Footer from "./react/components/Footer/Footer";
 import Admin from "./react/AdminComponents/Pages/Admin";
 import Login from "./react/components/Login/Login";
+import ShoppingBag from "./react/components/ShoppingCart/ShoppingBag/ShoppingBag";
 
 function App() {
 	return (
@@ -23,6 +24,7 @@ function App() {
 				<Route path={"/construction"} element={<Construction />} />
 				<Route path={"/admin/*"} element={<Admin />} />
 				<Route path={"/login"} element={<Login />} />
+				<Route path={"/bag"} element={<ShoppingBag />} />
 			</Routes>
 
 			<Footer />

@@ -17,17 +17,11 @@ router.use("/products/genre", require("./productsByGenre.js"));
 router.use("/product/review", require("./review"));
 // router.use("/carrito", require("./carrito"));
 
-//----------------  for client  -------------------------------
-router.use("/users/client/login", require("./loginClient"));
-router.use("/users/client/create", require("./createClient"));
-router.use("/users/client/update", require("./updateClient"));
+//----------------  chatbot  -------------------------------
 router.use("/chatBot", require("./chatBot"));
-// router.use("/users/create", require("./userPost"));
-
-//----------------  for admin  --------------------------------
+//----------------  for admin & client --------------------------------
 router.use("/users/create", require("./userCreate"));
 router.use("/users/login", require("./loginUser"));
-router.use("/users/client/delete", authMaster, require("./deleteClient"));
 router.use("/products/create", [authMaster, isAdmin], require("./postProduct"));
 router.use("/products/update", [authMaster, isAdmin], require("./updateProduct"));
 router.use("/products/delete", [authMaster, isAdmin], require("./deleteProduct"));

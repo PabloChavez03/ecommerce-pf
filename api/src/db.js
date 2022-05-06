@@ -19,33 +19,32 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 // );
 
 let sequelize =
-  process.env.NODE_ENV === "production"
-    ? new Sequelize({
-        database: DB_NAME,
-        dialect: "postgres",
-        host: DB_HOST,
-        port: 5432,
-        username: DB_USER,
-        password: DB_PASSWORD,
-        pool: {
-          max: 3,
-          min: 1,
-          idle: 10000,
-        },
-        dialectOptions: {
-          ssl: {
-            require: true,
-            // Ref.: https://github.com/brianc/node-postgres/issues/2009
-            rejectUnauthorized: false,
-          },
-          keepAlive: true,
-        },
-        // ssl: true,
-      })
-    : new Sequelize(
-        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-        { logging: false, native: false }
-      );
+      process.env.NODE_ENV === "production"
+        ? new Sequelize({
+            database: DB_NAME,
+            dialect: "postgres",
+            host: DB_HOST,
+            port: 5432,
+            username: DB_USER,
+            password: DB_PASSWORD,
+            pool: {
+              max: 3,
+              min: 1,
+              idle: 10000,
+            },
+            dialectOptions: {
+              ssl: {
+                require: true,
+                // Ref.: https://github.com/brianc/node-postgres/issues/2009
+                rejectUnauthorized: false,
+              },
+              keepAlive: true,
+            },
+          })
+        : new Sequelize(
+            `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+            { logging: false, native: false }
+          );
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -78,7 +77,7 @@ const {
 	Category,
 	ProductDetail,
 	Order,
-	Cliente,
+	// Cliente,
 	Carrito,
 	Review,
 	Invoice,
@@ -94,12 +93,12 @@ const {
 ProductDetail.hasMany(Review);
 Review.belongsTo(ProductDetail);
 
-Cliente.hasMany(Review);
-Review.belongsTo(Cliente);
+Users.hasMany(Review);
+Review.belongsTo(Users);
 
 //Client-Order-Factura
-Cliente.hasMany(Order);
-Order.belongsTo(Cliente);
+Users.hasMany(Order);
+Order.belongsTo(Users);
 
 //Orden de compra - Factura
 Order.hasOne(Invoice);
@@ -118,8 +117,8 @@ Product.hasOne(ProductDetail);
 ProductDetail.belongsTo(Product);
 
 //Carrito-Client
-Cliente.hasOne(Carrito);
-Carrito.belongsTo(Cliente);
+Users.hasOne(Carrito);
+Carrito.belongsTo(Users);
 
 //Carrito-Products
 Product.hasOne(Carrito);
