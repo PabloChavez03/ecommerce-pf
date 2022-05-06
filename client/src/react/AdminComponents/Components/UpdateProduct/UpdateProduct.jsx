@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { getDetails } from '../../../../redux/actions-types';
+import back from "../../../components/svg/volver-flecha.png";
+import style from '../DeleteProduct/DeleteProduct.module.css'
 
 export default function UpdateProduct() {
   const { productId } = useParams();
@@ -39,7 +41,17 @@ export default function UpdateProduct() {
   const [input, setInput] = useState(initialState);
   return (
     <div>
-
+        <div className={style.imgContainer}>
+        <NavLink to={`/admin/allproducts`} style={{ textDecoration: "none" }}>
+        <img 
+            src={back}
+            alt="Img back"
+            className={style.img}
+          />
+        </NavLink>
+        </div>
+      {productToUpdate?.name?
+      
      <div>
         <h4>Nombre</h4>
         <input
@@ -69,9 +81,9 @@ export default function UpdateProduct() {
           }):<p>Hola</p>
         }
         <div>
-
         </div>
-      </div> 
+      </div>
+: <p>No se encontro el producto</p>}
     </div>
   );
 };

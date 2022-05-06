@@ -21,7 +21,6 @@ export default function CardDetail() {
 		<div>
 			<NavBar />
 			{productDetail.name ? (
-				<div>
 					<Card
 						id={productDetail.id}
 						name={productDetail.name}
@@ -36,7 +35,6 @@ export default function CardDetail() {
 						variants={productDetail.variants}
 						info={productDetail.info}
 					/>
-				</div>
 			) : (
 				<h1>Loading...</h1>
 			)}

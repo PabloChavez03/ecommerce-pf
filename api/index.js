@@ -23,6 +23,7 @@ const { conn } = require("./src/db.js");
 
 const setDDBBcategories = require("./src/controllers/categoriesDbSetter.js");
 const getDDBBproducts = require("./src/controllers/productsDbGetter.js");
+const createRoles = require("./src/controllers/createRoles.js");
 //const { getAPIproducts } = require("./src/controllers/productsPost.js");
 
 // Syncing all the models at once.
@@ -30,6 +31,10 @@ conn
   .sync({ force: false })
   .then(() => {
     server.listen(process.env.PORT || 5000, async () => {
+
+      // // Roles
+      await createRoles();
+
       // // Categories
       await setDDBBcategories();
 

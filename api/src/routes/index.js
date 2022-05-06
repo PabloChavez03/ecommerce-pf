@@ -4,7 +4,7 @@ const { Router } = require("express");
 
 const router = Router();
 
-const authMaster = require("../middleware/authMaster");
+const { authMaster,isAdmin } = require("../middleware/authMaster");
 
 // Modularizando las rutas
 
@@ -17,27 +17,27 @@ router.use("/products/genre", require("./productsByGenre.js"));
 router.use("/product/review", require("./review"));
 // router.use("/carrito", require("./carrito"));
 
-
-
-
 //----------------  for client  -------------------------------
-// router.use("/client", require("./client"));
 router.use("/users/client/login", require("./loginClient"));
 router.use("/users/client/create", require("./createClient"));
 router.use("/users/client/update", require("./updateClient"));
-router.use("/users/client/delete", require("./deleteClient"));
+router.use("/chatBot", require("./chatBot"));
+// router.use("/users/create", require("./userPost"));
 
 //----------------  for admin  --------------------------------
 router.use("/users/create", require("./userCreate"));
 router.use("/users/login", require("./loginUser"));
-router.use("/products/create", authMaster, require("./postProduct"));
-router.use("/products/update", authMaster, require("./updateProduct"));
-router.use("/products/delete", authMaster, require("./deleteProduct"));
-router.use("/product/stock", authMaster, require("./updateStock"));
-router.use("/users/update", authMaster, require("./userUpdate"));
-router.use("/users/delete", authMaster, require("./userDelete"));
+router.use("/users/client/delete", authMaster, require("./deleteClient"));
+router.use("/products/create", [authMaster, isAdmin], require("./postProduct"));
+router.use("/products/update", [authMaster, isAdmin], require("./updateProduct"));
+router.use("/products/delete", [authMaster, isAdmin], require("./deleteProduct"));
+router.use("/product/stock", [authMaster, isAdmin], require("./updateStock"));
+router.use("/users/update", [authMaster, isAdmin], require("./userUpdate"));
+router.use("/users/delete", [authMaster, isAdmin], require("./userDelete"));
 
-//-------------------------------------------------------------
+//----------------------Mercado Pago---------------------------------------
+router.use("/mercadopago", require("./mercadoPago"));
+//-------------------------------------------------------------------------
 
 /* ¡¡¡ACLARACION!!! Para poder utilizar las rutas de ADMIN deberan de registrarse o en su defecto comentar el middleware de authMaster*/
 

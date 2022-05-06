@@ -23,9 +23,9 @@ export default function Paginated({productsToPaginated, productsPerPage}) {
 
     const handleNextPage = (event) => {
         event.preventDefault();
-        if((currentPage+1) !== Math.ceil(productsToPaginated.length / productsPerPage)) {
+        if(currentPage !== Math.ceil(productsToPaginated.length / productsPerPage))  {
             dispatch(setCurrentPage(parseInt(currentPage + 1)))
-            if(currentPage + 1 > maxLimitNumberPage) {
+            if(currentPage + 1 >= maxLimitNumberPage) {
                 setmaxLimitNumberPage(maxLimitNumberPage + limitNumberPage);
                 setminLimitNumberPage(minLimitNumberPage + limitNumberPage);
             };   
