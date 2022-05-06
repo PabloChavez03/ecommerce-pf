@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 
+// import AccountMenu from "./AccountMenu/AccountMenu";
+
 import SearchBar from "../SearchBar/SearchBar";
 import CartIcon from "../svg/CartIcon";
-import AccountIcon from "../svg/AccountIcon";
 import CreateIcon from "../svg/CreateIcon";
+import AccountIcon from "../svg/AccountIcon";
+
 import Modal from "../ShoppingCart/Modal/Modal";
 
 import "./NavBar.scss";
@@ -58,17 +61,17 @@ export default function NavBar() {
           <Link to={"/admin"}>
             <CreateIcon />
           </Link>
-
+         
           <div className="icon_cart" onClick={(e) => handleModalStatus(e)}>
             {/* <NavLink exact to={"/cart"} onClick={handleClickForHiddingBurguer}> */}
             <CartIcon />
             {/**Insertando el componente modal */}
-            {/* </NavLink> */}
+            {/* </NavLink> */} 
+            
+            <AccountIcon/>
           </div>
           <Modal status={statusModal} setStatus={setStatusModal} />
-          <NavLink to={"/account"} onClick={handleClickForHiddingBurguer}>
-            <AccountIcon />
-          </NavLink>
+            {/* <AccountMenu/> */}
         </div>
       </div>
 

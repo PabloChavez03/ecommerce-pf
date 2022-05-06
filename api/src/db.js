@@ -17,6 +17,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 // 		},
 // 	},
 // );
+
 let sequelize =
   process.env.NODE_ENV === "production"
     ? new Sequelize({
@@ -83,7 +84,10 @@ const {
 	Invoice,
   Role,
   Users,
+  Chat_bot_emisor,
+  Chat_bot_receptor,
 } = sequelize.models;
+
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -121,9 +125,14 @@ Carrito.belongsTo(Cliente);
 Product.hasOne(Carrito);
 Carrito.belongsTo(Product);
 
+
 //Role-User
 Users.hasOne(Role);
 Role.belongsTo(Users);
+
+//Chat bot Emisor-Receptor
+Chat_bot_emisor.belongsToMany(Chat_bot_receptor, { through: "Emisor_Receptor" });
+Chat_bot_receptor.belongsToMany(Chat_bot_emisor, { through: "Emisor_Receptor" });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

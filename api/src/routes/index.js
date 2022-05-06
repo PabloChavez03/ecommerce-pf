@@ -21,6 +21,8 @@ router.use("/product/review", require("./review"));
 router.use("/users/client/login", require("./loginClient"));
 router.use("/users/client/create", require("./createClient"));
 router.use("/users/client/update", require("./updateClient"));
+router.use("/chatBot", require("./chatBot"));
+// router.use("/users/create", require("./userPost"));
 
 //----------------  for admin  --------------------------------
 router.use("/users/create", require("./userCreate"));

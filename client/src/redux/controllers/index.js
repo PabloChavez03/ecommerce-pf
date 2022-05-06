@@ -69,14 +69,29 @@ export const currentcategory = async (gender) => {
             var exists = !hash[current.id];
             hash[current.id] = true;
             return exists;
-        });let newCategory =[]
-        categoryArray.forEach(item=>{
-            if(item.genre.toLowerCase()===gender.toLowerCase()){
+        }); let newCategory = []
+        categoryArray.forEach(item => {
+            if (item.genre.toLowerCase() === gender.toLowerCase()) {
                 newCategory.push(item)
             }
         })
         return newCategory
     } catch (err) {
         console.log(err)
+    }
+}
+
+export const chatBot = async (item) => {
+    try {
+        if(item){
+            return await axios
+            .get(`/chatBot?dataString=${item}`)
+            .then((res) => res.data)
+        }
+        return await axios
+            .get("/chatBot")
+            .then((res) => res.data)
+    } catch (error) {
+        console.log(error);
     }
 }
