@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import CardDetail from "./react/components/CardDetail/CardDetail";
@@ -10,8 +11,36 @@ import Footer from "./react/components/Footer/Footer";
 import Admin from "./react/AdminComponents/Pages/Admin";
 import Login from "./react/components/Login/Login";
 import ShoppingBag from "./react/components/ShoppingCart/ShoppingBag/ShoppingBag";
+import axios from "axios";
 
 function App() {
+	const [user, setUSer] = useState(null);
+
+	useEffect(() => {
+		const getUser = () =>
+			axios({
+				url: "http://localhost:3001/auth/login/success",
+				method: "GET",
+				withCredentials: true,
+				headers: {
+					"Content-Type": "application/json",
+					"Access-Control-Allow-Credentials": true,
+				},
+			})
+				.then((response) => {
+					if (response.status === 200) return response.data;
+					else throw new Error("Authentication has been failed");
+				})
+				.then((resObject) => {
+					setUSer(resObject.user);
+				})
+				.catch((e) => console.log(e));
+
+		getUser();
+	}, []);
+
+	console.log(user);
+
 	return (
 		<BrowserRouter>
 			<Routes>
