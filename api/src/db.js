@@ -78,7 +78,7 @@ const {
 	Category,
 	ProductDetail,
 	Order,
-	Cliente,
+	// Cliente,
 	Carrito,
 	Review,
 	Invoice,
@@ -94,12 +94,12 @@ const {
 ProductDetail.hasMany(Review);
 Review.belongsTo(ProductDetail);
 
-Cliente.hasMany(Review);
-Review.belongsTo(Cliente);
+Users.hasMany(Review);
+Review.belongsTo(Users);
 
 //Client-Order-Factura
-Cliente.hasMany(Order);
-Order.belongsTo(Cliente);
+Users.hasMany(Order);
+Order.belongsTo(Users);
 
 //Orden de compra - Factura
 Order.hasOne(Invoice);
@@ -118,8 +118,8 @@ Product.hasOne(ProductDetail);
 ProductDetail.belongsTo(Product);
 
 //Carrito-Client
-Cliente.hasOne(Carrito);
-Carrito.belongsTo(Cliente);
+Users.hasOne(Carrito);
+Carrito.belongsTo(Users);
 
 //Carrito-Products
 Product.hasOne(Carrito);
