@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
     address,
   } = req.body;
   try {
-    const saltRam = 10;
+    // const saltRam = 10;
     // const passwordHash = await bcrypt.hash(user_password, saltRam);
 
     const user = await Users.create({

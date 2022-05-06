@@ -4,13 +4,13 @@ const { Users, Role } = require("../db");
 const authMaster = async (req, res, next) => {
   //----------------------------AUTHORIZATION--------------------------------------------------------
   const authorization = req.get("authorization");
-
+  
   let token = null;
-
+  
   if (authorization && authorization.toLowerCase().startsWith("bearer")) {
     token = authorization.substring(7);
   }
-
+  
   let decodedToken = {};
 
   try {
