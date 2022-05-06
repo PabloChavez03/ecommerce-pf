@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProductByName } from "../../../redux/actions-types";
 import style from "./SearchBar.module.css";
 
@@ -21,6 +21,8 @@ export default function SearchBar() {
 			setSearch("");
 		};
 	};
+
+	// const productsName = useSelector((state) => )
 
 	return (
 		<div>
