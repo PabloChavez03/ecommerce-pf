@@ -181,23 +181,15 @@ export const getFiltersGenderProduct = (payload) => async (dispatch) => {
 	});
 };
 
+
+
 export function createNewUser(payload) {
 	return async function (dispatch) {
 		const newUser = await axios.post(
-			"http://localhost:3001/users/client/create",
-			payload
-		);
-		return newUser;
-	};
-}
-
-export function createNewUserAdmin(payload) {
-	return async function (dispatch) {
-		const newUserAdmin = await axios.post(
 			"http://localhost:3001/users/create",
 			payload
 		);
-		return newUserAdmin;
+		return newUser;
 	};
 }
 
