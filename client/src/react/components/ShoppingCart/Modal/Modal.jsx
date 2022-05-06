@@ -1,12 +1,14 @@
 import React from "react";
 
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import ProductCardModal from "../CardModal/ProductCardModal";
 import style from "./Modal.module.css";
 
 const Modal = ({ status, setStatus }) => {
 	const cartData = useSelector((state) => state.cartItems);
+	const navigate = useNavigate();
 	// const subTotal = useSelector((state) => state.subTotal);
 
 	let subtotalCart = 0
@@ -15,7 +17,7 @@ const Modal = ({ status, setStatus }) => {
 	
 	const handleClickBag = (event) => {
 		event.preventDefault();
-		alert("Funcionalidad en desarrollo!");
+		navigate("/bag");
 	};
 	
 	return (
