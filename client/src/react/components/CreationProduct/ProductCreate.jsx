@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import {
 	getAllCategoriesForForm,
@@ -68,11 +68,10 @@ export default function ProductCreate() {
   
 	useEffect(() => {
 		dispatch(getAllCategoriesForForm());
-	}, [dispatch]);
+	},[dispatch])
 
 	//Categorias para devolver keys
-	//let categories = useSelector((state) => state.categoriesForForm);
-	// console.log(categories)
+	let categories = useSelector((state) => state.categoriesForForm);
 
 	const initialState = {
 		name: "",
@@ -84,7 +83,7 @@ export default function ProductCreate() {
 		color: "",
 		gender: "",
 		brandName: "",
-		// category: [],
+		category: "",
 		info: {
 			aboutMe: "",
 			sizeAndFit: "",
@@ -95,9 +94,9 @@ export default function ProductCreate() {
 
 	const [input, setInput] = useState(initialState);
 	const [errors, setError] = useState(initialState);
-	// let demoCategories = [];
-	// demoCategories = categories.filter((el) => input.category.includes(el.id));
+	const [nameCategory, setNameCategory] = useState("");
 	// console.log(demoCategories)
+
 
 	function handleChange(e) {
 		setInput({
@@ -112,40 +111,43 @@ export default function ProductCreate() {
 		);
 	};
 
-	// function handleSelectCategoryOnChange(e) {
-	// 	const value = e.target.value;
-	// 	e.preventDefault();
-	// 	setInput((prev) => ({
-	// 		...prev,
-	// 		category: [...input.category, Number(value)],
-	// 	}));
-		// console.log(value)
+	function handleSelectCategoryOnChange(e) {
+		const value = e.target.value;
+		e.preventDefault();
 
-		//set Error a revisar
+		setInput((prev) => ({
+			...prev,
+			category: Number(value),
+		}));
+		console.log(value)
 
-	// 	setError(
-	// 		validate({
-	// 			...input,
-	// 			category: [...input.category, Number(value)],
-	// 		})
-	// 	);
-	// }
+		// set Error a revisar
 
-	// function handleDeleteSelectCategory(e) {
-	// 	const value = e.target.value;
-	// 	e.preventDefault();
-	// 	setInput((prev) => ({
-	// 		...prev,
-	// 		category: prev.category.filter((el) => el !== Number(value)),
-	// 	}));
+		setError(
+			validate({
+				...input,
+				category: Number(value),
+			})
+		);
+		let categoryName = categories.find((e) => e.id === Number(value))
+		setNameCategory(categoryName.title);
 
-	// 	setError(
-	// 		validate({
-	// 			...input,
-	// 			category: input.category.filter((el) => el !== Number(value)),
-	// 		})
-	// 	);
-	// }
+	}
+
+	function handleDeleteSelectCategory(e) {
+		e.preventDefault();
+		setInput((prev) => ({
+			...prev,
+			category: "",
+		}));
+
+		setError(
+			validate({
+				...input,
+				category: "",
+			})
+		);
+	}
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -165,6 +167,21 @@ export default function ProductCreate() {
 			[e.target.name]: !input.isOffertPrice,
 		});
 	};
+
+	// const handleChangeSelectGender = (e) => {
+	// 	e.preventDefault();
+	// 	setInput({
+	// 		...input,
+	// 		[e.target.name]: e.target.value,
+	// 	});
+	// 	setError(
+	// 		validate({
+	// 			...input,
+	// 			[e.target.name]: e.target.value,
+	// 		})
+	// 	);
+	// 	dispatch(getAllCategoriesForForm)
+	// }
 
 	//para futuros keyPress
 	// const handleKeyPress = (e) => {
@@ -205,7 +222,7 @@ export default function ProductCreate() {
 							value={input.name}
 							onChange={(e) => handleChange(e)}
 						/>
-						{errors.name && <p>{errors.name}</p>}
+						{errors.name && input.name !== "" ? <p>{errors.name}</p> : ""}
 					</div>
 
 					<div className={s.description}>
@@ -344,7 +361,7 @@ export default function ProductCreate() {
 						<h5>Género seleccionado: {input.gender === "" ? "Seleccionar género" : input.gender === 'women' ? "Mujer" : "Hombre"}</h5>
 					</div>
 				</div>
-				{/* <div className={s.sectionFive} >
+				<div className={s.sectionFive} >
 					<label>Categories: </label>
 					<select className={s.input} onChange={handleSelectCategoryOnChange}>
 						<optgroup value='categories' label='Man'>
@@ -368,22 +385,22 @@ export default function ProductCreate() {
 					</select>
 					<div className={s.categoriesContainerGeneral}>
 
-					{demoCategories?.map((el) => (
-						<div key={el.id} className={s.categoriesContainer}>
-							<span key={el.id} value={el.id} className={s.spanCategory}>
-								{el.title}
+					{input.category !== "" ?
+						<div className={s.categoriesContainer}>
+							<span value={input.category} className={s.spanCategory}>
+								{nameCategory}
 							</span>
 							<button
 								className={s.buttonCategory}
-								value={el.id}
+								value={input.category}
 								onClick={(e) => handleDeleteSelectCategory(e)}
 							>
 								x
 							</button>
 						</div>
-					))}
+					: ""}
 				</div>
-				</div> */}
+				</div>
 
 				
 				<div className={s.sectionSix} >

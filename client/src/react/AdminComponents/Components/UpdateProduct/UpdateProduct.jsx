@@ -75,14 +75,12 @@ export default function UpdateProduct() {
 
 	const productToUpdate = useSelector((state)=>state.details);
 
-	// useEffect(() => {
-	// 	dispatch(getAllCategoriesForForm());
-	// }, [dispatch]);
+	useEffect(() => {
+		dispatch(getAllCategoriesForForm());
+	}, [dispatch]);
 
-	// useEffect(() => {
-	// 	dispatch(setDetails(productToUpdate));
-	// },[dispatch, productToUpdate,]);
-	
+	let categories = useSelector((state) => state.categoriesForForm);
+
 	//Categorias para devolver keys
 	//let categories = useSelector((state) => state.categoriesForForm);
 	// console.log(categories)
@@ -130,7 +128,7 @@ export default function UpdateProduct() {
 		color: "",
 		gender: "",
 		brandName: "",
-		// category: [],
+		category: "",
 		info: {
 			aboutMe: "",
 			sizeAndFit: "",
@@ -139,9 +137,9 @@ export default function UpdateProduct() {
 		variants: [],
 	});
 	const [errors, setError] = useState(stateErrors);
-	// let demoCategories = [];
-	// demoCategories = categories.filter((el) => input.category.includes(el.id));
-	// console.log(demoCategories)
+	const idCategory = categories.find((e) => e.id === productToUpdate.CategoryId );
+	const [nameCategory, setNameCategory] = useState(idCategory.title);
+
 
 	useEffect(() => {
 		setInput(productToUpdate);
@@ -160,40 +158,41 @@ export default function UpdateProduct() {
 		);
 	}
 
-	// function handleSelectCategoryOnChange(e) {
-	// 	const value = e.target.value;
-	// 	e.preventDefault();
-	// 	setInput((prev) => ({
-	// 		...prev,
-	// 		category: [...input.category, Number(value)],
-	// 	}));
-		// console.log(value)
+	function handleSelectCategoryOnChange(e) {
+		const value = e.target.value;
+		e.preventDefault();
 
-		//set Error a revisar
+		setInput((prev) => ({
+			...prev,
+			category: Number(value),
+		}));
+		// set Error a revisar
 
-	// 	setError(
-	// 		validate({
-	// 			...input,
-	// 			category: [...input.category, Number(value)],
-	// 		})
-	// 	);
-	// }
+		setError(
+			validate({
+				...input,
+				category: Number(value),
+			})
+		);
+		let categoryName = categories.find((e) => e.id === Number(value))
+		setNameCategory(categoryName.title);
 
-	// function handleDeleteSelectCategory(e) {
-	// 	const value = e.target.value;
-	// 	e.preventDefault();
-	// 	setInput((prev) => ({
-	// 		...prev,
-	// 		category: prev.category.filter((el) => el !== Number(value)),
-	// 	}));
+	}
 
-	// 	setError(
-	// 		validate({
-	// 			...input,
-	// 			category: input.category.filter((el) => el !== Number(value)),
-	// 		})
-	// 	);
-	// }
+	function handleDeleteSelectCategory(e) {
+		e.preventDefault();
+		setInput((prev) => ({
+			...prev,
+			category: "",
+		}));
+
+		setError(
+			validate({
+				...input,
+				category: "",
+			})
+		);
+	}
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -375,8 +374,6 @@ export default function UpdateProduct() {
 						{errors.color && <p>{errors.color}</p>}
 					</div>
 				
-
-
 					<div>
 						<label>Género: </label>
 						<select
@@ -394,7 +391,7 @@ export default function UpdateProduct() {
 						<h5>Género seleccionado: {input.gender === "" ? "Seleccionar género" : input.gender === 'women' ? "Mujer" : "Hombre"}</h5>
 					</div>
 				</div>
-				{/* <div className={s.sectionFive} >
+				<div className={s.sectionFive} >
 					<label>Categories: </label>
 					<select className={s.input} onChange={handleSelectCategoryOnChange}>
 						<optgroup value='categories' label='Man'>
@@ -418,23 +415,22 @@ export default function UpdateProduct() {
 					</select>
 					<div className={s.categoriesContainerGeneral}>
 
-					{demoCategories?.map((el) => (
-						<div key={el.id} className={s.categoriesContainer}>
-							<span key={el.id} value={el.id} className={s.spanCategory}>
-								{el.title}
+					{input.category !== "" ?
+						<div className={s.categoriesContainer}>
+							<span value={input.category} className={s.spanCategory}>
+								{nameCategory}
 							</span>
 							<button
 								className={s.buttonCategory}
-								value={el.id}
+								value={input.category}
 								onClick={(e) => handleDeleteSelectCategory(e)}
 							>
 								x
 							</button>
 						</div>
-					))}
+					: ""}
 				</div>
-				</div> */}
-
+				</div>
 				
 				<div className={s.sectionSix} >
 					<div>
