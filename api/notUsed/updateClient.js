@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Cliente } = require("../db");
+const { Cliente } = require("../src/db");
 const bcrypt = require("bcrypt");
 const router = Router();
 
@@ -19,8 +19,8 @@ router.patch("/:dni_client", async (req, res) => {
   console.log(req.params);
   console.log(req.body);
 
-  const saltRounds = 10;
-  let newPassword = await bcrypt.hash(login_password, saltRounds);
+  // const saltRounds = 10;
+  // let newPassword = await bcrypt.hash(login_password, saltRounds);
   try {
     const modified = Cliente.update(
       {
@@ -28,7 +28,7 @@ router.patch("/:dni_client", async (req, res) => {
         dni_client,
         email,
         login_name,
-        login_password: newPassword,
+        // login_password: newPassword,
         lastname,
         address,
         isRegistered,
