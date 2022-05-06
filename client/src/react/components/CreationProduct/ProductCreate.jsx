@@ -15,7 +15,6 @@ import AddVariants from "./components/AddVariants";
 // Utils
 import s from "./ProductCreate.module.css";
 import { handleDeleteImg, handleSizeDelete } from "./handlers";
-import NavBar from "../NavBar/NavBar";
 
 function validate(input) {
 	let errors = {};
@@ -43,8 +42,8 @@ function validate(input) {
 		errors.currentPrice = <i>"Debe ingresar un importe valido!"</i>;
 		// errors.button = true;
 	}
-	if (!input.colour || input.colour === "") {
-		errors.colour = <i>"Debe ingresar un color de prenda!"</i>;
+	if (!input.color || input.color === "") {
+		errors.color = <i>"Debe ingresar un color de prenda!"</i>;
 		// errors.button = true;
 	}
 	if (!input.gender || input.gender === "") {
@@ -66,14 +65,13 @@ export default function ProductCreate() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [canAddImage, setCanAddImage] = useState(false);
-
+  
 	useEffect(() => {
 		dispatch(getAllCategoriesForForm());
-	}, [dispatch]);
+	},[dispatch])
 
 	//Categorias para devolver keys
 	let categories = useSelector((state) => state.categoriesForForm);
-	// console.log(categories)
 
 	const initialState = {
 		name: "",
@@ -82,10 +80,10 @@ export default function ProductCreate() {
 		previousPrice: 0,
 		isOffertPrice: false,
 		currentPrice: 0,
-		colour: "",
+		color: "",
 		gender: "",
 		brandName: "",
-		category: [],
+		category: "",
 		info: {
 			aboutMe: "",
 			sizeAndFit: "",
@@ -96,9 +94,9 @@ export default function ProductCreate() {
 
 	const [input, setInput] = useState(initialState);
 	const [errors, setError] = useState(initialState);
-	let demoCategories = [];
-	demoCategories = categories.filter((el) => input.category.includes(el.id));
+	const [nameCategory, setNameCategory] = useState("");
 	// console.log(demoCategories)
+
 
 	function handleChange(e) {
 		setInput({
@@ -111,39 +109,42 @@ export default function ProductCreate() {
 				[e.target.name]: e.target.value,
 			})
 		);
-	}
+	};
 
 	function handleSelectCategoryOnChange(e) {
 		const value = e.target.value;
 		e.preventDefault();
+
 		setInput((prev) => ({
 			...prev,
-			category: [...input.category, Number(value)],
+			category: Number(value),
 		}));
-		// console.log(value)
+		console.log(value)
 
-		//set Error a revisar
+		// set Error a revisar
 
 		setError(
 			validate({
 				...input,
-				category: [...input.category, Number(value)],
+				category: Number(value),
 			})
 		);
+		let categoryName = categories.find((e) => e.id === Number(value))
+		setNameCategory(categoryName.title);
+
 	}
 
 	function handleDeleteSelectCategory(e) {
-		const value = e.target.value;
 		e.preventDefault();
 		setInput((prev) => ({
 			...prev,
-			category: prev.category.filter((el) => el !== Number(value)),
+			category: "",
 		}));
 
 		setError(
 			validate({
 				...input,
-				category: input.category.filter((el) => el !== Number(value)),
+				category: "",
 			})
 		);
 	}
@@ -157,15 +158,30 @@ export default function ProductCreate() {
 			navigate("/");
 			alert("Producto creado con exito!");
 			navigate("/");
-		}
-	}
+		};
+	};
 
 	function handleCheck(e) {
 		setInput({
 			...input,
 			[e.target.name]: !input.isOffertPrice,
 		});
-	}
+	};
+
+	// const handleChangeSelectGender = (e) => {
+	// 	e.preventDefault();
+	// 	setInput({
+	// 		...input,
+	// 		[e.target.name]: e.target.value,
+	// 	});
+	// 	setError(
+	// 		validate({
+	// 			...input,
+	// 			[e.target.name]: e.target.value,
+	// 		})
+	// 	);
+	// 	dispatch(getAllCategoriesForForm)
+	// }
 
 	//para futuros keyPress
 	// const handleKeyPress = (e) => {
@@ -179,6 +195,17 @@ export default function ProductCreate() {
 	// 	}
 	// }
 
+	const handleChangeInfoAditional = (e)=> {
+		e.preventDefault();
+		setInput({
+			...input,
+			info: {
+				...input.info,
+				[e.target.name]:e.target.value
+			}
+		});
+	}
+
 	return (
 		<div className={s.container}>
 			<form className={s.form} onSubmit={(e) => handleSubmit(e)}>
@@ -186,24 +213,24 @@ export default function ProductCreate() {
 				<div className={s.sectionOne}>
 
 					<div className={s.name}>
-						<label>Name: </label>
+						<label>Nombre: </label>
 						<input
 							className={s.input}
 							type='text'
-							placeholder='Ingrese el nombre!!'
+							placeholder='Ingrese nombre'
 							name='name'
 							value={input.name}
 							onChange={(e) => handleChange(e)}
 						/>
-						{errors.name && <p>{errors.name}</p>}
+						{errors.name && input.name !== "" ? <p>{errors.name}</p> : ""}
 					</div>
 
 					<div className={s.description}>
-						<label>Description: </label>
+						<label>Descripción: </label>
 						<textarea
 							className={s.input}
 							type='text'
-							placeholder='Ingrese descripcion!!'
+							placeholder='Ingrese descripción'
 							name='description'
 							value={input.description}
 							onChange={(e) => handleChange(e)}
@@ -250,7 +277,7 @@ export default function ProductCreate() {
 
 				<div className={s.sectionThree}>
 					<div>
-						<label>Is an offert product? </label>
+						<label>El producto se encuentra en oferta? </label>
 						<input
 							className={s.offertProduct}
 							type='checkbox'
@@ -262,11 +289,11 @@ export default function ProductCreate() {
 
 					{input.isOffertPrice && (
 						<div>
-							<label>Previous Price: </label>
+							<label>Precio anterior: </label>
 							<input
 								className={s.input}
 								type='number'
-								placeholder='Ingrese precio!!'
+								placeholder='Ingrese precio anterior'
 								name='previousPrice'
 								value={input.previousPrice}
 								onChange={(e) => handleChange(e)}
@@ -276,11 +303,11 @@ export default function ProductCreate() {
 					)}
 
 					<div>
-						<label>Current Price: </label>
+						<label>Precio actual: </label>
 						<input
 							className={s.input}
 							type='number'
-							placeholder='Ingrese precio!!'
+							placeholder='Ingrese precio'
 							name='currentPrice'
 							value={input.currentPrice}
 							onChange={(e) => handleChange(e)}
@@ -292,11 +319,11 @@ export default function ProductCreate() {
 
 				<div className={s.sectionFour}>
 					<div>
-						<label>Brand Name: </label>
+						<label>Marca: </label>
 						<input
 							className={s.input}
 							type='text'
-							placeholder='Ingrese marca!!'
+							placeholder='Ingrese marca'
 							name='brandName'
 							value={input.brandName}
 							onChange={(e) => handleChange(e)}
@@ -305,34 +332,33 @@ export default function ProductCreate() {
 					</div>
 
 					<div>
-						<label>Colour: </label>
+						<label>Color: </label>
 						<input
 							className={s.input}
 							type='text'
-							placeholder='Ingrese color!!'
-							name='colour'
-							value={input.colour}
+							placeholder='Ingrese color'
+							name='color'
+							value={input.color}
 							onChange={(e) => handleChange(e)}
 						/>
-						{errors.colour && <p>{errors.colour}</p>}
+						{errors.color && <p>{errors.color}</p>}
 					</div>
 				
-
-
 					<div>
-						<label>Gender: </label>
+						<label>Género: </label>
 						<select
 							className={s.input}
 							type='text'
-							placeholder='Ingrese fenero!!'
+							placeholder='Ingrese género'
 							name='gender'
 							value={input.gender}
 							onChange={(e) => handleChange(e)}
 						>
 							<option>Seleccionar</option>
-							<option value={"men"}>Men</option>
-							<option value={"women"}>Women</option>
+							<option value={"men"}>Hombre</option>
+							<option value={"women"}>Mujer</option>
 						</select>
+						<h5>Género seleccionado: {input.gender === "" ? "Seleccionar género" : input.gender === 'women' ? "Mujer" : "Hombre"}</h5>
 					</div>
 				</div>
 				<div className={s.sectionFive} >
@@ -359,20 +385,20 @@ export default function ProductCreate() {
 					</select>
 					<div className={s.categoriesContainerGeneral}>
 
-					{demoCategories?.map((el) => (
-						<div key={el.id} className={s.categoriesContainer}>
-							<span key={el.id} value={el.id} className={s.spanCategory}>
-								{el.title}
+					{input.category !== "" ?
+						<div className={s.categoriesContainer}>
+							<span value={input.category} className={s.spanCategory}>
+								{nameCategory}
 							</span>
 							<button
 								className={s.buttonCategory}
-								value={el.id}
+								value={input.category}
 								onClick={(e) => handleDeleteSelectCategory(e)}
 							>
 								x
 							</button>
 						</div>
-					))}
+					: ""}
 				</div>
 				</div>
 
@@ -393,18 +419,17 @@ export default function ProductCreate() {
 								input.info.sizeAndFit ||
 								input.info.careInfo) && (
 								<div>
-									<p>
-										<span className={s.titulo}>About me:</span>{" "}
-										{input.info.aboutMe}
-									</p>
-									<p>
-										<span className={s.titulo}>Size and Fit:</span>{" "}
-										{input.info.sizeAndFit}
-									</p>
-									<p>
-										<span className={s.titulo}>Care info:</span>{" "}
-										{input.info.careInfo}
-									</p>
+									<label>About Me:</label>
+									<input type="text" value={input.info.aboutMe} name="aboutMe" className={s.input} onChange={(e) => handleChangeInfoAditional(e)}>
+									</input>
+									<br/>
+									<label>Size and Fit:</label>
+									<input type="text" value={input.info.sizeAndFit} name="sizeAndFit" className={s.input} onChange={(e) => handleChangeInfoAditional(e)}>
+									</input>
+									<br/>
+									<label>Care info:</label>
+									<input type="text" value={input.info.careInfo} name="careInfo" className={s.input} onChange={(e) => handleChangeInfoAditional(e)}>
+									</input>
 								</div>
 							)}
 						</fieldset>
@@ -414,11 +439,11 @@ export default function ProductCreate() {
 						<AddVariants input={input} setInput={setInput} />
 						{input.variants.length ? (
 							<fieldset className={s.showInfo}>
-								<legend>Variants: </legend>
+								<legend>Variantes: </legend>
 								{input.variants.map((el, idx) => {
 									return (
 										<div key={`${el.brandSize}${idx}`} className={s.eachVariant}>
-											<p>{el.brandSize}</p>
+											<p>{`Talle: ${el.brandSize} Stock: ${el.stock}`}</p>
 											<button
 												className={s.buttonCategory}
 												onClick={(e) => handleSizeDelete(e, el, input, setInput)}
@@ -433,13 +458,12 @@ export default function ProductCreate() {
 							""
 						)}
 					</div>
-
-					<button
+						<button
 						type='submit'
 						className={Object.values(errors).length === 0 ? s.btn : s.btnDisable}
 					>
 						Crear Producto
-					</button>
+					</button> 
 				</div>
 			</form>
 		</div>

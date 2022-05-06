@@ -25,8 +25,8 @@ export default function Home() {
 	const firstProduct = lastProduct - productsPerPage;
 	const productsCurent =
 		select === ""
-			? allProducts.slice(firstProduct, lastProduct)
-			: productFilter.slice(firstProduct, lastProduct);
+			? allProducts?.slice(firstProduct, lastProduct)
+			: productFilter?.slice(firstProduct, lastProduct);
 	const [render, setRender] = useState();
 
 	useEffect(() => {

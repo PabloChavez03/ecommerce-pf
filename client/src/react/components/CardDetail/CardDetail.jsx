@@ -16,7 +16,6 @@ export default function CardDetail() {
 	}, [dispatch, productId]);
 
 	const productDetail = useSelector((state) => state.details);
-
 	return (
 		<div>
 			<NavBar />

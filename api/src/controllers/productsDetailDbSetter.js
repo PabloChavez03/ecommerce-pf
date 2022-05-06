@@ -13,7 +13,7 @@ async function setDDBBproducts(productId) {
 			console.log(e),
 		);
 
-		// console.log(productWithStock);
+		console.log(productWithStock);
 
 		let category = await Category.findByPk(productWithStock.CategoryId);
 

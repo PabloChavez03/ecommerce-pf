@@ -25,7 +25,7 @@ export default function FilterByCategory() {
             <select onChange={(e) => handleChangeSelect(e)}>
                 <option value={"selectCategory"}>Seleccionar Categoría</option>
                 {
-                    allCategories.length?allCategories.map((e)=>(
+                    allCategories?.length?allCategories.map((e)=>(
                         <option key={e.id} value={e.id} name={e.title}>{e.title}</option>
                     )):null
                 }
