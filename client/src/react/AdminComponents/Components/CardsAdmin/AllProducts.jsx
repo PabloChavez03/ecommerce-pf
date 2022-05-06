@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, setDetails } from "../../../../redux/actions-types";
-import Filter from "../../../components/Filters/Filter";
 import Paginated from "../../../components/Paginated/Paginated";
+import FiltersAdmin from "../FiltersAdmin/FiltersAdmin";
 import SearchProducts from "../SearchProducts/SearchProducts";
 import CardAdmin from "./CardAdmin";
 import style from './CardAdmin.module.css';
@@ -20,7 +20,6 @@ export default function AllProducts() {
 		select === ""
 			? allProducts.slice(firstProduct, lastProduct)
 			: productFilter.slice(firstProduct, lastProduct);
-	const [render, setRender] = useState();
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -43,6 +42,7 @@ export default function AllProducts() {
 					productsPerPage={productsPerPage}
 				/>
         <SearchProducts/>
+        <FiltersAdmin/>
 			<div className={style.cardsContainer}>
       {productsCurent.length
         ? productsCurent.map((e , index) => (

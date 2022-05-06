@@ -20,6 +20,7 @@ import {
 } from "../actions-creators/index.js";
 import { filterbrands } from "../controllers/index.js";
 
+
 const initialState = {
   products: [],
   productFilter: [],
@@ -31,7 +32,8 @@ const initialState = {
   select: "",
   newgenders: [],
   subTotal: 0,
-  categoriesForForm: []
+  categoriesForForm: [],
+
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {

@@ -25,7 +25,6 @@ const ProductCardModal = ({
     e.preventDefault();
     dispatch(changeCartQuantity(e.target.value, id));
   };
-
   useEffect(() => {
 
   },[cartItems])
