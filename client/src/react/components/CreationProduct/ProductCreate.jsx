@@ -63,7 +63,7 @@ function validate(input) {
 		errors.brandName = <i>"Debe ingresar una marca"</i>;
 		// errors.button = true;
 	}
-	if (!input.category.length) {
+	if (!input.category || input.category === "") {
 		errors.category = <i>"Debe ingresar una marca"</i>;
 		// errors.button = true;
 	}
