@@ -56,9 +56,10 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				productFilter: payload.filter((e) => e.Category.genre === gender),
 			};
 		case ADD_PRODUCT_TO_CART:
-			let cartProductAux = state.cartItems.find((e) => e.id === payload.id);
+			let cartProductAux = state.cartItems.find((e) =>( (e.id + e.brandSize) === (payload.id + payload.brandSize)));
+			console.log(payload)
 			if (cartProductAux) {
-				const prevCart = state.cartItems.filter((e) => e.id !== payload.id);
+				const prevCart = state.cartItems.filter((e) => (e.id + e.brandSize) !== (payload.id + payload.brandSize));
 				cartProductAux.quantity++;
 				return {
 					...state,

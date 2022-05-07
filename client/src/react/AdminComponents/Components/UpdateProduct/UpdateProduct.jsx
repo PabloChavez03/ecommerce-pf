@@ -202,8 +202,6 @@ export default function UpdateProduct() {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		console.log(input)
-		console.log(errors)
 		if (Object.values(errors).length !== 0) {
 			alert("Faltan campos que rellenar");
 		} else {

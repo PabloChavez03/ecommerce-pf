@@ -130,7 +130,7 @@ export default function ProductCreate() {
 			...prev,
 			category: Number(value),
 		}));
-		console.log(value);
+		// console.log(value);
 
 		// set Error a revisar
 
