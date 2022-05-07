@@ -7,7 +7,7 @@ const cors = require("cors");
 
 const cookieSession = require("cookie-session");
 const passport = require("passport");
-const passportSetup = require("./passport");
+const passportSetup = require("../src/middleware/passport");
 
 require("./db.js");
 
