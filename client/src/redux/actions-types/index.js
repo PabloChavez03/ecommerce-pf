@@ -1,20 +1,22 @@
 import {
-  GET_PRODUCT_BY_NAME,
-  ADD_PRODUCT_TO_CART,
-  REMOVE_PRODUCT_FROM_CART,
-  CHANGE_CART_QUANTITY,
-  SET_CURRENT_PAGE,
-  GET_ALL_PRODUCTS,
-  GET_CURRENT_BRANDS,
-  GET_FILTERS_BRANDS,
-  ORDER_BY_PRICE,
-  GET_DETAILS,
-  SET_DETAILS,
-  GET_ALL_CATEGORIES,
-  GET_CATEGORY_BY_ID,
-  GET_FILTERS_GENDER_PRODUCT,
-  GET_ALL_CATEGORIES_FOR_FORM,
-  CHAT_BOT,
+	GET_PRODUCT_BY_NAME,
+	ADD_PRODUCT_TO_CART,
+	REMOVE_PRODUCT_FROM_CART,
+	CHANGE_CART_QUANTITY,
+	SET_CURRENT_PAGE,
+	GET_ALL_PRODUCTS,
+	GET_CURRENT_BRANDS,
+	GET_FILTERS_BRANDS,
+	ORDER_BY_PRICE,
+	GET_DETAILS,
+	SET_DETAILS,
+	GET_ALL_CATEGORIES,
+	GET_CATEGORY_BY_ID,
+	GET_FILTERS_GENDER_PRODUCT,
+	GET_ALL_CATEGORIES_FOR_FORM,
+	CHAT_BOT,
+	GET_CHAT_BOT_RECEPTOR,
+	GET_CHAT_BOT_EMISOR,
   GET_USER_DATA,
   GET_PRODUCTS_NAME_ADMIN,
   CLEAN_FILTERS,
@@ -22,10 +24,12 @@ import {
   LOGGED_OUT,
 } from "../actions-creators";
 import {
-  chatBot,
-  currentbrands,
-  currentcategory,
-  urlProdutcGender,
+	chatBot,
+	currentbrands,
+	currentcategory,
+	getChatBotEmisor,
+	getChatBotReceptor,
+	urlProdutcGender,
 } from "../controllers";
 import axios from "axios";
 
@@ -224,6 +228,20 @@ export const getChatBot = (payload) => async (dispatch) => {
 // 	};
 // };
 
+export const AllChatBotReceptor = () => async (dispatch) => {
+	let data = await getChatBotReceptor();
+	return dispatch({
+		type: GET_CHAT_BOT_RECEPTOR,
+		payload: data
+	})
+}
+export const AllChatBotEmisor = () => async (dispatch) => {
+	let data = await getChatBotEmisor();
+	return dispatch({
+		type: GET_CHAT_BOT_EMISOR,
+		payload: data
+	})
+}
 export function getProductByNameAdmin(name) {
   return async function (dispatch) {
     const { data } = await axios.get(`/products?productName=${name}`);

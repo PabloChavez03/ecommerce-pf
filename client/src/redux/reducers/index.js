@@ -18,6 +18,8 @@ import {
   DELETE_PRODUCT,
   GET_ALL_CATEGORIES_FOR_FORM,
   CHAT_BOT,
+  GET_CHAT_BOT_RECEPTOR,
+  GET_CHAT_BOT_EMISOR,
   GET_USER_DATA,
   GET_PRODUCTS_NAME_ADMIN,
   CLEAN_FILTERS,
@@ -38,6 +40,8 @@ const initialState = {
   subTotal: 0,
   categoriesForForm: [],
   chatbot: {},
+  chatBotReceptor: [],
+  chatBotEmisor: [],
   userData: {},
   productFilterAdmin: [],
   productsAdmin: [],
@@ -61,7 +65,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
           cartItems: [...prevCart, cartProductAux],
           subTotal: Number(
             state.subTotal +
-              Math.round(cartProductAux.currentPrice * cartProductAux.quantity)
+            Math.round(cartProductAux.currentPrice * cartProductAux.quantity)
           ),
         };
       } else {
@@ -144,25 +148,25 @@ export default function rootReducer(state = initialState, { type, payload }) {
       let arr =
         payload[0] === "high"
           ? productsSort?.sort(function (a, b) {
-              if (a.currentPrice < b.currentPrice) {
-                return 1;
-              }
-              if (a.currentPrice > b.currentPrice) {
-                return -1;
-              } else {
-                return 0;
-              }
-            })
+            if (a.currentPrice < b.currentPrice) {
+              return 1;
+            }
+            if (a.currentPrice > b.currentPrice) {
+              return -1;
+            } else {
+              return 0;
+            }
+          })
           : productsSort?.sort(function (a, b) {
-              if (a.currentPrice > b.currentPrice) {
-                return 1;
-              }
-              if (a.currentPrice < b.currentPrice) {
-                return -1;
-              } else {
-                return 0;
-              }
-            });
+            if (a.currentPrice > b.currentPrice) {
+              return 1;
+            }
+            if (a.currentPrice < b.currentPrice) {
+              return -1;
+            } else {
+              return 0;
+            }
+          });
       return {
         ...state,
         productFilter: arr,
@@ -237,6 +241,16 @@ export default function rootReducer(state = initialState, { type, payload }) {
           ...state,
           productFilterAdmin: [],
         };
+      }
+    case GET_CHAT_BOT_RECEPTOR:
+      return {
+        ...state,
+        chatBotReceptor: payload
+      }
+    case GET_CHAT_BOT_EMISOR:
+      return {
+        ...state,
+        chatBotEmisor: payload
       }
     case GET_STOCK_PRODUCTS:
       return {

@@ -36,6 +36,9 @@ const NavAdmin = () => {
 					<NavLink className={style.navLink} to={"/admin/orders"}>
 						Mis Ordenes
 					</NavLink>
+					<NavLink className={style.navLink} to={"/admin/chatbot"}>
+						Chat Bot
+					</NavLink>
 					<button onClick={(e)=>handleClickLoggedOut(e)}>
 						Cerrar Sesión
 					</button>

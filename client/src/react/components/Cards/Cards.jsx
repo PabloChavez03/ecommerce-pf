@@ -26,7 +26,7 @@ export default function Cards({
         {isOffertPrice ? <h4>{`Precio de oferta $ ${currentPrice}`}</h4> : null}
       </div>
       <h5 className={css.title}>{name}</h5>
-      <h3>Color: {color}</h3>
+      <h5 className={css.title}>Color: {color}</h5>
       <select>
         <option>Talle</option>
       {
