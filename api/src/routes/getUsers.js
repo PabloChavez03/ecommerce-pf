@@ -1,29 +1,18 @@
 const { Router } = require("express");
-const { Users, Role } = require("../db");
+const { Users } = require("../db");
 const router = Router();
 
 router.get("", async (req, res) => {
-	let allProducts = await Users.findAll();
+	let allUser = await Users.findAll();
 
 	try {
-		allProducts
-			? res.status(200).send(allProducts)
-			: res.status(404).send("Productos no encontrados");
+		allUser
+			? res.status(200).send(allUser)
+			: res.status(404).send("Usuarios no encontrados");
 	} catch (error) {
 		return new TypeError(error);
 	}
 });
 
-
-
-
-// const getAllDbInfo = async () => {
-// 	let allInfo = await Product.findAll({
-// 		include: {
-// 			model: Category,
-// 		},
-// 	});
-// 	return allInfo;
-// };
 
 module.exports = router;

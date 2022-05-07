@@ -2,7 +2,7 @@ const { Router } = require("express");
 const { Users, Role } = require("../db");
 const router = Router();
 // const bcrypt = require("bcrypt");
-const emailer = require("../emailer")
+
 
 router.post("/", async (req, res) => {
   const {
@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
       const roleClient = await Role.findOne({ where: { name: "client" } });
       await user.setRole(roleClient);
     }
-    // emailer.sendMail()
+   
 
     const createdUser = await user.save();
 
