@@ -59,10 +59,7 @@ function validate(input) {
 		errors.brandName = <i>"Debe ingresar una marca!"</i>;
 		// errors.button = true;
 	}
-	if (!input.category || input.category === "") {
-		errors.category = <i>"Debe ingresar una categoria!"</i>;
-		// errors.button = true;
-	}
+	
 	return errors;
 }
 
@@ -115,6 +112,7 @@ export default function UpdateProduct() {
 		gender: "",
 		brandName: "",
 		// category: [],
+		category:'',
 		info: {
 			aboutMe: "",
 			sizeAndFit: "",
@@ -204,6 +202,8 @@ export default function UpdateProduct() {
 
 	function handleSubmit(e) {
 		e.preventDefault();
+		console.log(input)
+		console.log(errors)
 		if (Object.values(errors).length !== 0) {
 			alert("Faltan campos que rellenar");
 		} else {
