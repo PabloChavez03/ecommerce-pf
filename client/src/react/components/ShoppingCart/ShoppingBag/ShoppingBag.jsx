@@ -20,14 +20,16 @@ export default function ShoppingBag() {
             <h1>Mi Carrito</h1>
             {
                 cartItems.length?cartItems.map((e) => (
+                    console.log(e),
                     <ProductCardModal
                         id={e.id}
                         name={e.name}
                         color={e.color}
                         price={e.currentPrice}
                         image={e.image}
+                        size={e.brandSize}
                         quantity={e.quantity}
-                        key={e.id}
+                        key={e.id + e.brandSize}
                     />
                 )) : <p>No hay productos en el carrito</p>
             }

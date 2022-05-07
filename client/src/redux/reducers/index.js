@@ -57,7 +57,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			};
 		case ADD_PRODUCT_TO_CART:
 			let cartProductAux = state.cartItems.find((e) =>( (e.id + e.brandSize) === (payload.id + payload.brandSize)));
-			console.log(payload)
 			if (cartProductAux) {
 				const prevCart = state.cartItems.filter((e) => (e.id + e.brandSize) !== (payload.id + payload.brandSize));
 				cartProductAux.quantity++;
@@ -79,20 +78,20 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				};
 			}
 		case REMOVE_PRODUCT_FROM_CART:
-			let indexRemoveQty = state.cartItems.findIndex((e) => e.id === payload);
+			let indexRemoveQty = state.cartItems.findIndex((e) => (e.id + e.brandSize.toString()) === (payload.id + payload.size.toString()));
 			state.cartItems[indexRemoveQty].quantity = 1;
 			return {
 				...state,
-				cartItems: state.cartItems.filter((e) => e.id !== payload),
+				cartItems: state.cartItems.filter((e) => (e.id + e.brandSize.toString()) !== (payload.id + payload.size.toString())),
 			};
 		case CHANGE_CART_QUANTITY:
-			let index = state.cartItems.findIndex((e) => e.id === payload[1]);
+			let index = state.cartItems.findIndex((e) =>(e.id + e.brandSize.toString()) === (payload.id + payload.size.toString()));
 			let item = state.cartItems[index];
-			if (payload[0] === "-") {
+			if (payload.sign === "-") {
 				if (item.quantity === 1) {
 					return {
 						...state,
-						cartItems: state.cartItems.filter((e) => e.id !== payload[1]),
+						cartItems: state.cartItems.filter((e) => (e.id + e.brandSize.toString()) !== (payload.id + payload.size.toString())),
 					};
 				}
 				state.cartItems[index].quantity--;
