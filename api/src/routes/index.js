@@ -33,9 +33,9 @@ router.use(
 	[authMaster, isAdmin],
 	require("./deleteProduct")
 );
-router.use("/product/stock", [authMaster, isAdmin], require("./updateStock"));
-router.use("/users/update", [authMaster, isAdmin], require("./userUpdate"));
-router.use("/users/delete", [authMaster, isAdmin], require("./userDelete"));
+router.use("/product/stock", /*[authMaster, isAdmin],*/ require("./updateStock"));
+router.use("/users/update", /*[authMaster, isAdmin],*/ require("./userUpdate"));
+router.use("/users/delete", /*[authMaster, isAdmin],*/ require("./userDelete"));
 
 //----------------------Mercado Pago---------------------------------------
 router.use("/mercadopago", require("./mercadoPago"));
