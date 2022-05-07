@@ -27,8 +27,8 @@ router.use("/products/delete",[authMaster, isAdmin],require("./deleteProduct"));
 router.use("/product/stock", [authMaster, isAdmin], require("./updateStock"));
 router.use("/users/update", [authMaster, isAdmin], require("./userUpdate"));
 router.use("/users/delete", [authMaster, isAdmin], require("./userDelete"));
-router.use("/users/findall", require("./getUsers"));
-router.use("/users/findByPk", require("./usersFindByPk"));
+router.use("/users/findall", [authMaster, isAdmin], require("./getUsers"));
+router.use("/users/findByPk", [authMaster, isAdmin],require("./usersFindByPk"));
 //----------------------Mercado Pago---------------------------------------
 router.use("/mercadopago", require("./mercadoPago"));
 //-----------------------  Google  ----------------------------------------
