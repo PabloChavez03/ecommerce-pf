@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { getCurrentBrands, getFiltersBrands } from '../../../../redux/actions-types';
 
-function FiltersByMark({ setCurrentPage }) {
+function FiltersByMark({ setCurrentPage, selectFilter, setSelectFilter }) {
     const [value, setValue] = useState('Marca');
     const [params] = useSearchParams();
     const gender = params.get('gender')
@@ -19,10 +19,16 @@ function FiltersByMark({ setCurrentPage }) {
 
 
     function handleFilterByMark(e) {
-        e.preventDefault();
-        dispatch(getFiltersBrands(e.target.value));
-        setCurrentPage(1);
-        setValue(e.target.value);
+        if(e.target.value !== "Marca") {
+            e.preventDefault();
+            dispatch(getFiltersBrands(e.target.value));
+            setCurrentPage(1);
+            setValue(e.target.value);
+            setSelectFilter(e.target.value);
+        }     else {
+            setSelectFilter("");
+        } 
+
     };
 
     return (

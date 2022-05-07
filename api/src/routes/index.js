@@ -22,9 +22,9 @@ router.use("/chatBot", require("./chatBot"));
 //----------------  for admin & client --------------------------------
 router.use("/users/create", require("./userCreate"));
 router.use("/users/login", require("./loginUser"));
-router.use("/products/create", [authMaster, isAdmin], require("./postProduct"));
-router.use("/products/update", [authMaster, isAdmin], require("./updateProduct"));
-router.use("/products/delete", [authMaster, isAdmin], require("./deleteProduct"));
+router.use("/products/create", /*[authMaster, isAdmin],*/ require("./postProduct"));
+router.use("/products/update", /*[authMaster, isAdmin],*/ require("./updateProduct"));
+router.use("/products/delete", /*[authMaster, isAdmin],*/ require("./deleteProduct"));
 router.use("/product/stock", [authMaster, isAdmin], require("./updateStock"));
 router.use("/users/update", [authMaster, isAdmin], require("./userUpdate"));
 router.use("/users/delete", [authMaster, isAdmin], require("./userDelete"));

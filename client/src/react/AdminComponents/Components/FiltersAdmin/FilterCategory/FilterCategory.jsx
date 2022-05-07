@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategoriesForForm, getCategoryById, setCurrentPage } from "../../../../../redux/actions-types";
 
-export default function FilterCategory() {
+export default function FilterCategory({setSelect}) {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,8 +14,9 @@ export default function FilterCategory() {
     const handleChangeSelect = (event) => {
         event.preventDefault();
         if (event.target.value !== "selectCategory") {
-            dispatch(getCategoryById(event.target.value));
+            dispatch(getCategoryById(event.target.value, "admin"));
             dispatch(setCurrentPage(1));
+            setSelect("select")
         };
     };
     return (
