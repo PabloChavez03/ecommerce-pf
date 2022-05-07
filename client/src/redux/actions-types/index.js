@@ -139,10 +139,14 @@ export const postProduct = (info, token) => {
 	};
 };
 
-export const updateProduct = (id, info) => {
+export const updateProduct = (id, info, token) => {
 	return function (dispatch) {
 		const updateProduct = axios
-			.patch(`/products/update/${id}`, info)
+			.patch(`/products/update/${id}`, info, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			})
 			.then((response) => response);
 		return updateProduct;
 	};
