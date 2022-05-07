@@ -6,6 +6,7 @@ import Filter from "../Filters/Filter";
 import { NavLink, useSearchParams } from "react-router-dom";
 import Paginated from "../Paginated/Paginated";
 import {
+	cleanFilters,
 	getFiltersGenderProduct,
 	setCurrentPage,
 	setDetails,
@@ -20,36 +21,50 @@ export default function Home() {
 	let allProducts = useSelector((state) => state.products);
 	const productFilter = useSelector((state) => state.productFilter);
 	const currentPage = useSelector((state) => state.currentPage);
-	const select = useSelector((state) => state.select);
+	const [selectFilter, setSelectFilter] = useState("");
 	const [productsPerPage] = useState(9);
 	const lastProduct = currentPage * productsPerPage;
 	const firstProduct = lastProduct - productsPerPage;
 	const productsCurent =
-		select === ""
+	selectFilter === ""
 			? allProducts?.slice(firstProduct, lastProduct)
 			: productFilter?.slice(firstProduct, lastProduct);
 	const [render, setRender] = useState();
-	console.log(productsCurent)
-	useEffect(() => {
+		useEffect(() => {
 		dispatch(getFiltersGenderProduct(gender));
 		dispatch(setCurrentPage(1));
 		dispatch(setDetails());
-	}, [dispatch, gender]);
+		setSelectFilter("")
+	}, [dispatch, gender, setSelectFilter]);
+
+	const handleClickReset = (e) => {
+		e.preventDefault();
+		setSelectFilter("");
+		dispatch(cleanFilters("home"));
+	}
 	return (
 		<div className={css.principalDivHome}>
 			<NavBar />
-			<SearchBar/>
+			<SearchBar
+			setSelectFilter={setSelectFilter}
+			/>
+			<button onClick={(e)=>handleClickReset(e)}>Restablecer filtros</button>
 			<Filter
 				setRender={setRender}
 				setCurrentPage={setCurrentPage}
 				render={render}
+				selectFilter={selectFilter}
+				setSelectFilter={setSelectFilter}
+				
 			/>
 			<div>
 				<Paginated
-					productsToPaginated={select !== "" ? productsCurent : allProducts}
+					productsToPaginated={selectFilter !== "" ? productsCurent : allProducts}
 					lastProduct={lastProduct}
 					firstProduct={firstProduct}
 					productsPerPage={productsPerPage}
+					selectFilter={selectFilter}
+					setSelectFilter={setSelectFilter}
 				/>
 			</div>
 			<div className={css.cardContainer}>

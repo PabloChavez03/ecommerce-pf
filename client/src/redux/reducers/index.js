@@ -19,6 +19,8 @@ import {
   GET_ALL_CATEGORIES_FOR_FORM,
   CHAT_BOT,
   GET_USER_DATA,
+  GET_PRODUCTS_NAME_ADMIN,
+  CLEAN_FILTERS,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -36,6 +38,8 @@ const initialState = {
   categoriesForForm: [],
   chatbot: {},
   userData: {},
+  productFilterAdmin: [],
+  productsAdmin: [],
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -45,7 +49,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         productFilter: payload.filter((e) => e.Category.genre === gender),
-        select: "name",
+        // select: "name",
       };
     case ADD_PRODUCT_TO_CART:
       let cartProductAux = state.cartItems.find((e) => e.id === payload.id);
@@ -103,7 +107,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case GET_ALL_PRODUCTS:
       return {
         ...state,
-        products: payload,
+        productsAdmin: payload,
       };
     case GET_CURRENT_BRANDS:
       return {
@@ -116,7 +120,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
         return {
           ...state,
           productFilter: allProducts,
-          select: payload,
+          // select: payload,
           currentPage: 1,
         };
       } else {
@@ -124,7 +128,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
         return {
           ...state,
           productFilter: dataBrands,
-          select: payload,
+          // select: payload,
           currentPage: 1,
         };
       }
@@ -139,10 +143,9 @@ export default function rootReducer(state = initialState, { type, payload }) {
         details: payload,
       };
     case ORDER_BY_PRICE:
-      let productsSort =
-        state.select === "" ? state.products : state.productFilter;
+      let productsSort = payload[1];
       let arr =
-        payload === "high"
+        payload[0] === "high"
           ? productsSort?.sort(function (a, b) {
               if (a.currentPrice < b.currentPrice) {
                 return 1;
@@ -163,37 +166,35 @@ export default function rootReducer(state = initialState, { type, payload }) {
                 return 0;
               }
             });
-      if (state.select === "") {
-        return {
-          ...state,
-          products: arr,
-          currentPage: 1,
-        };
-      } else {
         return {
           ...state,
           productFilter: arr,
           currentPage: 1,
         };
-      }
     case GET_ALL_CATEGORIES:
       return {
         ...state,
         categories: payload,
       };
     case GET_CATEGORY_BY_ID:
-      return {
-        ...state,
-        productFilter: payload[0],
-        select: payload[1],
-        currentPage: 1,
-      };
+      if(payload.sector === "admin") {
+        return {
+          ...state,
+          productFilterAdmin: payload.category,
+          currentPage: 1,
+        }
+      } else {
+        return {
+          ...state,
+          productFilter: payload,
+          currentPage: 1,
+        };
+      }
     case GET_FILTERS_GENDER_PRODUCT:
       return {
         ...state,
         products: payload,
         newgenders: payload,
-        select: "",
         currentPage: 1,
       };
     case POST_PRODUCT:
@@ -223,6 +224,25 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         userData: payload,
       };
+      case GET_PRODUCTS_NAME_ADMIN:
+        return {
+        ...state,
+        productFilterAdmin: payload,
+        // select: "name",
+      };
+      case CLEAN_FILTERS:
+        if(payload === "home") {
+          return {
+            ...state,
+            productFilter: []
+          }
+        } else {
+          return {
+            ...state,
+            productFilterAdmin: []
+          }
+        }
+        
     default:
       return { ...state };
   }

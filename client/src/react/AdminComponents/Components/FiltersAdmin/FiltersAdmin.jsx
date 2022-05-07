@@ -3,11 +3,12 @@ import React from "react";
 import FilterCategory from "./FilterCategory/FilterCategory";
 
 
-export default function FiltersAdmin() {
+export default function FiltersAdmin({setSelect}) {
     
     return (
         <div>
-            <FilterCategory/>
+            <FilterCategory
+            setSelect={setSelect}/>
             {/* <FilterBrands/> */}
         </div>
     )

@@ -15,7 +15,9 @@ import {
 	GET_FILTERS_GENDER_PRODUCT,
 	GET_ALL_CATEGORIES_FOR_FORM,
 	CHAT_BOT,
-	GET_USER_DATA
+	GET_USER_DATA,
+	GET_PRODUCTS_NAME_ADMIN,
+	CLEAN_FILTERS
 } from "../actions-creators";
 import {
 	chatBot,
@@ -67,12 +69,12 @@ export const getAllProducts = () => {
 	};
 };
 
-export function orderByPrice(payload) {
+export function orderByPrice(order,products) {
 	return {
 		type: ORDER_BY_PRICE,
-		payload,
+		payload: [order,products]
 	};
-}
+};
 
 export const getDetails = (productId) => {
   return async function (dispatch) {
@@ -164,12 +166,15 @@ export const getAllCategoriesForForm = () => {
 	};
 };
 
-export const getCategoryById = (idCategory) => {
+export const getCategoryById = (idCategory, sector) => {
 	return async function (dispatch) {
 		const category = await axios.get(`/products?categoryId=${idCategory}`);
 		return dispatch({
 			type: GET_CATEGORY_BY_ID,
-			payload: [category.data, idCategory],
+			payload: {
+				category: category.data,
+				sector
+			},
 		});
 	};
 };
@@ -220,3 +225,18 @@ export const getChatBot = (payload) => async (dispatch) => {
 // 		payload
 // 	};
 // };
+
+
+export function getProductByNameAdmin(name) {
+	return async function(dispatch){
+		const { data } = await axios.get(`/products?productName=${name}`);
+		return dispatch({ type: 	GET_PRODUCTS_NAME_ADMIN, payload: data });
+	};
+};
+
+export function cleanFilters(sector) {
+	return{
+		type: CLEAN_FILTERS,
+		payload: sector
+	};
+};

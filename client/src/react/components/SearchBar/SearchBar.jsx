@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getProductByName } from "../../../redux/actions-types";
 import style from "./SearchBar.module.css";
 
-export default function SearchBar() {
+export default function SearchBar({setSelectFilter}) {
 	const dispatch = useDispatch();
 	const [search, setSearch] = useState("");
 
@@ -15,10 +15,11 @@ export default function SearchBar() {
 	const handleClickSearch = (event) => {
 		event.preventDefault();
 		if(search === "") {
-			alert("Debe ingresar un producto a buscar!")
+			alert("Debe ingresar un producto a buscar!");
 		} else {
 			dispatch(getProductByName(search));
 			setSearch("");
+			setSelectFilter("search");
 		};
 	};
 

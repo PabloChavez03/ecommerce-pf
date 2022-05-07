@@ -18,7 +18,6 @@ export default function Cards({
     event.preventDefault(); //provisorio hasta que este el carrito
     alert("Funcionalidad en desarrollo");
 }
-  console.log(color)
   return (
     <div className={css.container}>
         <img src={`https://${image}`} alt="Product Img" />

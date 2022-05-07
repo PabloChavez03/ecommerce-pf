@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { getAllCategories, getCategoryById, setCurrentPage } from "../../../../redux/actions-types";
 
-export default function FilterByCategory() {
+export default function FilterByCategory({selectFilter, setSelectFilter}) {
     const dispatch = useDispatch();
     const [params] = useSearchParams();
     const gender = params.get('gender')
@@ -17,7 +17,13 @@ export default function FilterByCategory() {
         if (event.target.value !== "selectCategory") {
             dispatch(getCategoryById(event.target.value));
             dispatch(setCurrentPage(1));
-        };
+            console.log(event.target.value)
+            setSelectFilter(event.target.value);
+            console.log(selectFilter)
+            
+        } else {
+            setSelectFilter("");
+        }
     };
 
     return (
@@ -27,7 +33,7 @@ export default function FilterByCategory() {
                 {
                     allCategories?.length?allCategories.map((e)=>(
                         <option key={e.id} value={e.id} name={e.title}>{e.title}</option>
-                    )):null
+                    )):""
                 }
             </select>
         </div>

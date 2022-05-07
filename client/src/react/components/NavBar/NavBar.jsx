@@ -11,9 +11,11 @@ import AccountIcon from "../svg/AccountIcon";
 import Modal from "../ShoppingCart/Modal/Modal";
 
 import "./NavBar.scss";
+import { useDispatch } from "react-redux";
+import { getFiltersGenderProduct } from "../../../redux/actions-types";
 
 export default function NavBar() {
-
+  const dispatch = useDispatch();
 	let location = useLocation();
 
 	const [statusModal, setStatusModal] = useState(false);
@@ -35,6 +37,7 @@ export default function NavBar() {
 
   const handleClickForHiddingBurguer = (e) => {
     setToogleMenu(false);
+    dispatch(getFiltersGenderProduct(e.target.value))
   };
 
   return (
@@ -85,7 +88,8 @@ export default function NavBar() {
                   ? "active"
                   : ""
               }
-              onClick={handleClickForHiddingBurguer}
+              onClick={(e)=>handleClickForHiddingBurguer(e)}
+              value="men"
             >
               <li>Men</li>
             </Link>
@@ -98,7 +102,8 @@ export default function NavBar() {
                   ? "active"
                   : ""
               }
-              onClick={handleClickForHiddingBurguer}
+              onClick={(e)=>handleClickForHiddingBurguer(e)}
+              value="women"
             >
               <li>Women</li>
             </Link>
