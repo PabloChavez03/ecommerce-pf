@@ -1,11 +1,11 @@
-const axios = require("axios");
+  const axios = require("axios");
 
 class PaymentService {
   async createPayment() {
     const url = "https://api.mercadopago.com/checkout/preferences";
 
     const body = {
-      payer_email: "test_user_55825875@testuser.com",
+      payer_email: "test_user_77874808@testuser.com",
       items: [
         {
           title: "Dummy Title",
