@@ -5,7 +5,6 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 
 import SearchBar from "../SearchBar/SearchBar";
 import CartIcon from "../svg/CartIcon";
-import CreateIcon from "../svg/CreateIcon";
 import AccountIcon from "../svg/AccountIcon";
 
 import Modal from "../ShoppingCart/Modal/Modal";
@@ -19,7 +18,8 @@ export default function NavBar() {
 	let location = useLocation();
 	const userCurrent = useSelector((state) => state.userData);
 	const { rol } = userCurrent;
-	const [logued, setLogued] = useState(userCurrent.username ? true : false);
+	// const [logued, setLogued] = useState(userCurrent.username ? true : false);
+	const [logued, setLogued] = useState(false);
 	const [rolUser, setRolUser] = useState(rol);
 	const [statusModal, setStatusModal] = useState(false);
 
@@ -30,7 +30,11 @@ export default function NavBar() {
 		document.body.style.overflow = "scroll";
 	}
 	/** ------ */
-	useEffect(() => {}, [logued, rolUser]);
+	useEffect(() => {
+		if (userCurrent.username) {
+			setLogued(true);
+		}
+	}, [setLogued, userCurrent]);
 
 	const ruteRol = rolUser === "admin" ? "/admin" : "/user/profile";
 	let ruteIconAccount = logued === false ? "/login" : ruteRol;
@@ -69,9 +73,6 @@ export default function NavBar() {
 
 				<div className='nav__up__features'>
 					{/* <WishListIcon /> */}
-					<Link to={"/admin"}>
-						<CreateIcon />
-					</Link>
 
 					<div className='icon_cart' onClick={(e) => handleModalStatus(e)}>
 						{/* <NavLink exact to={"/cart"} onClick={handleClickForHiddingBurguer}> */}
@@ -79,8 +80,11 @@ export default function NavBar() {
 						{/**Insertando el componente modal */}
 						{/* </NavLink> */}
 					</div>
-					<NavLink to={ruteIconAccount}>
-						<AccountIcon />
+					<NavLink to={ruteIconAccount} className='accountContainer'>
+						<AccountIcon className='accountIcon' />
+						<h3 className='accountName'>
+							{userCurrent.username ? userCurrent.username : "Login"}
+						</h3>
 					</NavLink>
 					<Modal status={statusModal} setStatus={setStatusModal} />
 					{/* <AccountMenu/> */}
