@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import style from "./AdminCreate.module.css";
 import { useDispatch } from "react-redux";
-import { createNewUserAdmin } from '../../../../redux/actions-types'
+import { createNewUser } from '../../../../redux/actions-types'
 import { useNavigate } from "react-router-dom";
 
 const AdminCreate = () => {
@@ -12,7 +12,7 @@ const AdminCreate = () => {
 	const [newAdmin, setNewAdmin] = useState({
 		user_name: "",
 		legajo_user: "",
-		rol: "",
+		rol: "admin",
 		user_password: "",
 		confirm_user_password: "",
 		
@@ -21,7 +21,6 @@ const AdminCreate = () => {
 	const [error, setError] = useState({
 		user_name: "",
 		legajo_user: "",
-		rol: "",
 		user_password: "",
 		confirm_user_password: "",
 		submit: "",
@@ -41,9 +40,9 @@ const AdminCreate = () => {
 		if (input.legajo_user.length <= 5) {
 			errors.legajo_user = "Debe ingresar un legajo!";
 		}else{errors.legajo_user = 'good'}
-		if (input.rol.length <= 3) {
-			errors.rol = "Debe ingresar un Rol!";
-		}else{errors.rol = 'good'}
+		// if (input.rol.length <= 3) {
+		// 	errors.rol = "Debe ingresar un Rol!";
+		// }else{errors.rol = 'good'}
 		if (input.user_password.length <= 3 ) {
 			errors.user_password = "Debe ingresar una contraseña!";
 		}else{errors.user_password = 'good'}
@@ -52,7 +51,7 @@ const AdminCreate = () => {
 			errors.confirm_user_password = "Ambas contraseñas deben ser iguales!";
 		}else{errors.confirm_user_password = 'good'}
 
-		if(errors.user_name=== 'good' && errors.legajo_user === 'good' && errors.rol=== 'good' && errors.user_password=== 'good' && errors.confirm_user_password=== 'good'){
+		if(errors.user_name=== 'good'  && errors.legajo_user=== 'good' && errors.user_password=== 'good' && errors.confirm_user_password=== 'good'){
 			errors.submit = 'we good'
 		}
 		return errors
@@ -71,6 +70,7 @@ const AdminCreate = () => {
 			  [e.target.name]: e.target.value,
 			}
 		));
+		console.log(newAdmin)
 	};
 	const handleSubmit= (e)=>{ 
 		e.preventDefault();
@@ -78,12 +78,12 @@ const AdminCreate = () => {
 		console.log(newAdmin)
 		if(error.submit !== 'we good'){setActiveCreate(false); return }
 		dispatch(
-			createNewUserAdmin(newAdmin)
+			createNewUser(newAdmin)
 		)
 		setNewAdmin({
 		user_name: "",
 		legajo_user: "",
-		rol: "",
+		rol: "admin",
 		user_password: "",
 		confirm_user_password: "",
 		});
@@ -184,7 +184,7 @@ const AdminCreate = () => {
 									{error.legajo_user !== 'good' && correct ?  <p className={style.errMsj}>{error.legajo_user}</p> : <p>{' '}</p>}
 
 								</div>
-								<div className={style.formInputContainer}>
+								{/* <div className={style.formInputContainer}>
 									<label className={style.formLabel}>ROL</label>
 									<input
 										className={error.rol !== 'good' && correct ?  style.error : style.formInput}
@@ -196,7 +196,7 @@ const AdminCreate = () => {
 									/>
 									{error.rol !== 'good' && correct ?  <p className={style.errMsj}>{error.rol}</p> : <p>{' '}</p>}
 
-								</div>
+								</div> */}
 							<button
 								className={style.formButtonCreateActive}
 								onClick={handleChangeActive}

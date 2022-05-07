@@ -137,10 +137,13 @@ export default function UpdateProduct() {
 		variants: [],
 	});
 	const [errors, setError] = useState(stateErrors);
-	const idCategory = categories.find((e) => e.id === productToUpdate.CategoryId );
-	const [nameCategory, setNameCategory] = useState(idCategory.title);
+	const idCategory = categories.find((e) => e.id === productToUpdate.CategoryId);
+	let nameCategories = idCategory?.title
+	const [nameCategory, setNameCategory] = useState(nameCategories);
 
-
+	useEffect(()=>{
+		setNameCategory(nameCategories)
+	},[nameCategories,idCategory])
 	useEffect(() => {
 		setInput(productToUpdate);
 	},[productToUpdate])

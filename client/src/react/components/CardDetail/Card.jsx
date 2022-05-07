@@ -21,7 +21,6 @@ export default function Card({
   const dispatch = useDispatch();
   const [imageCurrent, setImageCurrent] = useState("");
   const sizes = variants.map((e) => e.brandSize);
-
   const [productToCart, setProductToCart] = useState({
     name,
     image: images[0],
@@ -30,6 +29,7 @@ export default function Card({
     brandSize: sizes[0],
     quantity: 1,
     id,
+    variants: variants
   });
 
   useEffect(() => {

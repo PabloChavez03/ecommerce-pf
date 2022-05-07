@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getProductByName } from "../../../../redux/actions-types";
+import { getProductByName, getProductByNameAdmin } from "../../../../redux/actions-types";
 import style from "../../../components/SearchBar/SearchBar.module.css";
 //import lupa from "../../../components/svg/buscar.png";
 
-export default function SearchProducts() {
+export default function SearchProducts({setSelect}) {
 	const dispatch = useDispatch();
 	const [search, setSearch] = useState("");
 
@@ -18,8 +18,9 @@ export default function SearchProducts() {
 		if(search === "") {
 			alert("Debe ingresar un producto a buscar!")
 		} else {
-			dispatch(getProductByName(search));
+			dispatch(getProductByNameAdmin(search));
 			setSearch("");
+			setSelect("search");
 		};
 	};
 

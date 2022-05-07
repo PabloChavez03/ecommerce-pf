@@ -11,6 +11,10 @@ import Footer from "./react/components/Footer/Footer";
 import Admin from "./react/AdminComponents/Pages/Admin";
 import Login from "./react/components/Login/Login";
 import ShoppingBag from "./react/components/ShoppingCart/ShoppingBag/ShoppingBag";
+import PayPlataform from "./react/components/PayPlataform/PayPlataform";
+import ProfileUser from "./react/components/ProfileUser/ProfileUser";
+import OrderDetail from "./react/UserOrders/OrderDetail";
+import UserOrders from "./react/UserOrders/UserOrders";
 import axios from "axios";
 
 function App() {
@@ -54,8 +58,11 @@ function App() {
 				<Route path={"/admin/*"} element={<Admin />} />
 				<Route path={"/login"} element={<Login />} />
 				<Route path={"/bag"} element={<ShoppingBag />} />
+				<Route path={"/pay"} element={<PayPlataform />} />
+				<Route path={"/user/profile"} element={<ProfileUser />} />
+				<Route path={"/user/orders"} element={<UserOrders />} />
+				<Route path={"/user/orders/:idOrder"} element={<OrderDetail />} />
 			</Routes>
-
 			<Footer />
 		</BrowserRouter>
 	);

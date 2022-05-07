@@ -70,8 +70,8 @@ const Login = () => {
 			phone: "",
 			dni_client: "",
 			email: "",
-			login_name: "",
-			login_password: "",
+			user_name: "",
+			user_password: "",
 			name: "",
 			lastname: "",
 			address: "",
@@ -212,10 +212,10 @@ const Login = () => {
 									<label className={style.formLabel}>USUARIO</label>
 									<input
 										className={style.formInput}
-										type="text"
-										name="login_name"
-										value={newUser.login_name}
-										placeholder="Usuario"
+										type='text'
+										name='user_name'
+										value={newUser.user_name}
+										placeholder='Usuario'
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
@@ -223,10 +223,10 @@ const Login = () => {
 									<label className={style.formLabel}>CONTRASEÑA</label>
 									<input
 										className={style.formInput}
-										type="password"
-										name="login_password"
-										value={newUser.login_password}
-										placeholder="Contraseña"
+										type='password'
+										name='user_password'
+										value={newUser.user_password}
+										placeholder='Contraseña'
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>

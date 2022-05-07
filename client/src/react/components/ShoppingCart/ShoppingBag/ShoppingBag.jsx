@@ -8,7 +8,7 @@ export default function ShoppingBag() {
     const cartItems = useSelector((state) => state.cartItems);
     let suma = 0;
     let subtotal = cartItems?.forEach((e)=>suma+=e.currentPrice);
-    
+    let envio = 50;
     const handleClickSend = (e) => {
         e.preventDefault();
         alert("Funcionalidad en desarrollo!");
@@ -31,21 +31,15 @@ export default function ShoppingBag() {
                     />
                 )) : <p>No hay productos en el carrito</p>
             }
-            <div>
-                <label>Calcular costo de envío</label>
-                <br></br>
-                <label>Ingresar Código Postal</label>
-                <input type="text" placeholder="Ej: 2000"></input>
-                <input type="submit" name="send" value="Calcular costo de envío" onClick={(e)=>handleClickSend(e)}/>
-            </div>
             <h3>Subtotal:</h3>
             <p>${suma}</p>
             <h3>Costo de envío:</h3>
-            <p>$0</p>
+            <p>${envio}</p>
             <h2>Total:</h2>
-            <p>${suma}</p>
-
-            <button onClick={(e)=>handleClickSend(e)}>Finalizar compra</button>
+            <p>${suma + envio}</p>
+            <NavLink to={"/pay"}>
+                <button>Finalizar compra</button>
+            </NavLink>
             <br></br>
             <NavLink to={"/"}>
                 <button>Seguir comprando</button>

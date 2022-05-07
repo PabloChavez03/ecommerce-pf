@@ -14,20 +14,23 @@ const ProductCardModal = ({
   size,
   image,
   quantity,
+  variants
 }) => {
-  /** FALTA AGREGAR LOS OTROS DATOS, SOLO ESTOY RENDERIZANDO EL NAME */
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cartItems);
   const handleRemove = () => {
     dispatch(removeProductFromCart(id));
   };
   const handleQtyChange = (e) => {
+
     e.preventDefault();
     dispatch(changeCartQuantity(e.target.value, id));
   };
   useEffect(() => {
+  },[cartItems, variants])
 
-  },[cartItems])
+
+  console.log(variants)
   return (
     <div className={style.cardModalContainer}>
       <img
