@@ -5,7 +5,7 @@ class PaymentService {
     const url = "https://api.mercadopago.com/checkout/preferences";
 
     const body = {
-      payer_email: "test_user_19554216@testuser.com",
+      payer_email: "test_user_55825875@testuser.com",
       items: [
         {
           title: "Dummy Title",
@@ -13,14 +13,14 @@ class PaymentService {
           picture_url: "http://www.myapp.com/myimage.jpg",
           category_id: "category123",
           quantity: 1,
-          unit_price: 10
-        }
+          unit_price: 10,
+        },
       ],
       back_urls: {
         failure: "/failure",
         pending: "/pending",
-        success: "/success"
-      }
+        success: "/success",
+      },
     };
 
     const payment = await axios.post(url, body, {
