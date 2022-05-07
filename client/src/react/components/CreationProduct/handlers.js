@@ -132,7 +132,7 @@ export const handleSubmitAddSize = (
 	setCanAddVariant(false);
 	setVariants({
 		brandSize: "",
-		isInStock: true,
+		isInStock: false,
 		stock: ""
 	})
 };

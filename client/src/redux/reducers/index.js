@@ -22,6 +22,7 @@ import {
   GET_PRODUCTS_NAME_ADMIN,
   CLEAN_FILTERS,
   GET_STOCK_PRODUCTS,
+  LOGGED_OUT,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -33,7 +34,6 @@ const initialState = {
   currentPage: 1,
   details: {},
   categories: [],
-  // select: "",
   newgenders: [],
   subTotal: 0,
   categoriesForForm: [],
@@ -50,7 +50,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         productFilter: payload.filter((e) => e.Category.genre === gender),
-        // select: "name",
       };
     case ADD_PRODUCT_TO_CART:
       let cartProductAux = state.cartItems.find((e) => e.id === payload.id);
@@ -76,7 +75,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
       }
     case REMOVE_PRODUCT_FROM_CART:
       let indexRemoveQty = state.cartItems.findIndex((e) => e.id === payload);
-      // let itemRemoveQty = state.cartItems[index];
       state.cartItems[indexRemoveQty].quantity = 1;
       return {
         ...state,
@@ -121,7 +119,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
         return {
           ...state,
           productFilter: allProducts,
-          // select: payload,
           currentPage: 1,
         };
       } else {
@@ -129,7 +126,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
         return {
           ...state,
           productFilter: dataBrands,
-          // select: payload,
           currentPage: 1,
         };
       }
@@ -229,7 +225,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         productFilterAdmin: payload,
-        // select: "name",
       };
     case CLEAN_FILTERS:
       if (payload === "home") {
@@ -250,6 +245,16 @@ export default function rootReducer(state = initialState, { type, payload }) {
           (e) => e.isInStock === true
         ),
       };
+    case LOGGED_OUT:
+      return {
+        ...state,
+        productFilter: [],
+        productFilterAdmin: [],
+        currentPage: 1,
+        userData: {},
+        cartItems: [],
+        details: {}
+      }
     default:
       return { ...state };
   }

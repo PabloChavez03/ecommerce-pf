@@ -19,6 +19,7 @@ import {
   GET_PRODUCTS_NAME_ADMIN,
   CLEAN_FILTERS,
   GET_STOCK_PRODUCTS,
+  LOGGED_OUT,
 } from "../actions-creators";
 import {
   chatBot,
@@ -243,3 +244,9 @@ export function getStockProductRender(payload) {
     payload,
   };
 }
+
+export function loggedOut() {
+  return {
+    type: LOGGED_OUT,
+  };
+};

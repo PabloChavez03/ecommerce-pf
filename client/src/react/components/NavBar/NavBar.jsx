@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 
 // import AccountMenu from "./AccountMenu/AccountMenu";
@@ -11,16 +11,27 @@ import AccountIcon from "../svg/AccountIcon";
 import Modal from "../ShoppingCart/Modal/Modal";
 
 import "./NavBar.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getFiltersGenderProduct } from "../../../redux/actions-types";
 
 export default function NavBar() {
   const dispatch = useDispatch();
 	let location = useLocation();
-
+  const userCurrent = useSelector((state)=>state.userData);
+  const {rol} = userCurrent;
+  const [logued, setLogued] = useState(userCurrent.username?true:false);
+  const [rolUser, setRolUser] = useState(rol);
 	const [statusModal, setStatusModal] = useState(false);
 
+  useEffect(()=> {
 
+  },[logued, rolUser])
+
+  const ruteRol = rolUser === "admin" ? "/admin" : "/user/profile";
+  let ruteIconAccount = logued === false ? "/login" : ruteRol;
+  
+
+  
   const handleModalStatus = (e) => {
     e.preventDefault();
     setStatusModal(true);
@@ -66,8 +77,9 @@ export default function NavBar() {
             <CartIcon />
             {/**Insertando el componente modal */}
             {/* </NavLink> */} 
-            
-            <AccountIcon/>
+            <NavLink to={ruteIconAccount} >
+              <AccountIcon/>
+            </NavLink>
           </div>
           <Modal status={statusModal} setStatus={setStatusModal} />
             {/* <AccountMenu/> */}
