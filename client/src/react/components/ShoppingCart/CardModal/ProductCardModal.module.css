@@ -13,7 +13,7 @@
 }
 
 .cardModalTitle {
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 600;
 }
 
@@ -36,7 +36,7 @@
 
 .cardModalImg {
 	width: 75px;
-	height: 120px
+	height: 120px;
 }
 
 .btnMasMenos {
@@ -52,6 +52,17 @@
 .quantity {
 	border: 1px solid rgb(129, 120, 120);
 	border-radius: 4px;
-	padding: 0px 10px ;
+	padding: 0px 10px;
 	cursor: default;
+}
+
+@media (max-width: 500px) {
+	.cardModalTitle,
+	.cardModalInfoContainer {
+		font-size: 12px;
+	}
+
+	.cardModalInfoPrice {
+		font-size: 10px;
+	}
 }

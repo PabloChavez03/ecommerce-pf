@@ -3,10 +3,12 @@ import NavBar from "../NavBar/NavBar";
 import style from "./Login.module.css";
 import { useDispatch } from "react-redux";
 import { createNewUser, UserLogin } from "../../../redux/actions-types";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 	const [activeCreate, setActiveCreate] = useState(false);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const [newUser, setNewUser] = useState({
 		phone: "",
@@ -78,6 +80,7 @@ const Login = () => {
 			isRegistered: true,
 		});
 		alert("sumitie");
+		navigate("/user/profile");
 	};
 	//////////////////////////// LOGIN ///////////////////////
 	const [login, setLogin] = useState({
@@ -109,6 +112,7 @@ const Login = () => {
 			user_name: "",
 			user_password: "",
 		});
+		navigate("/");
 	};
 
 	const GOOGLE = () => {
@@ -128,7 +132,7 @@ const Login = () => {
 					</p>
 					<form onSubmit={(e) => handleLoginSubmit(e)}>
 						<div className={style.formInputContainer}>
-							<label className={style.formLabel}>CORREO ELECTRÓNICO</label>
+							<label className={style.formLabel}>USUARIO</label>
 							<input
 								className={style.formInput}
 								type="text"
@@ -149,12 +153,7 @@ const Login = () => {
 								onChange={(e) => handleChangeInputLogin(e)}
 							/>
 						</div>
-						<button
-							className={style.formButtonLogin}
-							// onClick={() => alert("Falta colocar funcionalidad")}
-						>
-							INGRESAR
-						</button>
+						<button className={style.formButtonLogin}>INGRESAR</button>
 					</form>
 				</div>
 				{/**Creando usuario */}
@@ -212,10 +211,10 @@ const Login = () => {
 									<label className={style.formLabel}>USUARIO</label>
 									<input
 										className={style.formInput}
-										type='text'
-										name='user_name'
+										type="text"
+										name="user_name"
 										value={newUser.user_name}
-										placeholder='Usuario'
+										placeholder="Usuario"
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
@@ -223,10 +222,10 @@ const Login = () => {
 									<label className={style.formLabel}>CONTRASEÑA</label>
 									<input
 										className={style.formInput}
-										type='password'
-										name='user_password'
+										type="password"
+										name="user_password"
 										value={newUser.user_password}
-										placeholder='Contraseña'
+										placeholder="Contraseña"
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
@@ -262,10 +261,7 @@ const Login = () => {
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
-								<button
-									className={style.formButtonCreateActive}
-									// onClick={() => alert("Falta colocar funcionalidad")}
-								>
+								<button className={style.formButtonCreateActive}>
 									CREAR Y CONTINUAR
 								</button>
 								<button
