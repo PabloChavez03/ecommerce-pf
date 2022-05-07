@@ -1,0 +1,41 @@
+.modal {
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  padding: 20px;
+  position: fixed;
+  top: 20px;
+  left: 30%;
+  border: 5px solid rgb(66, 66, 66);
+  border-radius: 20px;
+}
+
+.head {
+  width: 100%;
+  margin: 10px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.head p {
+  margin: 0px 15px;
+  font-size: 20px;
+  font-weight: 800;
+  border-radius: 70px;
+  cursor: pointer;
+  color: black;
+  padding: 8px 15px 0px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+}
+.head p:hover {
+  background-color: gray;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+}
+.title {
+  width: 100%;
+  outline: none;
+}
+.respuesta {
+  width: 100%;
+  outline: none;
+}

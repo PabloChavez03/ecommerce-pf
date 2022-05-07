@@ -14,12 +14,16 @@ import {
 	GET_CATEGORY_BY_ID,
 	GET_FILTERS_GENDER_PRODUCT,
 	GET_ALL_CATEGORIES_FOR_FORM,
-	CHAT_BOT
+	CHAT_BOT,
+	GET_CHAT_BOT_RECEPTOR,
+	GET_CHAT_BOT_EMISOR
 } from "../actions-creators";
 import {
 	chatBot,
 	currentbrands,
 	currentcategory,
+	getChatBotEmisor,
+	getChatBotReceptor,
 	urlProdutcGender,
 } from "../controllers";
 import axios from "axios";
@@ -74,15 +78,15 @@ export function orderByPrice(payload) {
 }
 
 export const getDetails = (productId) => {
-  return async function (dispatch) {
-    const productDetail = await axios.get(
-      `/products/detail/${productId}`
-    );
-    return dispatch({
-      type: GET_DETAILS,
-      payload: productDetail.data,
-    });
-  };
+	return async function (dispatch) {
+		const productDetail = await axios.get(
+			`/products/detail/${productId}`
+		);
+		return dispatch({
+			type: GET_DETAILS,
+			payload: productDetail.data,
+		});
+	};
 };
 
 export const setDetails = (obj = {}) => {
@@ -212,12 +216,12 @@ export function UserLogin(payload) {
 }
 
 export const getChatBot = (payload) => async (dispatch) => {
-  let data = await chatBot(payload);
- 
-  return dispatch({
-    type: CHAT_BOT,
-    payload: data,
-  })
+	let data = await chatBot(payload);
+
+	return dispatch({
+		type: CHAT_BOT,
+		payload: data,
+	})
 }
 // export function filterBrandAdmin(payload){
 // 	return {
@@ -225,3 +229,18 @@ export const getChatBot = (payload) => async (dispatch) => {
 // 		payload
 // 	};
 // };
+
+export const AllChatBotReceptor = () => async (dispatch) => {
+	let data = await getChatBotReceptor();
+	return dispatch({
+		type: GET_CHAT_BOT_RECEPTOR,
+		payload: data
+	})
+}
+export const AllChatBotEmisor = () => async (dispatch) => {
+	let data = await getChatBotEmisor();
+	return dispatch({
+		type: GET_CHAT_BOT_EMISOR,
+		payload: data
+	})
+}

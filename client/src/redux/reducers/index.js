@@ -18,6 +18,8 @@ import {
   DELETE_PRODUCT,
   GET_ALL_CATEGORIES_FOR_FORM,
   CHAT_BOT,
+  GET_CHAT_BOT_RECEPTOR,
+  GET_CHAT_BOT_EMISOR
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -33,7 +35,9 @@ const initialState = {
   newgenders: [],
   subTotal: 0,
   categoriesForForm: [],
-  chatbot: {}
+  chatbot: {},
+  chatBotReceptor: [],
+  chatBotEmisor: []
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -77,16 +81,16 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case CHANGE_CART_QUANTITY:
       let index = state.cartItems.findIndex((e) => e.id === payload[1]);
       let item = state.cartItems[index];
-      if(payload[0] === "-") {
-        if(item.quantity === 1) {
+      if (payload[0] === "-") {
+        if (item.quantity === 1) {
           return {
             ...state,
             cartItems: state.cartItems.filter((e) => e.id !== payload[1])
           };
         }
-      state.cartItems[index].quantity--
+        state.cartItems[index].quantity--
       } else {
-      state.cartItems[index].quantity++
+        state.cartItems[index].quantity++
       }
       return {
         ...state,
@@ -214,6 +218,16 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         chatbot: payload
+      }
+    case GET_CHAT_BOT_RECEPTOR:
+      return {
+        ...state,
+        chatBotReceptor: payload
+      }
+    case GET_CHAT_BOT_EMISOR:
+      return {
+        ...state,
+        chatBotEmisor: payload
       }
     default:
       return { ...state };

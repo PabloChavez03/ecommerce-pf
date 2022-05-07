@@ -25,6 +25,9 @@ const NavAdmin = () => {
 					<NavLink className={style.navLink} to={"/admin/orders"}>
 						Mis Ordenes
 					</NavLink>
+					<NavLink className={style.navLink} to={"/admin/chatbot"}>
+						Chat Bot
+					</NavLink>
 				</ul>
 			</nav>
 		</>

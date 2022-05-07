@@ -65,9 +65,9 @@ export const currentcategory = async (gender) => {
             hash[current.id] = true;
             return exists;
         });
-        let newCategory =[]
-        categoryArray.forEach(item=>{
-            if(item.genre.toLowerCase()===gender.toLowerCase()){
+        let newCategory = []
+        categoryArray.forEach(item => {
+            if (item.genre.toLowerCase() === gender.toLowerCase()) {
                 newCategory.push(item)
             }
         })
@@ -79,15 +79,77 @@ export const currentcategory = async (gender) => {
 
 export const chatBot = async (item) => {
     try {
-        if(item){
+        if (item) {
             return await axios
-            .get(`/chatBot?dataString=${item}`)
-            .then((res) => res.data)
+                .get(`/chatBot?dataString=${item}`)
+                .then((res) => res.data)
         }
         return await axios
             .get("/chatBot")
             .then((res) => res.data)
     } catch (error) {
         console.log(error);
+    }
+}
+////Chat bot Receptor
+export const getChatBotReceptor = async () => {
+    try {
+        return await axios
+            .get(`http://localhost:3001/chatBot/receptor`)
+            .then(res => res.data)
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const postChatBotReceptor = async (data) => {
+    try {
+        return await axios
+            .post(`http://localhost:3001/chatBot/receptor`, {
+                name: data
+            })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const putChatBotReceptor = async (data) => {
+    try {
+        return await axios
+            .put(`http://localhost:3001/chatBot/receptor`, {
+                id: data.id,
+                name: data.name,
+                isActive: data.isActive
+            })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const deleteChatBotReceptor = async (data) => {
+    try {
+        return await axios
+            .delete(`http://localhost:3001/chatBot/receptor`, {
+                data: {
+                    id: data.id,
+                }
+            })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+////Chat bot Emisor 
+export const getChatBotEmisor = async () => {
+    try {
+        return await axios
+            .get(`http://localhost:3001/chatBot/emisor`)
+            .then(res => res.data)
+    }
+    catch (err) {
+        console.log(err);
     }
 }
