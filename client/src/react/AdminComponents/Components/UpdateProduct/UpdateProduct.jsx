@@ -177,7 +177,7 @@ export default function UpdateProduct() {
 				category: Number(value),
 			})
 		);
-		let categoryName = categories.find((e) => e.id === Number(value))
+		let categoryName = categories.find((e) => Number(e.id) === Number(value))
 		setNameCategory(categoryName.title);
 
 	}

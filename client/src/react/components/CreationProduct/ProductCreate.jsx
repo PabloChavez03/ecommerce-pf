@@ -63,7 +63,7 @@ function validate(input) {
     errors.brandName = <i>"Debe ingresar una marca"</i>;
     // errors.button = true;
   }
-  if (!input.category.length) {
+  if (!input.category || input.category === "") {
     errors.category = <i>"Debe ingresar una marca"</i>;
     // errors.button = true;
   }
@@ -86,9 +86,9 @@ export default function ProductCreate() {
     name: "",
     description: "",
     images: [],
-    previousPrice: "",
+    previousPrice: 0,
     isOffertPrice: false,
-    currentPrice: "",
+    currentPrice: 0,
     color: "",
     gender: "",
     brandName: "",
@@ -118,6 +118,7 @@ export default function ProductCreate() {
         [e.target.name]: e.target.value,
       })
     );
+    console.log(errors)
   }
 
   function handleSelectCategoryOnChange(e) {
@@ -131,14 +132,14 @@ export default function ProductCreate() {
     console.log(value);
 
     // set Error a revisar
-
+    console.log(errors)
     setError(
       validate({
         ...input,
         category: Number(value),
       })
     );
-    let categoryName = categories.find((e) => e.id === Number(value));
+    let categoryName = categories.find((e) => Number(e.id) === Number(value));
     setNameCategory(categoryName.title);
   }
 
@@ -359,8 +360,8 @@ export default function ProductCreate() {
               onChange={(e) => handleChange(e)}
             >
               <option>Seleccionar</option>
-              <option value={"men"}>Hombre</option>
-              <option value={"women"}>Mujer</option>
+              <option name="men" value={"men"}>Hombre</option>
+              <option name="women" value={"women"}>Mujer</option>
             </select>
             <h5>
               Género seleccionado:{" "}
