@@ -28,7 +28,7 @@ const createRoles = require("./src/controllers/createRoles.js");
 
 // Syncing all the models at once.
 conn
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     server.listen(process.env.PORT || 5000, async () => {
 
