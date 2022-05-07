@@ -18,44 +18,45 @@ import { handleDeleteImg, handleSizeDelete } from "./handlers";
 
 function validate(input) {
 	let errors = {};
+	let nameVal = /^[a-zA-Z\s]*$/;
 	// errors.button = false;
 
-	if (!input.name || input.name === "") {
-		errors.name = <i>"Debe ingresar un nombre del producto!"</i>;
+	if (!input.name || input.name === "" || nameVal.test(input.name) === false) {
+		errors.name = <i>"Debe ingresar un nombre del producto"</i>;
 		// errors.button = true;
 	}
-	if (!input.description || input.description === "") {
-		errors.description = <i>"Debe ingresar una description del producto!"</i>;
+	if (!input.description || input.description === "" || nameVal.test(input.description) === false) {
+		errors.description = <i>"Debe ingresar una description del producto"</i>;
 		// errors.button = true;
 	}
 
 	if (!input.images.length) {
-		errors.images = <i>"Debe agregar al menos una imagen producto!"</i>;
+		errors.images = <i>"Debe agregar al menos una imagen producto"</i>;
 		// errors.button = true;
 	}
 
-	if (!input.previousPrice || input.previousPrice < 0) {
-		errors.previousPrice = <i>"Debe ingresar un importe valido!"</i>;
-		// errors.button = true;
-	}
+	// if (!input.previousPrice || input.previousPrice < 0) {
+	// 	errors.previousPrice = <i>"Debe ingresar un importe valido!"</i>;
+	// 	// errors.button = true;
+	// }
 	if (!input.currentPrice || input.currentPrice < 0) {
-		errors.currentPrice = <i>"Debe ingresar un importe valido!"</i>;
+		errors.currentPrice = <i>"Debe ingresar un importe valido"</i>;
 		// errors.button = true;
 	}
-	if (!input.color || input.color === "") {
-		errors.color = <i>"Debe ingresar un color de prenda!"</i>;
+	if (!input.color || input.color === "" || nameVal.test(input.color) === false) {
+		errors.color = <i>"Debe ingresar un color de prenda valido"</i>;
 		// errors.button = true;
 	}
 	if (!input.gender || input.gender === "") {
-		errors.gender = <i>"Debe ingresar un genero!"</i>;
+		errors.gender = <i>"Debe ingresar un genero"</i>;
 		// errors.button = true;
 	}
 	if (!input.brandName || input.brandName === "") {
-		errors.brandName = <i>"Debe ingresar una marca!"</i>;
+		errors.brandName = <i>"Debe ingresar una marca"</i>;
 		// errors.button = true;
 	}
 	if (!input.category.length) {
-		errors.category = <i>"Debe ingresar una marca!"</i>;
+		errors.category = <i>"Debe ingresar una marca"</i>;
 		// errors.button = true;
 	}
 	return errors;
@@ -92,6 +93,7 @@ export default function ProductCreate() {
 		variants: [],
 	};
 
+	const [correct, setCorrect] = useState(false);
 	const [input, setInput] = useState(initialState);
 	const [errors, setError] = useState(initialState);
 	const [nameCategory, setNameCategory] = useState("");
@@ -151,6 +153,7 @@ export default function ProductCreate() {
 
 	function handleSubmit(e) {
 		e.preventDefault();
+		setCorrect(true)
 		if (Object.values(errors).length !== 0) {
 			alert("Faltan campos que rellenar");
 		} else {
