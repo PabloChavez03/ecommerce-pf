@@ -14,7 +14,6 @@ function OrderByPrice({ setRender, setCurrentPage, setSelectFilter, productsCure
     } else {
       setSelectFilter("");
     }
-   
   }
   return (
     <div>

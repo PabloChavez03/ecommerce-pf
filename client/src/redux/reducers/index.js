@@ -21,6 +21,7 @@ import {
   GET_USER_DATA,
   GET_PRODUCTS_NAME_ADMIN,
   CLEAN_FILTERS,
+  GET_STOCK_PRODUCTS,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -166,23 +167,23 @@ export default function rootReducer(state = initialState, { type, payload }) {
                 return 0;
               }
             });
-        return {
-          ...state,
-          productFilter: arr,
-          currentPage: 1,
-        };
+      return {
+        ...state,
+        productFilter: arr,
+        currentPage: 1,
+      };
     case GET_ALL_CATEGORIES:
       return {
         ...state,
         categories: payload,
       };
     case GET_CATEGORY_BY_ID:
-      if(payload.sector === "admin") {
+      if (payload.sector === "admin") {
         return {
           ...state,
           productFilterAdmin: payload.category,
           currentPage: 1,
-        }
+        };
       } else {
         return {
           ...state,
@@ -224,25 +225,31 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         userData: payload,
       };
-      case GET_PRODUCTS_NAME_ADMIN:
-        return {
+    case GET_PRODUCTS_NAME_ADMIN:
+      return {
         ...state,
         productFilterAdmin: payload,
         // select: "name",
       };
-      case CLEAN_FILTERS:
-        if(payload === "home") {
-          return {
-            ...state,
-            productFilter: []
-          }
-        } else {
-          return {
-            ...state,
-            productFilterAdmin: []
-          }
-        }
-        
+    case CLEAN_FILTERS:
+      if (payload === "home") {
+        return {
+          ...state,
+          productFilter: [],
+        };
+      } else {
+        return {
+          ...state,
+          productFilterAdmin: [],
+        };
+      }
+    case GET_STOCK_PRODUCTS:
+      return {
+        ...state,
+        productFilterAdmin: state.productsAdmin.filter(
+          (e) => e.isInStock === true
+        ),
+      };
     default:
       return { ...state };
   }
