@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import style from "./Login.module.css";
 import { useDispatch } from "react-redux";
-import {createNewUser, UserLogin} from '../../../redux/actions-types'
+import { createNewUser, UserLogin } from "../../../redux/actions-types";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 	const [activeCreate, setActiveCreate] = useState(false);
-	const dispatch = useDispatch()
-
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const [newUser, setNewUser] = useState({
 		phone: "",
@@ -25,11 +26,13 @@ const Login = () => {
 
 	function validate(newUser) {
 		let errors = {};
-		if (!newUser.name) {errors.name = "Es necesario ingresar tu nombre"}else {
-			errors.name = 'good'
-		};
-		if(errors.name === 'good' ){
-			errors.submit = 'we good'
+		if (!newUser.name) {
+			errors.name = "Es necesario ingresar tu nombre";
+		} else {
+			errors.name = "good";
+		}
+		if (errors.name === "good") {
+			errors.submit = "we good";
 		}
 		return errors;
 	}
@@ -57,14 +60,14 @@ const Login = () => {
 			setActiveCreate(true);
 		}
 	};
-	const handleSubmit= (e)=>{ 
+	const handleSubmit = (e) => {
 		e.preventDefault();
 		// setCorrect(true)
 		// console.log(newAdmin)
-		if(error.submit !== 'we good'){ return }
-		dispatch(
-			createNewUser(newUser)
-		)
+		if (error.submit !== "we good") {
+			return;
+		}
+		dispatch(createNewUser(newUser));
 		setNewUser({
 			phone: "",
 			dni_client: "",
@@ -76,10 +79,11 @@ const Login = () => {
 			address: "",
 			isRegistered: true,
 		});
-		alert('sumitie')
-	}
+		alert("sumitie");
+		navigate("/user/profile");
+	};
 	//////////////////////////// LOGIN ///////////////////////
-	const [login , setLogin] = useState({
+	const [login, setLogin] = useState({
 		user_name: "",
 		user_password: "",
 	});
@@ -95,22 +99,22 @@ const Login = () => {
 		// 		[e.target.name]: e.target.value,
 		// 	})
 		// );
-		console.log(login)
+		console.log(login);
 	};
-	const handleLoginSubmit = (e)=> {
+	const handleLoginSubmit = (e) => {
 		e.preventDefault();
 		// setCorrect(true)
 		// console.log(newAdmin)
 		// if(error.submit !== 'we good'){ return }
-		dispatch(
-			UserLogin(login)
-		)
-		console.log(login)
+		dispatch(UserLogin(login));
+		console.log(login);
 		setLogin({
-		user_name: "",
-		user_password: "",
-		})
-	}
+			user_name: "",
+			user_password: "",
+		});
+		navigate("/");
+	};
+
 	return (
 		<>
 			<NavBar />
@@ -122,9 +126,9 @@ const Login = () => {
 						Si haz comprado antes en Clothes 22, solo ingresa tu correo
 						electrónico y contraseña para acceder a tu cuenta.
 					</p>
-					<form onSubmit={(e)=>handleLoginSubmit(e)}>
+					<form onSubmit={(e) => handleLoginSubmit(e)}>
 						<div className={style.formInputContainer}>
-							<label className={style.formLabel}>CORREO ELECTRÓNICO</label>
+							<label className={style.formLabel}>USUARIO</label>
 							<input
 								className={style.formInput}
 								type='text'
@@ -145,12 +149,7 @@ const Login = () => {
 								onChange={(e) => handleChangeInputLogin(e)}
 							/>
 						</div>
-						<button
-							className={style.formButtonLogin}
-							// onClick={() => alert("Falta colocar funcionalidad")}
-						>
-							INGRESAR
-						</button>
+						<button className={style.formButtonLogin}>INGRESAR</button>
 					</form>
 				</div>
 				{/**Creando usuario */}
@@ -158,7 +157,7 @@ const Login = () => {
 					{activeCreate ? (
 						<div className={style.formCreateActive}>
 							<h2 className={style.formTitle}>Crear Cuenta</h2>
-							<form onSubmit={(e)=>handleSubmit(e)}>
+							<form onSubmit={(e) => handleSubmit(e)}>
 								<div className={style.formInputContainer}>
 									<label className={style.formLabel}>NOMBRE</label>
 									<input
@@ -258,10 +257,7 @@ const Login = () => {
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
-								<button
-									className={style.formButtonCreateActive}
-									// onClick={() => alert("Falta colocar funcionalidad")}
-								>
+								<button className={style.formButtonCreateActive}>
 									CREAR Y CONTINUAR
 								</button>
 								<button
