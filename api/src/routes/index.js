@@ -16,7 +16,6 @@ router.use("/allproducts", require("./getAllProducts"));
 router.use("/products/genre", require("./productsByGenre.js"));
 router.use("/product/review", require("./review"));
 // router.use("/carrito", require("./carrito"));
-
 //----------------  chatbot  ----------------------------------------------
 router.use("/chatBot", require("./chatBot"));
 //----------------  for Admin & Client ------------------------------------
