@@ -145,6 +145,7 @@
 }
 .mainInfo {
 	display: flex;
+	max-width: 100%;
 	min-height: 650px;
 	margin: auto;
 	flex-direction: column;

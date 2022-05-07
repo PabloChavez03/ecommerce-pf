@@ -29,13 +29,16 @@ const Admin = () => {
 						<Route path={"/createproduct"} element={<ProductCreate />} />
 						<Route path={"/allproducts"} element={<AllProducts />} />
 						<Route path={"/delete/:productId"} element={<DeleteProduct />} />
-						<Route path={"/modification/:productId"} element={<UpdateProduct />} />
-						<Route path={"/createadmin"} element={<AdminCreate/>} />
-						<Route path={"/clients"} element={<AllClients/>} />
-						<Route path={"/clients/:idClient"} element={<ClientDetail/>} />
-						<Route path={"/orders"} element={<AllOrders/>} />
-						<Route path={"/orders/:idOrder"} element={<OrderDetail/>} />
-						<Route path={"/chatbot"} element={<ChatBot/>} />
+						<Route
+							path={"/modification/:productId"}
+							element={<UpdateProduct />}
+						/>
+						<Route path={"/createadmin"} element={<AdminCreate />} />
+						<Route path={"/clients"} element={<AllClients />} />
+						<Route path={"/clients/:idClient"} element={<ClientDetail />} />
+						<Route path={"/orders"} element={<AllOrders />} />
+						<Route path={"/orders/:idOrder"} element={<OrderDetail />} />
+						<Route path={"/chatbot"} element={<ChatBot />} />
 					</Routes>
 				</div>
 			</div>
