@@ -17,10 +17,7 @@ export default function FilterByCategory({selectFilter, setSelectFilter}) {
         if (event.target.value !== "selectCategory") {
             dispatch(getCategoryById(event.target.value));
             dispatch(setCurrentPage(1));
-            console.log(event.target.value)
-            setSelectFilter(event.target.value);
-            console.log(selectFilter)
-            
+            setSelectFilter(event.target.value);           
         } else {
             setSelectFilter("");
         }

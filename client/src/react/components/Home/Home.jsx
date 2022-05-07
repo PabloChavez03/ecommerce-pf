@@ -55,7 +55,7 @@ export default function Home() {
 				render={render}
 				selectFilter={selectFilter}
 				setSelectFilter={setSelectFilter}
-				
+				productsCurent={productsCurent}
 			/>
 			<div>
 				<Paginated

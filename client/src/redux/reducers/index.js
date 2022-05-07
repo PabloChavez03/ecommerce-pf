@@ -186,7 +186,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
       } else {
         return {
           ...state,
-          productFilter: payload,
+          productFilter: payload.category,
           currentPage: 1,
         };
       }
