@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import NavBar from "../../NavBar/NavBar";
 import ProductCardModal from "../CardModal/ProductCardModal";
 
 import axios from "axios";
 
 export default function ShoppingBag() {
+	const navigate = useNavigate();
 	const cartItems = useSelector((state) => state.cartItems);
 	let suma = 0;
 	let subtotal = cartItems?.forEach((e) => (suma += e.currentPrice));
 	let envio = 50;
 
 	const [email, setEmail] = useState("");
-	const [linkMP, setLinkMP] = useState("");
 
 	const handleClickSend = (e) => {
 		e.preventDefault();
@@ -22,6 +22,7 @@ export default function ShoppingBag() {
 
 	const handlePayment = async (e) => {
 		e.preventDefault();
+
 		const { data } = await axios.get(
 			"http://localhost:3001/mercadopago/payment",
 			{
@@ -29,7 +30,7 @@ export default function ShoppingBag() {
 			},
 		);
 
-		console.log(data.init_point);
+		window.open(data.init_point, "_self");
 	};
 
 	return (
@@ -66,7 +67,7 @@ export default function ShoppingBag() {
 			/>
 
 			<NavLink to={"/pay"}>
-				<button onClick={(e) => handlePayment(e)}>Finalizar compra</button>
+				<button onClick={(e) => handlePayment(e)}>Comprar</button>
 			</NavLink>
 			<br></br>
 			<NavLink to={"/"}>
