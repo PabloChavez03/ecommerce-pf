@@ -9,6 +9,8 @@ import axios from "axios";
 export default function ShoppingBag() {
 	const navigate = useNavigate();
 	const cartItems = useSelector((state) => state.cartItems);
+	const userData = useSelector((state) => state.userData);
+
 	let suma = 0;
 	let subtotal = cartItems?.forEach((e) => (suma += e.currentPrice));
 	let envio = 50;
@@ -23,10 +25,12 @@ export default function ShoppingBag() {
 	const handlePayment = async (e) => {
 		e.preventDefault();
 
+		const emailAux = userData.email ? userData.email : email;
+
 		const { data } = await axios.get(
 			"http://localhost:3001/mercadopago/payment",
 			{
-				params: { cartItems, email, envio },
+				params: { cartItems, emailAux, envio },
 			},
 		);
 
@@ -60,15 +64,24 @@ export default function ShoppingBag() {
 			<h2>Total:</h2>
 			<p>${suma + envio}</p>
 
-			<label htmlFor="email">Email: </label>
-			<input
-				id="email"
-				type="email"
-				onChange={(e) => setEmail(e.target.value)}
-			/>
-
+			{userData.email === null ? (
+				<>
+					<label htmlFor="email">Email: </label>
+					<br />
+					<i>Recuerda agregar tu email en tu información de perfil</i>
+					<br />
+					<input
+						id="email"
+						type="email"
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+				</>
+			) : (
+				""
+			)}
+			<br />
 			<NavLink to={"/pay"}>
-				<button onClick={(e) => handlePayment(e)}>Comprar</button>
+				<button onClick={(e) => handlePayment(e)}>Ir a pagar</button>
 			</NavLink>
 			<br></br>
 			<NavLink to={"/"}>

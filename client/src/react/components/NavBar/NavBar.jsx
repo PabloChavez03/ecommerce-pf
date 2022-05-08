@@ -67,7 +67,7 @@ export default function NavBar() {
 	const handleLoginClick = (e) => {
 		e.preventDefault();
 		setLoginMenu(!loginMenu);
-	}
+	};
 	const handleLogOut = (e) => {
 		window.open("http://localhost:3001/auth/logout", "_self");
 	};
@@ -91,14 +91,14 @@ export default function NavBar() {
 					{/* <WishListIcon /> */}
 
 					<div
-						className='loginMenuContainer'
+						className="loginMenuContainer"
 						onClick={(e) => handleLoginClick(e)}
 					>
-						<AccountIcon className='accountIcon' />
+						<AccountIcon className="accountIcon" />
 					</div>
 					{loginMenu && <LoginMenu setLoginMenu={setLoginMenu} />}
 
-					<div className='icon_cart' onClick={(e) => handleModalStatus(e)}>
+					<div className="icon_cart" onClick={(e) => handleModalStatus(e)}>
 						{/* <NavLink exact to={"/cart"} onClick={handleClickForHiddingBurguer}> */}
 						<CartIcon />
 						{/**Insertando el componente modal */}
@@ -158,10 +158,6 @@ export default function NavBar() {
 						</NavLink>
 					</ul>
 				</div>
-			</div>
-
-			<div className="nav__searchBar">
-				<SearchBar />
 			</div>
 		</nav>
 	);

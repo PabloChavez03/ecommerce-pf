@@ -106,12 +106,11 @@ const Login = () => {
 		// setCorrect(true)
 		// console.log(newAdmin)
 		// if(error.submit !== 'we good'){ return }
-		dispatch(UserLogin(login));
-		console.log(login);
 		setLogin({
 			user_name: "",
 			user_password: "",
 		});
+		dispatch(UserLogin(login));
 		navigate("/");
 	};
 
