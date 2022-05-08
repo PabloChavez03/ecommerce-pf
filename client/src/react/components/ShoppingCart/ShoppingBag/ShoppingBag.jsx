@@ -70,7 +70,7 @@ export default function ShoppingBag() {
 				<h2>Total:</h2>
 				<p>${suma + envio}</p>
 
-				{!userData.email.length ? (
+				{userData.email && !userData.email.length ? (
 					<div className={css.mail}>
 						<label htmlFor="email">Email: </label>
 						<br />
@@ -86,11 +86,18 @@ export default function ShoppingBag() {
 					""
 				)}
 				<br />
-				<NavLink to={"/pay"}>
-					<button className={css.btn} onClick={(e) => handlePayment(e)}>
-						Ir a pagar
-					</button>
-				</NavLink>
+				{userData.username ? (
+					<>
+						<NavLink to={"/pay"}>
+							<button className={css.btn} onClick={(e) => handlePayment(e)}>
+								Ir a pagar
+							</button>
+						</NavLink>
+					</>
+				) : (
+					"Inicia sesión para comprar"
+				)}
+
 				<br></br>
 				<NavLink to={"/"}>
 					<button className={css.btn}>Seguir comprando</button>

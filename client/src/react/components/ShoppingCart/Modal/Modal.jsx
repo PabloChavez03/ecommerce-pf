@@ -19,6 +19,11 @@ const Modal = ({ status, setStatus }) => {
 
 	const handleClickBag = (event) => {
 		event.preventDefault();
+		if (!cartData.length) {
+			alert("Por favor agregue productos al carrito para continuar");
+			return;
+		}
+
 		navigate("/bag");
 	};
 
@@ -40,7 +45,7 @@ const Modal = ({ status, setStatus }) => {
 							{cartData &&
 								cartData.map((product) => {
 									return (
-										<div key={product.id+ product.brandSize}>
+										<div key={product.id + product.brandSize}>
 											<ProductCardModal
 												id={product.id}
 												name={product.name}
