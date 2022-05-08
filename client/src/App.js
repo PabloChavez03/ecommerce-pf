@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import CardDetail from "./react/components/CardDetail/CardDetail";
@@ -14,8 +15,37 @@ import PayPlataform from "./react/components/PayPlataform/PayPlataform";
 import ProfileUser from "./react/components/ProfileUser/ProfileUser";
 import OrderDetail from "./react/UserOrders/OrderDetail";
 import UserOrders from "./react/UserOrders/UserOrders";
+import axios from "axios";
+import Failure from "./react/components/back Urls/failure"
 
 function App() {
+	const [user, setUSer] = useState(null);
+
+	useEffect(() => {
+		const getUser = () =>
+			axios({
+				url: "http://localhost:3001/auth/login/success",
+				method: "GET",
+				withCredentials: true,
+				headers: {
+					"Content-Type": "application/json",
+					"Access-Control-Allow-Credentials": true,
+				},
+			})
+				.then((response) => {
+					if (response.status === 200) return response.data;
+					else throw new Error("Authentication has been failed");
+				})
+				.then((resObject) => {
+					setUSer(resObject.user);
+				})
+				.catch((e) => console.log(e));
+
+		getUser();
+	}, []);
+
+	console.log(user);
+
 	return (
 		<BrowserRouter>
 			<Routes>
@@ -33,6 +63,7 @@ function App() {
 				<Route path={"/user/profile"} element={<ProfileUser />} />
 				<Route path={"/user/orders"} element={<UserOrders />} />
 				<Route path={"/user/orders/:idOrder"} element={<OrderDetail />} />
+				<Route path={"/failure"} element={<Failure />} />
 			</Routes>
 			<Footer />
 		</BrowserRouter>

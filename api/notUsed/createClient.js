@@ -1,7 +1,7 @@
 const { Router } = require("express");
-const { Cliente } = require("../db");
+const { Cliente } = require("../src/db");
 const router = Router();
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res) => {
   const {
@@ -9,7 +9,6 @@ router.post("/", async (req, res) => {
     dni_client,
     email,
     login_name,
-    login_password,
     name,
     lastname,
     address,
@@ -20,15 +19,14 @@ router.post("/", async (req, res) => {
 
 
   try {
-    const saltRam = 10;
-    const passwordHash = await bcrypt.hash(login_password, saltRam);
+    // const saltRam = 10;
+    // const passwordHash = await bcrypt.hash(login_password, saltRam);
 
     const client = await Cliente.create({
       phone,
       dni_client,
       email,
       login_name,
-      login_password: passwordHash,
       name,
       lastname,
       address,

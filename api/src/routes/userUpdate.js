@@ -1,20 +1,47 @@
 const { Router } = require("express");
-const { Users } = require("../db");
-const bcrypt = require("bcrypt");
+const { Users,Role } = require("../db");
+// const bcrypt = require("bcrypt");
 const router = Router();
 
-router.patch("/:legajo_user", async (req, res) => {
-  const { user_name, user_password, rol } = req.body;
-  let { legajo_user } = req.params;
+router.patch("/:user_name", async (req, res) => {
+  const {
+    user_password,
+    phone,
+    email,
+    lastname,
+    address,
+    isRegistered,
+    name,
+    rol,
+    legajo_user,
+  } = req.body;
 
-  const saltRounds = 10;
-  let newPassword = await bcrypt.hash(user_password, saltRounds);
+  let { user_name } = req.params;
+
+  //rol?
+
+  // const saltRounds = 10;
+  // let newPassword = await bcrypt.hash(user_password, saltRounds);
 
   try {
-   const modified = Users.update({ legajo_user, user_name, user_password: newPassword, rol}, {
-        where: {legajo_user}
-    });
-    res.status(200).send(`${modified} Usuario modificado`)
+
+    const user = await Users.findOne({where : { user_name }});
+
+    console.log(user)
+
+    await user.update({ legajo_user, user_password, phone, email, lastname, address, isRegistered, name });
+
+    if (rol) {
+    const role = await Role.findOne({where : {name: rol}});
+    await user.setRole(role);
+    }
+
+    // console.log(role);
+
+
+    await user.save();
+
+    res.status(200).send(`${user.user_name} Usuario modificado`)
   } catch (error) {
     console.log(error);
   }

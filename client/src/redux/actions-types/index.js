@@ -209,7 +209,7 @@ export function createNewUser(payload) {
 	return async function (dispatch) {
 		const newUser = await axios.post(
 			"http://localhost:3001/users/create",
-			payload
+			payload,
 		);
 	};
 }
@@ -218,7 +218,7 @@ export function UserLogin(payload) {
 	return async function (dispatch) {
 		const userLogin = await axios.post(
 			"http://localhost:3001/users/login",
-			payload
+			payload,
 		);
 		return dispatch({
 			type: GET_USER_DATA,

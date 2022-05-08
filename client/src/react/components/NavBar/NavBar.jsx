@@ -6,10 +6,11 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import CartIcon from "../svg/CartIcon";
 import AccountIcon from "../svg/AccountIcon";
+// import CreateIcon from "../svg/CreateIcon";
 
 import Modal from "../ShoppingCart/Modal/Modal";
 
-import "./NavBar.scss";
+import "./NavBar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getFiltersGenderProduct } from "../../../redux/actions-types";
 import LoginMenu from "./LoginMenu/LoginMenu";
@@ -31,6 +32,7 @@ export default function NavBar() {
 		document.body.style.overflow = "visible";
 	}
 	/** ------ */
+
 	useEffect(() => {
 		if (userCurrent.username) {
 			setLogued(true);
@@ -45,6 +47,8 @@ export default function NavBar() {
 		setStatusModal(true);
 		setLoginMenu(false);
 	};
+
+	/** Fin modal */
 
 	const [toogleMenu, setToogleMenu] = useState(false);
 
@@ -63,24 +67,27 @@ export default function NavBar() {
 	const handleLoginClick = (e) => {
 		e.preventDefault();
 		setLoginMenu(!loginMenu);
+	}
+	const handleLogOut = (e) => {
+		window.open("http://localhost:3001/auth/logout", "_self");
 	};
 
 	return (
-		<nav className='nav'>
-			<div className='nav__up'>
-				<div className='nav__up__left'>
-					<span className='nav__up__left__burguer' onClick={handleBurguerClick}>
-						<span className='nav__up__left__burguer_bar'></span>
-						<span className='nav__up__left__burguer_bar'></span>
-						<span className='nav__up__left__burguer_bar'></span>
-						<span className='nav__up__left__burguer_bar'></span>
+		<nav className="nav">
+			<div className="nav__up">
+				<div className="nav__up__left">
+					<span className="nav__up__left__burguer" onClick={handleBurguerClick}>
+						<span className="nav__up__left__burguer_bar"></span>
+						<span className="nav__up__left__burguer_bar"></span>
+						<span className="nav__up__left__burguer_bar"></span>
+						<span className="nav__up__left__burguer_bar"></span>
 					</span>
 					<NavLink to={"/"} style={{ textDecoration: "none" }}>
-						<h1 className='nav__up__left__logo'>CLOTHES 22</h1>
+						<h1 className="nav__up__left__logo">CLOTHES 22</h1>
 					</NavLink>
 				</div>
 
-				<div className='nav__up__features'>
+				<div className="nav__up__features">
 					{/* <WishListIcon /> */}
 
 					<div
@@ -96,21 +103,19 @@ export default function NavBar() {
 						<CartIcon />
 						{/**Insertando el componente modal */}
 						{/* </NavLink> */}
+						{/* <NavLink to={ruteIconAccount} className="accountContainer">
+							<AccountIcon className="accountIcon" />
+							<h3 className="accountName">
+								{userCurrent.username ? userCurrent.username : "Login"}
+							</h3>
+						</NavLink> */}
 					</div>
-
-					{/* <NavLink to={ruteIconAccount} className='accountContainer'>
-						<AccountIcon className='accountIcon' />
-						<h3 className='accountName'>
-							{userCurrent.username ? userCurrent.username : "Login"}
-						</h3>
-					</NavLink> */}
-
 					<Modal status={statusModal} setStatus={setStatusModal} />
 					{/* <AccountMenu/> */}
 				</div>
 			</div>
 
-			<div className='nav__down'>
+			<div className="nav__down">
 				<div className={`nav__down__links ${toogleMenu ? "menuActived" : ""}`}>
 					<ul>
 						<NavLink to={"/"} onClick={handleClickForHiddingBurguer}>
@@ -125,7 +130,7 @@ export default function NavBar() {
 									: ""
 							}
 							onClick={(e) => handleClickForHiddingBurguer(e)}
-							value='men'
+							value="men"
 						>
 							<li>Men</li>
 						</Link>
@@ -139,7 +144,7 @@ export default function NavBar() {
 									: ""
 							}
 							onClick={(e) => handleClickForHiddingBurguer(e)}
-							value='women'
+							value="women"
 						>
 							<li>Women</li>
 						</Link>
@@ -147,11 +152,15 @@ export default function NavBar() {
 						<NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
 							<li>About</li>
 						</NavLink>
+
+						<NavLink to={"/"} onClick={handleLogOut}>
+							<li>Logout</li>
+						</NavLink>
 					</ul>
 				</div>
 			</div>
 
-			<div className='nav__searchBar'>
+			<div className="nav__searchBar">
 				<SearchBar />
 			</div>
 		</nav>

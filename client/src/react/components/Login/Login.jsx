@@ -47,7 +47,7 @@ const Login = () => {
 			validate({
 				...newUser,
 				[e.target.name]: e.target.value,
-			})
+			}),
 		);
 	};
 	// console.log(newUser);
@@ -115,6 +115,10 @@ const Login = () => {
 		navigate("/");
 	};
 
+	const GOOGLE = () => {
+		window.open("http://localhost:3001/auth/google", "_self");
+	};
+
 	return (
 		<>
 			<NavBar />
@@ -131,10 +135,10 @@ const Login = () => {
 							<label className={style.formLabel}>USUARIO</label>
 							<input
 								className={style.formInput}
-								type='text'
-								name='user_name'
+								type="text"
+								name="user_name"
 								value={login.user_name}
-								placeholder='Name'
+								placeholder="Name"
 								onChange={(e) => handleChangeInputLogin(e)}
 							/>
 						</div>
@@ -142,10 +146,10 @@ const Login = () => {
 							<label className={style.formLabel}>CONTRASEÑA</label>
 							<input
 								className={style.formInput}
-								type='password'
-								name='user_password'
+								type="password"
+								name="user_password"
 								value={login.user_password}
-								placeholder='Contraseña'
+								placeholder="Contraseña"
 								onChange={(e) => handleChangeInputLogin(e)}
 							/>
 						</div>
@@ -162,10 +166,10 @@ const Login = () => {
 									<label className={style.formLabel}>NOMBRE</label>
 									<input
 										className={style.formInput}
-										type='text'
-										name='name'
+										type="text"
+										name="name"
 										value={newUser.name}
-										placeholder='Nombre'
+										placeholder="Nombre"
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
@@ -174,10 +178,10 @@ const Login = () => {
 									<label className={style.formLabel}>APELLIDO</label>
 									<input
 										className={style.formInput}
-										type='text'
-										name='lastname'
+										type="text"
+										name="lastname"
 										value={newUser.lastname}
-										placeholder='Apellido'
+										placeholder="Apellido"
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
@@ -185,10 +189,10 @@ const Login = () => {
 									<label className={style.formLabel}>DNI</label>
 									<input
 										className={style.formInput}
-										type='number'
-										name='dni_client'
+										type="number"
+										name="dni_client"
 										value={newUser.dni_client}
-										placeholder='DNI'
+										placeholder="DNI"
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
@@ -196,10 +200,10 @@ const Login = () => {
 									<label className={style.formLabel}>CORREO ELECTRÓNICO</label>
 									<input
 										className={style.formInput}
-										type='text'
-										name='email'
+										type="text"
+										name="email"
 										value={newUser.email}
-										placeholder='Email'
+										placeholder="Email"
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
@@ -207,10 +211,10 @@ const Login = () => {
 									<label className={style.formLabel}>USUARIO</label>
 									<input
 										className={style.formInput}
-										type='text'
-										name='user_name'
+										type="text"
+										name="user_name"
 										value={newUser.user_name}
-										placeholder='Usuario'
+										placeholder="Usuario"
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
@@ -218,10 +222,10 @@ const Login = () => {
 									<label className={style.formLabel}>CONTRASEÑA</label>
 									<input
 										className={style.formInput}
-										type='password'
-										name='user_password'
+										type="password"
+										name="user_password"
 										value={newUser.user_password}
-										placeholder='Contraseña'
+										placeholder="Contraseña"
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
@@ -231,18 +235,18 @@ const Login = () => {
 									</label>
 									<input
 										className={style.formInput}
-										type='password'
-										placeholder='Repetir contraseña'
+										type="password"
+										placeholder="Repetir contraseña"
 									/>
 								</div>
 								<div className={style.formInputContainer}>
 									<label className={style.formLabel}>CELULAR</label>
 									<input
 										className={style.formInput}
-										type='number'
-										name='phone'
+										type="number"
+										name="phone"
 										value={newUser.phone}
-										placeholder='Celular'
+										placeholder="Celular"
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
@@ -250,10 +254,10 @@ const Login = () => {
 									<label className={style.formLabel}>DIRECCION</label>
 									<input
 										className={style.formInput}
-										type='text'
-										name='address'
+										type="text"
+										name="address"
 										value={newUser.address}
-										placeholder='Direccion'
+										placeholder="Direccion"
 										onChange={(e) => handleChangeInputNewUser(e)}
 									/>
 								</div>
@@ -286,6 +290,13 @@ const Login = () => {
 								onClick={handleChangeActive}
 							>
 								CREAR CUENTA
+							</button>
+
+							<button
+								className={`${style.formButtonCreateActive} ${style.google}`}
+								onClick={GOOGLE}
+							>
+								INICIAR CON GOOGLE
 							</button>
 						</div>
 					)}

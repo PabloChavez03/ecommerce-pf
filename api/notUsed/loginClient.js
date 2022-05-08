@@ -2,7 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const { Cliente } = require("../src/db");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res) => {
   const { login_name, login_password } = req.body;
@@ -11,10 +11,10 @@ router.post("/", async (req, res) => {
 
     //   console.log(user)
 
-    const passwordCorrect =
-      client === null
-        ? false
-        : await bcrypt.compare(login_password, client.login_password);
+    // const passwordCorrect =
+    //   client === null
+    //     ? false
+    //     : await bcrypt.compare(login_password, client.login_password);
 
     const userForToken = {
       id: client.phone,

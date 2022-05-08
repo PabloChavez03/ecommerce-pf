@@ -4,13 +4,13 @@ const { Users, Role } = require("../db");
 const authMaster = async (req, res, next) => {
   //----------------------------AUTHORIZATION--------------------------------------------------------
   const authorization = req.get("authorization");
-
+  
   let token = null;
-
+  
   if (authorization && authorization.toLowerCase().startsWith("bearer")) {
     token = authorization.substring(7);
   }
-
+  
   let decodedToken = {};
 
   try {
@@ -40,7 +40,7 @@ const authMaster = async (req, res, next) => {
 const isAdmin = async (req, res, next) => {
   // const user = await Users.findByPk(req.userId);
   const role = await Role.findByPk(req.role);
-  console.log(role.name);
+  // console.log(role.name);
   if (role.name === "admin") {
     next();
   } else {

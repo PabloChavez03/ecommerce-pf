@@ -36,6 +36,15 @@ router.post("/", async (req, res) => {
       res.status(200).send({
         rol: roleOfUser.name,
         username: user.user_name,
+        password: user.user_password,
+        phone: user.phone,
+        legajo: user.legajo_user,
+        dni: user.dni_client,
+        email: user.email,
+        name: user.name,
+        lastname: user.lastname,
+        address: user.address,
+        isRegistered: user.isRegistered,
         token,
       });
     }

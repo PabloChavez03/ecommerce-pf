@@ -3,6 +3,7 @@ const { Users, Role } = require("../db");
 const router = Router();
 // const bcrypt = require("bcrypt");
 
+
 router.post("/", async (req, res) => {
   const {
     legajo_user,
@@ -17,7 +18,7 @@ router.post("/", async (req, res) => {
     address,
   } = req.body;
   try {
-    const saltRam = 10;
+    // const saltRam = 10;
     // const passwordHash = await bcrypt.hash(user_password, saltRam);
 
     const user = await Users.create({
@@ -30,6 +31,7 @@ router.post("/", async (req, res) => {
       name,
       lastname,
       address,
+   
     });
 
     if (rol) {
@@ -39,10 +41,12 @@ router.post("/", async (req, res) => {
       const roleClient = await Role.findOne({ where: { name: "client" } });
       await user.setRole(roleClient);
     }
+   
 
     const createdUser = await user.save();
 
     createdUser ? res.status(200).json(user + "creado") : res.sendStatus(404);
+     
   } catch (error) {
     res.status(500).json({ error });
   }
