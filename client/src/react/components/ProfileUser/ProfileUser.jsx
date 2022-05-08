@@ -5,7 +5,7 @@ import NavBar from "../NavBar/NavBar";
 import style from "./ProfileUser.module.css";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { updateUserInfo, UserLogin } from "../../../redux/actions-types";
+import { loggedOut, updateUserInfo, UserLogin } from "../../../redux/actions-types";
 
 export default function ProfileUser() {
 	const dispatch = useDispatch();
@@ -60,13 +60,13 @@ export default function ProfileUser() {
 		e.preventDefault();
 		dispatch(updateUserInfo(userData.username, userData.token, user));
 		alert("Los cambios se guardaron");
+		dispatch(loggedOut());
 		dispatch(
 			UserLogin({
 				user_name: user.username,
 				user_password: user.password,
 			}),
 		);
-		navigate("/");
 	};
 
 	return (
@@ -86,7 +86,7 @@ export default function ProfileUser() {
 								name="username"
 								type="text"
 								value={!user.username ? "" : user.username}
-								onChange={handleChange}
+								readOnly
 							/>
 						</div>
 						<div className={style.infoContainer}>
@@ -119,7 +119,7 @@ export default function ProfileUser() {
 								name="dni"
 								type="number"
 								value={!user.dni ? "" : user.dni}
-								onChange={handleChange}
+								onChange={typeof Number(user.dni) === "number" ? handleChange : null}
 							/>
 						</div>
 					</fieldset>
