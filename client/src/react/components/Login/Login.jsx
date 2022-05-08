@@ -107,13 +107,14 @@ const Login = () => {
 		// console.log(newAdmin)
 		// if(error.submit !== 'we good'){ return }
 		dispatch(UserLogin(login));
-		console.log(login);
 		setLogin({
 			user_name: "",
 			user_password: "",
 		});
 		navigate("/");
 	};
+
+
 
 	const GOOGLE = () => {
 		window.open("http://localhost:3001/auth/google", "_self");

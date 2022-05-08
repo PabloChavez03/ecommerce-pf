@@ -10,6 +10,8 @@ export default function Failure() {
 		.split("&")
 		.map((el) => el.split("="));
 
+		console.log(params)
+
 	const {
 		collection_id,
 		collection_status,
