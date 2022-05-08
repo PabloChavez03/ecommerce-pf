@@ -45,8 +45,9 @@ export default function ShoppingBag() {
 						color={e.color}
 						price={e.currentPrice}
 						image={e.image}
+						size={e.brandSize}
 						quantity={e.quantity}
-						key={e.id}
+						key={e.id + e.brandSize}
 					/>
 				))
 			) : (

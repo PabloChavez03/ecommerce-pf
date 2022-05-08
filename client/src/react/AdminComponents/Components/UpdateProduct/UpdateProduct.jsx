@@ -39,10 +39,10 @@ function validate(input) {
 		// errors.button = true;
 	}
 
-	if (!input.previousPrice || input.previousPrice < 0) {
-		errors.previousPrice = <i>"Debe ingresar un importe valido!"</i>;
-		// errors.button = true;
-	}
+	// if (!input.previousPrice || input.previousPrice < 0) {
+	// 	errors.previousPrice = <i>"Debe ingresar un importe valido!"</i>;
+	// 	// errors.button = true;
+	// }
 	if (!input.currentPrice || input.currentPrice < 0) {
 		errors.currentPrice = <i>"Debe ingresar un importe valido!"</i>;
 		// errors.button = true;
@@ -59,10 +59,7 @@ function validate(input) {
 		errors.brandName = <i>"Debe ingresar una marca!"</i>;
 		// errors.button = true;
 	}
-	if (!input.category || input.category === "") {
-		errors.category = <i>"Debe ingresar una categoria!"</i>;
-		// errors.button = true;
-	}
+	
 	return errors;
 }
 
@@ -115,6 +112,7 @@ export default function UpdateProduct() {
 		gender: "",
 		brandName: "",
 		// category: [],
+		category:'',
 		info: {
 			aboutMe: "",
 			sizeAndFit: "",

@@ -46,15 +46,15 @@ export const addProductToCart = (product) => {
 	};
 };
 
-export const removeProductFromCart = (id) => {
+export const removeProductFromCart = (id, size) => {
 	return async function (dispatch) {
-		return dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: id });
+		return dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: {id,size} });
 	};
 };
 
-export const changeCartQuantity = (sign, id) => {
+export const changeCartQuantity = (sign, id, size) => {
 	return async function (dispatch) {
-		return dispatch({ type: CHANGE_CART_QUANTITY, payload: [sign, id] });
+		return dispatch({ type: CHANGE_CART_QUANTITY, payload: {sign, id, size} });
 	};
 };
 

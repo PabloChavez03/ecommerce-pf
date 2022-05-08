@@ -56,10 +56,15 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				productFilter: payload.filter((e) => e.Category.genre === gender),
 			};
 		case ADD_PRODUCT_TO_CART:
-			let cartProductAux = state.cartItems.find((e) => e.id === payload.id);
+			let cartProductAux = state.cartItems.find((e) =>( (e.id + e.brandSize) === (payload.id + payload.brandSize)));
 			if (cartProductAux) {
-				const prevCart = state.cartItems.filter((e) => e.id !== payload.id);
-				cartProductAux.quantity++;
+				const prevCart = state.cartItems.filter((e) => (e.id + e.brandSize) !== (payload.id + payload.brandSize));
+				if(payload.variants[0].stock !== cartProductAux.quantity){
+					cartProductAux.quantity++;
+				}
+				
+				console.log(`el stock es:${payload.variants[0].stock} y la cantidad es:${ cartProductAux.quantity}`)
+				
 				return {
 					...state,
 					cartItems: [...prevCart, cartProductAux],
@@ -78,20 +83,20 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				};
 			}
 		case REMOVE_PRODUCT_FROM_CART:
-			let indexRemoveQty = state.cartItems.findIndex((e) => e.id === payload);
+			let indexRemoveQty = state.cartItems.findIndex((e) => (e.id + e.brandSize.toString()) === (payload.id + payload.size.toString()));
 			state.cartItems[indexRemoveQty].quantity = 1;
 			return {
 				...state,
-				cartItems: state.cartItems.filter((e) => e.id !== payload),
+				cartItems: state.cartItems.filter((e) => (e.id + e.brandSize.toString()) !== (payload.id + payload.size.toString())),
 			};
 		case CHANGE_CART_QUANTITY:
-			let index = state.cartItems.findIndex((e) => e.id === payload[1]);
+			let index = state.cartItems.findIndex((e) =>(e.id + e.brandSize.toString()) === (payload.id + payload.size.toString()));
 			let item = state.cartItems[index];
-			if (payload[0] === "-") {
+			if (payload.sign === "-") {
 				if (item.quantity === 1) {
 					return {
 						...state,
-						cartItems: state.cartItems.filter((e) => e.id !== payload[1]),
+						cartItems: state.cartItems.filter((e) => (e.id + e.brandSize.toString()) !== (payload.id + payload.size.toString())),
 					};
 				}
 				state.cartItems[index].quantity--;
