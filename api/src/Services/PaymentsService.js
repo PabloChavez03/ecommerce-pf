@@ -1,8 +1,8 @@
 const axios = require("axios");
 
 class PaymentService {
-	constructor(products, email) {
-		this.products = products;
+	constructor(productsAndDelivery, email) {
+		this.products = productsAndDelivery;
 		this.email = email;
 	}
 
@@ -11,7 +11,7 @@ class PaymentService {
 
 		const body = {
 			payer_email: this.email,
-			items: this.products,
+			items: [...this.products],
 			back_urls: {
 				failure: "/failure",
 				pending: "/pending",
