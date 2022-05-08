@@ -310,6 +310,13 @@ export function updateUserInfo(username, token, payload) {
 	};
 }
 
+export function setChangeFormCreate(form) {
+	return {
+		type: SET_CHANGE_FORM_CREATE,
+		payload: form,
+	};
+}
+
 export function getAllClients(token) {
 	return async function (dispatch) {
 		const { data } = await axios.get("http://localhost:3001/users/findall", {
