@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import css from './HomeAdmin.module.css'
 
 export default function HomeAdmin() {
 	const handleClickConstruction = (e) => {
@@ -8,15 +9,15 @@ export default function HomeAdmin() {
 	};
 	
 	return(
-		<div>
+		<div className={css.container}>
 			<NavLink to={"/admin/allproducts"}>
-			<button>MIS PRODUCTOS</button>
+			<button className={css.item}>MIS PRODUCTOS</button>
 			</NavLink>
 			<NavLink to={"/admin/createproduct"}>
-			<button>CARGAR PRODUCTOS</button>
+			<button className={css.item}>CARGAR PRODUCTOS</button>
 			</NavLink>
-			<button onClick={(e)=>handleClickConstruction(e)}>MIS CLIENTES</button>
-			<button onClick={(e)=>handleClickConstruction(e)}>MIS VENTAS</button>
+			<button className={css.item} onClick={(e)=>handleClickConstruction(e)}>MIS CLIENTES</button>
+			<button className={css.item} onClick={(e)=>handleClickConstruction(e)}>MIS VENTAS</button>
 		</div>
 	);
 };
