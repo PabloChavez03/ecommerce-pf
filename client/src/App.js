@@ -15,7 +15,7 @@ import PayPlataform from "./react/components/PayPlataform/PayPlataform";
 import ProfileUser from "./react/components/ProfileUser/ProfileUser";
 import OrderDetail from "./react/UserOrders/OrderDetail";
 import UserOrders from "./react/UserOrders/UserOrders";
-import Success from "./react/components/back Urls/success";
+// import Success from "./react/components/back Urls/success";
 import axios from "axios";
 import Failure from "./react/components/back Urls/failure"
 
@@ -61,7 +61,7 @@ function App() {
 				<Route path={"/login"} element={<Login />} />
 				<Route path={"/bag"} element={<ShoppingBag />} />
 				<Route path={"/pay"} element={<PayPlataform />}	/>
-        <Route path={"/pay/success"} element={<Success/>}/>
+        {/* <Route path={"/pay/success"} element={<Success/>}/> */}
 				<Route path={"/user/profile"} element={<ProfileUser />} />
 				<Route path={"/user/orders"} element={<UserOrders />} />
 				<Route path={"/user/orders/:idOrder"} element={<OrderDetail />} />
