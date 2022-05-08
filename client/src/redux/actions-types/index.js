@@ -25,6 +25,8 @@ import {
 	UPDATE_USER_INFO,
 	GET_ALL_CLIENTS,
 	GET_CLIENT_DETAIL,
+	DEL_CLIENT_DETAIL,
+	UPDATE_CLIENT_INFO,
 } from "../actions-creators";
 import {
 	chatBot,
