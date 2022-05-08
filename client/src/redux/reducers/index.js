@@ -28,6 +28,7 @@ import {
 	UPDATE_USER_INFO,
 	GET_ALL_CLIENTS,
 	GET_CLIENT_DETAIL,
+	DELETE_CLIENT_DETAIL,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -314,6 +315,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				...state,
 				clientDetail: payload,
 			};
+		case DELETE_CLIENT_DETAIL:
+			return {
+				...state,
+				clientDetail: {},
+			}
 
 		default:
 			return { ...state };

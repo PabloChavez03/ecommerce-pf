@@ -25,6 +25,7 @@ import {
 	UPDATE_USER_INFO,
 	GET_ALL_CLIENTS,
 	GET_CLIENT_DETAIL,
+	DELETE_CLIENT_DETAIL,
 } from "../actions-creators";
 import {
 	chatBot,
@@ -339,4 +340,10 @@ export function getClientDetail(token, username) {
 			payload: data,
 		});
 	};
+}
+
+export function deleteClientDetail() {
+  return {
+		type: DELETE_CLIENT_DETAIL,
+	}
 }
