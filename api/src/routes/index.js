@@ -32,7 +32,6 @@ router.use(
 	[authMaster, isAdmin],
 	require("./deleteProduct"),
 );
-<<<<<<< HEAD
 router.use("/product/stock", [authMaster, isAdmin], require("./updateStock"));
 router.use("/users/update", [authMaster, isAdmin], require("./userUpdate"));
 router.use("/users/delete", [authMaster, isAdmin], require("./userDelete"));
@@ -42,12 +41,6 @@ router.use(
 	[authMaster, isAdmin],
 	require("./usersFindByPk"),
 );
-=======
-router.use("/product/stock", /*[authMaster, isAdmin],*/ require("./updateStock"));
-router.use("/users/update", /*[authMaster, isAdmin],*/ require("./userUpdate"));
-router.use("/users/delete", /*[authMaster, isAdmin],*/ require("./userDelete"));
-
->>>>>>> c4f174afccddd98d35890c7aa1147c8bcb2a3a5c
 //----------------------Mercado Pago---------------------------------------
 router.use("/mercadopago", require("./mercadoPago"));
 //-----------------------  Google  ----------------------------------------
