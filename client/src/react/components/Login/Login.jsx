@@ -114,6 +114,8 @@ const Login = () => {
 		navigate("/");
 	};
 
+
+
 	const GOOGLE = () => {
 		window.open("http://localhost:3001/auth/google", "_self");
 	};

@@ -15,6 +15,7 @@ import PayPlataform from "./react/components/PayPlataform/PayPlataform";
 import ProfileUser from "./react/components/ProfileUser/ProfileUser";
 import OrderDetail from "./react/UserOrders/OrderDetail";
 import UserOrders from "./react/UserOrders/UserOrders";
+// import Success from "./react/components/back Urls/success";
 import axios from "axios";
 import Failure from "./react/components/back Urls/failure";
 
