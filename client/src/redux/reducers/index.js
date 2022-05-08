@@ -27,6 +27,8 @@ import {
   LOGGED_OUT,
   UPDATE_USER_INFO,
   SET_CHANGE_FORM_CREATE,
+  GET_ALL_CLIENTS,
+  GET_CLIENT_DETAIL
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -65,6 +67,8 @@ export const initialState = {
     },
     variants: [],
   },
+  allClients: [],
+  clientDetail: {},
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -338,6 +342,22 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         productCreate: payload,
       };
+	  case UPDATE_USER_INFO:
+		return {
+			...state,
+			userData: payload,
+		};
+	case GET_ALL_CLIENTS:
+		return {
+			...state,
+			allClients: payload,
+		};
+
+	case GET_CLIENT_DETAIL:
+		return {
+			...state,
+			clientDetail: payload,
+		};
     default:
       return { ...state };
   }

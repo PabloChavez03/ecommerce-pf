@@ -24,6 +24,8 @@ import {
   LOGGED_OUT,
   UPDATE_USER_INFO,
   SET_CHANGE_FORM_CREATE,
+  GET_ALL_CLIENTS,
+	GET_CLIENT_DETAIL
 } from "../actions-creators";
 import {
   chatBot,
@@ -312,4 +314,37 @@ export function setChangeFormCreate(form) {
     type: SET_CHANGE_FORM_CREATE,
     payload: form,
   };
+}
+
+export function getAllClients(token) {
+	return async function (dispatch) {
+		const { data } = await axios.get("http://localhost:3001/users/findall", {
+			headers: {
+				authorization: `Bearer ${token}`,
+			},
+		});
+
+		return dispatch({
+			type: GET_ALL_CLIENTS,
+			payload: data,
+		});
+	};
+}
+
+export function getClientDetail(token, username) {
+	return async function (dispatch) {
+		const { data } = await axios.get(
+			`http://localhost:3001/users/findByPk/${username}`,
+			{
+				headers: {
+					authorization: `Bearer ${token}`,
+				},
+			},
+		);
+
+		return dispatch({
+			type: GET_CLIENT_DETAIL,
+			payload: data,
+		});
+	};
 }

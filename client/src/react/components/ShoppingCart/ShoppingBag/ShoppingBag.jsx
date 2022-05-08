@@ -16,15 +16,15 @@ export default function ShoppingBag() {
 	let subtotal = cartItems?.forEach((e) => (suma += e.currentPrice));
 	let envio = 50;
 
-	const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
 
-	const handleClickSend = (e) => {
-		e.preventDefault();
-		alert("Funcionalidad en desarrollo!");
-	};
+  const handleClickSend = (e) => {
+    e.preventDefault();
+    alert("Funcionalidad en desarrollo!");
+  };
 
-	const handlePayment = async (e) => {
-		e.preventDefault();
+  const handlePayment = async (e) => {
+    e.preventDefault();
 
 		const emailAux = userData.email ? userData.email : email;
 
@@ -35,8 +35,8 @@ export default function ShoppingBag() {
 			},
 		);
 
-		window.open(data.init_point, "_self");
-	};
+    window.open(data.init_point, "_self");
+  };
 
 	return (
 		<div className={css.container}>

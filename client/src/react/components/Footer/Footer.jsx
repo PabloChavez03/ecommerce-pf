@@ -18,15 +18,13 @@ function Footer() {
      
       
       <div className={css.img}>
-        <NavLink to="https://www.instagram.com/soyhenry_ok/">
-          <img src={instagram} alt="Instagram"/>
-        </NavLink>
-        <NavLink to="https://api.whatsapp.com/send?phone=+51921899526&text=Hola,%20quisiera%20comprar%20una%20prenda%20en%20Clothes%2022">
+        <a href="https://www.instagram.com/ramirocasanova/?hl=en" target="_blank" rel="noreferrer"> 
+        <img src={instagram} alt="Instagram"/>
+        </a>
+        <a href="https://api.whatsapp.com/send?phone=51921874847&text=Hola%20soy%20Kenneth!%20" target="_blank" rel="noreferrer">
           <img src={whatsapp} alt="Whatsapp"/>
-        </NavLink>
-   
+        </a>
       </div>
-
     </div>
   );
 };
