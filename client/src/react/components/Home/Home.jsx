@@ -45,10 +45,10 @@ export default function Home() {
 	return (
 		<div className={css.principalDivHome}>
 			<NavBar />
-			<div className={css.search}><SearchBar
+			<div className={css.search}><div className={css.reset}><button onClick={(e)=>handleClickReset(e)}>Restablecer filtros</button></div><SearchBar
 			setSelectFilter={setSelectFilter}
 			/></div>
-			<div className={css.reset}><button onClick={(e)=>handleClickReset(e)}>Restablecer filtros</button></div>
+			
 			<Filter
 				setRender={setRender}
 				setCurrentPage={setCurrentPage}

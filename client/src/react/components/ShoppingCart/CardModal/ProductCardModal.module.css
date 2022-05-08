@@ -56,6 +56,23 @@
 	cursor: default;
 }
 
+.modalCardClose {
+	width: 23px;
+	height: 20px;
+	background-image: url("../../../AdminComponents/Components/CardsAdmin/images/eliminar.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	cursor: pointer;
+
+	transition: width 0.2s, height 0.2s;
+}
+
+.modalCardClose:hover {
+	width: 24px;
+	height: 21px;
+}
+
 @media (max-width: 500px) {
 	.cardModalTitle,
 	.cardModalInfoContainer {
@@ -64,5 +81,17 @@
 
 	.cardModalInfoPrice {
 		font-size: 10px;
+	}
+
+	.modalCardClose {
+		width: 22px;
+		height: 16px;
+
+		transition: width 0.2s, height 0.2s;
+	}
+
+	.modalCardClose:hover {
+		width: 22px;
+		height: 16px;
 	}
 }

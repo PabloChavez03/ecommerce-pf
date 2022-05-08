@@ -70,7 +70,7 @@ const AdminCreate = () => {
 			  [e.target.name]: e.target.value,
 			}
 		));
-		console.log(newAdmin)
+		// console.log(newAdmin)
 	};
 	const handleSubmit= (e)=>{ 
 		e.preventDefault();

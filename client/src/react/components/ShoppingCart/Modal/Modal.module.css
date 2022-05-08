@@ -14,6 +14,23 @@
 	width: calc(100vw - 550px);
 }
 
+.modalCloseButton {
+	width: 25px;
+	height: 25px;
+	background-image: url("../../svg/volver-flecha.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	cursor: pointer;
+
+	transition: width 0.2s, height 0.2s;
+}
+
+.modalCloseButton:hover {
+	width: 30px;
+	height: 30px;
+}
+
 .modalContainer {
 	width: 550px;
 	background: #fff;

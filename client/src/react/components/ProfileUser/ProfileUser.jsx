@@ -3,14 +3,11 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "../NavBar/NavBar";
 import style from "./ProfileUser.module.css";
-import { useParams, useNavigate } from "react-router-dom";
 
-import { updateUserInfo, UserLogin } from "../../../redux/actions-types";
+import { loggedOut, updateUserInfo, UserLogin } from "../../../redux/actions-types";
 
 export default function ProfileUser() {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	const { id } = useParams();
 
 	const userData = useSelector((state) => state.userData);
 	const [user, setUser] = useState({
@@ -54,20 +51,53 @@ export default function ProfileUser() {
 			...user,
 			[e.target.name]: e.target.value,
 		});
+		// setError(
+		// 	validate({
+		// 	  ...user,
+		// 	  [e.target.name]: e.target.value,
+		// 	}
+		// ));
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		dispatch(updateUserInfo(userData.username, userData.token, user));
 		alert("Los cambios se guardaron");
+		dispatch(loggedOut());
 		dispatch(
 			UserLogin({
 				user_name: user.username,
 				user_password: user.password,
 			}),
 		);
-		navigate("/");
 	};
+
+
+	// const [error, setError] = useState({
+	// 	dni: userData.dni,
+	// 	submit:''
+	// });
+
+	// const [correct, setCorrect] = useState(false);
+	
+
+	  
+
+	// function validate(input) {
+	// 	let errors = {};
+	
+		
+	// 	if (/^[0-9]*$/.test(user.dni) !== true) {
+	// 		errors.dni = "Debe ingresar un email!";
+	// 	}else{errors.dni = 'good'}
+		
+		
+	// 	if(errors.dni === 'good'){
+	// 		errors.submit = 'we good'
+	// 	}
+	// 	return errors
+		
+	// }
 
 	return (
 		<>
@@ -86,7 +116,7 @@ export default function ProfileUser() {
 								name="username"
 								type="text"
 								value={!user.username ? "" : user.username}
-								onChange={handleChange}
+								readOnly
 							/>
 						</div>
 						<div className={style.infoContainer}>

@@ -79,8 +79,7 @@ const Login = () => {
 			address: "",
 			isRegistered: true,
 		});
-		alert("sumitie");
-		navigate("/user/profile");
+		alert("Usuario creado exitosamente!");
 	};
 	//////////////////////////// LOGIN ///////////////////////
 	const [login, setLogin] = useState({
