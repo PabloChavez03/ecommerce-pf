@@ -18,7 +18,7 @@ router.get("/payment", async (req, res) => {
 
 	const productsAndDelivery = [
 		...products,
-		{ title: "Delivery", quantity: 1, unit_price: Number(envio) },
+		{ title: "Shipping", quantity: 1, unit_price: Number(envio) },
 	];
 
 	const PaymentsInstance = new PaymentsController(
