@@ -13,6 +13,7 @@ export default function ShoppingBag() {
 	let envio = 50;
 
 	const [email, setEmail] = useState("");
+	const [linkMP, setLinkMP] = useState("");
 
 	const handleClickSend = (e) => {
 		e.preventDefault();
@@ -24,7 +25,7 @@ export default function ShoppingBag() {
 		const { data } = await axios.get(
 			"http://localhost:3001/mercadopago/payment",
 			{
-				params: { cartItems, email },
+				params: { cartItems, email, envio },
 			},
 		);
 
