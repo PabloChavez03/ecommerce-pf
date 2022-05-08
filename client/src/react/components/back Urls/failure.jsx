@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink,useSearchParams } from "react-router-dom";
 
 export default function Failure() {
   const {
@@ -15,7 +15,7 @@ export default function Failure() {
     site_id,
     processing_mode,
     merchant_account_id,
-  } = useParams();
+  } = useSearchParams()();
 
   return (
     <div>
