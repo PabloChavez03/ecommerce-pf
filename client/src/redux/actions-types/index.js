@@ -23,13 +23,19 @@ import {
 	GET_STOCK_PRODUCTS,
 	LOGGED_OUT,
 	UPDATE_USER_INFO,
+	DELETE_CHAT_BOT_RECEPTOR,
+	DELETE_CHAT_BOT_EMISOR,
+	GET_CHAT_BOT_RECEPTOR_NAME
 } from "../actions-creators";
 import {
 	chatBot,
 	currentbrands,
 	currentcategory,
+	deleteChatBotEmisor,
+	deleteChatBotReceptor,
 	getChatBotEmisor,
 	getChatBotReceptor,
+	getChatBotReceptorName,
 	urlProdutcGender,
 } from "../controllers";
 import axios from "axios";
@@ -213,7 +219,7 @@ export function createNewUser(payload) {
 	return async function (dispatch) {
 		const newUser = await axios.post(
 			"http://localhost:3001/users/create",
-			payload,
+			payload
 		);
 	};
 }
@@ -222,7 +228,7 @@ export function UserLogin(payload) {
 	return async function (dispatch) {
 		const userLogin = await axios.post(
 			"http://localhost:3001/users/login",
-			payload,
+			payload
 		);
 		return dispatch({
 			type: GET_USER_DATA,
@@ -296,7 +302,7 @@ export function updateUserInfo(username, token, payload) {
 				headers: {
 					authorization: `Bearer ${token}`,
 				},
-			},
+			}
 		);
 
 		return dispatch({
@@ -304,4 +310,37 @@ export function updateUserInfo(username, token, payload) {
 			payload: data,
 		});
 	};
+}
+
+export const deleteIdChatBotReceptor = (id) => async (dispatch) => {
+	let receptor = await deleteChatBotReceptor(id);
+	let emisor = await getChatBotEmisor();
+	return dispatch({
+		type: DELETE_CHAT_BOT_RECEPTOR,
+		payload: {
+			receptor,
+			emisor
+		},
+	});
+};
+
+export const deleteIdChatBotEmisor = (id) => async (dispatch) => {
+	let emisor = await deleteChatBotEmisor(id);
+	let receptor = await getChatBotReceptor();
+	return dispatch({
+		type: DELETE_CHAT_BOT_EMISOR,
+		payload: {
+			emisor,
+			receptor
+		},
+	});
+};
+
+
+export const GetChatBotReceptorName = () => async (dispatch) => {
+	let data = await getChatBotReceptorName();
+	return dispatch({
+		type:GET_CHAT_BOT_RECEPTOR_NAME,
+		payload:data
+	})
 }

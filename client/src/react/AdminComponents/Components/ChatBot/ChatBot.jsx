@@ -4,6 +4,8 @@ import style from "./ChatBot.module.css";
 import {
   AllChatBotEmisor,
   AllChatBotReceptor,
+  deleteIdChatBotReceptor,
+  deleteIdChatBotEmisor,
 } from "../../../../redux/actions-types";
 import NewEmisor from "./components/Emisor/NewEmisor";
 
@@ -20,6 +22,21 @@ export default function ChatBot() {
     dispatch(AllChatBotReceptor());
     dispatch(AllChatBotEmisor());
   }, [dispatch]);
+
+  const handleDeleteIDReceptor = (id) => {
+    dispatch(deleteIdChatBotReceptor(id));
+  };
+  const handleDeleteIDEmisor = (id) => {
+    dispatch(deleteIdChatBotEmisor(id));
+  };
+  const handleNewEmisor = () => {
+    if(newEmisor){
+      setNewEmisor(false)
+    }else{
+      setNewEmisor(true);
+    }
+    
+  };
   return (
     <div>
       <nav className={style.navChat}>
@@ -29,10 +46,10 @@ export default function ChatBot() {
           <button>Receptor</button>
         </div>
       </nav>
-
+      {/**----------------------------------------------------------------------------- */}
       <div>
         <button className={style.btnNew}>New Receptor</button>
-        
+
         <table className={style.table}>
           <thead>
             <tr>
@@ -60,17 +77,25 @@ export default function ChatBot() {
                     <td>{item.isActive ? "Activo" : "Desactivado"}</td>
                     <td className={style.optionBtn}>
                       <button className={style.orange}>Edit</button>{" "}
-                      <button className={style.red}>Clean</button>
+                      <button
+                        className={style.red}
+                        onClick={() => handleDeleteIDReceptor(item.id)}
+                      >
+                        Clean
+                      </button>
                     </td>
                   </tr>
                 ))}
           </tbody>
         </table>
       </div>
+      {/**----------------------------------------------------------------------------- */}
       <div>
-        <button className={style.btnNew}>New Emisor</button>
-        {newEmisor?<NewEmisor/>:null}
-        
+        <button className={style.btnNew} onClick={() => handleNewEmisor()}>
+          New Emisor
+        </button>
+        {newEmisor ? <NewEmisor handleNewEmisor={handleNewEmisor} /> : null}
+
         <table className={style.table}>
           <thead>
             <tr>
@@ -108,7 +133,12 @@ export default function ChatBot() {
                     <td>{item.isActive ? "Activo" : "Desactivado"}</td>
                     <td className={style.optionBtn}>
                       <button className={style.orange}>Edit</button>{" "}
-                      <button className={style.red}>Clean</button>
+                      <button
+                        className={style.red}
+                        onClick={() => handleDeleteIDEmisor(item.id)}
+                      >
+                        Clean
+                      </button>
                     </td>
                   </tr>
                 ))}

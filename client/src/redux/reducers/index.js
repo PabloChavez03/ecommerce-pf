@@ -26,6 +26,9 @@ import {
 	GET_STOCK_PRODUCTS,
 	LOGGED_OUT,
 	UPDATE_USER_INFO,
+	DELETE_CHAT_BOT_RECEPTOR,
+	DELETE_CHAT_BOT_EMISOR,
+	GET_CHAT_BOT_RECEPTOR_NAME,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -46,6 +49,7 @@ export const initialState = {
 	userData: {},
 	productFilterAdmin: [],
 	productsAdmin: [],
+	chatBotReceptorName:[],
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -73,7 +77,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 					cartItems: [...prevCart, cartProductAux],
 					subTotal: Number(
 						state.subTotal +
-							Math.round(cartProductAux.currentPrice * cartProductAux.quantity),
+						Math.round(cartProductAux.currentPrice * cartProductAux.quantity),
 					),
 				};
 			} else {
@@ -82,7 +86,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 					cartItems: [...state.cartItems, payload],
 					subTotal: Number(
 						state.subTotal +
-							Math.round(payload.currentPrice * payload.quantity),
+						Math.round(payload.currentPrice * payload.quantity),
 					),
 				};
 			}
@@ -173,25 +177,25 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			let arr =
 				payload[0] === "high"
 					? productsSort?.sort(function (a, b) {
-							if (a.currentPrice < b.currentPrice) {
-								return 1;
-							}
-							if (a.currentPrice > b.currentPrice) {
-								return -1;
-							} else {
-								return 0;
-							}
-					  })
+						if (a.currentPrice < b.currentPrice) {
+							return 1;
+						}
+						if (a.currentPrice > b.currentPrice) {
+							return -1;
+						} else {
+							return 0;
+						}
+					})
 					: productsSort?.sort(function (a, b) {
-							if (a.currentPrice > b.currentPrice) {
-								return 1;
-							}
-							if (a.currentPrice < b.currentPrice) {
-								return -1;
-							} else {
-								return 0;
-							}
-					  });
+						if (a.currentPrice > b.currentPrice) {
+							return 1;
+						}
+						if (a.currentPrice < b.currentPrice) {
+							return -1;
+						} else {
+							return 0;
+						}
+					});
 			return {
 				...state,
 				productFilter: arr,
@@ -299,6 +303,23 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				...state,
 				userData: payload,
 			};
+		case DELETE_CHAT_BOT_RECEPTOR:
+			return {
+				...state,
+				chatBotReceptor: payload.receptor,
+				chatBotEmisor: payload.emisor,
+			}
+		case DELETE_CHAT_BOT_EMISOR:
+			return {
+				...state,
+				chatBotReceptor: payload.receptor,
+				chatBotEmisor: payload.emisor,
+			}
+		case GET_CHAT_BOT_RECEPTOR_NAME:
+			return{
+				...state,
+				chatBotReceptorName:payload
+			}
 		default:
 			return { ...state };
 	}

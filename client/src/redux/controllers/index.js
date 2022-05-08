@@ -103,6 +103,15 @@ export const getChatBotReceptor = async () => {
     }
 }
 
+export const getChatBotReceptorName = async () => {
+    try {
+        let data = await getChatBotReceptor()
+        return data.map(item => item.name)
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 export const postChatBotReceptor = async (data) => {
     try {
         return await axios
@@ -129,25 +138,42 @@ export const putChatBotReceptor = async (data) => {
     }
 }
 
-export const deleteChatBotReceptor = async (data) => {
+export const deleteChatBotReceptor = async (id) => {
     try {
-        return await axios
+        await axios
             .delete(`http://localhost:3001/chatBot/receptor`, {
                 data: {
-                    id: data.id,
+                    id: id,
                 }
             })
+        return await getChatBotReceptor()
     }
     catch (err) {
         console.log(err);
     }
 }
-////Chat bot Emisor 
+/**----------------------------------EMISOR----------------------------------------------- */
+////Chat bot Emisor
 export const getChatBotEmisor = async () => {
     try {
         return await axios
             .get(`http://localhost:3001/chatBot/emisor`)
             .then(res => res.data)
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const deleteChatBotEmisor = async (id) => {
+    try {
+        await axios
+            .delete(`http://localhost:3001/chatBot/emisor`, {
+                data: {
+                    id: id,
+                }
+            })
+        return await getChatBotEmisor()
     }
     catch (err) {
         console.log(err);
