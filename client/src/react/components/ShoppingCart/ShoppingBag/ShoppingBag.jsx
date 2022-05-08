@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import NavBar from "../../NavBar/NavBar";
 import ProductCardModal from "../CardModal/ProductCardModal";
+import css from './ShoppingBag.module.css'
 
 import axios from "axios";
 
@@ -34,10 +35,10 @@ export default function ShoppingBag() {
 	};
 
 	return (
-		<div>
-			<NavBar />
-			<h1>Mi Carrito</h1>
-			{cartItems.length ? (
+		<div className={css.container}>
+			<div className={css.nav}><NavBar /></div>
+			<h1 className={css.name}>Mi Carrito</h1>
+			<div className={css.modalCartContainer}>{cartItems.length ? (
 				cartItems.map((e) => (
 					<ProductCardModal
 						id={e.id}
@@ -52,28 +53,34 @@ export default function ShoppingBag() {
 				))
 			) : (
 				<p>No hay productos en el carrito</p>
-			)}
+			)}</div>
+			<div className={css.infoCont}>
 			<h3>Subtotal:</h3>
 			<p>${suma}</p>
 			<h3>Costo de envío:</h3>
 			<p>${envio}</p>
 			<h2>Total:</h2>
 			<p>${suma + envio}</p>
-
-			<label htmlFor="email">Email: </label>
+			
+			
+				<div className={css.mail}>
+				<label htmlFor="email">Email: </label>
 			<input
 				id="email"
 				type="email"
 				onChange={(e) => setEmail(e.target.value)}
-			/>
+			/>	
+				</div>
+			
 
 			<NavLink to={"/pay"}>
-				<button onClick={(e) => handlePayment(e)}>Comprar</button>
+				<button className={css.btn} onClick={(e) => handlePayment(e)}>Comprar</button>
 			</NavLink>
 			<br></br>
 			<NavLink to={"/"}>
-				<button>Seguir comprando</button>
+				<button className={css.btn}>Seguir comprando</button>
 			</NavLink>
+			</div>
 		</div>
 	);
 }
