@@ -85,18 +85,7 @@ export default function Failure() {
         <h3>Merchant Account Id</h3>
         <p>${merchant_account_id}</p>
       </div>
-
-      {/* // collection_id=1247974602
-        // collection_status=rejected
-        // payment_id=1247974602
-        // status=rejected
-        // external_reference=null
-        // payment_type=credit_card
-        // merchant_order_id=4705177212
-        // preference_id=1118819873-f3358ec6-ea85-4867-85a0-b733c3376f3d
-        // site_id=MLA
-        // processing_mode=aggregator
-        // merchant_account_id=null */}
+    
     </div>
   )
 }
