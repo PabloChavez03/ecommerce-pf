@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { loggedOut } from "../../../../redux/actions-types";
 
 const LoginMenu = ({ setLoginMenu }) => {
-	const { username, rol } = useSelector((state) => state.userData);
+	const { username, rol, legajo } = useSelector((state) => state.userData);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -27,7 +27,10 @@ const LoginMenu = ({ setLoginMenu }) => {
 					<h3 className={style.menuLoginTitle}>Hola, {username}</h3>
 
 					<ul className={style.menuLoginListContainer}>
-						<NavLink to={"/user/profile"} className={style.menuLoginItem}>
+						<NavLink
+							to={`/user/profile/${legajo}`}
+							className={style.menuLoginItem}
+						>
 							Mi perfil
 						</NavLink>
 						{rol === "admin" && (

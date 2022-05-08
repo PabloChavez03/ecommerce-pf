@@ -16,7 +16,7 @@ import ProfileUser from "./react/components/ProfileUser/ProfileUser";
 import OrderDetail from "./react/UserOrders/OrderDetail";
 import UserOrders from "./react/UserOrders/UserOrders";
 import axios from "axios";
-import Failure from "./react/components/back Urls/failure"
+import Failure from "./react/components/back Urls/failure";
 
 function App() {
 	const [user, setUSer] = useState(null);
@@ -60,7 +60,7 @@ function App() {
 				<Route path={"/login"} element={<Login />} />
 				<Route path={"/bag"} element={<ShoppingBag />} />
 				<Route path={"/pay"} element={<PayPlataform />} />
-				<Route path={"/user/profile"} element={<ProfileUser />} />
+				<Route path={"/user/profile/:id"} element={<ProfileUser />} />
 				<Route path={"/user/orders"} element={<UserOrders />} />
 				<Route path={"/user/orders/:idOrder"} element={<OrderDetail />} />
 				<Route path={"/failure"} element={<Failure />} />

@@ -25,6 +25,7 @@ import {
 	CLEAN_FILTERS,
 	GET_STOCK_PRODUCTS,
 	LOGGED_OUT,
+	UPDATE_USER_INFO,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -56,10 +57,14 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				productFilter: payload.filter((e) => e.Category.genre === gender),
 			};
 		case ADD_PRODUCT_TO_CART:
-			let cartProductAux = state.cartItems.find((e) =>( (e.id + e.brandSize) === (payload.id + payload.brandSize)));
+			let cartProductAux = state.cartItems.find(
+				(e) => e.id + e.brandSize === payload.id + payload.brandSize,
+			);
 			if (cartProductAux) {
-				const prevCart = state.cartItems.filter((e) => (e.id + e.brandSize) !== (payload.id + payload.brandSize));
-				if(payload.variants[0].stock !== cartProductAux.quantity){
+				const prevCart = state.cartItems.filter(
+					(e) => e.id + e.brandSize !== payload.id + payload.brandSize,
+				);
+				if (payload.variants[0].stock !== cartProductAux.quantity) {
 					cartProductAux.quantity++;
 				}
 				// console.log(`el stock es:${payload.variants[0].stock} y la cantidad es:${ cartProductAux.quantity}`)
@@ -68,7 +73,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 					cartItems: [...prevCart, cartProductAux],
 					subTotal: Number(
 						state.subTotal +
-							Math.round(cartProductAux.currentPrice * cartProductAux.quantity)
+							Math.round(cartProductAux.currentPrice * cartProductAux.quantity),
 					),
 				};
 			} else {
@@ -76,25 +81,42 @@ export default function rootReducer(state = initialState, { type, payload }) {
 					...state,
 					cartItems: [...state.cartItems, payload],
 					subTotal: Number(
-						state.subTotal + Math.round(payload.currentPrice * payload.quantity)
+						state.subTotal +
+							Math.round(payload.currentPrice * payload.quantity),
 					),
 				};
 			}
 		case REMOVE_PRODUCT_FROM_CART:
-			let indexRemoveQty = state.cartItems.findIndex((e) => (e.id + e.brandSize.toString()) === (payload.id + payload.size.toString()));
+			let indexRemoveQty = state.cartItems.findIndex(
+				(e) =>
+					e.id + e.brandSize.toString() ===
+					payload.id + payload.size.toString(),
+			);
 			state.cartItems[indexRemoveQty].quantity = 1;
 			return {
 				...state,
-				cartItems: state.cartItems.filter((e) => (e.id + e.brandSize.toString()) !== (payload.id + payload.size.toString())),
+				cartItems: state.cartItems.filter(
+					(e) =>
+						e.id + e.brandSize.toString() !==
+						payload.id + payload.size.toString(),
+				),
 			};
 		case CHANGE_CART_QUANTITY:
-			let index = state.cartItems.findIndex((e) =>(e.id + e.brandSize.toString()) === (payload.id + payload.size.toString()));
+			let index = state.cartItems.findIndex(
+				(e) =>
+					e.id + e.brandSize.toString() ===
+					payload.id + payload.size.toString(),
+			);
 			let item = state.cartItems[index];
 			if (payload.sign === "-") {
 				if (item.quantity === 1) {
 					return {
 						...state,
-						cartItems: state.cartItems.filter((e) => (e.id + e.brandSize.toString()) !== (payload.id + payload.size.toString())),
+						cartItems: state.cartItems.filter(
+							(e) =>
+								e.id + e.brandSize.toString() !==
+								payload.id + payload.size.toString(),
+						),
 					};
 				}
 				state.cartItems[index].quantity--;
@@ -259,7 +281,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			return {
 				...state,
 				productFilterAdmin: state.productsAdmin.filter(
-					(e) => e.isInStock === true
+					(e) => e.isInStock === true,
 				),
 			};
 		case LOGGED_OUT:
@@ -271,6 +293,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				userData: {},
 				cartItems: [],
 				details: {},
+			};
+		case UPDATE_USER_INFO:
+			return {
+				...state,
+				userData: payload,
 			};
 		default:
 			return { ...state };
