@@ -1,23 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink,useSearchParams } from "react-router-dom";
+import { NavLink, useSearchParams, useLocation } from "react-router-dom";
 
 export default function Failure() {
-  const {
-    collection_id,
-    collection_status,
-    payment_id,
-    status,
-    external_reference,
-    payment_type,
-    merchant_order_id,
-    preference_id,
-    site_id,
-    processing_mode,
-    merchant_account_id,
-  } = useSearchParams()();
+
+
+    const location = useLocation()
+    console.log(location)
+
+    
+
+//   const {
+//     collection_id,
+//     collection_status,
+//     payment_id,
+//     status,
+//     external_reference,
+//     payment_type,
+//     merchant_order_id,
+//     preference_id,
+//     site_id,
+//     processing_mode,
+//     merchant_account_id,
+//   } = useSearchParams();
 
   return (
+
+  
     <div>
         <div>
         <img src="https://padasystem.com.ar/wp-content/uploads/2019/04/pagorec.jpg" alt="img not found" with="300px" height="350px" ></img>
@@ -89,5 +98,5 @@ export default function Failure() {
         // processing_mode=aggregator
         // merchant_account_id=null */}
     </div>
-  );
+  )
 }
