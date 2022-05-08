@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
 
     const createdUser = await user.save();
 
-    createdUser ? res.status(200).json(user + "creado") : res.sendStatus(404);
+    createdUser ? res.status(201).json(user + "creado") : res.sendStatus(404);
      
   } catch (error) {
     res.status(500).json({ error });

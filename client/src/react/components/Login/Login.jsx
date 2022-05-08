@@ -156,6 +156,7 @@ const Login = () => {
 						<button className={style.formButtonLogin}>INGRESAR</button>
 					</form>
 				</div>
+
 				{/**Creando usuario */}
 				<div className={style.formCreateUser}>
 					{activeCreate ? (
