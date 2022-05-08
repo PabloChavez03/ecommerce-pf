@@ -62,9 +62,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				if(payload.variants[0].stock !== cartProductAux.quantity){
 					cartProductAux.quantity++;
 				}
-				
-				console.log(`el stock es:${payload.variants[0].stock} y la cantidad es:${ cartProductAux.quantity}`)
-				
+				// console.log(`el stock es:${payload.variants[0].stock} y la cantidad es:${ cartProductAux.quantity}`)
 				return {
 					...state,
 					cartItems: [...prevCart, cartProductAux],
