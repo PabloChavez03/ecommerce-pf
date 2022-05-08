@@ -4,6 +4,7 @@ import instagram from "./images/instagram.png";
 import whatsapp from "./images/whatsapp.png";
 import about from "./images/informacion.png";
 import css from './Footer.module.css'
+import { NavLink } from "react-router-dom";
 
 function Footer() {
   const handleClickButton = (event) => {
@@ -17,9 +18,12 @@ function Footer() {
      
       
       <div className={css.img}>
-        <img src={instagram} alt="Instagram" onClick={(e)=>handleClickButton(e)}/>
-     
-        <img src={whatsapp} alt="Whatsapp" onClick={(e)=>handleClickButton(e)}/>
+        <NavLink to="https://www.instagram.com/soyhenry_ok/">
+          <img src={instagram} alt="Instagram"/>
+        </NavLink>
+        <NavLink to="https://api.whatsapp.com/send?phone=+51921899526&text=Hola,%20quisiera%20comprar%20una%20prenda%20en%20Clothes%2022">
+          <img src={whatsapp} alt="Whatsapp"/>
+        </NavLink>
    
       </div>
 
