@@ -59,7 +59,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			let cartProductAux = state.cartItems.find((e) =>( (e.id + e.brandSize) === (payload.id + payload.brandSize)));
 			if (cartProductAux) {
 				const prevCart = state.cartItems.filter((e) => (e.id + e.brandSize) !== (payload.id + payload.brandSize));
-				cartProductAux.quantity++;
+				if(payload.variants[0].stock !== cartProductAux.quantity){
+					cartProductAux.quantity++;
+				}
+				
+				console.log(`el stock es:${payload.variants[0].stock} y la cantidad es:${ cartProductAux.quantity}`)
+				
 				return {
 					...state,
 					cartItems: [...prevCart, cartProductAux],
