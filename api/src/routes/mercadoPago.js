@@ -4,7 +4,7 @@ const PaymentsController = require("../controllers/PaymentsController");
 const PaymentsService = require("../Services/PaymentsService");
 
 router.get("/payment", async (req, res) => {
-	const { email, cartItems } = req.query;
+	const { email, cartItems, envio } = req.query;
 
 	const products = cartItems.map((product) => {
 		product = JSON.parse(product);
@@ -16,8 +16,13 @@ router.get("/payment", async (req, res) => {
 		};
 	});
 
+	const productsAndDelivery = [
+		...products,
+		{ title: "Delivery", quantity: 1, unit_price: Number(envio) },
+	];
+
 	const PaymentsInstance = new PaymentsController(
-		new PaymentsService(products, email),
+		new PaymentsService(productsAndDelivery, email),
 	);
 	PaymentsInstance.getPaymentLink(req, res);
 });
