@@ -51,6 +51,12 @@ export default function ProfileUser() {
 			...user,
 			[e.target.name]: e.target.value,
 		});
+		// setError(
+		// 	validate({
+		// 	  ...user,
+		// 	  [e.target.name]: e.target.value,
+		// 	}
+		// ));
 	};
 
 	const handleSubmit = (e) => {
@@ -65,6 +71,33 @@ export default function ProfileUser() {
 			}),
 		);
 	};
+
+
+	// const [error, setError] = useState({
+	// 	dni: userData.dni,
+	// 	submit:''
+	// });
+
+	// const [correct, setCorrect] = useState(false);
+	
+
+	  
+
+	// function validate(input) {
+	// 	let errors = {};
+	
+		
+	// 	if (/^[0-9]*$/.test(user.dni) !== true) {
+	// 		errors.dni = "Debe ingresar un email!";
+	// 	}else{errors.dni = 'good'}
+		
+		
+	// 	if(errors.dni === 'good'){
+	// 		errors.submit = 'we good'
+	// 	}
+	// 	return errors
+		
+	// }
 
 	return (
 		<>
