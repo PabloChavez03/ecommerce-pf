@@ -27,8 +27,6 @@ export default function ClientDetail() {
 		user_name,
 	} = useSelector((state) => state.clientDetail);
 
-	// console.log(Role)
-
 	useEffect(() => {
 		dispatch(getClientDetail(userData.token, username));
 
@@ -36,18 +34,19 @@ export default function ClientDetail() {
 	}, [dispatch]);
 
 	const handleAdminRole = (e) => {
-		if (!e.target.checked) {
-			setIsAdmin(e.target.value);
+		if (e.target.checked) {
+			setIsAdmin("admin")
 		} else {
-			setIsAdmin(e.target.value);
+			setIsAdmin("client")
 		}
 	};
-	console.log(Role)
 
+	console.log(isAdmin)
+	// console.log(Role)
 	const handleSubmit = (e) => {
 		dispatch(
 			updateUserInfo(username, userData.token, {
-				rol: !isAdmin ? "client" : "admin",
+				rol: isAdmin,
 			}),
 		);
 
@@ -67,7 +66,7 @@ export default function ClientDetail() {
 				<input
 					type="checkbox"
 					value={isAdmin}
-					checked={Role.name === isAdmin ? true : false}
+					checked={isAdmin === "admin" ? true : false}
 					onChange={handleAdminRole}
 				/>
 				<button onClick={handleSubmit}>Enviar</button>
