@@ -23,6 +23,8 @@ import {
 	GET_STOCK_PRODUCTS,
 	LOGGED_OUT,
 	UPDATE_USER_INFO,
+	GET_ALL_CLIENTS,
+	GET_CLIENT_DETAIL,
 } from "../actions-creators";
 import {
 	chatBot,
@@ -301,6 +303,39 @@ export function updateUserInfo(username, token, payload) {
 
 		return dispatch({
 			type: UPDATE_USER_INFO,
+			payload: data,
+		});
+	};
+}
+
+export function getAllClients(token) {
+	return async function (dispatch) {
+		const { data } = await axios.get("http://localhost:3001/users/findall", {
+			headers: {
+				authorization: `Bearer ${token}`,
+			},
+		});
+
+		return dispatch({
+			type: GET_ALL_CLIENTS,
+			payload: data,
+		});
+	};
+}
+
+export function getClientDetail(token, username) {
+	return async function (dispatch) {
+		const { data } = await axios.get(
+			`http://localhost:3001/users/findByPk/${username}`,
+			{
+				headers: {
+					authorization: `Bearer ${token}`,
+				},
+			},
+		);
+
+		return dispatch({
+			type: GET_CLIENT_DETAIL,
 			payload: data,
 		});
 	};

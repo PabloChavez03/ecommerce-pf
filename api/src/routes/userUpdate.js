@@ -27,7 +27,7 @@ router.patch("/:user_name", async (req, res) => {
 
 	try {
 		const user = await Users.findOne({ where: { user_name } });
-
+		console.log("Rol", rol);
 		await user.update({
 			user_name: username,
 			user_password: password,
