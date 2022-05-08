@@ -52,7 +52,7 @@ router.patch("/:user_name", async (req, res) => {
 
 		res.status(200).send(user);
 	} catch (error) {
-		console.log(error);
+		return res.status(409).json({ conflitcs: error})
 	}
 });
 

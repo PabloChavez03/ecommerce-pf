@@ -10,7 +10,7 @@ import {
 export default function ClientDetail() {
 	const location = useLocation();
 	const dispatch = useDispatch();
-	const [isAdmin, setIsAdmin] = useState(false);
+	const [isAdmin, setIsAdmin] = useState("admin");
 
 	const username = location.pathname.split("/")[3];
 	const userData = useSelector((state) => state.userData);
@@ -27,15 +27,22 @@ export default function ClientDetail() {
 		user_name,
 	} = useSelector((state) => state.clientDetail);
 
+	// console.log(Role)
+
 	useEffect(() => {
 		dispatch(getClientDetail(userData.token, username));
 
-		if (Role.name === "admin") setIsAdmin(true);
-	}, []);
+		// if (Role.name === "admin") setIsAdmin(true);
+	}, [dispatch]);
 
 	const handleAdminRole = (e) => {
-		setIsAdmin(!isAdmin);
+		if (!e.target.checked) {
+			setIsAdmin(e.target.value);
+		} else {
+			setIsAdmin(e.target.value);
+		}
 	};
+	console.log(Role)
 
 	const handleSubmit = (e) => {
 		dispatch(
@@ -60,7 +67,7 @@ export default function ClientDetail() {
 				<input
 					type="checkbox"
 					value={isAdmin}
-					checked={isAdmin}
+					checked={Role.name === isAdmin ? true : false}
 					onChange={handleAdminRole}
 				/>
 				<button onClick={handleSubmit}>Enviar</button>
