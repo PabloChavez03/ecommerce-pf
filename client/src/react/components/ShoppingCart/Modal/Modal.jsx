@@ -38,7 +38,10 @@ const Modal = ({ status, setStatus }) => {
 					<div className={style.modalContainer}>
 						<div className={style.modalHeader}>
 							<p>CARRITO DE COMPRA</p>
-							<span onClick={() => setStatus(false)}>X</span>
+							<span
+								onClick={() => setStatus(false)}
+								className={style.modalCloseButton}
+							></span>
 						</div>
 
 						<div className={style.modalCartContainer}>
