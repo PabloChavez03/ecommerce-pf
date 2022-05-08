@@ -13,6 +13,7 @@ import Modal from "../ShoppingCart/Modal/Modal";
 import "./NavBar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getFiltersGenderProduct } from "../../../redux/actions-types";
+import LoginMenu from "./LoginMenu/LoginMenu";
 
 export default function NavBar() {
 	const dispatch = useDispatch();
@@ -28,7 +29,7 @@ export default function NavBar() {
 	if (statusModal === true) {
 		document.body.style.overflow = "hidden";
 	} else {
-		document.body.style.overflow = "scroll";
+		document.body.style.overflow = "visible";
 	}
 	/** ------ */
 
@@ -44,6 +45,7 @@ export default function NavBar() {
 	const handleModalStatus = (e) => {
 		e.preventDefault();
 		setStatusModal(true);
+		setLoginMenu(false);
 	};
 
 	/** Fin modal */
@@ -60,6 +62,12 @@ export default function NavBar() {
 		dispatch(getFiltersGenderProduct(e.target.value));
 	};
 
+	/** Menu del login */
+	const [loginMenu, setLoginMenu] = useState(false);
+	const handleLoginClick = (e) => {
+		e.preventDefault();
+		setLoginMenu(!loginMenu);
+	};
 	const handleLogOut = (e) => {
 		window.open("http://localhost:3001/auth/logout", "_self");
 	};
@@ -82,17 +90,25 @@ export default function NavBar() {
 				<div className="nav__up__features">
 					{/* <WishListIcon /> */}
 
+					<div
+						className="loginMenuContainer"
+						onClick={(e) => handleLoginClick(e)}
+					>
+						<AccountIcon className="accountIcon" />
+					</div>
+					{loginMenu && <LoginMenu setLoginMenu={setLoginMenu} />}
+
 					<div className="icon_cart" onClick={(e) => handleModalStatus(e)}>
 						{/* <NavLink exact to={"/cart"} onClick={handleClickForHiddingBurguer}> */}
 						<CartIcon />
 						{/**Insertando el componente modal */}
 						{/* </NavLink> */}
-						<NavLink to={ruteIconAccount} className="accountContainer">
+						{/* <NavLink to={ruteIconAccount} className="accountContainer">
 							<AccountIcon className="accountIcon" />
 							<h3 className="accountName">
 								{userCurrent.username ? userCurrent.username : "Login"}
 							</h3>
-						</NavLink>
+						</NavLink> */}
 					</div>
 					<Modal status={statusModal} setStatus={setStatusModal} />
 					{/* <AccountMenu/> */}
@@ -142,10 +158,6 @@ export default function NavBar() {
 						</NavLink>
 					</ul>
 				</div>
-			</div>
-
-			<div className="nav__searchBar">
-				<SearchBar />
 			</div>
 		</nav>
 	);

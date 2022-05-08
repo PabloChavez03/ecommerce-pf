@@ -19,12 +19,12 @@ const ProductCardModal = ({
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cartItems);
   const handleRemove = () => {
-    dispatch(removeProductFromCart(id));
+    dispatch(removeProductFromCart(id, size));
+    
   };
   const handleQtyChange = (e) => {
-
     e.preventDefault();
-    dispatch(changeCartQuantity(e.target.value, id));
+    dispatch(changeCartQuantity(e.target.value, id, size));
   };
   useEffect(() => {
   },[cartItems, variants])

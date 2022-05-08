@@ -106,11 +106,11 @@ const Login = () => {
 		// setCorrect(true)
 		// console.log(newAdmin)
 		// if(error.submit !== 'we good'){ return }
-		dispatch(UserLogin(login));
 		setLogin({
 			user_name: "",
 			user_password: "",
 		});
+		dispatch(UserLogin(login));
 		navigate("/");
 	};
 
@@ -157,6 +157,7 @@ const Login = () => {
 						<button className={style.formButtonLogin}>INGRESAR</button>
 					</form>
 				</div>
+
 				{/**Creando usuario */}
 				<div className={style.formCreateUser}>
 					{activeCreate ? (

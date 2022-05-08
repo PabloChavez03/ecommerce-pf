@@ -1,3 +1,68 @@
 .profileUserContainer {
 	min-height: calc(100vh - 60px);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0.5rem;
+}
+
+.titulo {
+	margin-top: 2rem;
+}
+
+.sections {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.section {
+	padding: 2rem;
+	border: 1px solid #00000030;
+	border-radius: 2rem;
+}
+
+.input {
+	margin: 0.5rem;
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	border: 1px solid #00000030;
+	padding-left: 1rem;
+}
+
+.infoContainer {
+	display: flex;
+	flex-direction: column;
+	margin: 0.5rem;
+}
+
+.button {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	padding: 1rem 2rem;
+	border-radius: 1rem;
+	border: 2px solid #47b02130;
+	background-color: transparent;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: bold;
+}
+
+.button:hover {
+	background-color: #47b02130;
+}
+
+@media (min-width: 900px) {
+	.profileUserContainer {
+		max-width: 600px;
+		margin: auto;
+		margin-top: 2rem;
+	}
+
+	.sections {
+		display: flex;
+		flex-direction: row;
+		gap: 2rem;
+		margin-top: 2rem;
+	}
 }
