@@ -3,14 +3,11 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "../NavBar/NavBar";
 import style from "./ProfileUser.module.css";
-import { useParams, useNavigate } from "react-router-dom";
 
 import { loggedOut, updateUserInfo, UserLogin } from "../../../redux/actions-types";
 
 export default function ProfileUser() {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	const { id } = useParams();
 
 	const userData = useSelector((state) => state.userData);
 	const [user, setUser] = useState({
@@ -119,7 +116,7 @@ export default function ProfileUser() {
 								name="dni"
 								type="number"
 								value={!user.dni ? "" : user.dni}
-								onChange={typeof Number(user.dni) === "number" ? handleChange : null}
+								onChange={handleChange}
 							/>
 						</div>
 					</fieldset>
