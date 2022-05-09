@@ -238,26 +238,6 @@ export function createNewUser(payload) {
 }
 
 export function UserLogin(payload) {
-<<<<<<< HEAD
-  return async function (dispatch) {
-    try {
-      const userLogin = await axios.post(
-        "http://localhost:3001/users/login",
-        payload
-      );
-      return dispatch({
-        type: GET_USER_DATA,
-        payload: userLogin.data,
-      });
-    } catch(error) {
-      // console.log('ERROOOOOOOOOORRRRR', error.name);
-      return dispatch({
-        type: GET_USER_DATA,
-        payload: error,
-      });
-    }
-  };
-=======
 	return async function (dispatch) {
 		try {
 			const userLogin = await axios.post(
@@ -276,7 +256,6 @@ export function UserLogin(payload) {
 			});
 		}
 	};
->>>>>>> 6f057d3dbce082a45bfdc630220d4d8694900580
 }
 
 export const getChatBot = (payload) => async (dispatch) => {
