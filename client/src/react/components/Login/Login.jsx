@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import style from "./Login.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,15 @@ const Login = () => {
 	const [activeCreate, setActiveCreate] = useState(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
+	const userData  = useSelector((state) => state.userData);
+	console.log(userData)
+	useEffect(()=>{
+		if(userData.name){
+			alert('Usuario o contraseña incorrecta')
+		}else if(userData.username){
+			navigate('/')
+		}
+	},[userData])
 	const [newUser, setNewUser] = useState({
 		phone: "",
 		dni_client: "",
@@ -100,8 +108,7 @@ const Login = () => {
 		// );
 		// console.log(login);
 	};
-	const userData  = useSelector((state) => state.userData);
-	console.log(userData)
+	
 	const handleLoginSubmit = (e) => {
 		e.preventDefault();
 		// setCorrect(true)
@@ -112,10 +119,7 @@ const Login = () => {
 			user_password: "",
 		});
 		dispatch(UserLogin(login));
-		if(userData.username){
-			navigate("/");
-		}
-		console.log(userData)
+		
 		
 	};
 
