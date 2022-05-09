@@ -125,9 +125,9 @@ const Login = () => {
 
 
 
-	const GOOGLE = () => {
-		window.open("http://localhost:3001/auth/google", "_self");
-	};
+	// const GOOGLE = () => {
+	// 	window.open("http://localhost:3001/auth/google", "_self");
+	// };
 
 	return (
 		<>
@@ -303,12 +303,12 @@ const Login = () => {
 								CREAR CUENTA
 							</button>
 
-							<button
+							{/* <button
 								className={`${style.formButtonCreateActive} ${style.google}`}
 								onClick={GOOGLE}
 							>
 								INICIAR CON GOOGLE
-							</button>
+							</button> */}
 						</div>
 					)}
 				</div>
