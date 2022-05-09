@@ -28,7 +28,7 @@ const LoginMenu = ({ setLoginMenu }) => {
 
 					<ul className={style.menuLoginListContainer}>
 						<NavLink
-							to={`/user/profile/${legajo}`}
+							to={`/user/profile`}
 							className={style.menuLoginItem}
 						>
 							Mi perfil

@@ -24,7 +24,7 @@ function AddVariants({ input, setInput }) {
 		e.preventDefault();
 		setVariants({
 			...variants,
-			brandSize: e.target.value
+			brandSize: e.target.value.toUpperCase()
 		});
 	};
 
@@ -49,7 +49,8 @@ function AddVariants({ input, setInput }) {
 						type="text"
 						id="size"
 						name="size"
-						onChange={(e) => handleSizeChange(e, variants.size, setVariants, input)}
+						value={variants.brandSize.toUpperCase()}
+						onChange={(e) => handleSizeChange(e)}
 					/>
 					<label htmlFor="size">El producto se encuentra en stock?</label>
 					<input 

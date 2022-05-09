@@ -30,6 +30,9 @@ import {
 	POST_CHAT_BOT_EMISOR,
 	PUT_CHAT_BOT_RECEPTOR,
 	PUT_CHAT_BOT_EMISOR,
+	SET_CHANGE_FORM_CREATE,
+	GET_ALL_CLIENTS,
+	GET_CLIENT_DETAIL
 } from "../actions-creators";
 import {
 	chatBot,
@@ -45,6 +48,7 @@ import {
 	putChatBotEmisor,
 	putChatBotReceptor,
 	urlProdutcGender,
+
 } from "../controllers";
 import axios from "axios";
 
@@ -224,25 +228,25 @@ export const getFiltersGenderProduct = (payload) => async (dispatch) => {
 };
 
 export function createNewUser(payload) {
-	return async function (dispatch) {
-		const newUser = await axios.post(
-			"http://localhost:3001/users/create",
-			payload
-		);
-	};
+  return async function (dispatch) {
+    const newUser = await axios.post(
+      "http://localhost:3001/users/create",
+      payload
+    );
+  };
 }
 
 export function UserLogin(payload) {
-	return async function (dispatch) {
-		const userLogin = await axios.post(
-			"http://localhost:3001/users/login",
-			payload
-		);
-		return dispatch({
-			type: GET_USER_DATA,
-			payload: userLogin.data,
-		});
-	};
+  return async function (dispatch) {
+    const userLogin = await axios.post(
+      "http://localhost:3001/users/login",
+      payload
+    );
+    return dispatch({
+      type: GET_USER_DATA,
+      payload: userLogin.data,
+    });
+  };
 }
 
 export const getChatBot = (payload) => async (dispatch) => {
@@ -315,6 +319,46 @@ export function updateUserInfo(username, token, payload) {
 
 		return dispatch({
 			type: UPDATE_USER_INFO,
+			payload: data,
+		});
+	};
+}
+
+export function setChangeFormCreate(form) {
+	return {
+		type: SET_CHANGE_FORM_CREATE,
+		payload: form,
+	};
+}
+
+export function getAllClients(token) {
+	return async function (dispatch) {
+		const { data } = await axios.get("http://localhost:3001/users/findall", {
+			headers: {
+				authorization: `Bearer ${token}`,
+			},
+		});
+
+		return dispatch({
+			type: GET_ALL_CLIENTS,
+			payload: data,
+		});
+	};
+}
+
+export function getClientDetail(token, username) {
+	return async function (dispatch) {
+		const { data } = await axios.get(
+			`http://localhost:3001/users/findByPk/${username}`,
+			{
+				headers: {
+					authorization: `Bearer ${token}`,
+				},
+			}
+		);
+
+		return dispatch({
+			type: GET_CLIENT_DETAIL,
 			payload: data,
 		});
 	};

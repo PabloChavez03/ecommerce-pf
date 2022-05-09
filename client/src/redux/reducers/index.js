@@ -33,6 +33,9 @@ import {
 	POST_CHAT_BOT_EMISOR,
 	PUT_CHAT_BOT_RECEPTOR,
 	PUT_CHAT_BOT_EMISOR,
+	SET_CHANGE_FORM_CREATE,
+	GET_ALL_CLIENTS,
+	GET_CLIENT_DETAIL
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -54,6 +57,26 @@ export const initialState = {
 	productFilterAdmin: [],
 	productsAdmin: [],
 	chatBotReceptorName: [],
+	productCreate: {
+		name: "",
+		description: "",
+		images: [],
+		previousPrice: "",
+		isOffertPrice: false,
+		currentPrice: "",
+		color: "",
+		gender: "",
+		brandName: "",
+		category: "",
+		info: {
+			aboutMe: "",
+			sizeAndFit: "",
+			careInfo: "",
+		},
+		variants: [],
+	},
+	allClients: [],
+	clientDetail: {},
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -301,12 +324,30 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				userData: {},
 				cartItems: [],
 				details: {},
+				productCreate: {
+					name: "",
+					description: "",
+					images: [],
+					previousPrice: "",
+					isOffertPrice: false,
+					currentPrice: "",
+					color: "",
+					gender: "",
+					brandName: "",
+					category: "",
+					info: {
+						aboutMe: "",
+						sizeAndFit: "",
+						careInfo: "",
+					},
+					variants: [],
+				}
 			};
 		case UPDATE_USER_INFO:
 			return {
 				...state,
 				userData: payload,
-			};
+			}
 		case DELETE_CHAT_BOT_RECEPTOR:
 			return {
 				...state,
@@ -344,6 +385,22 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				...state,
 				chatBotEmisor: payload
 			}
+		case SET_CHANGE_FORM_CREATE:
+			return {
+				...state,
+				productCreate: payload,
+			};
+		case GET_ALL_CLIENTS:
+			return {
+				...state,
+				allClients: payload,
+			};
+
+		case GET_CLIENT_DETAIL:
+			return {
+				...state,
+				clientDetail: payload,
+			};
 		default:
 			return { ...state };
 	}

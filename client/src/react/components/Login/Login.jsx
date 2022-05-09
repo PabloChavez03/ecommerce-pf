@@ -79,8 +79,7 @@ const Login = () => {
 			address: "",
 			isRegistered: true,
 		});
-		alert("sumitie");
-		navigate("/user/profile");
+		alert("Usuario creado exitosamente!");
 	};
 	//////////////////////////// LOGIN ///////////////////////
 	const [login, setLogin] = useState({
@@ -113,6 +112,8 @@ const Login = () => {
 		dispatch(UserLogin(login));
 		navigate("/");
 	};
+
+
 
 	const GOOGLE = () => {
 		window.open("http://localhost:3001/auth/google", "_self");
