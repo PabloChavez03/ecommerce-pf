@@ -1,6 +1,5 @@
 .navContainer {
-	/* background: red; */
-	height: 75vh;
+	height: 70vh;
 	position: fixed;
 }
 
@@ -11,7 +10,32 @@
 	gap: 10px;
 }
 
-.navLink {
+.navLinkAdmin {
 	text-decoration: none;
 	color: #333;
+	padding: 5px 10px;
+}
+
+.navLinkAdmin:hover {
+	background-color: rgba(0, 0, 0, 0.03);
+}
+
+.navAdminButton {
+	width: 100%;
+	font-size: 13px;
+	padding: 8px;
+	border-radius: 50px;
+	font-weight: 400;
+	text-align: center;
+	border: 1px solid transparent;
+	cursor: pointer;
+	background-color: #687880;
+	color: #fff;
+	text-decoration: none;
+
+	transition: 0.5s;
+}
+
+.navAdminButton:hover {
+	background-color: #467f9c;
 }

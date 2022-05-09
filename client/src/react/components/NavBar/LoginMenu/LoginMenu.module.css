@@ -34,7 +34,12 @@
 	text-decoration: none;
 	color: #333;
 	font-size: 14px;
-	padding: 5px;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+
+.menuLoginItem:hover {
+	background-color: rgba(0, 0, 0, 0.03);
 }
 
 .menuLoginButton {
@@ -49,6 +54,12 @@
 	background-color: #687880;
 	color: #fff;
 	text-decoration: none;
+
+	transition: 0.5s;
+}
+
+.menuLoginButton:hover {
+	background-color: #ad0c36;
 }
 
 /*Logout*/
