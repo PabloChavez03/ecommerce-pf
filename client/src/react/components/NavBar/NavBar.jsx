@@ -69,7 +69,7 @@ export default function NavBar() {
 		setLoginMenu(!loginMenu);
 	};
 	const handleLogOut = (e) => {
-		window.open("http://localhost:3001/auth/logout", "_self");
+		window.open("/auth/logout", "_self");
 	};
 
 	return (

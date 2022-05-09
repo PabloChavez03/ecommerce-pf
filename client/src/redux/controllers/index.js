@@ -95,7 +95,7 @@ export const chatBot = async (item) => {
 export const getChatBotReceptor = async () => {
     try {
         return await axios
-            .get(`http://localhost:3001/chatBot/receptor`)
+            .get(`/chatBot/receptor`)
             .then(res => res.data)
     }
     catch (err) {
@@ -115,7 +115,7 @@ export const getChatBotReceptorName = async () => {
 export const postChatBotReceptor = async (data) => {
     try {
         return await axios
-            .post(`http://localhost:3001/chatBot/receptor`, {
+            .post(`/chatBot/receptor`, {
                 name: data.name,
                 isActive: data.isActive
             })
@@ -128,7 +128,7 @@ export const postChatBotReceptor = async (data) => {
 export const putChatBotReceptor = async (data) => {
     try {
         return await axios
-            .put(`http://localhost:3001/chatBot/receptor`, {
+            .put(`/chatBot/receptor`, {
                 id: data.id,
                 name: data.name,
                 isActive: data.isActive
@@ -142,7 +142,7 @@ export const putChatBotReceptor = async (data) => {
 export const deleteChatBotReceptor = async (id) => {
     try {
         await axios
-            .delete(`http://localhost:3001/chatBot/receptor`, {
+            .delete(`/chatBot/receptor`, {
                 data: {
                     id: id,
                 }
@@ -158,7 +158,7 @@ export const deleteChatBotReceptor = async (id) => {
 export const getChatBotEmisor = async () => {
     try {
         return await axios
-            .get(`http://localhost:3001/chatBot/emisor`)
+            .get(`/chatBot/emisor`)
             .then(res => res.data)
     }
     catch (err) {
@@ -169,7 +169,7 @@ export const getChatBotEmisor = async () => {
 export const postChatBotEmisor = async (data) => {
     try {
         return await axios
-            .post(`http://localhost:3001/chatBot/emisor`, {
+            .post(`/chatBot/emisor`, {
                 name: data.name,
                 respuesta: data.respuesta,
                 isActive: data.isActive,
@@ -184,7 +184,7 @@ export const postChatBotEmisor = async (data) => {
 export const putChatBotEmisor = async (data) => {
     try {
         return await axios
-            .put(`http://localhost:3001/chatBot/emisor`, {
+            .put(`/chatBot/emisor`, {
                 id: data.id,
                 name: data.name,
                 respuesta: data.respuesta,
@@ -200,7 +200,7 @@ export const putChatBotEmisor = async (data) => {
 export const deleteChatBotEmisor = async (id) => {
     try {
         await axios
-            .delete(`http://localhost:3001/chatBot/emisor`, {
+            .delete(`/chatBot/emisor`, {
                 data: {
                     id: id,
                 }

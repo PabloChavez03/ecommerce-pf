@@ -26,7 +26,7 @@ function App() {
 	useEffect(() => {
 		const getUser = () =>
 			axios({
-				url: "http://localhost:3001/auth/login/success",
+				url: "/auth/login/success",
 				method: "GET",
 				withCredentials: true,
 				headers: {
