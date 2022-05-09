@@ -25,7 +25,7 @@ router.patch("/:user_name", async (req, res) => {
 	// const saltRounds = 10;
 	// let newPassword = await bcrypt.hash(user_password, saltRounds);
 
-	// try {
+	try {
 	const user = await Users.findOne({ where: { user_name } }).catch((e) => e);
 
 	await user
@@ -58,9 +58,9 @@ router.patch("/:user_name", async (req, res) => {
 	// });
 
 	res.status(200).send(user);
-	// } catch (error) {
-	// 	return res.status(409).json({ conflitcs: error });
-	// }
+	} catch (error) {
+		return res.status(409).json({ conflitcs: error });
+	}
 });
 
 module.exports = router;
