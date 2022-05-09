@@ -59,6 +59,9 @@ export default function NewReceptor({ handleNewReceptor }) {
   const handleEnviar = () => {
     if (respuesta.name !== "") {
       dispatch(PostChatBotReceptor(respuesta));
+      setTimeout(() => {
+        handleNewReceptor();
+      }, 1000);
     }
   };
 

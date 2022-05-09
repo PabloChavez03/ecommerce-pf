@@ -76,7 +76,6 @@ export default function ChatBot() {
       setNewReceptor(true);
     }
   };
- console.log(putEmisorConteiner);
   return (
     <div>
       <nav className={style.navChat}>

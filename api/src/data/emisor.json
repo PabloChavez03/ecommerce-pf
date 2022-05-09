@@ -13,7 +13,7 @@
 	{
 		"id": 2,
 		"name": "Problema de usuario",
-		"respuesta": "ASD XD",
+		"respuesta": "Problemas en el usuario porfavor enviar un correo a soporte tecnico. Ejemplo.ejemplo.com",
 		"isActive": true,
 		"alternativa": [
 			"Menu de Respuestas"
@@ -21,12 +21,11 @@
 	},
 	{
 		"id": 4,
-		"name": "Servicio tecnico",
-		"respuesta": "asds",
+		"name": "Atencion al cliente",
+		"respuesta": "Si desea contactar con un personal de la tienda por queja o dudas: Enviar un correo al Ejemplo@ejemplo.com con el asunto ",
 		"isActive": true,
 		"alternativa": [
-			"Menu de Respuestas",
-			"Problema de usuario"
+			"Menu de Respuestas"
 		]
 	},
 	{
@@ -34,6 +33,6 @@
 		"name": "Problemas de Compra",
 		"respuesta": "Tiene problema al realizar una compra en la pagina. Porfavor contactar con atencion al cliente: empresa@Empresa.com",
 		"isActive": true,
-		"alternativa": []
+		"alternativa": ["Menu de Respuestas"]
 	}
 ]

@@ -52,9 +52,12 @@ const chat_bot = async (data) => {
         }
         let dato = v1.find(item => item.name === data)
         let v2 = []
-        dato.chat_bot_receptors.forEach(item => {
-            v2.push(item.name)
-        })
+        if (dato.chat_bot_receptors.length > 0) {
+            dato.chat_bot_receptors.forEach(item => {
+                v2.push(item.name)
+            })
+        }
+
         let v3 = {
             id: dato.id,
             name: dato.name,
@@ -77,6 +80,7 @@ const emisor = async () => {
             attributes: ['name'],
             through: { attributes: [] },
         }
+        ,order: [['id']]
     });
 }
 const allEmisor = async () => {
@@ -126,7 +130,9 @@ const addEmisor = async ({ name, respuesta, isActive = true, receptor }) => {
 }
 //Editar el Emisor por parametro {id, name, isActive} se puede obviar el isActive pero 
 const updateEmisor = async ({ id, name, respuesta, isActive, alternativa }) => {
+
     if (id) {
+
         if (name || respuesta || isActive === false || isActive || alternativa) {
             await Chat_bot_emisor.update({
                 name,
@@ -134,6 +140,10 @@ const updateEmisor = async ({ id, name, respuesta, isActive, alternativa }) => {
                 isActive,
                 alternativa
             }, { where: { id } })
+            // const receptorDB = await Chat_bot_receptor.findAll({
+            //     where: { name: alternativa },
+            // });
+            // await data.add(receptorDB);
             return { "Info": "Succession" }
         } else {
             return { "Info": "Requisito un dato para poder actualizar el dato" }
