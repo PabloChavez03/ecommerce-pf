@@ -13,7 +13,7 @@ class PaymentService {
 			payer_email: this.email,
 			items: [...this.products],
 			back_urls: {
-				failure: "http://localhost:3000/",
+				failure: "http://localhost:3000/failure",
 				pending: "http://localhost:3000/",
 				success: "http://localhost:3000/",
 			},
