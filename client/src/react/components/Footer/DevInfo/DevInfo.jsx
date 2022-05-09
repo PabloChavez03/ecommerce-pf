@@ -117,9 +117,11 @@ export default function DevInfo() {
           <h3>Pablo Chávez</h3>
           <div>
           <a
-            href=" "
+            href="https://www.linkedin.com/in/pablo-oscar-chavez/"
+            target="_blank"
+            rel="noreferrer"
           >
-            <img src={linkedin} alt="Github" className={style.imageIcon} onClick={(e) => handleClickImg(e)}/>
+            <img src={linkedin} alt="Github" className={style.imageIcon}/>
           </a>
           <a
             href="https://github.com/PabloChavez03"
