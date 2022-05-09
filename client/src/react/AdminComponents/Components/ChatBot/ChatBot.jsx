@@ -8,11 +8,18 @@ import {
   deleteIdChatBotEmisor,
 } from "../../../../redux/actions-types";
 import NewEmisor from "./components/Emisor/NewEmisor";
+import NewReceptor from "./components/Receptor/NewReceptor";
+import PutEmisor from "./components/Emisor/PutEmisorId";
+import PutReceptor from "./components/Receptor/PutReceptor";
 
 export default function ChatBot() {
   //useState
-  const [activeChat, setActiveChat] = useState(true);
   const [newEmisor, setNewEmisor] = useState(false);
+  const [newReceptor, setNewReceptor] = useState(false);
+  const [putReceptor, setPutReceptor] = useState(false);
+  const [putReceptorConteiner, setPutReceptorConteiner] = useState({});
+  const [putEmisor, setPutEmisor] = useState(false);
+  const [putEmisorConteiner, setPutEmisorConteiner] = useState({});
   //Dispath reducer
   const dispatch = useDispatch();
   const receptor = useSelector((state) => state.chatBotReceptor);
@@ -22,6 +29,32 @@ export default function ChatBot() {
     dispatch(AllChatBotReceptor());
     dispatch(AllChatBotEmisor());
   }, [dispatch]);
+  const handleEditReceptor = (data) => {
+    if (putReceptor) {
+      setPutReceptor(false);
+    } else {
+      setPutReceptor(true);
+      setPutReceptorConteiner({
+        id: data.id,
+        name: data.name,
+        isActive: data.isActive,
+      });
+    }
+  };
+  const handleEditEmisor = (data) => {
+    if (putEmisor) {
+      setPutEmisor(false);
+    } else {
+      setPutEmisor(true);
+      setPutEmisorConteiner({
+        id: data.id,
+        name: data.name,
+        respuestadata: data.respuesta,
+        isActive: data.isActive,
+        alternativa: data.alternativa,
+      });
+    }
+  };
 
   const handleDeleteIDReceptor = (id) => {
     dispatch(deleteIdChatBotReceptor(id));
@@ -30,13 +63,20 @@ export default function ChatBot() {
     dispatch(deleteIdChatBotEmisor(id));
   };
   const handleNewEmisor = () => {
-    if(newEmisor){
-      setNewEmisor(false)
-    }else{
+    if (newEmisor) {
+      setNewEmisor(false);
+    } else {
       setNewEmisor(true);
     }
-    
   };
+  const handleNewReceptor = () => {
+    if (newReceptor) {
+      setNewReceptor(false);
+    } else {
+      setNewReceptor(true);
+    }
+  };
+ console.log(putEmisorConteiner);
   return (
     <div>
       <nav className={style.navChat}>
@@ -48,8 +88,20 @@ export default function ChatBot() {
       </nav>
       {/**----------------------------------------------------------------------------- */}
       <div>
-        <button className={style.btnNew}>New Receptor</button>
-
+        <button className={style.btnNew} onClick={() => handleNewReceptor()}>
+          New Receptor
+        </button>
+        {newReceptor ? (
+          <NewReceptor handleNewReceptor={handleNewReceptor} />
+        ) : null}
+        {putReceptor ? (
+          <PutReceptor
+            handleEdit={handleEditReceptor}
+            id={putReceptorConteiner.id}
+            name={putReceptorConteiner.name}
+            isActive={putReceptorConteiner.isActive}
+          />
+        ) : null}
         <table className={style.table}>
           <thead>
             <tr>
@@ -76,7 +128,12 @@ export default function ChatBot() {
                     <td>{item.name}</td>
                     <td>{item.isActive ? "Activo" : "Desactivado"}</td>
                     <td className={style.optionBtn}>
-                      <button className={style.orange}>Edit</button>{" "}
+                      <button
+                        className={style.orange}
+                        onClick={() => handleEditReceptor(item)}
+                      >
+                        Edit
+                      </button>{" "}
                       <button
                         className={style.red}
                         onClick={() => handleDeleteIDReceptor(item.id)}
@@ -95,7 +152,16 @@ export default function ChatBot() {
           New Emisor
         </button>
         {newEmisor ? <NewEmisor handleNewEmisor={handleNewEmisor} /> : null}
-
+        {putEmisor ? (
+          <PutEmisor
+            handleEdit={handleEditEmisor}
+            id={putEmisorConteiner.id}
+            name={putEmisorConteiner.name}
+            respuestadata={putEmisorConteiner.respuestadata}
+            isActive={putEmisorConteiner.isActive}
+            alternativa={putEmisorConteiner.alternativa}
+          />
+        ) : null}
         <table className={style.table}>
           <thead>
             <tr>
@@ -132,7 +198,12 @@ export default function ChatBot() {
                     </td>
                     <td>{item.isActive ? "Activo" : "Desactivado"}</td>
                     <td className={style.optionBtn}>
-                      <button className={style.orange}>Edit</button>{" "}
+                      <button
+                        className={style.orange}
+                        onClick={() => handleEditEmisor(item)}
+                      >
+                        Edit
+                      </button>{" "}
                       <button
                         className={style.red}
                         onClick={() => handleDeleteIDEmisor(item.id)}

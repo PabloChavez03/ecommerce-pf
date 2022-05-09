@@ -1,0 +1,94 @@
+.modal {
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    padding: 20px;
+    position: fixed;
+    top: 80px;
+    left: 30%;
+    border: 5px solid rgb(66, 66, 66);
+    border-radius: 20px;
+    overflow: scroll;
+  }
+  
+  .modal::-webkit-scrollbar {
+    display: none;
+  }
+  .head {
+    width: 100%;
+    margin: 10px 0px;
+    display: flex;
+    position: sticky;
+    justify-content: space-between;
+  }
+  
+  .head p {
+    margin: 0px 15px;
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 70px;
+    cursor: pointer;
+    color: black;
+    padding: 8px 15px 0px;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+  }
+  .head p:hover {
+    background-color: gray;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+  }
+  .title {
+    width: 100%;
+    outline: none;
+    padding: 5px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .title:hover {
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+  }
+  .title:focus {
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+  }
+  .respuesta {
+    width: 100%;
+    outline: none;
+    padding: 5px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .respuesta:hover {
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+  }
+  .respuesta:focus {
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+  }
+  .containerCheck {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+  }
+  .containerCheck div {
+    padding-right: 30px;
+  }
+  
+  .containerSelect {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  .p {
+    margin: 5px 10px;
+    padding: 3px 10px;
+    cursor: pointer;
+    background-color: gray;
+    color: white;
+  }
+  
+  .btn{
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+  }

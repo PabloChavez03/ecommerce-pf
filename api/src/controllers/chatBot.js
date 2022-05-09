@@ -125,12 +125,14 @@ const addEmisor = async ({ name, respuesta, isActive = true, receptor }) => {
 
 }
 //Editar el Emisor por parametro {id, name, isActive} se puede obviar el isActive pero 
-const updateEmisor = async ({ id, name, isActive }) => {
+const updateEmisor = async ({ id, name, respuesta, isActive, alternativa }) => {
     if (id) {
-        if (name || isActive === false || isActive) {
+        if (name || respuesta || isActive === false || isActive || alternativa) {
             await Chat_bot_emisor.update({
                 name,
+                respuesta,
                 isActive,
+                alternativa
             }, { where: { id } })
             return { "Info": "Succession" }
         } else {

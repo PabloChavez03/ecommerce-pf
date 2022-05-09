@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { PostChatBotReceptor } from "../../../../../../redux/actions-types";
+import { PutChatBotReceptor } from "../../../../../../redux/actions-types";
 import style from "./New.Receptor.module.css";
-export default function NewReceptor({ handleNewReceptor }) {
+export default function PutReceptor({ handleEdit, id, name, isActive }) {
   ///////////Dispatch
   const dispatch = useDispatch();
   //
@@ -11,8 +11,9 @@ export default function NewReceptor({ handleNewReceptor }) {
     desactivado: false,
   });
   const [respuesta, setRespuesta] = useState({
-    name: "",
-    isActive: focusCheck.activo,
+    id: id,
+    name: name,
+    isActive: isActive,
   });
   /**FUNCION PARA VALIDAR EL MAYUS */
   const mayusculaSearch = (as) => {
@@ -32,7 +33,7 @@ export default function NewReceptor({ handleNewReceptor }) {
   };
 
   const handleCerrar = () => {
-    handleNewReceptor();
+    handleEdit();
   };
   const handleCheck = () => {
     if (focusCheck.activo) {
@@ -58,14 +59,13 @@ export default function NewReceptor({ handleNewReceptor }) {
 
   const handleEnviar = () => {
     if (respuesta.name !== "") {
-      dispatch(PostChatBotReceptor(respuesta));
+      dispatch(PutChatBotReceptor(respuesta));
     }
   };
-
   return (
     <div className={style.modal}>
       <div className={style.head}>
-        <h1>New Emisor</h1>
+        <h1>Update Emisor</h1>
         <p onClick={() => handleCerrar()}>X</p>
       </div>
       <div>
@@ -101,7 +101,7 @@ export default function NewReceptor({ handleNewReceptor }) {
         <input
           className={style.btn}
           type={"button"}
-          value={"Agregar"}
+          value={"Actualizar Cambios"}
           onClick={() => handleEnviar()}
         />
       </div>

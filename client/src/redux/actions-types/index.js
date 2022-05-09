@@ -25,7 +25,11 @@ import {
 	UPDATE_USER_INFO,
 	DELETE_CHAT_BOT_RECEPTOR,
 	DELETE_CHAT_BOT_EMISOR,
-	GET_CHAT_BOT_RECEPTOR_NAME
+	GET_CHAT_BOT_RECEPTOR_NAME,
+	POST_CHAT_BOT_RECEPTOR,
+	POST_CHAT_BOT_EMISOR,
+	PUT_CHAT_BOT_RECEPTOR,
+	PUT_CHAT_BOT_EMISOR,
 } from "../actions-creators";
 import {
 	chatBot,
@@ -36,6 +40,10 @@ import {
 	getChatBotEmisor,
 	getChatBotReceptor,
 	getChatBotReceptorName,
+	postChatBotEmisor,
+	postChatBotReceptor,
+	putChatBotEmisor,
+	putChatBotReceptor,
 	urlProdutcGender,
 } from "../controllers";
 import axios from "axios";
@@ -340,7 +348,44 @@ export const deleteIdChatBotEmisor = (id) => async (dispatch) => {
 export const GetChatBotReceptorName = () => async (dispatch) => {
 	let data = await getChatBotReceptorName();
 	return dispatch({
-		type:GET_CHAT_BOT_RECEPTOR_NAME,
-		payload:data
+		type: GET_CHAT_BOT_RECEPTOR_NAME,
+		payload: data
+	})
+}
+
+export const PostChatBotReceptor = (data) => async (dispatch) => {
+	await postChatBotReceptor(data);
+	let receptor = await getChatBotReceptor();
+	return dispatch({
+		type: POST_CHAT_BOT_RECEPTOR,
+		payload: receptor
+	})
+}
+
+
+export const PostChatBotEmisor = (data) => async (dispatch) => {
+	await postChatBotEmisor(data);
+	let emisor = await getChatBotEmisor();
+	return dispatch({
+		type: POST_CHAT_BOT_EMISOR,
+		payload: emisor
+	})
+}
+
+export const PutChatBotReceptor = (data) => async (dispatch) => {
+	await putChatBotReceptor(data);
+	let receptor = await getChatBotReceptor();
+	return dispatch({
+		type: PUT_CHAT_BOT_RECEPTOR,
+		payload: receptor
+	})
+}
+
+export const PutChatBotEmisor = (data) => async (dispatch) => {
+	await putChatBotEmisor(data);
+	let emisor = await getChatBotEmisor();
+	return dispatch({
+		type: PUT_CHAT_BOT_EMISOR,
+		payload: emisor
 	})
 }

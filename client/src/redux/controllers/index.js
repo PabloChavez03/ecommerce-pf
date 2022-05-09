@@ -116,7 +116,8 @@ export const postChatBotReceptor = async (data) => {
     try {
         return await axios
             .post(`http://localhost:3001/chatBot/receptor`, {
-                name: data
+                name: data.name,
+                isActive: data.isActive
             })
     }
     catch (err) {
@@ -159,6 +160,37 @@ export const getChatBotEmisor = async () => {
         return await axios
             .get(`http://localhost:3001/chatBot/emisor`)
             .then(res => res.data)
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const postChatBotEmisor = async (data) => {
+    try {
+        return await axios
+            .post(`http://localhost:3001/chatBot/emisor`, {
+                name: data.name,
+                respuesta: data.respuesta,
+                isActive: data.isActive,
+                receptor: data.receptor
+            })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const putChatBotEmisor = async (data) => {
+    try {
+        return await axios
+            .put(`http://localhost:3001/chatBot/emisor`, {
+                id: data.id,
+                name: data.name,
+                respuesta: data.respuesta,
+                isActive: data.isActive,
+                alternativa: data.alternativa
+            })
     }
     catch (err) {
         console.log(err);

@@ -29,6 +29,10 @@ import {
 	DELETE_CHAT_BOT_RECEPTOR,
 	DELETE_CHAT_BOT_EMISOR,
 	GET_CHAT_BOT_RECEPTOR_NAME,
+	POST_CHAT_BOT_RECEPTOR,
+	POST_CHAT_BOT_EMISOR,
+	PUT_CHAT_BOT_RECEPTOR,
+	PUT_CHAT_BOT_EMISOR,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -49,7 +53,7 @@ export const initialState = {
 	userData: {},
 	productFilterAdmin: [],
 	productsAdmin: [],
-	chatBotReceptorName:[],
+	chatBotReceptorName: [],
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -316,9 +320,29 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				chatBotEmisor: payload.emisor,
 			}
 		case GET_CHAT_BOT_RECEPTOR_NAME:
-			return{
+			return {
 				...state,
-				chatBotReceptorName:payload
+				chatBotReceptorName: payload
+			}
+		case POST_CHAT_BOT_RECEPTOR:
+			return {
+				...state,
+				chatBotReceptor: payload
+			}
+		case POST_CHAT_BOT_EMISOR:
+			return {
+				...state,
+				chatBotEmisor: payload
+			}
+		case PUT_CHAT_BOT_RECEPTOR:
+			return {
+				...state,
+				chatBotReceptor: payload
+			}
+		case PUT_CHAT_BOT_EMISOR:
+			return {
+				...state,
+				chatBotEmisor: payload
 			}
 		default:
 			return { ...state };
