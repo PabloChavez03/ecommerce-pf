@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import style from "./Login.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createNewUser, UserLogin } from "../../../redux/actions-types";
 import { useNavigate } from "react-router-dom";
 
@@ -98,8 +98,10 @@ const Login = () => {
 		// 		[e.target.name]: e.target.value,
 		// 	})
 		// );
-		console.log(login);
+		// console.log(login);
 	};
+	const userData  = useSelector((state) => state.userData);
+	console.log(userData)
 	const handleLoginSubmit = (e) => {
 		e.preventDefault();
 		// setCorrect(true)
@@ -110,7 +112,11 @@ const Login = () => {
 			user_password: "",
 		});
 		dispatch(UserLogin(login));
-		navigate("/");
+		if(userData.username){
+			navigate("/");
+		}
+		console.log(userData)
+		
 	};
 
 

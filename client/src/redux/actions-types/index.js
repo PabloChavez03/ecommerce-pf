@@ -25,7 +25,7 @@ import {
   UPDATE_USER_INFO,
   SET_CHANGE_FORM_CREATE,
   GET_ALL_CLIENTS,
-	GET_CLIENT_DETAIL
+  GET_CLIENT_DETAIL,
 } from "../actions-creators";
 import {
   chatBot,
@@ -223,14 +223,22 @@ export function createNewUser(payload) {
 
 export function UserLogin(payload) {
   return async function (dispatch) {
-    const userLogin = await axios.post(
-      "http://localhost:3001/users/login",
-      payload
-    );
-    return dispatch({
-      type: GET_USER_DATA,
-      payload: userLogin.data,
-    });
+    try {
+      const userLogin = await axios.post(
+        "http://localhost:3001/users/login",
+        payload
+      );
+      return dispatch({
+        type: GET_USER_DATA,
+        payload: userLogin.data,
+      });
+    } catch(error) {
+      console.log('ERROOOOOOOOOORRRRR', error.name);
+      return dispatch({
+        type: GET_USER_DATA,
+        payload: error,
+      });
+    }
   };
 }
 
@@ -317,34 +325,34 @@ export function setChangeFormCreate(form) {
 }
 
 export function getAllClients(token) {
-	return async function (dispatch) {
-		const { data } = await axios.get("http://localhost:3001/users/findall", {
-			headers: {
-				authorization: `Bearer ${token}`,
-			},
-		});
+  return async function (dispatch) {
+    const { data } = await axios.get("http://localhost:3001/users/findall", {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
 
-		return dispatch({
-			type: GET_ALL_CLIENTS,
-			payload: data,
-		});
-	};
+    return dispatch({
+      type: GET_ALL_CLIENTS,
+      payload: data,
+    });
+  };
 }
 
 export function getClientDetail(token, username) {
-	return async function (dispatch) {
-		const { data } = await axios.get(
-			`http://localhost:3001/users/findByPk/${username}`,
-			{
-				headers: {
-					authorization: `Bearer ${token}`,
-				},
-			},
-		);
+  return async function (dispatch) {
+    const { data } = await axios.get(
+      `http://localhost:3001/users/findByPk/${username}`,
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-		return dispatch({
-			type: GET_CLIENT_DETAIL,
-			payload: data,
-		});
-	};
+    return dispatch({
+      type: GET_CLIENT_DETAIL,
+      payload: data,
+    });
+  };
 }
