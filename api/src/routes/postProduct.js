@@ -19,6 +19,8 @@ router.post("", async (req, res) => {
 		category,
 	} = req.body;
 
+	console.log(req.body);
+
 	/** Variants
 	 *
 	 * {
@@ -49,7 +51,7 @@ router.post("", async (req, res) => {
 				name,
 				image: images[0],
 				isOffertPrice,
-				previousPrice,
+				previousPrice: "" ? null : previousPrice,
 				currentPrice,
 				brandName,
 				color,
@@ -80,7 +82,7 @@ router.post("", async (req, res) => {
 				brandName,
 				images,
 				isOffertProduct: isOffertPrice,
-				previousPrice,
+				previousPrice: "" ? null : previousPrice,
 				currentPrice,
 				color,
 				variants,
