@@ -239,14 +239,22 @@ export function createNewUser(payload) {
 
 export function UserLogin(payload) {
   return async function (dispatch) {
-    const userLogin = await axios.post(
-      "http://localhost:3001/users/login",
-      payload
-    );
-    return dispatch({
-      type: GET_USER_DATA,
-      payload: userLogin.data,
-    });
+    try {
+      const userLogin = await axios.post(
+        "http://localhost:3001/users/login",
+        payload
+      );
+      return dispatch({
+        type: GET_USER_DATA,
+        payload: userLogin.data,
+      });
+    } catch(error) {
+      console.log('ERROOOOOOOOOORRRRR', error.name);
+      return dispatch({
+        type: GET_USER_DATA,
+        payload: error,
+      });
+    }
   };
 }
 
