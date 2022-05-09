@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import {
@@ -8,6 +8,7 @@ import {
 	updateProduct,
 	setDetails,
 } from "../../../../redux/actions-types";
+import back from "../../../components/svg/volver-flecha.png";
 
 // Components
 import AddImages from "../../../components/CreationProduct/components/AddImages";
@@ -16,6 +17,7 @@ import AddVariants from "../../../components/CreationProduct/components/AddVaria
 
 // Utils
 import s from "../../../components/CreationProduct/ProductCreate.module.css";
+import style from "../../../AdminComponents/Components/DeleteProduct/DeleteProduct.module.css";
 import {
 	handleDeleteImg,
 	handleSizeDelete,
@@ -39,10 +41,10 @@ function validate(input) {
 		// errors.button = true;
 	}
 
-	if (!input.previousPrice || input.previousPrice < 0) {
-		errors.previousPrice = <i>"Debe ingresar un importe valido!"</i>;
-		// errors.button = true;
-	}
+	// if (!input.previousPrice || input.previousPrice < 0) {
+	// 	errors.previousPrice = <i>"Debe ingresar un importe valido!"</i>;
+	// 	// errors.button = true;
+	// }
 	if (!input.currentPrice || input.currentPrice < 0) {
 		errors.currentPrice = <i>"Debe ingresar un importe valido!"</i>;
 		// errors.button = true;
@@ -59,10 +61,7 @@ function validate(input) {
 		errors.brandName = <i>"Debe ingresar una marca!"</i>;
 		// errors.button = true;
 	}
-	if (!input.category || input.category === "") {
-		errors.category = <i>"Debe ingresar una categoria!"</i>;
-		// errors.button = true;
-	}
+	
 	return errors;
 }
 
@@ -115,6 +114,7 @@ export default function UpdateProduct() {
 		gender: "",
 		brandName: "",
 		// category: [],
+		category:'',
 		info: {
 			aboutMe: "",
 			sizeAndFit: "",
@@ -243,8 +243,14 @@ export default function UpdateProduct() {
 
 	return (
 		<div className={s.container}>
+			
 			{productToUpdate?.name ? (
 				<form className={s.form} onSubmit={(e) => handleSubmit(e)}>
+					<div className={style.imgContainer}>
+						<NavLink to={`/admin/allproducts`} style={{ textDecoration: "none" }}>
+							<img src={back} alt='Img back' className={style.img} />
+						</NavLink>
+					</div>
 					<div className={s.sectionOne}>
 						<div className={s.name}>
 							<label>Nombre: </label>

@@ -4,13 +4,13 @@ const { Users, Role } = require("../db");
 const authMaster = async (req, res, next) => {
   //----------------------------AUTHORIZATION--------------------------------------------------------
   const authorization = req.get("authorization");
-  
+
   let token = null;
-  
+
   if (authorization && authorization.toLowerCase().startsWith("bearer")) {
     token = authorization.substring(7);
   }
-  
+
   let decodedToken = {};
 
   try {
@@ -41,10 +41,15 @@ const isAdmin = async (req, res, next) => {
   // const user = await Users.findByPk(req.userId);
   const role = await Role.findByPk(req.role);
   // console.log(role.name);
-  if (role.name === "admin") {
-    next();
+
+  if (role) {
+    if (role.name === "admin") {
+      next();
+    } else {
+      return res.status(403).json({ message: "require admin role" });
+    }
   } else {
-    return res.status(403).json({ message: "require admin role" });
+    return res.status(403).json({ message: "not register or authorized" });
   }
 
   // console.log(role)

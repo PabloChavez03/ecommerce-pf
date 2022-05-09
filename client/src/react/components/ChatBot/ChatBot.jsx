@@ -18,7 +18,7 @@ export default function ChatBot() {
     }
   };
   const handleoption = (item) => {
-    console.log(item);
+    // console.log(item);
     dispatch(getChatBot(item));
   };
   console.log(dataChatBot)

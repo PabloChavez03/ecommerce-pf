@@ -19,6 +19,11 @@ const Modal = ({ status, setStatus }) => {
 
 	const handleClickBag = (event) => {
 		event.preventDefault();
+		if (!cartData.length) {
+			alert("Por favor agregue productos al carrito para continuar");
+			return;
+		}
+
 		navigate("/bag");
 	};
 
@@ -33,14 +38,17 @@ const Modal = ({ status, setStatus }) => {
 					<div className={style.modalContainer}>
 						<div className={style.modalHeader}>
 							<p>CARRITO DE COMPRA</p>
-							<span onClick={() => setStatus(false)}>X</span>
+							<span
+								onClick={() => setStatus(false)}
+								className={style.modalCloseButton}
+							></span>
 						</div>
 
 						<div className={style.modalCartContainer}>
 							{cartData &&
 								cartData.map((product) => {
 									return (
-										<div key={product.id}>
+										<div key={product.id + product.brandSize}>
 											<ProductCardModal
 												id={product.id}
 												name={product.name}

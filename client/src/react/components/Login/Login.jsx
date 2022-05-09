@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import style from "./Login.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createNewUser, UserLogin } from "../../../redux/actions-types";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,15 @@ const Login = () => {
 	const [activeCreate, setActiveCreate] = useState(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
+	const userData  = useSelector((state) => state.userData);
+	console.log(userData)
+	useEffect(()=>{
+		if(userData.name){
+			alert('Usuario o contraseña incorrecta')
+		}else if(userData.username){
+			navigate('/')
+		}
+	},[userData])
 	const [newUser, setNewUser] = useState({
 		phone: "",
 		dni_client: "",
@@ -79,8 +87,7 @@ const Login = () => {
 			address: "",
 			isRegistered: true,
 		});
-		alert("sumitie");
-		navigate("/user/profile");
+		alert("Usuario creado exitosamente!");
 	};
 	//////////////////////////// LOGIN ///////////////////////
 	const [login, setLogin] = useState({
@@ -99,21 +106,24 @@ const Login = () => {
 		// 		[e.target.name]: e.target.value,
 		// 	})
 		// );
-		console.log(login);
+		// console.log(login);
 	};
+	
 	const handleLoginSubmit = (e) => {
 		e.preventDefault();
 		// setCorrect(true)
 		// console.log(newAdmin)
 		// if(error.submit !== 'we good'){ return }
-		dispatch(UserLogin(login));
-		console.log(login);
 		setLogin({
 			user_name: "",
 			user_password: "",
 		});
-		navigate("/");
+		dispatch(UserLogin(login));
+		
+		
 	};
+
+
 
 	const GOOGLE = () => {
 		window.open("http://localhost:3001/auth/google", "_self");
@@ -156,6 +166,7 @@ const Login = () => {
 						<button className={style.formButtonLogin}>INGRESAR</button>
 					</form>
 				</div>
+
 				{/**Creando usuario */}
 				<div className={style.formCreateUser}>
 					{activeCreate ? (

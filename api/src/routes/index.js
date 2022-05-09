@@ -32,8 +32,8 @@ router.use(
 	[authMaster, isAdmin],
 	require("./deleteProduct"),
 );
+router.use("/users/update", authMaster, require("./userUpdate"));
 router.use("/product/stock", [authMaster, isAdmin], require("./updateStock"));
-router.use("/users/update", [authMaster, isAdmin], require("./userUpdate"));
 router.use("/users/delete", [authMaster, isAdmin], require("./userDelete"));
 router.use("/users/findall", [authMaster, isAdmin], require("./getUsers"));
 router.use(

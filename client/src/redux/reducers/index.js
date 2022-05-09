@@ -25,6 +25,17 @@ import {
 	CLEAN_FILTERS,
 	GET_STOCK_PRODUCTS,
 	LOGGED_OUT,
+	UPDATE_USER_INFO,
+	DELETE_CHAT_BOT_RECEPTOR,
+	DELETE_CHAT_BOT_EMISOR,
+	GET_CHAT_BOT_RECEPTOR_NAME,
+	POST_CHAT_BOT_RECEPTOR,
+	POST_CHAT_BOT_EMISOR,
+	PUT_CHAT_BOT_RECEPTOR,
+	PUT_CHAT_BOT_EMISOR,
+	SET_CHANGE_FORM_CREATE,
+	GET_ALL_CLIENTS,
+	GET_CLIENT_DETAIL
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -45,6 +56,27 @@ export const initialState = {
 	userData: {},
 	productFilterAdmin: [],
 	productsAdmin: [],
+	chatBotReceptorName: [],
+	productCreate: {
+		name: "",
+		description: "",
+		images: [],
+		previousPrice: "",
+		isOffertPrice: false,
+		currentPrice: "",
+		color: "",
+		gender: "",
+		brandName: "",
+		category: "",
+		info: {
+			aboutMe: "",
+			sizeAndFit: "",
+			careInfo: "",
+		},
+		variants: [],
+	},
+	allClients: [],
+	clientDetail: {},
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -56,16 +88,23 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				productFilter: payload.filter((e) => e.Category.genre === gender),
 			};
 		case ADD_PRODUCT_TO_CART:
-			let cartProductAux = state.cartItems.find((e) => e.id === payload.id);
+			let cartProductAux = state.cartItems.find(
+				(e) => e.id + e.brandSize === payload.id + payload.brandSize,
+			);
 			if (cartProductAux) {
-				const prevCart = state.cartItems.filter((e) => e.id !== payload.id);
-				cartProductAux.quantity++;
+				const prevCart = state.cartItems.filter(
+					(e) => e.id + e.brandSize !== payload.id + payload.brandSize,
+				);
+				if (payload.variants[0].stock !== cartProductAux.quantity) {
+					cartProductAux.quantity++;
+				}
+				// console.log(`el stock es:${payload.variants[0].stock} y la cantidad es:${ cartProductAux.quantity}`)
 				return {
 					...state,
 					cartItems: [...prevCart, cartProductAux],
 					subTotal: Number(
 						state.subTotal +
-							Math.round(cartProductAux.currentPrice * cartProductAux.quantity)
+						Math.round(cartProductAux.currentPrice * cartProductAux.quantity),
 					),
 				};
 			} else {
@@ -73,25 +112,42 @@ export default function rootReducer(state = initialState, { type, payload }) {
 					...state,
 					cartItems: [...state.cartItems, payload],
 					subTotal: Number(
-						state.subTotal + Math.round(payload.currentPrice * payload.quantity)
+						state.subTotal +
+						Math.round(payload.currentPrice * payload.quantity),
 					),
 				};
 			}
 		case REMOVE_PRODUCT_FROM_CART:
-			let indexRemoveQty = state.cartItems.findIndex((e) => e.id === payload);
+			let indexRemoveQty = state.cartItems.findIndex(
+				(e) =>
+					e.id + e.brandSize.toString() ===
+					payload.id + payload.size.toString(),
+			);
 			state.cartItems[indexRemoveQty].quantity = 1;
 			return {
 				...state,
-				cartItems: state.cartItems.filter((e) => e.id !== payload),
+				cartItems: state.cartItems.filter(
+					(e) =>
+						e.id + e.brandSize.toString() !==
+						payload.id + payload.size.toString(),
+				),
 			};
 		case CHANGE_CART_QUANTITY:
-			let index = state.cartItems.findIndex((e) => e.id === payload[1]);
+			let index = state.cartItems.findIndex(
+				(e) =>
+					e.id + e.brandSize.toString() ===
+					payload.id + payload.size.toString(),
+			);
 			let item = state.cartItems[index];
-			if (payload[0] === "-") {
+			if (payload.sign === "-") {
 				if (item.quantity === 1) {
 					return {
 						...state,
-						cartItems: state.cartItems.filter((e) => e.id !== payload[1]),
+						cartItems: state.cartItems.filter(
+							(e) =>
+								e.id + e.brandSize.toString() !==
+								payload.id + payload.size.toString(),
+						),
 					};
 				}
 				state.cartItems[index].quantity--;
@@ -148,25 +204,25 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			let arr =
 				payload[0] === "high"
 					? productsSort?.sort(function (a, b) {
-							if (a.currentPrice < b.currentPrice) {
-								return 1;
-							}
-							if (a.currentPrice > b.currentPrice) {
-								return -1;
-							} else {
-								return 0;
-							}
-					  })
+						if (a.currentPrice < b.currentPrice) {
+							return 1;
+						}
+						if (a.currentPrice > b.currentPrice) {
+							return -1;
+						} else {
+							return 0;
+						}
+					})
 					: productsSort?.sort(function (a, b) {
-							if (a.currentPrice > b.currentPrice) {
-								return 1;
-							}
-							if (a.currentPrice < b.currentPrice) {
-								return -1;
-							} else {
-								return 0;
-							}
-					  });
+						if (a.currentPrice > b.currentPrice) {
+							return 1;
+						}
+						if (a.currentPrice < b.currentPrice) {
+							return -1;
+						} else {
+							return 0;
+						}
+					});
 			return {
 				...state,
 				productFilter: arr,
@@ -256,7 +312,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			return {
 				...state,
 				productFilterAdmin: state.productsAdmin.filter(
-					(e) => e.isInStock === true
+					(e) => e.isInStock === true,
 				),
 			};
 		case LOGGED_OUT:
@@ -268,6 +324,82 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				userData: {},
 				cartItems: [],
 				details: {},
+				productCreate: {
+					name: "",
+					description: "",
+					images: [],
+					previousPrice: "",
+					isOffertPrice: false,
+					currentPrice: "",
+					color: "",
+					gender: "",
+					brandName: "",
+					category: "",
+					info: {
+						aboutMe: "",
+						sizeAndFit: "",
+						careInfo: "",
+					},
+					variants: [],
+				}
+			};
+		case UPDATE_USER_INFO:
+			return {
+				...state,
+				userData: payload,
+			}
+		case DELETE_CHAT_BOT_RECEPTOR:
+			return {
+				...state,
+				chatBotReceptor: payload.receptor,
+				chatBotEmisor: payload.emisor,
+			}
+		case DELETE_CHAT_BOT_EMISOR:
+			return {
+				...state,
+				chatBotReceptor: payload.receptor,
+				chatBotEmisor: payload.emisor,
+			}
+		case GET_CHAT_BOT_RECEPTOR_NAME:
+			return {
+				...state,
+				chatBotReceptorName: payload
+			}
+		case POST_CHAT_BOT_RECEPTOR:
+			return {
+				...state,
+				chatBotReceptor: payload
+			}
+		case POST_CHAT_BOT_EMISOR:
+			return {
+				...state,
+				chatBotEmisor: payload
+			}
+		case PUT_CHAT_BOT_RECEPTOR:
+			return {
+				...state,
+				chatBotReceptor: payload
+			}
+		case PUT_CHAT_BOT_EMISOR:
+			return {
+				...state,
+				chatBotEmisor: payload
+			}
+		case SET_CHANGE_FORM_CREATE:
+			return {
+				...state,
+				productCreate: payload,
+			};
+		case GET_ALL_CLIENTS:
+			return {
+				...state,
+				allClients: payload,
+			};
+
+		case GET_CLIENT_DETAIL:
+			return {
+				...state,
+				clientDetail: payload,
 			};
 		default:
 			return { ...state };

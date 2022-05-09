@@ -15,9 +15,10 @@ import PayPlataform from "./react/components/PayPlataform/PayPlataform";
 import ProfileUser from "./react/components/ProfileUser/ProfileUser";
 import OrderDetail from "./react/UserOrders/OrderDetail";
 import UserOrders from "./react/UserOrders/UserOrders";
+// import Success from "./react/components/back Urls/success";
 import axios from "axios";
-import Failure from "./react/components/back Urls/failure"
-import Pending from "./react/components/back Urls/pending"
+import Failure from "./react/components/back Urls/failure";
+import DevInfo from "./react/components/Footer/DevInfo/DevInfo";
 
 function App() {
 	const [user, setUSer] = useState(null);
@@ -65,7 +66,7 @@ function App() {
 				<Route path={"/user/orders"} element={<UserOrders />} />
 				<Route path={"/user/orders/:idOrder"} element={<OrderDetail />} />
 				<Route path={"/failure"} element={<Failure />} />
-				<Route path={"/pending"} element={<Pending />} />
+				<Route path={"/info/dev"} element={<DevInfo />} />
 			</Routes>
 			<Footer />
 		</BrowserRouter>
