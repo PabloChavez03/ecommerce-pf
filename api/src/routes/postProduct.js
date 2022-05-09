@@ -19,8 +19,6 @@ router.post("", async (req, res) => {
 		category,
 	} = req.body;
 
-	console.log(req.body);
-
 	/** Variants
 	 *
 	 * {
