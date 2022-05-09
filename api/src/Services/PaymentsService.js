@@ -14,7 +14,7 @@ class PaymentService {
 			items: [...this.products],
 			back_urls: {
 				failure: "http://localhost:3000/failure",
-				pending: "http://localhost:3000/",
+				pending: "http://localhost:3000/pending/",
 				success: "http://localhost:3000/",
 			},
 		};

@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import NavBar from "../../NavBar/NavBar";
 import ProductCardModal from "../CardModal/ProductCardModal";
 import css from "./ShoppingBag.module.css";
-
-import axios from "axios";
 
 export default function ShoppingBag() {
 	const navigate = useNavigate();
@@ -16,7 +14,10 @@ export default function ShoppingBag() {
 	let subtotal = cartItems?.forEach((e) => (suma += e.currentPrice));
 	let envio = 50;
 
-	const [email, setEmail] = useState("");
+    const handleClickSend = (e) => {
+        e.preventDefault();
+        alert("Funcionalidad en desarrollo!");
+    };
 
 	const handleClickSend = (e) => {
 		e.preventDefault();
