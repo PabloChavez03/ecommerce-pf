@@ -148,7 +148,6 @@ export default function NavBar() {
 						>
 							<li>Women</li>
 						</Link>
-
 						<NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
 							<li>About</li>
 						</NavLink>

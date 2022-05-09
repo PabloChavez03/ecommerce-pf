@@ -16,16 +16,17 @@ export default function ShoppingBag() {
 	let subtotal = cartItems?.forEach((e) => (suma += e.currentPrice));
 	let envio = 50;
 
-  const [email, setEmail] = useState("");
+	const [email, setEmail] = useState("");
 
-  const handleClickSend = (e) => {
-    e.preventDefault();
-    alert("Funcionalidad en desarrollo!");
-  };
+	const handleClickSend = (e) => {
+		e.preventDefault();
+		alert("Funcionalidad en desarrollo!");
+	};
 
-  const handlePayment = async (e) => {
-    e.preventDefault();
-
+	const handlePayment = async (e) => {
+		e.preventDefault();
+		if(suma === 0){alert('Debe agregar productos al carrito para continuar'); navigate('/'); return}
+		if(userData.rol === 'admin'){alert('Un administrador no puede realizar compras'); return}
 		const emailAux = userData.email ? userData.email : email;
 
 		const { data } = await axios.get(
@@ -35,8 +36,8 @@ export default function ShoppingBag() {
 			},
 		);
 
-    window.open(data.init_point, "_self");
-  };
+		window.open(data.init_point, "_self");
+	};
 
 	return (
 		<div className={css.container}>
@@ -70,7 +71,7 @@ export default function ShoppingBag() {
 				<h2>Total:</h2>
 				<p>${suma + envio}</p>
 
-				{userData.email && !userData.email.length ? (
+				{(userData.email && !userData.email.length) || !userData.email ? (
 					<div className={css.mail}>
 						<label htmlFor="email">Email: </label>
 						<br />

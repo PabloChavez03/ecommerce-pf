@@ -82,10 +82,9 @@ export const initialState = {
 export default function rootReducer(state = initialState, { type, payload }) {
 	switch (type) {
 		case GET_PRODUCT_BY_NAME:
-			let gender = state.products.find((e) => e.Category.genre).Category.genre;
 			return {
 				...state,
-				productFilter: payload.filter((e) => e.Category.genre === gender),
+				productFilter: payload,
 			};
 		case ADD_PRODUCT_TO_CART:
 			let cartProductAux = state.cartItems.find(
@@ -98,7 +97,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				if (payload.variants[0].stock !== cartProductAux.quantity) {
 					cartProductAux.quantity++;
 				}
-				// console.log(`el stock es:${payload.variants[0].stock} y la cantidad es:${ cartProductAux.quantity}`)
 				return {
 					...state,
 					cartItems: [...prevCart, cartProductAux],
@@ -328,7 +326,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 					name: "",
 					description: "",
 					images: [],
-					previousPrice: "",
+					previousPrice: null,
 					isOffertPrice: false,
 					currentPrice: "",
 					color: "",
