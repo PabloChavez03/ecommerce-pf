@@ -21,32 +21,32 @@ import Failure from "./react/components/back Urls/failure";
 import DevInfo from "./react/components/Footer/DevInfo/DevInfo";
 
 function App() {
-	const [user, setUSer] = useState(null);
+	// const [user, setUSer] = useState(null);
 
-	useEffect(() => {
-		const getUser = () =>
-			axios({
-				url: "/auth/login/success",
-				method: "GET",
-				withCredentials: true,
-				headers: {
-					"Content-Type": "application/json",
-					"Access-Control-Allow-Credentials": true,
-				},
-			})
-				.then((response) => {
-					if (response.status === 200) return response.data;
-					else throw new Error("Authentication has been failed");
-				})
-				.then((resObject) => {
-					setUSer(resObject.user);
-				})
-				.catch((e) => console.log(e));
+	// useEffect(() => {
+	// 	const getUser = () =>
+	// 		axios({
+	// 			url: "/auth/login/success",
+	// 			method: "GET",
+	// 			withCredentials: true,
+	// 			headers: {
+	// 				"Content-Type": "application/json",
+	// 				"Access-Control-Allow-Credentials": true,
+	// 			},
+	// 		})
+	// 			.then((response) => {
+	// 				if (response.status === 200) return response.data;
+	// 				else throw new Error("Authentication has been failed");
+	// 			})
+	// 			.then((resObject) => {
+	// 				setUSer(resObject.user);
+	// 			})
+	// 			.catch((e) => console.log(e));
 
-		getUser();
-	}, []);
+	// 	getUser();
+	// }, []);
 
-	console.log(user);
+	// console.log(user);
 
 	return (
 		<BrowserRouter>
