@@ -10,7 +10,7 @@ export default function Product() {
 
   useEffect(() => {
     // luego de montarse el componente, le pedimos al backend el preferenceId
-    axios.post("http://localhost:3001/mercadopago/payment", { productId: id }).then((order) => {
+    axios.post("/mercadopago/payment", { productId: id }).then((order) => {
       setPreferenceId(order.preferenceId);
     });
   }, [id]);
