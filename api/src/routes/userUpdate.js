@@ -25,10 +25,11 @@ router.patch("/:user_name", async (req, res) => {
 	// const saltRounds = 10;
 	// let newPassword = await bcrypt.hash(user_password, saltRounds);
 
-	try {
-		const user = await Users.findOne({ where: { user_name } });
-		// console.log("Rol", rol);
-		await user.update({
+	// try {
+	const user = await Users.findOne({ where: { user_name } }).catch((e) => e);
+
+	await user
+		.update({
 			user_name: username,
 			user_password: password,
 			dni_client: dni,
@@ -39,28 +40,27 @@ router.patch("/:user_name", async (req, res) => {
 			phone,
 			legajo_user,
 			isRegistered,
-		});
+		})
+		.catch((e) => e);
 
-		if (rol) {
-			const role = await Role.findOne({ where: { name: rol } });
-			await user.setRole(role);
-		}
-
-		// console.log(role);
-
-		await user.save();
-
-		const userWithRole = await Users.findOne({
-			where: { user_name },
-			include: {
-				model: Role,
-			},
-		});
-
-		res.status(200).send(userWithRole);
-	} catch (error) {
-		return res.status(409).json({ conflitcs: error });
+	if (rol) {
+		const role = await Role.findOne({ where: { name: rol } });
+		await user.setRole(role);
 	}
+
+	await user.save();
+
+	// const userWithRole = await Users.findOne({
+	// 	where: { user_name },
+	// 	include: {
+	// 		model: Role,
+	// 	},
+	// });
+
+	res.status(200).send(user);
+	// } catch (error) {
+	// 	return res.status(409).json({ conflitcs: error });
+	// }
 });
 
 module.exports = router;

@@ -7,6 +7,8 @@ import {
 	UserLogin,
 } from "../../../../../redux/actions-types";
 
+import s from "./ClientDetail.module.css";
+
 export default function ClientDetail() {
 	const location = useLocation();
 	const dispatch = useDispatch();
@@ -49,50 +51,53 @@ export default function ClientDetail() {
 	// };
 
 	return (
-		<div>
+		<div className={s.container}>
 			<h1>Detalle del cliente</h1>
-			<p>
-				<span>Es administrador? </span>
-				<input
-					type="checkbox"
-					value={isAdmin}
-					checked={isAdmin === "admin" ? true : false}
-					onChange={handleAdminRole}
-				/>
-				{/* <button onClick={handleSubmit}>Enviar</button> */}
-			</p>
-			<p>
-				<span>Legajo: </span>
-				{clientDetail.legajo_user}
-			</p>
-			<p>
-				<span>Nombre de usuario: </span>
-				{clientDetail.user_name}
-			</p>
-			<p>
-				<span>Nombre: </span>
-				{clientDetail.name}
-			</p>
-			<p>
-				<span>Apellido: </span>
-				{clientDetail.lastname}
-			</p>
-			<p>
-				<span>DNI: </span>
-				{clientDetail.dni_client}
-			</p>
-			<p>
-				<span>E-mail: </span>
-				{clientDetail.email}
-			</p>
-			<p>
-				<span>Phone: </span>
-				{clientDetail.phone}
-			</p>
-			<p>
-				<span>Dirección: </span>
-				{clientDetail.address}
-			</p>
+			<div className={s.infoContainer}>
+				<p>
+					<span>Rol: </span>
+					{/* <input
+						type="checkbox"
+						value={isAdmin}
+						checked={isAdmin === "admin" ? true : false}
+						onChange={handleAdminRole}
+					/> */}
+					{/* <button onClick={handleSubmit}>Enviar</button> */}
+					{clientDetail.Role.name === "admin" ? "Administrador" : "Cliente"}
+				</p>
+				<p>
+					<span>Legajo: </span>
+					{clientDetail.legajo_user}
+				</p>
+				<p>
+					<span>Nombre de usuario: </span>
+					{clientDetail.user_name}
+				</p>
+				<p>
+					<span>Nombre: </span>
+					{clientDetail.name}
+				</p>
+				<p>
+					<span>Apellido: </span>
+					{clientDetail.lastname}
+				</p>
+				<p>
+					<span>DNI: </span>
+					{clientDetail.dni_client}
+				</p>
+				<p>
+					<span>E-mail: </span>
+					{clientDetail.email}
+				</p>
+				<p>
+					<span>Phone: </span>
+					{clientDetail.phone}
+				</p>
+				<p>
+					<span>Dirección: </span>
+					{clientDetail.address}
+				</p>
+			</div>
 		</div>
 	);
 }
