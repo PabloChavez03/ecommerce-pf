@@ -27,7 +27,7 @@ router.patch("/:user_name", async (req, res) => {
 
 	try {
 		const user = await Users.findOne({ where: { user_name } });
-		console.log("Rol", rol);
+		// console.log("Rol", rol);
 		await user.update({
 			user_name: username,
 			user_password: password,
@@ -50,9 +50,16 @@ router.patch("/:user_name", async (req, res) => {
 
 		await user.save();
 
-		res.status(200).send(user);
+		const userWithRole = await Users.findOne({
+			where: { user_name },
+			include: {
+				model: Role,
+			},
+		});
+
+		res.status(200).send(userWithRole);
 	} catch (error) {
-		return res.status(409).json({ conflitcs: error})
+		return res.status(409).json({ conflitcs: error });
 	}
 });
 

@@ -10,54 +10,43 @@ import {
 export default function ClientDetail() {
 	const location = useLocation();
 	const dispatch = useDispatch();
-	const [isAdmin, setIsAdmin] = useState("admin");
+	const [isAdmin, setIsAdmin] = useState("");
 
 	const username = location.pathname.split("/")[3];
 	const userData = useSelector((state) => state.userData);
 
-	const {
-		Role,
-		legajo_user,
-		name,
-		lastname,
-		dni_client,
-		email,
-		phone,
-		address,
-		user_name,
-	} = useSelector((state) => state.clientDetail);
-
-	// console.log(Role)
+	const clientDetail = useSelector((state) => state.clientDetail);
 
 	useEffect(() => {
 		dispatch(getClientDetail(userData.token, username));
+
+		if (clientDetail.Role && clientDetail.Role.name === "admin") {
+			setIsAdmin("admin");
+		} else {
+			setIsAdmin("client");
+		}
 
 		// if (Role.name === "admin") setIsAdmin(true);
 	}, [dispatch]);
 
 	const handleAdminRole = (e) => {
-		if (!e.target.checked) {
-			setIsAdmin(e.target.value);
+		if (e.target.checked) {
+			setIsAdmin((isAdmin) => (isAdmin = "admin"));
 		} else {
-			setIsAdmin(e.target.value);
+			setIsAdmin((isAdmin) => (isAdmin = "client"));
 		}
 	};
-	console.log(Role)
 
-	const handleSubmit = (e) => {
-		dispatch(
-			updateUserInfo(username, userData.token, {
-				rol: !isAdmin ? "client" : "admin",
-			}),
-		);
-
-		// dispatch(
-		// 	UserLogin({
-		// 		user_name: userData.user_name,
-		// 		user_password: userData.user_password,
-		// 	}),
-		// );
-	};
+	// console.log(isAdmin);
+	// console.log(Role)
+	// const handleSubmit = (e) => {
+	// 	// dispatch(delClientDetail());
+	// 	dispatch(
+	// 		updateUserInfo(username, userData.token, {
+	// 			rol: isAdmin,
+	// 		}),
+	// 	);
+	// };
 
 	return (
 		<div>
@@ -67,42 +56,42 @@ export default function ClientDetail() {
 				<input
 					type="checkbox"
 					value={isAdmin}
-					checked={Role.name === isAdmin ? true : false}
+					checked={isAdmin === "admin" ? true : false}
 					onChange={handleAdminRole}
 				/>
-				<button onClick={handleSubmit}>Enviar</button>
+				{/* <button onClick={handleSubmit}>Enviar</button> */}
 			</p>
 			<p>
 				<span>Legajo: </span>
-				{legajo_user}
+				{clientDetail.legajo_user}
 			</p>
 			<p>
 				<span>Nombre de usuario: </span>
-				{user_name}
+				{clientDetail.user_name}
 			</p>
 			<p>
 				<span>Nombre: </span>
-				{name}
+				{clientDetail.name}
 			</p>
 			<p>
 				<span>Apellido: </span>
-				{lastname}
+				{clientDetail.lastname}
 			</p>
 			<p>
 				<span>DNI: </span>
-				{dni_client}
+				{clientDetail.dni_client}
 			</p>
 			<p>
 				<span>E-mail: </span>
-				{email}
+				{clientDetail.email}
 			</p>
 			<p>
 				<span>Phone: </span>
-				{phone}
+				{clientDetail.phone}
 			</p>
 			<p>
 				<span>Dirección: </span>
-				{address}
+				{clientDetail.address}
 			</p>
 		</div>
 	);
