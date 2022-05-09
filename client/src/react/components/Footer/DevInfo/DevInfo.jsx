@@ -136,16 +136,18 @@ export default function DevInfo() {
           <h3>Matias Antunez</h3>
           <div>
           <a
-            href=" "
+            href="https://www.linkedin.com/in/matias-sebastian-antunez-98b0a2166"
+            target="_blank"
+            rel="noreferrer"
           >
-            <img src={linkedin} alt="Github" className={style.imageIcon} onClick={(e) => handleClickImg(e)}/>
+            <img src={linkedin} alt="Github" className={style.imageIcon}/>
           </a>
           <a
             href="https://github.com/MatyAntunez"
             target="_blank"
             rel="noreferrer"
           >
-            <img src={github} alt="Linkedin" className={style.imageIcon}/>
+            <img src={github} alt="Linkedin" className={style.imageIcon} />
           </a>
           </div>
         </div>
