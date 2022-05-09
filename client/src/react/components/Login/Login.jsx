@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import style from "./Login.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewUser, UserLogin } from "../../../redux/actions-types";
+import { createNewUser, UserLogin, loggedOut } from "../../../redux/actions-types";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -10,10 +10,12 @@ const Login = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const userData  = useSelector((state) => state.userData);
-	console.log(userData)
 	useEffect(()=>{
-		if(userData.name){
+		console.log(userData)
+		if(userData.name == "AxiosError"){
 			alert('Usuario o contraseña incorrecta')
+			dispatch(loggedOut())
+
 		}else if(userData.username){
 			navigate('/')
 		}

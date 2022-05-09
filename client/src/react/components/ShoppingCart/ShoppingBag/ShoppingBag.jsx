@@ -25,7 +25,8 @@ export default function ShoppingBag() {
 
 	const handlePayment = async (e) => {
 		e.preventDefault();
-
+		if(suma === 0){alert('Debe agregar productos al carrito para continuar'); navigate('/'); return}
+		if(userData.rol === 'admin'){alert('Un administrador no puede realizar compras'); return}
 		const emailAux = userData.email ? userData.email : email;
 
 		const { data } = await axios.get(

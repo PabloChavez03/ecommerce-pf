@@ -130,6 +130,7 @@ export default function ProductCreate() {
   }
 
   function handleSubmit(e) {
+    console.log(input)
     e.preventDefault();
     setCorrect(true);
     if (Object.values(errors).length !== 0) {
@@ -174,9 +175,8 @@ export default function ProductCreate() {
         },
         variants: [],
       })
-      navigate("/");
       alert("Producto creado con exito!");
-      navigate("/");
+      navigate("/admin");
     }
   }
 
