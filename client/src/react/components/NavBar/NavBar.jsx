@@ -153,9 +153,9 @@ export default function NavBar() {
 							<li>About</li>
 						</NavLink>
 
-						<NavLink to={"/"} onClick={handleLogOut}>
+						{/* <NavLink to={"/"} onClick={handleLogOut}>
 							<li>Logout</li>
-						</NavLink>
+						</NavLink> */}
 					</ul>
 				</div>
 			</div>
