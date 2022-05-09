@@ -249,7 +249,7 @@ export function UserLogin(payload) {
         payload: userLogin.data,
       });
     } catch(error) {
-      console.log('ERROOOOOOOOOORRRRR', error.name);
+      // console.log('ERROOOOOOOOOORRRRR', error.name);
       return dispatch({
         type: GET_USER_DATA,
         payload: error,
