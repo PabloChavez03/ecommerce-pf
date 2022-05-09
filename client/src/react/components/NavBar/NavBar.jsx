@@ -152,10 +152,6 @@ export default function NavBar() {
 						<NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
 							<li>About</li>
 						</NavLink>
-
-						{/* <NavLink to={"/"} onClick={handleLogOut}>
-							<li>Logout</li>
-						</NavLink> */}
 					</ul>
 				</div>
 			</div>
