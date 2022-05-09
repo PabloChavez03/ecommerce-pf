@@ -148,9 +148,9 @@ export default function NavBar() {
 						>
 							<li>Women</li>
 						</Link>
-						<NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
+						{/* <NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
 							<li>About</li>
-						</NavLink>
+						</NavLink> */}
 					</ul>
 				</div>
 			</div>
