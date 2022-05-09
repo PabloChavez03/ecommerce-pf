@@ -41,10 +41,15 @@ const isAdmin = async (req, res, next) => {
   // const user = await Users.findByPk(req.userId);
   const role = await Role.findByPk(req.role);
   // console.log(role.name);
-  if (role.name === "admin") {
-    next();
+
+  if (role) {
+    if (role.name === "admin") {
+      next();
+    } else {
+      return res.status(403).json({ message: "require admin role" });
+    }
   } else {
-    return res.status(403).json({ message: "require admin role" });
+    return res.status(403).json({ message: "not register or authorized" });
   }
 
   // console.log(role)

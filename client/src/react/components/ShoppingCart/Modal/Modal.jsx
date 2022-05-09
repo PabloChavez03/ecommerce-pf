@@ -11,30 +11,44 @@ const Modal = ({ status, setStatus }) => {
 	const navigate = useNavigate();
 	// const subTotal = useSelector((state) => state.subTotal);
 
-	let subtotalCart = 0
+	let subtotalCart = 0;
 	// console.log(cartData);
-	cartData.forEach(function(a){subtotalCart += (a.currentPrice * a.quantity);});
-	
+	cartData.forEach(function (a) {
+		subtotalCart += a.currentPrice * a.quantity;
+	});
+
 	const handleClickBag = (event) => {
 		event.preventDefault();
+		if (!cartData.length) {
+			alert("Por favor agregue productos al carrito para continuar");
+			return;
+		}
+
 		navigate("/bag");
 	};
-	
+
 	return (
 		<>
 			{status && (
 				<div className={style.modalOverlay}>
+					<div
+						className={style.modalOverlayClose}
+						onClick={() => setStatus(false)}
+					></div>
 					<div className={style.modalContainer}>
 						<div className={style.modalHeader}>
 							<p>CARRITO DE COMPRA</p>
-							<span onClick={() => setStatus(false)}>X</span>
+							<span
+								onClick={() => setStatus(false)}
+								className={style.modalCloseButton}
+							></span>
 						</div>
 
 						<div className={style.modalCartContainer}>
 							{cartData &&
 								cartData.map((product) => {
 									return (
-										<div key={product.id}>
+										<div key={product.id + product.brandSize}>
 											<ProductCardModal
 												id={product.id}
 												name={product.name}
@@ -54,12 +68,15 @@ const Modal = ({ status, setStatus }) => {
 						<div className={style.saleInfoContainer}>
 							<div className={style.saleInfo}>
 								<p>SUBTOTAL</p>
-								<span>$ {subtotalCart.toFixed(2) }</span>
+								<span>$ {subtotalCart.toFixed(2)}</span>
 							</div>
 						</div>
 
 						<div className={style.modalButtonContainer}>
-							<button className={style.modalButton} onClick={(e)=>handleClickBag(e)}>
+							<button
+								className={style.modalButton}
+								onClick={(e) => handleClickBag(e)}
+							>
 								VER BOLSA DE COMPRAS
 							</button>
 						</div>

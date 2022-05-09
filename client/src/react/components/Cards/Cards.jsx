@@ -11,10 +11,13 @@ export default function Cards({
   isOffertPrice,
   previousPrice,
   currentPrice,
+  variants,
+  color
 }) {
-  // const handleClickAddCart = (event) => (
-  // 	<Construction/> //provisorio hasta que este el carrito
-  // )
+//   const handleClickAddCart = (event) => {
+//     event.preventDefault(); //provisorio hasta que este el carrito
+//     alert("Funcionalidad en desarrollo");
+// }
   return (
     <div className={css.container}>
         <img src={`https://${image}`} alt="Product Img" />
@@ -23,7 +26,16 @@ export default function Cards({
         {isOffertPrice ? <h4>{`Precio de oferta $ ${currentPrice}`}</h4> : null}
       </div>
       <h5 className={css.title}>{name}</h5>
-      {/* <button onClick={(e)=>handleClickAddCart(e)}>Agregar al carrito</button> */}
+      {/* <h5 className={css.title}>Color: {color}</h5> */}
+      {/* <select>
+        <option>Talle</option>
+      {
+        variants?.length?variants.map((e)=>(
+          <option key={e.brandSize} name={e.brandSize} value={e.brandSize}>{e.brandSize}</option>
+        )):""
+      }
+      </select>
+      <button onClick={(e)=>handleClickAddCart(e)}>Agregar al carrito</button> */}
     </div>
   );
 }

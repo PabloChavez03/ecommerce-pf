@@ -29,8 +29,8 @@ router.post('/emisor', async (req, res) => {
 })
 //Editar el Emisor por parametro {id, name, isActive} se puede obviar el isActive pero 
 router.put('/emisor', async (req, res) => {
-    const { id, name, isActive } = req.body;
-    updateEmisor({ id, name, isActive })
+    const { id, name, respuesta, isActive,alternativa } = req.body;
+    updateEmisor({ id, name, respuesta, isActive,alternativa })
         .then(item => res.json(item))
 })
 //Borrar el Emisor por {id}
