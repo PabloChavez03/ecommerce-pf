@@ -17,6 +17,7 @@ import OrderDetail from "./react/UserOrders/OrderDetail";
 import UserOrders from "./react/UserOrders/UserOrders";
 import axios from "axios";
 import Failure from "./react/components/back Urls/failure"
+import Pending from "./react/components/back Urls/pending"
 
 function App() {
 	const [user, setUSer] = useState(null);
@@ -64,6 +65,7 @@ function App() {
 				<Route path={"/user/orders"} element={<UserOrders />} />
 				<Route path={"/user/orders/:idOrder"} element={<OrderDetail />} />
 				<Route path={"/failure"} element={<Failure />} />
+				<Route path={"/pending"} element={<Pending />} />
 			</Routes>
 			<Footer />
 		</BrowserRouter>

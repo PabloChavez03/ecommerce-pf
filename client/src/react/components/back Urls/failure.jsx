@@ -84,37 +84,12 @@ export default function Failure() {
 				<p>${processing_mode}</p>
 			</div>
 
-<<<<<<< HEAD
-      <div>
-        <h3>Preference Id</h3>
-        <p>${preference_id}</p>
-      </div>
-
-      <div>
-        <h3>Site Id</h3>
-        <p>${site_id}</p>
-      </div>
-
-      <div>
-        <h3>Processing Mode</h3>
-        <p>${processing_mode}</p>
-      </div>
-
-      <div>
-        <h3>Merchant Account Id</h3>
-        <p>${merchant_account_id}</p>
-      </div>
-    
-    </div>
-  )
-=======
 			<div>
 				<h3>Merchant Account Id</h3>
 				<p>${merchant_account_id}</p>
 			</div>
 		</div>
 	);
->>>>>>> 8555de963b6427e66207e249d361a24c84be025c
 }
 
 /* // collection_id=1247974602
