@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Cliente } = require("../db");
+const { Cliente } = require("../src/db");
 const router = Router();
 
 

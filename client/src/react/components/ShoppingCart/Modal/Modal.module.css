@@ -10,8 +10,29 @@
 	z-index: 999;
 }
 
+.modalOverlayClose {
+	width: calc(100vw - 550px);
+}
+
+.modalCloseButton {
+	width: 25px;
+	height: 25px;
+	background-image: url("../../svg/volver-flecha.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	cursor: pointer;
+
+	transition: width 0.2s, height 0.2s;
+}
+
+.modalCloseButton:hover {
+	width: 30px;
+	height: 30px;
+}
+
 .modalContainer {
-	width: 450px;
+	width: 550px;
 	background: #fff;
 	position: relative;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 29px 0px;
@@ -19,6 +40,7 @@
 	font-size: 20px;
 	font-weight: 800;
 	padding: 10px 0;
+	z-index: 9999;
 }
 
 .modalHeader {

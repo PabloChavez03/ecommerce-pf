@@ -1,0 +1,38 @@
+[
+	{
+		"id": 1,
+		"name": "Menu de Respuestas",
+		"respuesta": "Hola soy el bot de respuesta rapida, elija una de estas opciones:",
+		"isActive": true,
+		"alternativa": [
+			"Problema de usuario",
+			"Servicio tecnico",
+			"Problemas de Compra"
+		]
+	},
+	{
+		"id": 2,
+		"name": "Problema de usuario",
+		"respuesta": "Problemas en el usuario porfavor enviar un correo a soporte tecnico. Ejemplo.ejemplo.com",
+		"isActive": true,
+		"alternativa": [
+			"Menu de Respuestas"
+		]
+	},
+	{
+		"id": 4,
+		"name": "Atencion al cliente",
+		"respuesta": "Si desea contactar con un personal de la tienda por queja o dudas: Enviar un correo al Ejemplo@ejemplo.com con el asunto ",
+		"isActive": true,
+		"alternativa": [
+			"Menu de Respuestas"
+		]
+	},
+	{
+		"id": 3,
+		"name": "Problemas de Compra",
+		"respuesta": "Tiene problema al realizar una compra en la pagina. Porfavor contactar con atencion al cliente: empresa@Empresa.com",
+		"isActive": true,
+		"alternativa": ["Menu de Respuestas"]
+	}
+]
