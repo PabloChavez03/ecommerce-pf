@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetChatBotReceptorName,
-  PostChatBotEmisor,
+  PutChatBotEmisor,
 } from "../../../../../../redux/actions-types";
 import style from "./NewEmisor.module.css";
-export default function NewEmisor({ handleNewEmisor }) {
+export default function PutEmisor({
+  handleEdit,
+  id,
+  name,
+  respuestadata,
+  isActive,
+  alternativa,
+}) {
   //Dispath reducer
   const dispatch = useDispatch();
   const ReceptorName = useSelector((state) => state.chatBotReceptorName);
@@ -14,10 +21,11 @@ export default function NewEmisor({ handleNewEmisor }) {
     desactivado: false,
   });
   const [respuesta, setRespuesta] = useState({
-    name: ReceptorName[0],
-    respuesta: "",
-    isActive: focusCheck.activo,
-    receptor: [],
+    id: id,
+    name: name,
+    respuesta: respuestadata,
+    isActive: isActive,
+    receptor: alternativa,
   });
   //Dispath useEffect
   useEffect(() => {
@@ -25,7 +33,7 @@ export default function NewEmisor({ handleNewEmisor }) {
   }, [dispatch]);
 
   const handleCerrar = () => {
-    handleNewEmisor();
+    handleEdit();
   };
   const handleInputChange = (e) => {
     e.preventDefault();
@@ -73,7 +81,7 @@ export default function NewEmisor({ handleNewEmisor }) {
   };
   const handleEnviar = () => {
     if (respuesta.respuesta !== "") {
-      dispatch(PostChatBotEmisor(respuesta));
+      dispatch(PutChatBotEmisor(respuesta));
     }
   };
   return (

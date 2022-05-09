@@ -11,8 +11,6 @@ const receptorJson = JSON.parse(json_receptor);
 const load_chat_bot = async () => {
     let emisorDB = await Chat_bot_emisor.findAll();
     let receptorDB = await Chat_bot_receptor.findAll()
-    console.log(emisorDB.length === 0);
-    console.log(receptorDB.length === 0);
     if (receptorDB.length === 0) {
         receptorJson.forEach(async (item) => {
             const jane = await Chat_bot_receptor.build({ name: item.name, isActive: item.isActive });
@@ -127,12 +125,14 @@ const addEmisor = async ({ name, respuesta, isActive = true, receptor }) => {
 
 }
 //Editar el Emisor por parametro {id, name, isActive} se puede obviar el isActive pero 
-const updateEmisor = async ({ id, name, isActive }) => {
+const updateEmisor = async ({ id, name, respuesta, isActive, alternativa }) => {
     if (id) {
-        if (name || isActive === false || isActive) {
+        if (name || respuesta || isActive === false || isActive || alternativa) {
             await Chat_bot_emisor.update({
                 name,
+                respuesta,
                 isActive,
+                alternativa
             }, { where: { id } })
             return { "Info": "Succession" }
         } else {
