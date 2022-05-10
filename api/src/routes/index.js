@@ -47,6 +47,9 @@ router.use("/mercadopago", require("./mercadoPago"));
 router.use("/auth", require("./auth"));
 //-------------------------------------------------------------------------
 
+//----------------Ordenes de Compra-------------------------------------------
+router.use("/ordendecompra", require("./purchaseOrder"));
+
 /* ¡¡¡ACLARACION!!! Para poder utilizar las rutas de ADMIN deberan de registrarse o en su defecto comentar el middleware de authMaster*/
 
 module.exports = router;

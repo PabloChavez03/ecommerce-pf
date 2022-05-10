@@ -13,8 +13,8 @@ module.exports = (sequelize) => {
         allowNull: false
       },
       invoice_detail: {
-        type: DataTypes.ARRAY(DataTypes.JSON),
-        allowNull: false
+        type: DataTypes.STRING,
+        allowNull: true
       },
       invoice_ammount: {
         type: DataTypes.FLOAT(),
