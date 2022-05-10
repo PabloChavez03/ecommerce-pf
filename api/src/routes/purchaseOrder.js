@@ -1,10 +1,10 @@
 const { Router } = require("express");
-const { Cliente, Order, Invoice} = require("../db");
+const { Users, Order, Invoice} = require("../db");
 const router = Router();
 
 router.post("/", async (req, res) => {  
-    const {orderDetails, total, orderStatus, dni_client} = req.body;
-    console.log("aquiiiiiiiiii" + req.body)
+    const {orderDetails, total, orderStatus, user_name, } = req.body;
+    console.log("aquiiiiiiiiii" + orderDetails)
 
     try {
         let ordenDeCompra = await Order.create({ 
@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
             orderDetails,
             
         })
-        let response = await Cliente.findByPk(dni_client);
+        let response = await Users.findByPk(user_name);
         ordenDeCompra.setCliente(response)
 
      
@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
             })
             newInvoice.serOrder(orderId)
         }
-       res.status(200).json(ordenDeCompra)
+      return res.status(200).json(ordenDeCompra)
 
         
 
