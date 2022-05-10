@@ -76,7 +76,7 @@ const {
 	Category,
 	ProductDetail,
 	Order,
-	Cliente,
+	// Cliente,
 	Carrito,
 	Review,
 	Invoice,
@@ -102,6 +102,13 @@ Order.belongsTo(Users);
 //Orden de compra - Factura
 Order.hasOne(Invoice);
 Invoice.belongsTo(Order);
+
+//Order de compra - Payment Response
+Order.hasOne(PaymentResponse);
+PaymentResponse.belongsTo(Order);
+
+Order.hasOne(PaymentResponse);
+PaymentResponse.belongsTo(Order);
 
 //Product-Category
 Category.hasMany(Product);
@@ -136,16 +143,11 @@ Chat_bot_receptor.belongsToMany(Chat_bot_emisor, {
 });
 
 //Relacion Factura - Orden de Compra - PaymentResponse
-Cliente.hasMany(Order)
-Order.belongsTo(Cliente)
-Order.hasOne(Invoice)
-Invoice.belongsTo(Order)
+// Users.hasMany(Order)
+// Order.belongsTo(Cliente)
+// Order.hasOne(Invoice)
+// Invoice.belongsTo(Order)
 
-Order.hasOne(PaymentResponse)
-PaymentResponse.belongsTo(Order)
-
-Order.hasOne(PaymentResponse);
-PaymentResponse.belongsTo(Order);
 
 module.exports = {
 	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
