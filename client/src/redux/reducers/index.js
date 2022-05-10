@@ -96,7 +96,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
         );
         if (payload.variants[0].stock !== cartProductAux.quantity) {
           cartProductAux.quantity++;
-        }
+        }else{alert('No hay mas stock de este producto')}
         return {
           ...state,
           cartItems: [...prevCart, cartProductAux],
@@ -153,7 +153,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
         );
         if (item.variants[variantIndex].stock !== item.quantity) {
           item.quantity++;
-        }
+        }else{alert('No hay mas stock de este producto')}
       }
       return {
         ...state,
