@@ -48,6 +48,7 @@ const Modal = ({ status, setStatus }) => {
 							{cartData &&
 								cartData.map((product) => {
 									return (
+										// console.log(product),
 										<div key={product.id + product.brandSize}>
 											<ProductCardModal
 												id={product.id}
