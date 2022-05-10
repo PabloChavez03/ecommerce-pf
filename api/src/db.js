@@ -77,7 +77,7 @@ const {
 	Category,
 	ProductDetail,
 	Order,
-	// Cliente,
+  Cliente,
 	Carrito,
 	Review,
 	Invoice,
@@ -85,6 +85,7 @@ const {
   Users,
   Chat_bot_emisor,
   Chat_bot_receptor,
+  PaymentResponse
 } = sequelize.models;
 
 
@@ -132,6 +133,15 @@ Role.belongsTo(Users);
 //Chat bot Emisor-Receptor
 Chat_bot_emisor.belongsToMany(Chat_bot_receptor, { through: "Emisor_Receptor" });
 Chat_bot_receptor.belongsToMany(Chat_bot_emisor, { through: "Emisor_Receptor" });
+
+//Relacion Factura - Orden de Compra - PaymentResponse
+Order.belongsTo(Cliente)
+Order.hasOne(Invoice)
+Invoice.belongsTo(Order)
+
+Order.hasOne(PaymentResponse)
+PaymentResponse.belongsTo(Order)
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
