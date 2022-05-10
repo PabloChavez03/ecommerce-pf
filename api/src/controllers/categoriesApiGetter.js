@@ -7,13 +7,13 @@ let categories = JSON.parse(json_categories);
 async function getAPIcategories() {
 	if (categories.length === 0) {
 		const options = {
-			method: "GET",
-			url: "https://asos2.p.rapidapi.com/categories/list",
-			headers: {
-				"X-RapidAPI-Host": "asos2.p.rapidapi.com",
-				"X-RapidAPI-Key": "d62f81a6dfmsh5fe6aeef1451a1ep159b91jsn2fb37bcd4df7",
-			},
-		};
+      method: "GET",
+      url: "https://asos2.p.rapidapi.com/categories/list",
+      headers: {
+        "X-RapidAPI-Host": "asos2.p.rapidapi.com",
+        "X-RapidAPI-Key": "168bbc16e7msh73363da5ecfdd83p15b188jsn584ac672ce4b",
+      },
+    };
 
 		const data = axios(options)
 			.then(({ data }) => adaptCategory(data))
