@@ -2,7 +2,7 @@ const { Router } = require("express");
 const {PaymentResponse} = require("../db");
 const router = Router();
 
-router.post("", async (req, res) => {
+router.post("/", async (req, res) => {
 const {payment_id, status} = req.body;
 console.log(req.body)
 
