@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
-import { getAllClients } from "../../../../redux/actions-types";
+import {
+	getAllClients,
+	resetAllClients,
+} from "../../../../redux/actions-types";
 
 import s from "./allClients.module.css";
 
@@ -12,6 +15,10 @@ export default function AllClients() {
 
 	useEffect(() => {
 		dispatch(getAllClients(token));
+
+		return () => {
+			dispatch(resetAllClients());
+		};
 	}, []);
 
 	const allClients = useSelector((state) => state.allClients);
