@@ -24,6 +24,7 @@ import {
 	LOGGED_OUT,
 	UPDATE_USER_INFO,
 	GET_ALL_CLIENTS,
+	RESET_ALL_CLIENTS,
 	GET_CLIENT_DETAIL,
 	SET_CHANGE_FORM_CREATE,
 	DELETE_CHAT_BOT_RECEPTOR,
@@ -33,7 +34,6 @@ import {
 	POST_CHAT_BOT_EMISOR,
 	PUT_CHAT_BOT_RECEPTOR,
 	PUT_CHAT_BOT_EMISOR,
-	DEL_CLIENT_DETAIL,
 } from "../actions-creators";
 import {
 	chatBot,
@@ -352,6 +352,13 @@ export function getAllClients(token) {
 			type: GET_ALL_CLIENTS,
 			payload: data,
 		});
+	};
+}
+
+export function resetAllClients() {
+	return {
+		type: RESET_ALL_CLIENTS,
+		payload: [],
 	};
 }
 

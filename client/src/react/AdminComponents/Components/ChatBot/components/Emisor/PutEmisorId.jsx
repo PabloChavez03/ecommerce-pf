@@ -27,6 +27,7 @@ export default function PutEmisor({
     isActive: isActive,
     receptor: alternativa,
   });
+  console.log(respuesta)
   //Dispath useEffect
   useEffect(() => {
     dispatch(GetChatBotReceptorName());
@@ -82,6 +83,9 @@ export default function PutEmisor({
   const handleEnviar = () => {
     if (respuesta.respuesta !== "") {
       dispatch(PutChatBotEmisor(respuesta));
+      setTimeout(() => {
+        handleEdit();
+      }, 1000);
     }
   };
   return (

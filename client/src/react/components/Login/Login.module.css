@@ -78,6 +78,11 @@
 .formButtonLogin {
 	background-color: #ad0c36;
 	color: #fff;
+	transition: 0.5s;
+}
+
+.formButtonLogin:hover {
+	background-color: #d50a40;
 }
 
 /* Section Creando usuario */
@@ -100,6 +105,11 @@
 .formButtonCreateActive {
 	background-color: #687880;
 	color: #fff;
+	transition: 0.5s;
+}
+
+.formButtonCreateActive:hover {
+	background-color: #5b8aa2;
 }
 
 .formButtonBack {
@@ -141,8 +151,6 @@
 		padding: 20px 100px;
 	}
 }
-
-
 
 .google {
 	background-color: #cd111d;

@@ -18,28 +18,31 @@ const NavAdmin = () => {
 		<>
 			<nav className={style.navContainer}>
 				<ul className={style.listContainer}>
-					<NavLink className={style.navLink} to={"/admin"}>
+					<NavLink className={style.navLinkAdmin} to={"/admin"}>
 						Principal
 					</NavLink>
-					<NavLink className={style.navLink} to={"/admin/createproduct"}>
+					<NavLink className={style.navLinkAdmin} to={"/admin/createproduct"}>
 						Crear Producto
 					</NavLink>
-					<NavLink className={style.navLink} to={"/admin/allproducts"}>
+					<NavLink className={style.navLinkAdmin} to={"/admin/allproducts"}>
 						Listado de Productos
 					</NavLink>
-					<NavLink className={style.navLink} to={"/admin/createadmin"}>
+					<NavLink className={style.navLinkAdmin} to={"/admin/createadmin"}>
 						Crear Administrador
 					</NavLink>
-					<NavLink className={style.navLink} to={"/admin/clients"}>
+					<NavLink className={style.navLinkAdmin} to={"/admin/clients"}>
 						Mis Clientes
 					</NavLink>
-					<NavLink className={style.navLink} to={"/admin/orders"}>
+					{/* <NavLink className={style.navLinkAdmin} to={"/admin/orders"}>
 						Mis Ordenes
-					</NavLink>
-					<NavLink className={style.navLink} to={"/admin/chatbot"}>
+					</NavLink> */}
+					<NavLink className={style.navLinkAdmin} to={"/admin/chatbot"}>
 						Chat Bot
 					</NavLink>
-					<button onClick={(e)=>handleClickLoggedOut(e)}>
+					<button
+						onClick={(e) => handleClickLoggedOut(e)}
+						className={style.navAdminButton}
+					>
 						Cerrar Sesión
 					</button>
 				</ul>

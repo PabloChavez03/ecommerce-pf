@@ -60,6 +60,9 @@ export default function PutReceptor({ handleEdit, id, name, isActive }) {
   const handleEnviar = () => {
     if (respuesta.name !== "") {
       dispatch(PutChatBotReceptor(respuesta));
+      setTimeout(() => {
+        handleEdit();
+      }, 1000);
     }
   };
   return (
