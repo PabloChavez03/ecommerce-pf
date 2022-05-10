@@ -63,7 +63,9 @@ export default function ClientDetail() {
 						onChange={handleAdminRole}
 					/> */}
 					{/* <button onClick={handleSubmit}>Enviar</button> */}
-					{clientDetail.Role.name === "admin" ? "Administrador" : "Cliente"}
+					{clientDetail.Role && clientDetail.Role.name === "admin"
+						? "Administrador"
+						: "Cliente"}
 				</p>
 				<p>
 					<span>Legajo: </span>

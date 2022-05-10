@@ -230,7 +230,7 @@ export const getFiltersGenderProduct = (payload) => async (dispatch) => {
 export function createNewUser(payload) {
 	return async function (dispatch) {
 		const newUser = await axios.post(
-			"http://localhost:3001/users/create",
+			"/users/create",
 			payload,
 		);
 		return newUser;
@@ -241,7 +241,7 @@ export function UserLogin(payload) {
 	return async function (dispatch) {
 		try {
 			const userLogin = await axios.post(
-				"http://localhost:3001/users/login",
+				"/users/login",
 				payload,
 			);
 			return dispatch({
@@ -317,7 +317,7 @@ export function loggedOut() {
 export function updateUserInfo(username, token, payload) {
 	return async function (dispatch) {
 		const { data } = await axios.patch(
-			`http://localhost:3001/users/update/${username}`,
+			`/users/update/${username}`,
 			payload,
 			{
 				headers: {
@@ -342,7 +342,7 @@ export function setChangeFormCreate(form) {
 
 export function getAllClients(token) {
 	return async function (dispatch) {
-		const { data } = await axios.get("http://localhost:3001/users/findall", {
+		const { data } = await axios.get("/users/findall", {
 			headers: {
 				authorization: `Bearer ${token}`,
 			},
@@ -365,7 +365,7 @@ export function resetAllClients() {
 export function getClientDetail(token, username) {
 	return async function (dispatch) {
 		const { data } = await axios.get(
-			`http://localhost:3001/users/findByPk/${username}`,
+			`/users/findByPk/${username}`,
 			{
 				headers: {
 					authorization: `Bearer ${token}`,

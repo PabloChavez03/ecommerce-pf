@@ -3,7 +3,7 @@ const { Users, Order, Invoice} = require("../db");
 const router = Router();
 
 router.post("/", async (req, res) => {  
-    const {orderDetails, total, orderStatus, user_name, } = req.body;
+    const {orderDetails, total, orderStatus, dni_client} = req.body;
     console.log("aquiiiiiiiiii" + orderDetails)
 
     try {
@@ -13,13 +13,18 @@ router.post("/", async (req, res) => {
             orderDetails,
             
         })
-        let response = await Users.findByPk(user_name);
-        ordenDeCompra.setCliente(response)
+        let client = await Users.findOne({ where: {dni_client: dni_client}});
+
+        console.log(client)
+
+        // await client.addOrder(ordenDeCompra);
+        await ordenDeCompra.addUsers(client);
+        
 
      
-        let orderId = ordenDeCompra.orderId;
+        // let orderId = ordenDeCompra.orderId;
 
-        if (orderStatus === "Completed"){
+        if (ordenDeCompra.orderStatus === "Completed"){
 
             let date = Date.now();
 
@@ -27,7 +32,8 @@ router.post("/", async (req, res) => {
                 invoice_date: date,
                 invoice_ammount: total 
             })
-            newInvoice.serOrder(orderId)
+            ordenDeCompra.setInvoice(newInvoice)
+            console.log(newInvoice)
         }
       return res.status(200).json(ordenDeCompra)
 
