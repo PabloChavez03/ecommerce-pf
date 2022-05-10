@@ -135,6 +135,7 @@ Chat_bot_emisor.belongsToMany(Chat_bot_receptor, { through: "Emisor_Receptor" })
 Chat_bot_receptor.belongsToMany(Chat_bot_emisor, { through: "Emisor_Receptor" });
 
 //Relacion Factura - Orden de Compra - PaymentResponse
+Cliente.hasMany(Order)
 Order.belongsTo(Cliente)
 Order.hasOne(Invoice)
 Invoice.belongsTo(Order)
