@@ -13,12 +13,13 @@ router.post("/", async (req, res) => {
             orderDetails,
             
         })
+
         let client = await Users.findOne({ where: {dni_client: dni_client}});
 
-        console.log(client)
+        // console.log(client)
 
-        // await client.addOrder(ordenDeCompra);
-        await ordenDeCompra.addUsers(client);
+        await client.addOrder(ordenDeCompra);
+        // await ordenDeCompra.addUsers(client);
         
 
      
