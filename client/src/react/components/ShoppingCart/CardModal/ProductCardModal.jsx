@@ -50,6 +50,7 @@ const ProductCardModal = ({
 								className={style.btnMasMenos}
 								value={"-"}
 								onClick={(e) => handleQtyChange(e)}
+								
 							>
 								{" "}
 								-{" "}
