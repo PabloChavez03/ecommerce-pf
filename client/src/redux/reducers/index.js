@@ -137,6 +137,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 					payload.id + payload.size.toString(),
 			);
 			let item = state.cartItems[index];
+			console.log(item)
 			if (payload.sign === "-") {
 				if (item.quantity === 1) {
 					return {
@@ -148,9 +149,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
 						),
 					};
 				}
-				state.cartItems[index].quantity--;
+				item.quantity--;
 			} else {
-				state.cartItems[index].quantity++;
+				// if(payload.variants[0].stock !== cartProductAux.quantity){
+                //     cartProductAux.quantity++;
+                // }
+				item.quantity++;
 			}
 			return {
 				...state,
