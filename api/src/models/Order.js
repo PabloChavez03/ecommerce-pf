@@ -14,21 +14,20 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM(),
         values: ["Canceled", "Submited", "Completed", "Processing"],
         defaultValue: "Submited",
-        isDeleted: DataTypes.BOOLEAN(),
         allowNull: false,
       },
       orderDetails: {
-        type: DataTypes.JSON(),
+        type: DataTypes.STRING(),
         allowNull: false,
       },
       total: {
         type: DataTypes.FLOAT(),
         allowNull: false,
       },
-      address: {
-        type: DataTypes.JSON(),
-        allowNull: true,
-      },
+      // address: {
+      //   type: DataTypes.JSON(),
+      //   allowNull: true,
+      // },
     },
     { timestamps: true }
   );
