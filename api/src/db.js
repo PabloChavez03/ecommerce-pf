@@ -76,22 +76,15 @@ const {
 	Category,
 	ProductDetail,
 	Order,
-  Cliente,
+	Cliente,
 	Carrito,
 	Review,
 	Invoice,
-<<<<<<< HEAD
 	Role,
 	Users,
 	Chat_bot_emisor,
 	Chat_bot_receptor,
-=======
-  Role,
-  Users,
-  Chat_bot_emisor,
-  Chat_bot_receptor,
-  PaymentResponse
->>>>>>> 2a3afc95f6cf10ef4b2c7901fe572c912bbffc08
+	PaymentResponse,
 } = sequelize.models;
 
 // Aca vendrian las relaciones
@@ -143,13 +136,12 @@ Chat_bot_receptor.belongsToMany(Chat_bot_emisor, {
 });
 
 //Relacion Factura - Orden de Compra - PaymentResponse
-Order.belongsTo(Cliente)
-Order.hasOne(Invoice)
-Invoice.belongsTo(Order)
+Order.belongsTo(Cliente);
+Order.hasOne(Invoice);
+Invoice.belongsTo(Order);
 
-Order.hasOne(PaymentResponse)
-PaymentResponse.belongsTo(Order)
-
+Order.hasOne(PaymentResponse);
+PaymentResponse.belongsTo(Order);
 
 module.exports = {
 	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
