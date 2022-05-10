@@ -13,12 +13,13 @@ router.post("/", async (req, res) => {
             orderDetails,
             
         })
+
         let client = await Users.findOne({ where: {dni_client: dni_client}});
 
-        console.log(client)
+        // console.log(client)
 
-        // await client.addOrder(ordenDeCompra);
-        await ordenDeCompra.addUsers(client);
+        await client.addOrder(ordenDeCompra);
+        // await ordenDeCompra.addUsers(client);
         
 
      
@@ -35,7 +36,7 @@ router.post("/", async (req, res) => {
             ordenDeCompra.setInvoice(newInvoice)
             console.log(newInvoice)
         }
-       res.status(200).json(ordenDeCompra)
+      return res.status(200).json(ordenDeCompra)
 
         
 
