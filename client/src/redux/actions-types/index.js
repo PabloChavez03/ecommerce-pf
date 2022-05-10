@@ -34,6 +34,7 @@ import {
 	POST_CHAT_BOT_EMISOR,
 	PUT_CHAT_BOT_RECEPTOR,
 	PUT_CHAT_BOT_EMISOR,
+	CREATE_REVIEWS,
 } from "../actions-creators";
 import {
 	chatBot,
@@ -447,3 +448,14 @@ export const PutChatBotEmisor = (data) => async (dispatch) => {
 		payload: emisor,
 	});
 };
+
+export const createReview = (review) => {
+	return async function(dispatch) {
+		const postReview = axios.post("/product/review", review);
+		console.log(postReview)
+		return dispatch({
+			type: CREATE_REVIEWS,
+			payload: postReview.data
+		})
+	}
+}
