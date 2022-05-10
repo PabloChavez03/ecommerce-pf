@@ -69,7 +69,7 @@ export default function NavBar() {
 		setLoginMenu(!loginMenu);
 	};
 	const handleLogOut = (e) => {
-		window.open("http://localhost:3001/auth/logout", "_self");
+		window.open("/auth/logout", "_self");
 	};
 
 	return (
@@ -148,9 +148,9 @@ export default function NavBar() {
 						>
 							<li>Women</li>
 						</Link>
-						<NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
+						{/* <NavLink to={"/about"} onClick={handleClickForHiddingBurguer}>
 							<li>About</li>
-						</NavLink>
+						</NavLink> */}
 					</ul>
 				</div>
 			</div>

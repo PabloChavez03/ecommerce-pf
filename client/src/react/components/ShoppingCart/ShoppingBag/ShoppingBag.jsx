@@ -37,7 +37,7 @@ export default function ShoppingBag() {
     const emailAux = userData.email ? userData.email : email;
 
     const { data } = await axios.get(
-      "http://localhost:3001/mercadopago/payment",
+      "/mercadopago/payment",
       {
         params: { cartItems, emailAux, envio },
       }
