@@ -19,53 +19,52 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 // );
 
 let sequelize =
-      process.env.NODE_ENV === "production"
-        ? new Sequelize({
-            database: DB_NAME,
-            dialect: "postgres",
-            host: DB_HOST,
-            port: 5432,
-            username: DB_USER,
-            password: DB_PASSWORD,
-            pool: {
-              max: 3,
-              min: 1,
-              idle: 10000,
-            },
-            dialectOptions: {
-              ssl: {
-                require: true,
-                // Ref.: https://github.com/brianc/node-postgres/issues/2009
-                rejectUnauthorized: false,
-              },
-              keepAlive: true,
-            },
-          })
-        : new Sequelize(
-            `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-            { logging: false, native: false }
-          );
+	process.env.NODE_ENV === "production"
+		? new Sequelize({
+				database: DB_NAME,
+				dialect: "postgres",
+				host: DB_HOST,
+				port: 5432,
+				username: DB_USER,
+				password: DB_PASSWORD,
+				pool: {
+					max: 3,
+					min: 1,
+					idle: 10000,
+				},
+				dialectOptions: {
+					ssl: {
+						require: true,
+						// Ref.: https://github.com/brianc/node-postgres/issues/2009
+						rejectUnauthorized: false,
+					},
+					keepAlive: true,
+				},
+		  })
+		: new Sequelize(
+				`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+				{ logging: false, native: false },
+		  );
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
-
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
 fs.readdirSync(path.join(__dirname, "/models"))
-  .filter(
-    (file) =>
-      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
-  )
-  .forEach((file) => {
-    modelDefiners.push(require(path.join(__dirname, "/models", file)));
-  });
+	.filter(
+		(file) =>
+			file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js",
+	)
+	.forEach((file) => {
+		modelDefiners.push(require(path.join(__dirname, "/models", file)));
+	});
 
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach((model) => model(sequelize));
 // Capitalizamos los nombres de los modelos ie: product => Product
 let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [
-  entry[0][0].toUpperCase() + entry[0].slice(1),
-  entry[1],
+	entry[0][0].toUpperCase() + entry[0].slice(1),
+	entry[1],
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
@@ -81,12 +80,11 @@ const {
 	Carrito,
 	Review,
 	Invoice,
-  Role,
-  Users,
-  Chat_bot_emisor,
-  Chat_bot_receptor,
+	Role,
+	Users,
+	Chat_bot_emisor,
+	Chat_bot_receptor,
 } = sequelize.models;
-
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -124,16 +122,19 @@ Carrito.belongsTo(Users);
 Product.hasOne(Carrito);
 Carrito.belongsTo(Product);
 
-
 //Role-User
 Users.hasOne(Role);
 Role.belongsTo(Users);
 
 //Chat bot Emisor-Receptor
-Chat_bot_emisor.belongsToMany(Chat_bot_receptor, { through: "Emisor_Receptor" });
-Chat_bot_receptor.belongsToMany(Chat_bot_emisor, { through: "Emisor_Receptor" });
+Chat_bot_emisor.belongsToMany(Chat_bot_receptor, {
+	through: "Emisor_Receptor",
+});
+Chat_bot_receptor.belongsToMany(Chat_bot_emisor, {
+	through: "Emisor_Receptor",
+});
 
 module.exports = {
-  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-  conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+	conn: sequelize, // para importart la conexión { conn } = require('./db.js');
 };
