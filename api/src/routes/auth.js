@@ -23,7 +23,8 @@ router.get("/login/success", async (req, res) => {
 
     if (!userGoogle) {
       userGoogle = await Users.create({
-        user_name: req.user.displayName,
+        name: req.user.displayName,
+        user_name: req.user.displayName.replace(/ /g, "").toLowerCase(),
         user_password: req.user.id,
         email: req.user.emails[0].value,
       });
