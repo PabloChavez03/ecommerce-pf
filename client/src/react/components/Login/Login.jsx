@@ -80,7 +80,7 @@ const Login = () => {
 		dispatch(createNewUser(newUser));
 		setNewUser({
 			phone: "",
-			dni_client: "",
+			dni_client: Number(""),
 			email: "",
 			user_name: "",
 			user_password: "",

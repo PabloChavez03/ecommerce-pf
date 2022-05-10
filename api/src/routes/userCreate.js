@@ -49,7 +49,8 @@ router.post("/", async (req, res) => {
     created ? res.status(201).json(user + "creado") : res.status(409).json({message: "user exists"});
      
   } catch (error) {
-    res.status(409).json({ error: error.parent.detail });
+    console.log(error);
+    res.status(409).json({ error });
   }
 });
 
