@@ -33,6 +33,7 @@ router.use(
 	require("./deleteProduct"),
 );
 router.use("/users/update", authMaster, require("./userUpdate"));
+router.use("/client/update", [authMaster, isAdmin], require("./updateClient"));
 router.use("/product/stock", [authMaster, isAdmin], require("./updateStock"));
 router.use("/users/delete", [authMaster, isAdmin], require("./userDelete"));
 router.use("/users/findall", [authMaster, isAdmin], require("./getUsers"));
@@ -49,6 +50,10 @@ router.use("/auth", require("./auth"));
 
 //----------------Ordenes de Compra-------------------------------------------
 router.use("/ordendecompra", require("./purchaseOrder"));
+router.use("/PaymentResponse", require("./PaymentResponse"));
+router.use("/findAllOrders", require("./getAllOrders"));
+router.use("/findorderbypk", require("./getOrderByPk"));
+router.use("/findorderbystatus", require("./getFindOrderByStatus"));
 
 /* ¡¡¡ACLARACION!!! Para poder utilizar las rutas de ADMIN deberan de registrarse o en su defecto comentar el middleware de authMaster*/
 

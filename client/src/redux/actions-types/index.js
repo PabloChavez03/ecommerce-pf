@@ -36,6 +36,8 @@ import {
   PUT_CHAT_BOT_EMISOR,
   CREATE_REVIEWS,
   GET_REVIEWS_USER,
+  UPDATE_CLIENT_INFO,
+  RESET_CLIENT_DETAIL,
 } from "../actions-creators";
 import {
   chatBot,
@@ -449,10 +451,33 @@ export const createReview = (review) => {
 
 export const getReviewsUser = (user) => {
   return async function (dispatch) {
-    const reviewsUser = await axios.get(`product/review/${user}`);
+    const reviewsUser = await axios.get(`product/review?username=${user}`);
     return dispatch({
       type: GET_REVIEWS_USER,
       payload: reviewsUser.data,
     });
   };
 };
+
+
+export function updateClientInfo(token, payload) {
+	return async function (dispatch) {
+		const { data } = await axios.patch("/client/update", payload, {
+			headers: {
+				authorization: `Bearer ${token}`,
+			},
+		});
+
+		return dispatch({
+			type: UPDATE_CLIENT_INFO,
+			payload: data,
+		});
+	};
+}
+
+export function resetClientDetail() {
+	return {
+		type: RESET_CLIENT_DETAIL,
+		payload: {},
+	};
+}

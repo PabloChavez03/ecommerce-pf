@@ -2,69 +2,69 @@ const jwt = require("jsonwebtoken");
 const { Users, Role } = require("../db");
 
 const authMaster = async (req, res, next) => {
-  //----------------------------AUTHORIZATION--------------------------------------------------------
-  const authorization = req.get("authorization");
+	//----------------------------AUTHORIZATION--------------------------------------------------------
+	const authorization = req.get("authorization");
 
-  let token = null;
+	let token = null;
 
-  if (authorization && authorization.toLowerCase().startsWith("bearer")) {
-    token = authorization.substring(7);
-  }
+	if (authorization && authorization.toLowerCase().startsWith("bearer")) {
+		token = authorization.substring(7);
+	}
 
-  let decodedToken = {};
+	let decodedToken = {};
 
-  try {
-    decodedToken = jwt.verify(token, process.env.SECRET);
-  } catch (error) {
-    console.log(error);
-  }
+	try {
+		decodedToken = jwt.verify(token, process.env.SECRET);
+	} catch (error) {
+		console.log(error);
+	}
 
-  req.userName = decodedToken.username;
-  req.role = decodedToken.role;
+	req.userName = decodedToken.username;
+	req.role = decodedToken.role;
 
-  // const user = await Users.findByPk(req.userId);
-  // console.log(decodedToken.id)
-  // console.log(user)
-  // if (!user) {
-  //   return res.status(401).son({ message: "user not found" });
-  // }
+	// const user = await Users.findByPk(req.userId);
+	// console.log(decodedToken.id)
+	// console.log(user)
+	// if (!user) {
+	//   return res.status(401).son({ message: "user not found" });
+	// }
 
-  if (!token || !decodedToken.username) {
-    return res.status(401).json({ error: "token is missing or invalid!" });
-  }
-  //------------------------------------------------------------------------------------
+	if (!token || !decodedToken.username) {
+		return res.status(401).json({ error: "token is missing or invalid!" });
+	}
+	//------------------------------------------------------------------------------------
 
-  next();
+	next();
 };
 
 const isAdmin = async (req, res, next) => {
-  // const user = await Users.findByPk(req.userId);
-  const role = await Role.findByPk(req.role);
-  // console.log(role.name);
+	// const user = await Users.findByPk(req.userId);
+	const role = await Role.findByPk(req.role);
+	// console.log(role.name);
 
-  if (role) {
-    if (role.name === "admin") {
-      next();
-    } else {
-      return res.status(403).json({ message: "require admin role" });
-    }
-  } else {
-    return res.status(403).json({ message: "not register or authorized" });
-  }
+	if (role) {
+		if (role.name === "admin") {
+			next();
+		} else {
+			return res.status(403).json({ message: "require admin role" });
+		}
+	} else {
+		return res.status(403).json({ message: "not register or authorized" });
+	}
 
-  // console.log(role)
+	// console.log(role)
 };
 
 const isClient = async (req, res, next) => {
-  const role = await Role.findByPk(req.role);
-  if (role.name === "client") {
-    next();
-  }
+	const role = await Role.findByPk(req.role);
+	if (role.name === "client") {
+		next();
+	}
 
-  return res.status(403).json({ message: "" });
+	return res.status(403).json({ message: "" });
 };
 
 module.exports = {
-  authMaster,
-  isAdmin,
+	authMaster,
+	isAdmin,
 };
