@@ -26,6 +26,7 @@ import {
 	GET_ALL_CLIENTS,
 	RESET_ALL_CLIENTS,
 	GET_CLIENT_DETAIL,
+	RESET_CLIENT_DETAIL,
 	SET_CHANGE_FORM_CREATE,
 	DELETE_CHAT_BOT_RECEPTOR,
 	DELETE_CHAT_BOT_EMISOR,
@@ -34,6 +35,7 @@ import {
 	POST_CHAT_BOT_EMISOR,
 	PUT_CHAT_BOT_RECEPTOR,
 	PUT_CHAT_BOT_EMISOR,
+	UPDATE_CLIENT_INFO,
 } from "../actions-creators";
 import {
 	chatBot,
@@ -229,10 +231,7 @@ export const getFiltersGenderProduct = (payload) => async (dispatch) => {
 
 export function createNewUser(payload) {
 	return async function (dispatch) {
-		const newUser = await axios.post(
-			"/users/create",
-			payload,
-		);
+		const newUser = await axios.post("/users/create", payload);
 		return newUser;
 	};
 }
@@ -240,10 +239,7 @@ export function createNewUser(payload) {
 export function UserLogin(payload) {
 	return async function (dispatch) {
 		try {
-			const userLogin = await axios.post(
-				"/users/login",
-				payload,
-			);
+			const userLogin = await axios.post("/users/login", payload);
 			return dispatch({
 				type: GET_USER_DATA,
 				payload: userLogin.data,
@@ -316,18 +312,29 @@ export function loggedOut() {
 
 export function updateUserInfo(username, token, payload) {
 	return async function (dispatch) {
-		const { data } = await axios.patch(
-			`/users/update/${username}`,
-			payload,
-			{
-				headers: {
-					authorization: `Bearer ${token}`,
-				},
+		const { data } = await axios.patch(`/users/update/${username}`, payload, {
+			headers: {
+				authorization: `Bearer ${token}`,
 			},
-		);
+		});
 
 		return dispatch({
 			type: UPDATE_USER_INFO,
+			payload: data,
+		});
+	};
+}
+
+export function updateClientInfo(token, payload) {
+	return async function (dispatch) {
+		const { data } = await axios.patch("/client/update", payload, {
+			headers: {
+				authorization: `Bearer ${token}`,
+			},
+		});
+
+		return dispatch({
+			type: UPDATE_CLIENT_INFO,
 			payload: data,
 		});
 	};
@@ -364,19 +371,23 @@ export function resetAllClients() {
 
 export function getClientDetail(token, username) {
 	return async function (dispatch) {
-		const { data } = await axios.get(
-			`/users/findByPk/${username}`,
-			{
-				headers: {
-					authorization: `Bearer ${token}`,
-				},
+		const { data } = await axios.get(`/users/findByPk/${username}`, {
+			headers: {
+				authorization: `Bearer ${token}`,
 			},
-		);
+		});
 
 		return dispatch({
 			type: GET_CLIENT_DETAIL,
 			payload: data,
 		});
+	};
+}
+
+export function resetClientDetail() {
+	return {
+		type: RESET_CLIENT_DETAIL,
+		payload: {},
 	};
 }
 

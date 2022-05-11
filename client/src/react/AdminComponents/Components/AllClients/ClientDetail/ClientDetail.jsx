@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import {
 	getClientDetail,
-	updateUserInfo,
-	UserLogin,
+	resetClientDetail,
+	updateClientInfo,
 } from "../../../../../redux/actions-types";
 
 import s from "./ClientDetail.module.css";
@@ -12,31 +12,41 @@ import s from "./ClientDetail.module.css";
 export default function ClientDetail() {
 	const location = useLocation();
 	const dispatch = useDispatch();
-	const [isAdmin, setIsAdmin] = useState("");
+	const [isAdmin, setIsAdmin] = useState(false);
 
 	const username = location.pathname.split("/")[3];
 	const userData = useSelector((state) => state.userData);
-
 	const clientDetail = useSelector((state) => state.clientDetail);
 
 	useEffect(() => {
 		dispatch(getClientDetail(userData.token, username));
 
-		if (clientDetail.Role && clientDetail.Role.name === "admin") {
-			setIsAdmin("admin");
+		if (clientDetail.Role?.name === "admin") {
+			setIsAdmin(true);
 		} else {
-			setIsAdmin("client");
+			setIsAdmin(false);
 		}
 
-		// if (Role.name === "admin") setIsAdmin(true);
-	}, [dispatch]);
+		return () => {
+			dispatch(resetClientDetail());
+		};
+	}, []);
 
-	const handleAdminRole = (e) => {
-		if (e.target.checked) {
-			setIsAdmin((isAdmin) => (isAdmin = "admin"));
-		} else {
-			setIsAdmin((isAdmin) => (isAdmin = "client"));
-		}
+	const handleRol = (e) => {
+		e.preventDefault();
+
+		console.log(isAdmin);
+		setIsAdmin((isAdmin) => (isAdmin = !isAdmin));
+		console.log(isAdmin);
+
+		dispatch(
+			updateClientInfo(userData.token, {
+				user_name: username,
+				rol: isAdmin === true ? "admin" : "client",
+			}),
+		);
+		dispatch(resetClientDetail());
+		dispatch(getClientDetail(userData.token, username));
 	};
 
 	// console.log(isAdmin);
@@ -63,9 +73,15 @@ export default function ClientDetail() {
 						onChange={handleAdminRole}
 					/> */}
 					{/* <button onClick={handleSubmit}>Enviar</button> */}
-					{clientDetail.Role && clientDetail.Role.name === "admin"
-						? "Administrador"
-						: "Cliente"}
+					<input
+						disabled
+						type="text"
+						value={isAdmin === true ? "Administrador" : "Cliente"}
+					/>
+					<button onClick={handleRol}>Cambiar</button>
+					<br />
+					<i>Adminsitrador / Cliente</i>
+					{/* {clientDetail.Role?.name === "admin" ? "Administrador" : "Cliente"} */}
 				</p>
 				<p>
 					<span>Legajo: </span>
