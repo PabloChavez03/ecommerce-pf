@@ -484,6 +484,9 @@ export function resetClientDetail() {
 
 export const postOrder = (order) => {
   return async function (dispatch) {
-    await axios.post("/ordendecompra", order);
+    try{
+      await axios.post("/ordendecompra", order);
+    }catch(error){console.log(error)}
+    
   };
 };
