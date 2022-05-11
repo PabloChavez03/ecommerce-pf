@@ -7,12 +7,13 @@ const createRoles = async () => {
 
 	try {
 		const roles = await Promise.all([
-			await Role.findOrCreate({ name: "client" }),
-			await Role.findOrCreate({ name: "admin" }),
-		]);
+			await Role.create({ name: "client" }),
+			await Role.create({ name: "admin" }),
+		]).catch(e=>console.log(e));
 
 		return roles;
 	} catch (error) {
+		console.log(error)
 		return new TypeError(error);
 	}
 };

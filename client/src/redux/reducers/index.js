@@ -292,6 +292,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				chatbot: payload,
 			};
 		case GET_USER_DATA:
+			console.log(payload)
 			return {
 				...state,
 				userData: payload,
@@ -418,6 +419,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			};
 
 		case GET_CLIENT_DETAIL:
+			console.log(payload)
 			return {
 				...state,
 				clientDetail: payload,
