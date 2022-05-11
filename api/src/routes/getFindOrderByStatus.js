@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { Order, Users} = require("../db");
-const { route } = require("./purchaseOrder");
+const { route } = require("./postPurchaseOrder");
 const router = Router();
 
 

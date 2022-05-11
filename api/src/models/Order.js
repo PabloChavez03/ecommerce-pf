@@ -17,17 +17,17 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       orderDetails: {
-        type: DataTypes.STRING(),
+        type: DataTypes.ARRAY(DataTypes.JSON),
         allowNull: false,
       },
       total: {
         type: DataTypes.FLOAT(),
         allowNull: false,
       },
-      // address: {
-      //   type: DataTypes.JSON(),
-      //   allowNull: true,
-      // },
+      orderDate: {
+        type: DataTypes.DATE(),
+        allowNull: false,
+      },
     },
     { timestamps: true }
   );
