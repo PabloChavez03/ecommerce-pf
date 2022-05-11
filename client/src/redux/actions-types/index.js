@@ -447,10 +447,9 @@ export const createReview = (review) => {
   };
 };
 
-//Pedir al back que se cambie la recepcion del username a params en vez de body.
 export const getReviewsUser = (user) => {
   return async function (dispatch) {
-    const reviewsUser = await axios.get("/product/review");
+    const reviewsUser = await axios.get(`product/review/${user}`);
     return dispatch({
       type: GET_REVIEWS_USER,
       payload: reviewsUser.data,
