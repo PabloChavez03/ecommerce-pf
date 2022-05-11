@@ -29,6 +29,7 @@ async function setDDBBproducts(productId) {
 				gender: productDetail.gender,
 				brandName: productDetail.brandName,
 				images: productDetail.images,
+				isInStock: productDetail.isInStock,
 				isOffertProduct: productDetail.isOffertProduct,
 				previousPrice: productDetail.previousPrice,
 				currentPrice: productDetail.currentPrice,
@@ -36,8 +37,10 @@ async function setDDBBproducts(productId) {
 				variants: productDetail.variants.map((brandSize) => {
 					return {
 						brandSize,
-						isInStock: true,
-						stock: 100,
+						stock: productDetail.isInStock
+							? Math.floor(Math.random() * (100 - 0)) + 0
+							: false,
+						isInStock: productDetail.isInStock,
 					};
 				}),
 			},

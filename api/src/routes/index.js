@@ -33,6 +33,7 @@ router.use(
   require("./deleteProduct")
 );
 router.use("/users/update", authMaster, require("./userUpdate"));
+router.use("/client/update", [authMaster, isAdmin], require("./updateClient"));
 router.use("/product/stock", [authMaster, isAdmin], require("./updateStock"));
 router.use("/users/delete", [authMaster, isAdmin], require("./userDelete"));
 router.use("/users/findall", [authMaster, isAdmin], require("./getUsers"));

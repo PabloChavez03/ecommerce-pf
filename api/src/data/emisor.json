@@ -6,7 +6,7 @@
 		"isActive": true,
 		"alternativa": [
 			"Problema de usuario",
-			"Servicio tecnico",
+			"Atencion al cliente",
 			"Problemas de Compra"
 		]
 	},
@@ -33,6 +33,6 @@
 		"name": "Problemas de Compra",
 		"respuesta": "Tiene problema al realizar una compra en la pagina. Porfavor contactar con atencion al cliente: empresa@Empresa.com",
 		"isActive": true,
-		"alternativa": ["Menu de Respuestas"]
+		"alternativa": "Menu de Respuestas"
 	}
 ]

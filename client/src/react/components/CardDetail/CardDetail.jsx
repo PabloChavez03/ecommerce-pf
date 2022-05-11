@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetails } from "../../../redux/actions-types";
 import NavBar from "../NavBar/NavBar";
+import CreateReviews from "../Reviews/CreateReviews/CreateReviews";
+import ShowReviews from "../Reviews/ShowReviews/ShowReviews";
 import Card from "./Card";
 import style from "./CardDetail.module.css";
 
@@ -17,10 +19,12 @@ export default function CardDetail() {
 	
 
 	const productDetail = useSelector((state) => state.details);
+	console.log(productDetail)
 	return (
 		<div>
 			<NavBar />
 			{productDetail.name ? (
+				<div>
 					<Card
 						id={productDetail.id}
 						name={productDetail.name}
@@ -35,6 +39,10 @@ export default function CardDetail() {
 						variants={productDetail.variants}
 						info={productDetail.info}
 					/>
+					<ShowReviews productId={productId}/>
+					<CreateReviews productId={productId}/>
+				</div>
+					
 			) : (
 				<h1>Loading...</h1>
 			)}

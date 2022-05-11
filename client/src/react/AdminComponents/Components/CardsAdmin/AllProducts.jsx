@@ -68,6 +68,7 @@ export default function AllProducts() {
 			<div className={style.cardsContainer}>
 				{productsCurent?.length ? (
 					productsCurent.map((e, index) => (
+						console.log(e),
 						<CardAdmin
 							key={index}
 							id={e.id}

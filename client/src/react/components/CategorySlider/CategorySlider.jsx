@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "./Slider/Slider";
+import css from './CategorySlider.module.css'
 
 
 function CategorySlider() {
@@ -24,9 +25,10 @@ function CategorySlider() {
     },
   ];
   return (
-    <div>
+    <div className={css.sliderContainer}>
+      
       {arr?.map((e) => {
-        return <Slider key={e.name} gender={e.name} category={e} />;
+        return <div key={e.name} className={css.container}><Slider  gender={e.name} category={e} /></div>
       })}
     </div>
   );

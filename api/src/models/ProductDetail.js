@@ -37,6 +37,10 @@ module.exports = (sequelize) => {
 				type: DataTypes.ARRAY(DataTypes.STRING),
 				allowNull: false,
 			},
+			isInStock: {
+				type: DataTypes.BOOLEAN,
+				allowNull: false,
+			},
 			isOffertProduct: {
 				type: DataTypes.BOOLEAN,
 				allowNull: true,

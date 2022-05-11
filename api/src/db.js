@@ -128,8 +128,8 @@ Product.hasOne(Carrito);
 Carrito.belongsTo(Product);
 
 //Role-User
-Users.hasOne(Role);
-Role.belongsTo(Users);
+Role.hasMany(Users);
+Users.belongsTo(Role);
 
 //Chat bot Emisor-Receptor
 Chat_bot_emisor.belongsToMany(Chat_bot_receptor, {
@@ -144,7 +144,6 @@ Chat_bot_receptor.belongsToMany(Chat_bot_emisor, {
 // Order.belongsTo(Cliente)
 // Order.hasOne(Invoice)
 // Invoice.belongsTo(Order)
-
 
 module.exports = {
 	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
