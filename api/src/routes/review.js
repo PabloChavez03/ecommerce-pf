@@ -4,11 +4,11 @@ const { Review, Users, ProductDetail } = require("../db");
 const router = Router();
 
 router.get("", async (req, res) => {
-	const { user_name } = req.body;
+	const { username } = req.query;
 
 	const clientFound = await Users.findOne({
 		where: {
-			user_name,
+			user_name: username,
 		},
 		include: [
 			{
