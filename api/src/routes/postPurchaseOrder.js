@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
 
     res.status(201).json(ordenDeCompra);
   } catch (error) {
-    console.log(error);
+    return res.status(409).send({ message: error })
   }
 });
 
