@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
 
     let client = await Users.findOne({ where: { email: email } });
 
-    console.log(client)
+    // console.log(client)
 
     await client.addOrder(ordenDeCompra);
 
