@@ -43,6 +43,9 @@ export default function ShoppingBag() {
       }
     );
 
+    //generamos nuestra orden de compra
+    //cartItems === orderDetails, envio + suma === total, userData.dni_client === dni_client
+
     window.open(data.init_point, "_self");
   };
 

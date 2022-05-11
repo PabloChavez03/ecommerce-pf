@@ -1,15 +1,20 @@
 const {DataTypes} = require("sequelize");
 
 module.exports = (sequelize) => {
-    sequelize.define("PaymentResponse", { 
-       payment_id: {
-            type:DataTypes.INTEGER(),
-            allowNull:false,
-            primaryKey: true,
-            unique: true
-        },
+    sequelize.define(
+      "PaymentResponse",
+      {
         status: {
-            type: DataTypes.STRING(),
-            },
-    },{ timestamps: false})
+          type: DataTypes.STRING(),
+          allowNull: true,
+          primaryKey: true,
+        },
+        payment_id: {
+          type: DataTypes.INTEGER(),
+          allowNull: true,
+        //   unique: true,
+        },
+      },
+      { timestamps: false }
+    );
 };

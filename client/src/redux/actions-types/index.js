@@ -481,3 +481,12 @@ export function resetClientDetail() {
 		payload: {},
 	};
 }
+
+export const postOrder = (order) => {
+  return async function (dispatch) {
+    try{
+      await axios.post("/ordendecompra", order);
+    }catch(error){console.log(error)}
+    
+  };
+};
