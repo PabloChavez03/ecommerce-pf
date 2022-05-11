@@ -1,14 +1,14 @@
 const { Role } = require("../db");
 
 const createRoles = async () => {
-	const countRoles = await Role.findAll();
+	const countRoles = await Role.findAndCountAll();
 
-	if (countRoles > 0) return;
+	if (countRoles.count === 2) return;
 
 	try {
 		const roles = await Promise.all([
-			await Role.findOrCreate({ name: "client" }),
-			await Role.findOrCreate({ name: "admin" }),
+			await Role.findOrCreate({ where: { name: "client" } }),
+			await Role.findOrCreate({ where: { name: "admin" } }),
 		]);
 
 		return roles;
