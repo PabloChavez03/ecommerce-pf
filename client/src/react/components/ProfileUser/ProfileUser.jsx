@@ -101,7 +101,6 @@ export default function ProfileUser() {
 
 	return (
 		<>
-			<NavBar />
 			<div className={style.profileUserContainer}>
 				<h1 className={style.titulo}>Mi perfil</h1>
 

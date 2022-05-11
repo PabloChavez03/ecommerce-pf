@@ -37,6 +37,7 @@ import {
 	PUT_CHAT_BOT_EMISOR,
 	UPDATE_CLIENT_INFO,
 	CREATE_REVIEWS,
+	GET_REVIEWS_USER,
 } from "../actions-creators";
 import {
 	chatBot,
@@ -462,11 +463,21 @@ export const PutChatBotEmisor = (data) => async (dispatch) => {
 
 export const createReview = (review) => {
 	return async function (dispatch) {
-		const postReview = axios.post("/product/review", review);
-		console.log(postReview);
+		const postReview = await axios.post("/product/review", review);
 		return dispatch({
 			type: CREATE_REVIEWS,
 			payload: postReview.data,
+		});
+	};
+};
+
+//Pedir al back que se cambie la recepcion del username a params en vez de body.
+export const getReviewsUser = (user) => {
+	return async function (dispatch) {
+		const reviewsUser = await axios.get("/product/review");
+		return dispatch({
+			type: GET_REVIEWS_USER,
+			payload: reviewsUser.data,
 		});
 	};
 };

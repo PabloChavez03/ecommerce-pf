@@ -40,6 +40,7 @@ import {
 	RESET_CLIENT_DETAIL,
 	UPDATE_CLIENT_INFO,
 	CREATE_REVIEWS,
+	GET_REVIEWS_USER,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -81,6 +82,7 @@ export const initialState = {
 	},
 	allClients: [],
 	clientDetail: {},
+	reviewsUser: [],
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -210,6 +212,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			return {
 				...state,
 				details: payload,
+				reviewsUser: [],
 			};
 		case ORDER_BY_PRICE:
 			let productsSort = payload[1];
@@ -434,6 +437,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
 		case CREATE_REVIEWS:
 			return {
 				...state,
+			};
+
+		case GET_REVIEWS_USER:
+			return {
+				...state,
+				reviewsUser: payload,
 			};
 		default:
 			return { ...state };
