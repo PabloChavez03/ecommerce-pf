@@ -5,7 +5,6 @@ const PaymentsService = require("../Services/PaymentsService");
 
 router.get("/payment", async (req, res) => {
   const { email, cartItems, envio } = req.query;
-  req.email = email;
 
   if (cartItems) {
     try {

@@ -1,43 +1,27 @@
 const { Router } = require("express");
-const { Users, Order, Invoice } = require("../db");
+const { Order, PaymentResponse } = require("../db");
 const router = Router();
 
-router.post("/", async (req, res) => {
-  const { orderDetails, total, dni_client } = req.body;
-  //   console.log("aquiiiiiiiiii" + orderDetails);
+router.patch("/", async (req, res) => {
+  const { status,payment_id } = req.body;
 
-  const date = Date.now();
+  // const date = Date.now();
 
   try {
-    let ordenDeCompra = await Order.create({
-      total,
-      orderStatus: null,
-      orderDetails, //DataTypes.ARRAY(DataTypes.JSON) <--
-      orderDate: date,
+    
+    const paymentResponse = await PaymentResponse.update({
+      status,
+      payment_id,
     });
 
-    let client = await Users.findOne({ where: { dni_client: dni_client } });
 
-    // console.log(client)
 
-    await client.addOrder(ordenDeCompra);
-    // await ordenDeCompra.addUsers(client);
-
-    // let orderId = ordenDeCompra.orderId;
-
-    // if (ordenDeCompra.orderStatus === "Completed") {
-    //   let newInvoice = await Invoice.create({
-    //     invoice_date: date,
-    //     invoice_ammount: total,
-    //   });
-
-    //   ordenDeCompra.setInvoice(newInvoice);
-    //   console.log(newInvoice);
+  } catch (error) {
+    
+  }
 
     return res.status(201).json({ message: "Se creo la orden de compra" });
-  } catch (error) {
-    console.log(error);
-  }
+
 });
 
 module.exports = router;

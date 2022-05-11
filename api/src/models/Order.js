@@ -10,12 +10,6 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
-      orderStatus: {
-        type: DataTypes.ENUM(),
-        values: ["Canceled", "Submited", "Completed", "Processing"],
-        defaultValue: "Submited",
-        allowNull: false,
-      },
       orderDetails: {
         type: DataTypes.ARRAY(DataTypes.JSON),
         allowNull: false,

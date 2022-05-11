@@ -3,14 +3,14 @@ const adaptProductsDetail = require("./productsDetailAdapter");
 
 function getApiProductsDetail(productId) {
 	const options = {
-		method: "GET",
-		url: "https://asos2.p.rapidapi.com/products/v3/detail",
-		params: { id: `${productId}` },
-		headers: {
-			"X-RapidAPI-Host": "asos2.p.rapidapi.com",
-			"X-RapidAPI-Key": "abd2a37343mshe3cbdd6f1a187c8p1f2f91jsn85c1f72b3ad1",
-		},
-	};
+    method: "GET",
+    url: "https://asos2.p.rapidapi.com/products/v3/detail",
+    params: { id: `${productId}` },
+    headers: {
+      "X-RapidAPI-Host": "asos2.p.rapidapi.com",
+      "X-RapidAPI-Key": "e7a5ba93dbmsh7c5feaad3850f5dp1d3689jsn476196e6adde",
+    },
+  };
 
 	return axios
 		.request(options)
