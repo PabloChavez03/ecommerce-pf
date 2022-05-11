@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	cleanFilters,
-	getAllProducts,
-	setDetails,
-} from "../../../../redux/actions-types";
+import { cleanFilters, getAllProducts, setDetails } from "../../../../redux/actions-types";
 import Paginated from "../../../components/Paginated/Paginated";
 import FiltersAdmin from "../FiltersAdmin/FiltersAdmin";
 import SearchProducts from "../SearchProducts/SearchProducts";
@@ -22,16 +18,12 @@ export default function AllProducts() {
 	const lastProduct = currentPage * productsPerPage;
 	const firstProduct = lastProduct - productsPerPage;
 	const productsCurent =
-		select === ""
-			? allProducts.slice(firstProduct, lastProduct)
-			: productFilter.slice(firstProduct, lastProduct);
+		select === "" ? allProducts.slice(firstProduct, lastProduct) : productFilter.slice(firstProduct, lastProduct);
 
 	useEffect(() => {
 		dispatch(getAllProducts());
 		dispatch(setDetails());
 	}, [dispatch]);
-
-	useEffect(() => {}, [select, productsCurent]);
 
 	const handleClickReset = (e) => {
 		e.preventDefault();
@@ -40,7 +32,7 @@ export default function AllProducts() {
 	};
 
 	/** ----- Modal ----- */
-	const [modalStock, setModalStock] = useState(true);
+	const [modalStock, setModalStock] = useState(false);
 
 	/** ----- Fin del modal ----- */
 	return (
@@ -52,10 +44,7 @@ export default function AllProducts() {
 			/> */}
 			<div className={style.search}>
 				<div>
-					<button
-						onClick={(e) => handleClickReset(e)}
-						className={style.btnResetFilters}
-					>
+					<button onClick={(e) => handleClickReset(e)} className={style.btnResetFilters}>
 						Restablecer filtros
 					</button>
 				</div>
@@ -73,27 +62,22 @@ export default function AllProducts() {
 			</div>
 			<div className={style.cardsContainer}>
 				{productsCurent?.length ? (
-					productsCurent.map(
-						(e, index) => (
-							console.log(e),
-							(
-								<CardAdmin
-									key={index}
-									id={e.id}
-									name={e.name}
-									currentPrice={e.currentPrice}
-									isInStock={e.isInStock}
-									modalStock={modalStock}
-									setModalStock={setModalStock}
-								/>
-							)
-						)
-					)
+					productsCurent.map((e, index) => (
+						<CardAdmin
+							key={index}
+							id={e.id}
+							name={e.name}
+							currentPrice={e.currentPrice}
+							isInStock={e.isInStock}
+							modalStock={modalStock}
+							setModalStock={setModalStock}
+						/>
+					))
 				) : (
 					<p>No se encontraron productos</p>
 				)}
 			</div>
-			{modalStock && <ShowStockProduct />}
+			{modalStock && <ShowStockProduct modalStock={modalStock} setModalStock={setModalStock} />}
 		</div>
 	);
 }
