@@ -38,7 +38,7 @@ router.use("/ordendecompra", require("./postPurchaseOrder"));
 router.use("/findAllOrders", require("./getAllOrders"));
 router.use("/findorderbypk", require("./getOrderByPk"));
 router.use("/findorderbystatus", require("./getFindOrderByStatus"));
-router.use("/findOrderByUser", require("./getOrdersByUser"));
+router.use("/findOrderByUser", require("./getOrdersByUser.js"));
 //-----------------------------------------------------------------------------
 
 /* ¡¡¡ACLARACION!!! Para poder utilizar las rutas de ADMIN deberan de registrarse o en su defecto comentar el middleware de authMaster*/
