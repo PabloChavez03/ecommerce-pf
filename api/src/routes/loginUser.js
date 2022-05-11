@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 		// 	where: { UserUserName: user.user_name },
 		// }).catch((e) => console.log(e));
 		// console.log(roleOfUser.id);
-		// console.log(user);
+		console.log(user);
 
 		const passwordCorrect =
 			user === null
