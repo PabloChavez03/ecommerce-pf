@@ -3,9 +3,8 @@ module.exports = (sequelize) => {
   sequelize.define(
     "Order",
     {
-      orderId: {
+      payment_id: {
         type: DataTypes.INTEGER(),
-        autoIncrement: true,
         unique: true,
         allowNull: false,
         primaryKey: true,
@@ -21,6 +20,10 @@ module.exports = (sequelize) => {
       orderDate: {
         type: DataTypes.DATE(),
         allowNull: false,
+      },
+      status: {
+        type: DataTypes.STRING(),
+        allowNull: true,
       },
     },
     { timestamps: true }
