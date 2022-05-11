@@ -18,7 +18,7 @@ export default function CreateReviews({ productId }) {
     calification: 0,
     comment: "",
   });
-  console.log(userData)
+  console.log(userData);
   const handleClickSend = (event) => {
     event.preventDefault();
     if (!userData.username) {
@@ -36,15 +36,17 @@ export default function CreateReviews({ productId }) {
       if (review.comment === "") {
         alert("Por favor ingresa comentarios del producto");
       } else if (score !== 0 && review.comment !== "") {
-        dispatch(createReview(review));
-        setScore(0);
-        setReview({
-          UserUserName: userData.username,
-          productId: productId,
-          calification: 0,
-          comment: "",
-        });
-        alert("Tu reseña fue enviada con éxito. Muchas gracias!")
+        if (userData.username) {
+          dispatch(createReview(review));
+          setScore(0);
+          setReview({
+            UserUserName: userData.username,
+            productId: productId,
+            calification: 0,
+            comment: "",
+          });
+          alert("Tu reseña fue enviada con éxito. Muchas gracias!");
+        }
       }
     }
   };
@@ -79,7 +81,6 @@ export default function CreateReviews({ productId }) {
           <NavLink to="/login">aquí</NavLink>
         </div>
       ) : null}
-      <br />
       <h4>Comentarios:</h4>
       <textarea
         type="text"
@@ -89,7 +90,6 @@ export default function CreateReviews({ productId }) {
         onChange={(e) => handleClickComment(e)}
         className={style.textArea}
       ></textarea>
-      <br />
       <h4>Calificación:</h4>
       <div className={style.imgContainer}>
         <img
