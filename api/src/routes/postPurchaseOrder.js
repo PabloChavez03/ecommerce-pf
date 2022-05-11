@@ -16,6 +16,7 @@ router.post("/", async (req, res) => {
     });
 
     let client = await Users.findOne({ where: { dni_client: dni_client } });
+    //se puede cambiar dni por email.
 
     // console.log(client)
 
