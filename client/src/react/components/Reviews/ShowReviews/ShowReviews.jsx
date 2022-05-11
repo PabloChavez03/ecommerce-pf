@@ -19,7 +19,7 @@ export default function ShowReviews({ productId }) {
         <div>
           {productRender.Reviews.map((e) => (
             <CardReviews
-              username={e.username}
+            UserUserName={e.UserUserName}
               comment={e.comment}
               calification={e.calification}
             />

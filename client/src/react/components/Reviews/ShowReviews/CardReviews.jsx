@@ -4,15 +4,15 @@ import starBlack from "../images/estrella-transparent.png";
 import starGold from "../images/estrella-dorada.png";
 import style from "./CardReviews.module.css";
 
-export default function CardReviews({ username, comment, calification }) {
+export default function CardReviews({ UserUserName, comment, calification }) {
     console.log(calification)
     console.log(typeof calification)
   return (
     <div>
       <AccountIcon />
-      <h5>Usuario:</h5>
-      <p>{username}</p>
-      <h5>Comentario:</h5>
+      <h4>Usuario:</h4>
+      <p>{UserUserName}</p>
+      <h4>Comentario:</h4>
       <span>{comment}</span>
       <h4>Calificación:</h4>
       <div className={style.imgContainer}>
