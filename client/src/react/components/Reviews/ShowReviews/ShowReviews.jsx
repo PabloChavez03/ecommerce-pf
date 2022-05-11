@@ -12,7 +12,7 @@ export default function ShowReviews({ productId }) {
 
   const productRender = useSelector((state) => state.details);
   const reviews = productRender.Reviews;
-  
+
   return (
     <div>
       <h3>Reseñas del producto:</h3>
