@@ -10,6 +10,7 @@ import FiltersAdmin from "../FiltersAdmin/FiltersAdmin";
 import SearchProducts from "../SearchProducts/SearchProducts";
 import CardAdmin from "./CardAdmin";
 import style from "./CardAdmin.module.css";
+import ShowStockProduct from "./ShowStockProduct/ShowStockProduct";
 
 export default function AllProducts() {
 	const dispatch = useDispatch();
@@ -37,6 +38,11 @@ export default function AllProducts() {
 		setSelect("");
 		dispatch(cleanFilters("admin"));
 	};
+
+	/** ----- Modal ----- */
+	const [modalStock, setModalStock] = useState(true);
+
+	/** ----- Fin del modal ----- */
 	return (
 		<div className={style.container}>
 			{/* <Filter
@@ -67,20 +73,27 @@ export default function AllProducts() {
 			</div>
 			<div className={style.cardsContainer}>
 				{productsCurent?.length ? (
-					productsCurent.map((e, index) => (
-						console.log(e),
-						<CardAdmin
-							key={index}
-							id={e.id}
-							name={e.name}
-							currentPrice={e.currentPrice}
-							isInStock={e.isInStock}
-						/>
-					))
+					productsCurent.map(
+						(e, index) => (
+							console.log(e),
+							(
+								<CardAdmin
+									key={index}
+									id={e.id}
+									name={e.name}
+									currentPrice={e.currentPrice}
+									isInStock={e.isInStock}
+									modalStock={modalStock}
+									setModalStock={setModalStock}
+								/>
+							)
+						)
+					)
 				) : (
 					<p>No se encontraron productos</p>
 				)}
 			</div>
+			{modalStock && <ShowStockProduct />}
 		</div>
 	);
 }
