@@ -1,11 +1,13 @@
 const { Router } = require("express");
-const { Review, Users, ProductDetail } = require("../db");
+const { Review, Users, ProductDetail, Role } = require("../db");
 
 const router = Router();
 
 router.get("", async (req, res) => {
 	try {
 		const { username } = req.query;
+
+		console.log(username);
 
 		const clientFound = await Users.findOne({
 			where: {
@@ -14,6 +16,9 @@ router.get("", async (req, res) => {
 			include: [
 				{
 					model: Review,
+				},
+				{
+					model: Role,
 				},
 			],
 		});
