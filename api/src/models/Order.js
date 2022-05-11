@@ -3,31 +3,28 @@ module.exports = (sequelize) => {
   sequelize.define(
     "Order",
     {
-      orderId: {
+      payment_id: {
         type: DataTypes.INTEGER(),
-        autoIncrement: true,
         unique: true,
         allowNull: false,
         primaryKey: true,
       },
-      orderStatus: {
-        type: DataTypes.ENUM(),
-        values: ["Canceled", "Submited", "Completed", "Processing"],
-        defaultValue: "Submited",
-        allowNull: false,
-      },
       orderDetails: {
-        type: DataTypes.STRING(),
+        type: DataTypes.ARRAY(DataTypes.JSON),
         allowNull: false,
       },
       total: {
         type: DataTypes.FLOAT(),
         allowNull: false,
       },
-      // address: {
-      //   type: DataTypes.JSON(),
-      //   allowNull: true,
-      // },
+      orderDate: {
+        type: DataTypes.DATE(),
+        allowNull: false,
+      },
+      status: {
+        type: DataTypes.STRING(),
+        allowNull: true,
+      },
     },
     { timestamps: true }
   );

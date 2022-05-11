@@ -79,7 +79,7 @@ const {
 	// Cliente,
 	Carrito,
 	Review,
-	Invoice,
+	// Invoice,
 	Role,
 	Users,
 	Chat_bot_emisor,
@@ -100,15 +100,17 @@ Users.hasMany(Order);
 Order.belongsTo(Users);
 
 //Orden de compra - Factura
-Order.hasOne(Invoice);
-Invoice.belongsTo(Order);
+// Order.hasOne(Invoice);
+// Invoice.belongsTo(Order);
 
 //Order de compra - Payment Response
-Order.hasOne(PaymentResponse);
-PaymentResponse.belongsTo(Order);
+// PaymentResponse.hasOne(Order);
+// Order.belongsTo(PaymentResponse);
 
-Order.hasOne(PaymentResponse);
-PaymentResponse.belongsTo(Order);
+// Order.hasOne(PaymentResponse);
+// PaymentResponse.belongsTo(Order);
+// PaymentResponse.belongsTo(Order);
+
 
 //Product-Category
 Category.hasMany(Product);
