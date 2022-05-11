@@ -28,21 +28,24 @@ export default function ChatBot() {
           <div className={styles.ChatBotTitle}>
             <p>Chat Bot</p>
           </div>
-          <div className={styles.ChatContainer}>
-            <p>{dataChatBot.respuesta}</p>
-            <br />
-            {dataChatBot.alternativa
-              ? dataChatBot.alternativa.map((item) => (
-                  <p
-                    key={item}
-                    className={styles.alterChat}
-                    onClick={() => handleoption(item)}
-                  >
-                    {item}
-                  </p>
-                ))
-              : null}
-          </div>
+
+          {dataChatBot !== undefined ? (
+            <div className={styles.ChatContainer}>
+              <p>{dataChatBot.respuesta}</p>
+              <br />
+              {dataChatBot.alternativa
+                ? dataChatBot.alternativa.map((item) => (
+                    <p
+                      key={item}
+                      className={styles.alterChat}
+                      onClick={() => handleoption(item)}
+                    >
+                      {item}
+                    </p>
+                  ))
+                : null}
+            </div>
+          ) : null}
         </div>
       ) : null}
       <div className={styles.botton} onClick={() => handleactive()}>
