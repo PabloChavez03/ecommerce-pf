@@ -9,10 +9,11 @@ router.patch("", async (req, res) => {
 	try {
 		const user = await Users.findOne({
 			where: { user_name },
-		}).catch((e) => e);
+		}).catch((e) => console.log(e));
 
 		if (rol) {
 			const role = await Role.findOne({ where: { name: rol } });
+			console.log("role", role);
 			await user.setRole(role);
 		}
 
@@ -20,10 +21,8 @@ router.patch("", async (req, res) => {
 
 		const userModified = await Users.findOne({
 			where: { user_name },
-			include: { Model: Role },
-		}).catch((e) => e);
-
-		console.log(userModified);
+			include: { model: Role },
+		}).catch((e) => console.log(e));
 
 		res.status(200).send(userModified);
 	} catch (error) {
