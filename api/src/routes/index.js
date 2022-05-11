@@ -23,24 +23,20 @@ router.use("/users/create", require("./userCreate"));
 router.use("/users/login", require("./loginUser"));
 router.use("/products/create", [authMaster, isAdmin], require("./postProduct"));
 router.use(
-	"/products/update",
-	[authMaster, isAdmin],
-	require("./updateProduct"),
+  "/products/update",
+  [authMaster, isAdmin],
+  require("./updateProduct")
 );
 router.use(
-	"/products/delete",
-	[authMaster, isAdmin],
-	require("./deleteProduct"),
+  "/products/delete",
+  [authMaster, isAdmin],
+  require("./deleteProduct")
 );
 router.use("/users/update", authMaster, require("./userUpdate"));
 router.use("/product/stock", [authMaster, isAdmin], require("./updateStock"));
 router.use("/users/delete", [authMaster, isAdmin], require("./userDelete"));
 router.use("/users/findall", [authMaster, isAdmin], require("./getUsers"));
-router.use(
-	"/users/findByPk",
-	[authMaster, isAdmin],
-	require("./usersFindByPk"),
-);
+router.use("/users/findByPk", [authMaster, isAdmin], require("./usersFindByPk"));
 //----------------------Mercado Pago---------------------------------------
 router.use("/mercadopago", require("./mercadoPago"));
 //-----------------------  Google  ----------------------------------------
@@ -48,7 +44,7 @@ router.use("/auth", require("./auth"));
 //-------------------------------------------------------------------------
 
 //----------------Ordenes de Compra-------------------------------------------
-router.use("/ordendecompra", require("./purchaseOrder"));
+router.use("/ordendecompra", require("./postPurchaseOrder"));
 router.use("/PaymentResponse", require("./PaymentResponse"));
 
 /* ¡¡¡ACLARACION!!! Para poder utilizar las rutas de ADMIN deberan de registrarse o en su defecto comentar el middleware de authMaster*/

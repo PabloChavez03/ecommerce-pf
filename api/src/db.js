@@ -107,9 +107,6 @@ Invoice.belongsTo(Order);
 Order.hasOne(PaymentResponse);
 PaymentResponse.belongsTo(Order);
 
-Order.hasOne(PaymentResponse);
-PaymentResponse.belongsTo(Order);
-
 //Product-Category
 Category.hasMany(Product);
 Product.belongsTo(Category);
