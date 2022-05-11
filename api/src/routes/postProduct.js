@@ -79,6 +79,7 @@ router.post("", async (req, res) => {
 				gender,
 				brandName,
 				images,
+				isInStock: isThereProducts ? true : false,
 				isOffertProduct: isOffertPrice,
 				previousPrice: "" ? null : previousPrice,
 				currentPrice,
