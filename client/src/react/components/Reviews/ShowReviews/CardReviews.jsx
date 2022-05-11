@@ -5,8 +5,6 @@ import starGold from "../images/estrella-dorada.png";
 import style from "./CardReviews.module.css";
 
 export default function CardReviews({ UserUserName, comment, calification }) {
-    console.log(calification)
-    console.log(typeof calification)
   return (
     <div>
       <AccountIcon />

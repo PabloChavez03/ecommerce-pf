@@ -12,14 +12,15 @@ export default function ShowReviews({ productId }) {
 
   const productRender = useSelector((state) => state.details);
   const reviews = productRender.Reviews;
+  
   return (
     <div>
       <h3>Reseñas del producto:</h3>
-      {reviews?.length? (
+      {reviews?.length ? (
         <div>
-          {productRender.Reviews.map((e) => (
+          {productRender.Reviews.map((e)=>(
             <CardReviews
-            UserUserName={e.UserUserName}
+              UserUserName={e.UserUserName}
               comment={e.comment}
               calification={e.calification}
             />
