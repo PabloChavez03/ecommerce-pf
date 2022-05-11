@@ -39,6 +39,7 @@ import {
 	RESET_ALL_CLIENTS,
 	RESET_CLIENT_DETAIL,
 	UPDATE_CLIENT_INFO,
+	CREATE_REVIEWS,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -429,6 +430,10 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			return {
 				...state,
 				clientDetail: payload,
+			};
+		case CREATE_REVIEWS:
+			return {
+				...state,
 			};
 		default:
 			return { ...state };
