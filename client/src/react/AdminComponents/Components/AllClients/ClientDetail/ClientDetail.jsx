@@ -12,20 +12,16 @@ import s from "./ClientDetail.module.css";
 export default function ClientDetail() {
 	const location = useLocation();
 	const dispatch = useDispatch();
-	const [isAdmin, setIsAdmin] = useState(false);
 
 	const username = location.pathname.split("/")[3];
 	const userData = useSelector((state) => state.userData);
 	const clientDetail = useSelector((state) => state.clientDetail);
 
+	let isAdmin = false;
+	if (clientDetail.Role?.name === "admin") isAdmin = true;
+
 	useEffect(() => {
 		dispatch(getClientDetail(userData.token, username));
-
-		if (clientDetail.Role?.name === "admin") {
-			setIsAdmin(true);
-		} else {
-			setIsAdmin(false);
-		}
 
 		return () => {
 			dispatch(resetClientDetail());
@@ -35,16 +31,18 @@ export default function ClientDetail() {
 	const handleRol = (e) => {
 		e.preventDefault();
 
-		console.log(isAdmin);
-		setIsAdmin((isAdmin) => (isAdmin = !isAdmin));
-		console.log(isAdmin);
+		if (userData.username === clientDetail.user_name) {
+			alert("No puedes cambiar tus propios permisos");
+			return;
+		}
 
 		dispatch(
 			updateClientInfo(userData.token, {
 				user_name: username,
-				rol: isAdmin === true ? "admin" : "client",
+				rol: isAdmin !== true ? "admin" : "client",
 			}),
 		);
+
 		dispatch(resetClientDetail());
 		dispatch(getClientDetail(userData.token, username));
 	};
