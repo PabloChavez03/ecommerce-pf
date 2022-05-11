@@ -4,20 +4,24 @@ const { Review, Users, ProductDetail } = require("../db");
 const router = Router();
 
 router.get("", async (req, res) => {
-	const { username } = req.query;
+	try {
+		const { username } = req.query;
 
-	const clientFound = await Users.findOne({
-		where: {
-			user_name: username,
-		},
-		include: [
-			{
-				model: Review,
+		const clientFound = await Users.findOne({
+			where: {
+				user_name: username,
 			},
-		],
-	});
+			include: [
+				{
+					model: Review,
+				},
+			],
+		});
 
-	res.send(clientFound);
+		res.send(clientFound);
+	} catch (e) {
+		console.log(e);
+	}
 });
 
 router.post("", async (req, res) => {
