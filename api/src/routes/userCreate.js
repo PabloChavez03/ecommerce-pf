@@ -3,6 +3,7 @@ const { Users, Role } = require("../db");
 const router = Router();
 // const bcrypt = require("bcrypt");
 
+
 router.post("/", async (req, res) => {
   const {
     legajo_user,
@@ -17,19 +18,21 @@ router.post("/", async (req, res) => {
     address,
   } = req.body;
   try {
-    const saltRam = 10;
-    // const passwordHash = await bcrypt.hash(user_password, saltRam);
-
-    const user = await Users.create({
-      legajo_user,
-      user_name,
-      user_password /*passwordHash*/,
-      phone,
-      dni_client,
-      email,
-      name,
-      lastname,
-      address,
+    // const saltRam = 10;
+    // const passwordHash = await bcrypt.hash(user_password, saltRam)
+    
+    const [user, created] = await Users.findOrCreate({
+      where: {
+        legajo_user,
+        user_name,
+        user_password /*passwordHash*/,
+        phone,
+        dni_client,
+        email,
+        name,
+        lastname,
+        address,
+      },
     });
 
     if (rol) {
@@ -39,12 +42,14 @@ router.post("/", async (req, res) => {
       const roleClient = await Role.findOne({ where: { name: "client" } });
       await user.setRole(roleClient);
     }
+   
 
-    const createdUser = await user.save();
+    await user.save();
 
-    createdUser ? res.status(200).json(user + "creado") : res.sendStatus(404);
+    created ? res.status(201).json(user + "creado") : res.status(409).json({message: "user exists"});
+     
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(409).json({ error: error.parent.detail });
   }
 });
 

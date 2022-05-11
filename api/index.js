@@ -24,13 +24,15 @@ const { conn } = require("./src/db.js");
 const setDDBBcategories = require("./src/controllers/categoriesDbSetter.js");
 const getDDBBproducts = require("./src/controllers/productsDbGetter.js");
 const createRoles = require("./src/controllers/createRoles.js");
+const { load_chat_bot } = require("./src/controllers/chatBot.js");
 //const { getAPIproducts } = require("./src/controllers/productsPost.js");
 
 // Syncing all the models at once.
 conn
-  .sync({ force: false })
-  .then(() => {
-    server.listen(process.env.PORT || 5000, async () => {
+	.sync({ force: false })
+	.then(() => {
+		server.listen(process.env.PORT || 5000, async () => {
+			await load_chat_bot();
 
       // // // Roles
       // await createRoles();
@@ -96,7 +98,7 @@ conn
       // await getDDBBproducts(4545);
       // await getDDBBproducts(5088);
 
-      console.log("Listening on 3001"); // eslint-disable-line no-console
-    });
-  })
-  .catch((e) => console.log(e));
+			console.log("Listening on 3001"); // eslint-disable-line no-console
+		});
+	})
+	.catch((e) => console.log(e));

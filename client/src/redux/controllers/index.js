@@ -65,9 +65,9 @@ export const currentcategory = async (gender) => {
             hash[current.id] = true;
             return exists;
         });
-        let newCategory =[]
-        categoryArray.forEach(item=>{
-            if(item.genre.toLowerCase()===gender.toLowerCase()){
+        let newCategory = []
+        categoryArray.forEach(item => {
+            if (item.genre.toLowerCase() === gender.toLowerCase()) {
                 newCategory.push(item)
             }
         })
@@ -79,15 +79,135 @@ export const currentcategory = async (gender) => {
 
 export const chatBot = async (item) => {
     try {
-        if(item){
+        if (item) {
             return await axios
-            .get(`/chatBot?dataString=${item}`)
-            .then((res) => res.data)
+                .get(`/chatBot?dataString=${item}`)
+                .then((res) => res.data)
         }
         return await axios
             .get("/chatBot")
             .then((res) => res.data)
     } catch (error) {
         console.log(error);
+    }
+}
+////Chat bot Receptor
+export const getChatBotReceptor = async () => {
+    try {
+        return await axios
+            .get(`/chatBot/receptor`)
+            .then(res => res.data)
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const getChatBotReceptorName = async () => {
+    try {
+        let data = await getChatBotReceptor()
+        return data.map(item => item.name)
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const postChatBotReceptor = async (data) => {
+    try {
+        return await axios
+            .post(`/chatBot/receptor`, {
+                name: data.name,
+                isActive: data.isActive
+            })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const putChatBotReceptor = async (data) => {
+    try {
+        return await axios
+            .put(`/chatBot/receptor`, {
+                id: data.id,
+                name: data.name,
+                isActive: data.isActive
+            })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const deleteChatBotReceptor = async (id) => {
+    try {
+        await axios
+            .delete(`/chatBot/receptor`, {
+                data: {
+                    id: id,
+                }
+            })
+        return await getChatBotReceptor()
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+/**----------------------------------EMISOR----------------------------------------------- */
+////Chat bot Emisor
+export const getChatBotEmisor = async () => {
+    try {
+        return await axios
+            .get(`/chatBot/emisor`)
+            .then(res => res.data)
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const postChatBotEmisor = async (data) => {
+    try {
+        return await axios
+            .post(`/chatBot/emisor`, {
+                name: data.name,
+                respuesta: data.respuesta,
+                isActive: data.isActive,
+                receptor: data.receptor
+            })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const putChatBotEmisor = async (data) => {
+    try {
+        return await axios
+            .put(`/chatBot/emisor`, {
+                id: data.id,
+                name: data.name,
+                respuesta: data.respuesta,
+                isActive: data.isActive,
+                alternativa: data.alternativa
+            })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const deleteChatBotEmisor = async (id) => {
+    try {
+        await axios
+            .delete(`/chatBot/emisor`, {
+                data: {
+                    id: id,
+                }
+            })
+        return await getChatBotEmisor()
+    }
+    catch (err) {
+        console.log(err);
     }
 }
