@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { Users, Role } = require("../db");
+const { Users, Role, Product } = require("../db");
 const jwt = require("jsonwebtoken");
 // const bcrypt = require("bcrypt");
 
@@ -10,13 +10,13 @@ router.post("/", async (req, res) => {
 	try {
 		const user = await Users.findOne({
 			where: { user_name },
-			include: { model: Role },
+			include: [{ model: Role }, { model: Product }],
 		});
 		// const roleOfUser = await Role.findOne({
 		// 	where: { UserUserName: user.user_name },
 		// }).catch((e) => console.log(e));
 		// console.log(roleOfUser.id);
-		// console.log(user);
+		// console.log(JSON.stringify(user, null, 2));
 
 		const passwordCorrect =
 			user === null
@@ -49,6 +49,7 @@ router.post("/", async (req, res) => {
 				lastname: user.lastname,
 				address: user.address,
 				isRegistered: user.isRegistered,
+				Products: user.Products,
 				token,
 			});
 		}
