@@ -28,23 +28,25 @@
 
 .productName {
 	font-size: 20px;
+	width: 90%;
 }
 
 .modalCloseButton {
-	width: 25px;
-	height: 25px;
 	background-image: url("../../../../components/svg/volver-flecha.png");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	width: 25px;
+	height: 20px;
 	transform: scaleX(-1);
 	cursor: pointer;
+	margin-top: 5px;
 }
 
-.modalCloseButton:hover {
+/* .modalCloseButton:hover {
 	width: 26px;
 	height: 26px;
-}
+} */
 
 .listTitle {
 	display: flex;
@@ -56,6 +58,8 @@
 .listItems {
 	display: flex;
 	flex-direction: column;
+	max-height: 200px;
+	overflow-y: scroll;
 }
 
 .rowContainer {

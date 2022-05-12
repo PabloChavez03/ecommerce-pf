@@ -5,10 +5,7 @@ import style from "./ShowStockProduct.module.css";
 
 const ShowStockProduct = ({ modalStock, setModalStock }) => {
 	const dispatch = useDispatch();
-	const [detail, setDetail] = useState({
-		name: "",
-		variants: [],
-	});
+	const [detail, setDetail] = useState({});
 	const productDetailStock = useSelector((state) => state.details);
 
 	const { name, variants } = detail;
@@ -19,8 +16,10 @@ const ShowStockProduct = ({ modalStock, setModalStock }) => {
 
 	const handleCloseModal = () => {
 		setModalStock(!modalStock);
-		dispatch(setDetails());
+		dispatch(setDetails({}));
 	};
+
+	console.log(detail);
 
 	return (
 		<div className={style.modalStockProductContainerOverlay}>
@@ -35,13 +34,16 @@ const ShowStockProduct = ({ modalStock, setModalStock }) => {
 					<p>Stock</p>
 				</div>
 				<div className={style.listItems}>
-					{variants.length &&
+					{variants ? (
 						variants.map((item) => (
 							<div key={item.brandSize} className={style.rowContainer}>
 								<p>{item.brandSize}</p>
 								<p>{item.stock}</p>
 							</div>
-						))}
+						))
+					) : (
+						<p>Resolviendo</p>
+					)}
 				</div>
 			</div>
 		</div>

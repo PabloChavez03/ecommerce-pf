@@ -4,6 +4,7 @@ import { getReviewsUser } from "../../../../redux/actions-types";
 import CardReviews from "../../Reviews/ShowReviews/CardReviews";
 import deleteIcon from "../../../AdminComponents/Components/CardsAdmin/images/eliminar.png";
 import editIcon from "../../../AdminComponents/Components/CardsAdmin/images/editar.png";
+import { NavLink } from "react-router-dom";
 
 export default function ReviewsUser() {
   const dispatch = useDispatch();
@@ -13,19 +14,22 @@ export default function ReviewsUser() {
   }, [userData, dispatch]);
 
   const reviewsUser = useSelector((state) => state.reviewsUser).Reviews;
-  console.log(userData);
   return (
     <div>
       {reviewsUser?.length ? (
-        reviewsUser.map((e) => (
-          <div>
+        reviewsUser.map((e, i) => (
+          <div key={i}>
             <CardReviews
               UserUserName={e.UserUserName}
               comment={e.comment}
               calification={e.calification}
             />
-            <img src={editIcon} alt="edit icon"/>
-            <img src={deleteIcon} alt="edit icon"/>
+            <NavLink to={`/user/reviews/update/${e.id}`}>
+              <img src={editIcon} alt="edit icon" />
+            </NavLink>
+            <NavLink to={`/user/reviews/delete/${e.id}`}>
+              <img src={deleteIcon} alt="delete icon" />
+            </NavLink>
           </div>
         ))
       ) : (

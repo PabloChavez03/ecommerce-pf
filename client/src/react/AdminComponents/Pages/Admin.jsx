@@ -14,6 +14,7 @@ import AllOrders from "../Components/AllOrders/AllOrders";
 import ClientDetail from "../Components/AllClients/ClientDetail/ClientDetail";
 import OrderDetail from "../Components/OrderDetail/OrderDetail";
 import ChatBot from "../Components/ChatBot/ChatBot";
+import ProfileUser from "../../components/ProfileUser/ProfileUser";
 
 const Admin = () => {
 	return (
@@ -39,6 +40,7 @@ const Admin = () => {
 						<Route path={"/orders"} element={<AllOrders />} />
 						<Route path={"/orders/:idOrder"} element={<OrderDetail />} />
 						<Route path={"/chatbot"} element={<ChatBot />} />
+						<Route path={"/profile"} element={<ProfileUser />} />
 					</Routes>
 				</div>
 			</div>
