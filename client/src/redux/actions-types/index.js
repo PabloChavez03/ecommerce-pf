@@ -38,6 +38,8 @@ import {
   GET_REVIEWS_USER,
   UPDATE_CLIENT_INFO,
   RESET_CLIENT_DETAIL,
+  DELETE_REVIEWS,
+  UPDATE_REVIEWS,
 } from "../actions-creators";
 import {
   chatBot,
@@ -451,7 +453,7 @@ export const createReview = (review) => {
 
 export const getReviewsUser = (user) => {
   return async function (dispatch) {
-    const reviewsUser = await axios.get(`product/review?username=${user}`);
+    const reviewsUser = await axios.get(`/product/review?username=${user}`);
     return dispatch({
       type: GET_REVIEWS_USER,
       payload: reviewsUser.data,
@@ -459,31 +461,57 @@ export const getReviewsUser = (user) => {
   };
 };
 
-
 export function updateClientInfo(token, payload) {
-	return async function (dispatch) {
-		const { data } = await axios.patch("/client/update", payload, {
-			headers: {
-				authorization: `Bearer ${token}`,
-			},
-		});
+  return async function (dispatch) {
+    const { data } = await axios.patch("/client/update", payload, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
 
-		return dispatch({
-			type: UPDATE_CLIENT_INFO,
-			payload: data,
-		});
-	};
+    return dispatch({
+      type: UPDATE_CLIENT_INFO,
+      payload: data,
+    });
+  };
 }
 
 export function resetClientDetail() {
-	return {
-		type: RESET_CLIENT_DETAIL,
-		payload: {},
-	};
+  return {
+    type: RESET_CLIENT_DETAIL,
+    payload: {},
+  };
+}
+
+export function deleteReview(reviewId) {
+  return async function (dispatch) {
+    const reviewDelete = await axios.delete("/product/review", {
+      data: { reviewId },
+    });
+    return dispatch({
+      type: DELETE_REVIEWS,
+      payload: reviewDelete,
+    });
+  };
+}
+
+export function updateReview(update) {
+  return async function (dispatch) {
+    const reviewUpdate = await axios.patch("/product/review", update);
+    console.log(reviewUpdate)
+    return dispatch({
+      type: UPDATE_REVIEWS,
+      payload: reviewUpdate,
+    });
+  };
 }
 
 export const postOrder = (order) => {
   return async function (dispatch) {
-    await axios.post("/ordendecompra", order);
+    try {
+      await axios.post("/ordendecompra", order);
+    } catch (error) {
+      console.log(error);
+    }
   };
 };

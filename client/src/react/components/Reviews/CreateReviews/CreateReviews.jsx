@@ -18,7 +18,6 @@ export default function CreateReviews({ productId }) {
     calification: 0,
     comment: "",
   });
-  console.log(userData);
   const handleClickSend = (event) => {
     event.preventDefault();
     if (!userData.username) {
