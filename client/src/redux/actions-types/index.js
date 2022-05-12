@@ -518,13 +518,13 @@ export const postOrder = (order) => {
 };
 
 
-export function getAllClientsOrders(token, user_name) {
+export function getAllClientsOrders(/*token, */user_name) {
   return async function (dispatch) {
-    const { data } = await axios.get(`/findOrderByUser/${user_name}`, {
+    const { data } = await axios.get(`/findOrderByUser/${user_name}`/*, {
       headers: {
         authorization: `Bearer ${token}`,
       },
-    });
+    }*/);
 
     return dispatch({
       type: GET_ALL_CLIENTS_ORDERS,
