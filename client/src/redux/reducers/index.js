@@ -1,53 +1,4 @@
 import {
-<<<<<<< HEAD
-  ADD_PRODUCT_TO_CART,
-  GET_PRODUCT_BY_NAME,
-  REMOVE_PRODUCT_FROM_CART,
-  CHANGE_CART_QUANTITY,
-  SET_CURRENT_PAGE,
-  GET_ALL_PRODUCTS,
-  GET_CURRENT_BRANDS,
-  GET_FILTERS_BRANDS,
-  ORDER_BY_PRICE,
-  GET_DETAILS,
-  SET_DETAILS,
-  GET_ALL_CATEGORIES,
-  GET_CATEGORY_BY_ID,
-  GET_FILTERS_GENDER_PRODUCT,
-  POST_PRODUCT,
-  UPDATE_PRODUCT,
-  DELETE_PRODUCT,
-  GET_ALL_CATEGORIES_FOR_FORM,
-  CHAT_BOT,
-  GET_CHAT_BOT_RECEPTOR,
-  GET_CHAT_BOT_EMISOR,
-  GET_USER_DATA,
-  GET_PRODUCTS_NAME_ADMIN,
-  CLEAN_FILTERS,
-  GET_STOCK_PRODUCTS,
-  LOGGED_OUT,
-  UPDATE_USER_INFO,
-  DELETE_CHAT_BOT_RECEPTOR,
-  DELETE_CHAT_BOT_EMISOR,
-  GET_CHAT_BOT_RECEPTOR_NAME,
-  POST_CHAT_BOT_RECEPTOR,
-  POST_CHAT_BOT_EMISOR,
-  PUT_CHAT_BOT_RECEPTOR,
-  PUT_CHAT_BOT_EMISOR,
-  SET_CHANGE_FORM_CREATE,
-  GET_ALL_CLIENTS,
-  GET_CLIENT_DETAIL,
-  RESET_ALL_CLIENTS,
-  RESET_CLIENT_DETAIL,
-  UPDATE_CLIENT_INFO,
-  CREATE_REVIEWS,
-  GET_REVIEWS_USER,
-  DELETE_REVIEWS,
-  UPDATE_REVIEWS,
-  GET_ALL_CLIENTS_ORDERS,
-  GET_ALL_ORDERS
-
-=======
 	ADD_PRODUCT_TO_CART,
 	GET_PRODUCT_BY_NAME,
 	REMOVE_PRODUCT_FROM_CART,
@@ -93,53 +44,11 @@ import {
 	DELETE_REVIEWS,
 	UPDATE_REVIEWS,
 	GET_ALL_CLIENTS_ORDERS,
->>>>>>> f73e50788d154e2c465bce0968043f0124bb16e2
+  GET_ALL_ORDERS
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
 export const initialState = {
-<<<<<<< HEAD
-  products: [],
-  productFilter: [],
-  cartItems: [],
-  brands: [],
-  currentPage: 1,
-  details: {},
-  categories: [],
-  newgenders: [],
-  subTotal: 0,
-  categoriesForForm: [],
-  chatbot: {},
-  chatBotReceptor: [],
-  chatBotEmisor: [],
-  userData: {},
-  productFilterAdmin: [],
-  productsAdmin: [],
-  chatBotReceptorName: [],
-  productCreate: {
-    name: "",
-    description: "",
-    images: [],
-    previousPrice: "",
-    isOffertPrice: false,
-    currentPrice: "",
-    color: "",
-    gender: "",
-    brandName: "",
-    category: "",
-    info: {
-      aboutMe: "",
-      sizeAndFit: "",
-      careInfo: "",
-    },
-    variants: [],
-  },
-  allClients: [],
-  clientDetail: {},
-  reviewsUser: [],
-  allOrdersClientes: [],
-  allOrders:[]
-=======
 	products: [],
 	productFilter: [],
 	cartItems: [],
@@ -179,7 +88,7 @@ export const initialState = {
 	clientDetail: {},
 	reviewsUser: [],
 	allOrdersClientes: [],
->>>>>>> f73e50788d154e2c465bce0968043f0124bb16e2
+  allOrders:[]
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
