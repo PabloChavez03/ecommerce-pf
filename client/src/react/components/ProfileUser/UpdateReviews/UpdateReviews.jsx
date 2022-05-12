@@ -25,12 +25,19 @@ export default function UpdateReviews() {
 
   const [reviewUpdate, setReviewUpdate] = useState({});
   useEffect(()=>{},[reviewUpdate])
+  useEffect(()=>{},[update])
   const handleClickComment = (e) => {
     e.preventDefault();
     setUpdate({
       ...update,
       comment: e.target.value,
     });
+    setReviewUpdate({
+      reviewId,
+      changes: {
+        calification: Number(update.calification),
+        comment: e.target.value,
+      }})
   };
   const handleClickScore = (e) => {
     e.preventDefault();
@@ -38,16 +45,16 @@ export default function UpdateReviews() {
       ...update,
       calification: e.target.name,
     });
+     setReviewUpdate({
+        reviewId,
+        changes: {
+          calification: Number(e.target.name),
+          comment: update.comment,
+        }})
   };
   const handleClickSend = (e) => {
     e.preventDefault();
-   
-    setReviewUpdate({
-        reviewId,
-        changes: {
-          calification: Number(update.calification),
-          comment: update.comment,
-        }})
+  
     console.log(reviewUpdate)
     dispatch(updateReview(reviewUpdate));
   };
