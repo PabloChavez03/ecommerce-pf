@@ -111,7 +111,6 @@ Order.belongsTo(Users);
 // PaymentResponse.belongsTo(Order);
 // PaymentResponse.belongsTo(Order);
 
-
 //Product-Category
 Category.hasMany(Product);
 Product.belongsTo(Category);
@@ -149,6 +148,10 @@ Chat_bot_receptor.belongsToMany(Chat_bot_emisor, {
 // Order.belongsTo(Cliente)
 // Order.hasOne(Invoice)
 // Invoice.belongsTo(Order)
+
+// ====== Wishlist =======
+Product.belongsToMany(Users, { through: "Wishlist" });
+Users.belongsToMany(Product, { through: "Wishlist" });
 
 module.exports = {
 	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
