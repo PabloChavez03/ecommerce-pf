@@ -138,6 +138,15 @@
 	margin-bottom: 10px;
 }
 
+button:disabled,
+button[disabled],
+button[disabled]:hover {
+	border: 1px solid rgba(155, 155, 155, 0.2);
+	background-color: #cccccc;
+	color: #666666;
+	cursor: default;
+}
+
 @media (min-width: 760px) {
 	.loginContainer {
 		flex-direction: row;
