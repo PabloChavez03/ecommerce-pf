@@ -1,0 +1,10 @@
+.svg {
+	fill: none;
+	stroke: #00000050;
+	stroke-width: 1;
+}
+
+.svg:hover {
+	stroke: #e4111150;
+	fill: #e4111150;
+}

@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 		// 	where: { UserUserName: user.user_name },
 		// }).catch((e) => console.log(e));
 		// console.log(roleOfUser.id);
-		console.log(user);
+		// console.log(user);
 
 		const passwordCorrect =
 			user === null
@@ -53,7 +53,7 @@ router.post("/", async (req, res) => {
 			});
 		}
 	} catch (error) {
-		res.status(500).json({ error: error });
+		res.status(409).json({ error: error });
 	}
 });
 

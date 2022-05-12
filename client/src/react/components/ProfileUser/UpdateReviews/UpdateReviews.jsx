@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { getReviewsUser, updateReview } from "../../../../redux/actions-types";
 import starBlack from "../../Reviews/images/estrella-transparent.png";
 import starGold from "../../Reviews/images/estrella-dorada.png";
@@ -10,6 +10,7 @@ export default function UpdateReviews() {
   const dispatch = useDispatch();
   const { reviewId } = useParams();
   const { username } = useSelector((state) => state.userData);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getReviewsUser(username));
@@ -24,8 +25,8 @@ export default function UpdateReviews() {
   });
 
   const [reviewUpdate, setReviewUpdate] = useState({});
-  useEffect(()=>{},[reviewUpdate])
-  useEffect(()=>{},[update])
+  useEffect(() => {}, [reviewUpdate]);
+  useEffect(() => {}, [update]);
   const handleClickComment = (e) => {
     e.preventDefault();
     setUpdate({
@@ -37,7 +38,8 @@ export default function UpdateReviews() {
       changes: {
         calification: Number(update.calification),
         comment: e.target.value,
-      }})
+      },
+    });
   };
   const handleClickScore = (e) => {
     e.preventDefault();
@@ -45,23 +47,25 @@ export default function UpdateReviews() {
       ...update,
       calification: e.target.name,
     });
-     setReviewUpdate({
-        reviewId,
-        changes: {
-          calification: Number(e.target.name),
-          comment: update.comment,
-        }})
+    setReviewUpdate({
+      reviewId,
+      changes: {
+        calification: Number(e.target.name),
+        comment: update.comment,
+      },
+    });
   };
   const handleClickSend = (e) => {
     e.preventDefault();
-  
-    console.log(reviewUpdate)
+
+    console.log(reviewUpdate);
     dispatch(updateReview(reviewUpdate));
+    navigate("/user/reviews");
   };
-  
+
   return (
     <div className={style.container}>
-      <h3>Ingrese las modificaciones del producto:</h3>
+      <h3>Ingrese las modificaciones de su reseña:</h3>
 
       <h4>Comentarios:</h4>
       <textarea
@@ -113,6 +117,9 @@ export default function UpdateReviews() {
       <button onClick={(e) => handleClickSend(e)} className={style.buttonSend}>
         ENVIAR CAMBIOS
       </button>
+      <NavLink to={"/user/reviews"} style={{ textDecoration: "none" }}>
+        <button className={style.buttonSend}>CANCELAR</button>
+      </NavLink>
     </div>
   );
 }
