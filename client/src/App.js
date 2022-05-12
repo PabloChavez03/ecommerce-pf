@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import CardDetail from "./react/components/CardDetail/CardDetail";
@@ -13,10 +13,11 @@ import Login from "./react/components/Login/Login";
 import ShoppingBag from "./react/components/ShoppingCart/ShoppingBag/ShoppingBag";
 import PayPlataform from "./react/components/PayPlataform/PayPlataform";
 // import Success from "./react/components/back Urls/success";
-import axios from "axios";
+// import axios from "axios";
 import Failure from "./react/components/back Urls/failure";
 import DevInfo from "./react/components/Footer/DevInfo/DevInfo";
 import UserRoutes from "./react/components/ProfileUser/UserRoutes/UserRoutes";
+import DownloadPdf from "./react/components/DownloadPdf/DownloadPdf";
 function App() {
 	// const [user, setUSer] = useState(null);
 
@@ -62,6 +63,7 @@ function App() {
 				<Route path={"/user/*"} element={<UserRoutes />} />
 				<Route path={"/failure"} element={<Failure />} />
 				<Route path={"/info/dev"} element={<DevInfo />} />
+				<Route path={"/pruebapdf"} element={<DownloadPdf />} />
 			</Routes>
 			<Footer />
 		</BrowserRouter>
