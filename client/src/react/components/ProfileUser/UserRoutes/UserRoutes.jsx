@@ -9,7 +9,7 @@ import ReviewsUser from "../ReviewsUser/ReviewsUser";
 import OrderDetail from "../UserOrders/OrderDetail/OrderDetail";
 import UserOrders from "../UserOrders/UserOrders/UserOrders";
 import OrderActual from "../UserOrders/OrderActual/OrderActual";
-import style from "./UserRoutes.module.css";
+import style from "../UserRoutes/User.module.css";
 import UpdateReviews from "../UpdateReviews/UpdateReviews";
 
 export default function UserRoutes() {
