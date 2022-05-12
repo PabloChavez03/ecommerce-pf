@@ -17,7 +17,9 @@ router.use("/product/review", require("./review"));
 // router.use("/carrito", require("./carrito"));
 //----------------  chatbot  --------------------------------------------------
 router.use("/chatBot", require("./chatBot"));
-//----------------  for Admin & Client ----------------------------------------
+//-----------------------Prueba de correo--------------------------
+router.use('/email',require('./mailer'));
+//----------------  for Admin & Client ------------------------------------
 router.use("/users/create", require("./userCreate"));
 router.use("/users/login", require("./loginUser"));
 router.use("/products/create", [authMaster, isAdmin], require("./postProduct"));
@@ -54,6 +56,10 @@ router.use("/findorderbypk", require("./getOrderByPk"));
 router.use("/findorderbystatus", require("./getFindOrderByStatus"));
 router.use("/findOrderByUser", require("./getOrdersByUser.js"));
 //-----------------------------------------------------------------------------
+
+
+
+
 
 /* ¡¡¡ACLARACION!!! Para poder utilizar las rutas de ADMIN deberan de registrarse o en su defecto comentar el middleware de authMaster*/
 
