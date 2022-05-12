@@ -13,7 +13,7 @@ export default function AllClientsOrders() {
   }, [dispatch]);
 
   const allOrdersClientes = useSelector((state) => state.allOrdersClientes);
-  const { orderDetails } = allOrdersClientes;
+  // const { orderDetails } = allOrdersClientes;
 
   // console.log(orderDetails) de momento no vienen ordenes por eso tirar error
 
