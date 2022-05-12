@@ -5,9 +5,10 @@ import css from "./OrderDetail.module.css";
 import { useParams } from "react-router-dom";
 
 export default function OrderDetail() {
-  const { payment_id } = useParams();
+  const { payment_id } = useParams()
+  console.log('IDDDDDd',payment_id)
   const allOrdersClientes = useSelector((state) => state.allOrdersClientes);
-  const order = allOrdersClientes.find(
+  const order = allOrdersClientes?.find(
     (e) => Number(e.payment_id) === Number(payment_id)
   );
   console.log(order);

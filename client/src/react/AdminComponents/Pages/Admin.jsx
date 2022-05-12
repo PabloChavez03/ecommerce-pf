@@ -38,7 +38,7 @@ const Admin = () => {
 						<Route path={"/clients"} element={<AllClients />} />
 						<Route path={"/clients/:idClient"} element={<ClientDetail />} />
 						<Route path={"/orders"} element={<AllOrders />} />
-						<Route path={"/orders/:idOrder"} element={<OrderDetail />} />
+						<Route path={"/orders/:payment_id"} element={<OrderDetail />} />
 						<Route path={"/chatbot"} element={<ChatBot />} />
 						<Route path={"/profile"} element={<ProfileUser />} />
 					</Routes>

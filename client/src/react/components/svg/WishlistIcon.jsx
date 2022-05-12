@@ -3,7 +3,7 @@ import React from "react";
 import s from "./WishlistIcon.module.css";
 
 function WishlistIcon({ user, productId }) {
-	const favorited = user.Products.some((e) => {
+	const favorited = user.Products?.some((e) => {
 		return e.id === productId;
 	});
 
