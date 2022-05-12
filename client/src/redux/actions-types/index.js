@@ -39,6 +39,7 @@ import {
   UPDATE_CLIENT_INFO,
   RESET_CLIENT_DETAIL,
   DELETE_REVIEWS,
+  UPDATE_REVIEWS,
 } from "../actions-creators";
 import {
   chatBot,
@@ -452,7 +453,7 @@ export const createReview = (review) => {
 
 export const getReviewsUser = (user) => {
   return async function (dispatch) {
-    const reviewsUser = await axios.get(`product/review?username=${user}`);
+    const reviewsUser = await axios.get(`/product/review?username=${user}`);
     return dispatch({
       type: GET_REVIEWS_USER,
       payload: reviewsUser.data,
@@ -484,7 +485,7 @@ export function resetClientDetail() {
 
 export function deleteReview(reviewId) {
   return async function (dispatch) {
-    const reviewDelete = await axios.delete("product/review", {
+    const reviewDelete = await axios.delete("/product/review", {
       data: { reviewId },
     });
     return dispatch({
@@ -493,3 +494,24 @@ export function deleteReview(reviewId) {
     });
   };
 }
+
+export function updateReview(update) {
+  return async function (dispatch) {
+    const reviewUpdate = await axios.patch("/product/review", update);
+    console.log(reviewUpdate)
+    return dispatch({
+      type: UPDATE_REVIEWS,
+      payload: reviewUpdate,
+    });
+  };
+}
+
+export const postOrder = (order) => {
+  return async function (dispatch) {
+    try {
+      await axios.post("/ordendecompra", order);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

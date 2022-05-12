@@ -42,6 +42,7 @@ import {
   CREATE_REVIEWS,
   GET_REVIEWS_USER,
   DELETE_REVIEWS,
+  UPDATE_REVIEWS,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -439,11 +440,16 @@ export default function rootReducer(state = initialState, { type, payload }) {
       };
 
     case GET_REVIEWS_USER:
+      console.log(payload)
       return {
         ...state,
         reviewsUser: payload,
       };
     case DELETE_REVIEWS:
+      return {
+        ...state,
+      };
+    case UPDATE_REVIEWS:
       return {
         ...state,
       };

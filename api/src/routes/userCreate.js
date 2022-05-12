@@ -16,7 +16,7 @@ router.post("", async (req, res) => {
 		lastname,
 		address,
 	} = req.body;
-	// try {
+	try {
 	// const saltRam = 10;
 	// const passwordHash = await bcrypt.hash(user_password, saltRam)
 
@@ -62,9 +62,9 @@ router.post("", async (req, res) => {
 	created
 		? res.status(201).json(user + "creado")
 		: res.status(409).json({ message: "user exists" });
-	// } catch (error) {
-	// 	res.status(409).json({ error: error });
-	// }
+	} catch (error) {
+		res.status(409).json({ error: error });
+	}
 });
 
 module.exports = router;

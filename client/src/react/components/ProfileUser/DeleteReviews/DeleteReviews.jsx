@@ -1,16 +1,19 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { deleteReview } from "../../../../redux/actions-types";
 
 export default function DeleteReviews() {
   const dispatch = useDispatch();
   const { reviewId } = useParams();
+  const navigate = useNavigate();
+
   console.log(reviewId)
   const handleClickConfirm = (event) => {
     event.preventDefault();
-   
     dispatch(deleteReview(reviewId));
+    alert("Reseña eliminada con exito!");
+    navigate("/user/reviews")
   };
 
   return (

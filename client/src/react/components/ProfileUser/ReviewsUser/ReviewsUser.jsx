@@ -14,7 +14,6 @@ export default function ReviewsUser() {
   }, [userData, dispatch]);
 
   const reviewsUser = useSelector((state) => state.reviewsUser).Reviews;
-  console.log(reviewsUser);
   return (
     <div>
       {reviewsUser?.length ? (
@@ -25,9 +24,11 @@ export default function ReviewsUser() {
               comment={e.comment}
               calification={e.calification}
             />
-            <img src={editIcon} alt="edit icon"/>
+            <NavLink to={`/user/reviews/update/${e.id}`}>
+              <img src={editIcon} alt="edit icon" />
+            </NavLink>
             <NavLink to={`/user/reviews/delete/${e.id}`}>
-            <img src={deleteIcon} alt="edit icon"/>
+              <img src={deleteIcon} alt="delete icon" />
             </NavLink>
           </div>
         ))
