@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getAllClientsOrders } from "../../../../../redux/actions-types/index";
-// import s from "./allClients.module.css";
+import s from "./UserOrders.module.css";
 
 export default function AllClientsOrders() {
   const dispatch = useDispatch();
@@ -20,12 +20,12 @@ export default function AllClientsOrders() {
   console.log(allOrdersClientes);
 
   return (
-    <div>
-      <h1>Todas mis ordenes de compra</h1>
+    <div className={s.container}>
+      <h1 className={s.title}>Todas mis ordenes de compra</h1>
       <div>
         {allOrdersClientes?.map((client,id) => (
-          <div key={id}>
-            {/* <h3>{client?.UserUserName}</h3> */}
+          <div key={id} className={s.orders}>
+            <NavLink to={`/user/orders/${client.payment_id}`} style={{ textDecoration: "none" }}>
             <br /> {/* el br es el espaciador */}
             <p>
               <span>Fecha de emisión: </span>
@@ -43,6 +43,7 @@ export default function AllClientsOrders() {
               <span>Total: </span>
               {client.total}
             </p>
+            </NavLink>
           </div>
         ))}
       </div>
