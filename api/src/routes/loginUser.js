@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 
 router.post("/", async (req, res) => {
 	const { user_name, user_password } = req.body;
-
+	console.log(req.body)
 	try {
 		const user = await Users.findOne({
 			where: { user_name },

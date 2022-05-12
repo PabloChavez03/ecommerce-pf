@@ -49,6 +49,10 @@ function OrderActual() {
 
         <div>
           <h2>Empresa: Clothes 22</h2>
+          
+        </div>
+
+        <div>
           <h3>CUIT: </h3>
           <h4>30-28111120006-1</h4>
         </div>
@@ -82,7 +86,7 @@ function OrderActual() {
           {cartItems.map(e=> 
         {  return(
           <div key={e.brandSize + e.id + e.name}>
-            <p>{e.name}</p>
+            <p> {e.name}</p>
           </div>
             )})}
           </div>

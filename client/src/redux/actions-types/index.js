@@ -41,6 +41,7 @@ import {
 	DELETE_REVIEWS,
 	UPDATE_REVIEWS,
 	GET_ALL_CLIENTS_ORDERS,
+  GET_ALL_ORDERS
 } from "../actions-creators";
 import {
 	chatBot,
@@ -547,4 +548,19 @@ export function getAllClientsOrders(/*token, */ user_name) {
 			payload: data,
 		});
 	};
+}
+
+export function getAllOrders(token) {
+  return async function (dispatch) {
+    const { data } = await axios.get("/findAllOrders", {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+
+    return dispatch({
+      type: GET_ALL_ORDERS,
+      payload: data,
+    });
+  };
 }
