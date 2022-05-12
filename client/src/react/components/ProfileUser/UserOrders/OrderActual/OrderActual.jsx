@@ -18,17 +18,17 @@ function OrderActual() {
     .map((el) => el.split("="));
 
   const {
-    collection_id,
-    collection_status,
+    // collection_id,
+    // collection_status,
     payment_id,
     status,
-    external_reference,
-    payment_type,
-    merchant_order_id,
-    preference_id,
-    site_id,
-    processing_mode,
-    merchant_account_id,
+    // external_reference,
+    // payment_type,
+    // merchant_order_id,
+    // preference_id,
+    // site_id,
+    // processing_mode,
+    // merchant_account_id,
   } = Object.fromEntries(params);
 
   let order = {
