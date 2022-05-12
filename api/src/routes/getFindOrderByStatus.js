@@ -4,12 +4,12 @@ const { route } = require("./postPurchaseOrder");
 const router = Router();
 
 
-router.get("/:orderStatus", async (req, res) => {
+router.get("/:status", async (req, res) => {
 
-    const {orderStatus} = req.params;
+    const {status} = req.params;
 
     try {
-        let findOrder = await Order.findAll({where: {orderStatus: orderStatus}})
+        let findOrder = await Order.findAll({where: {status: status}})
         res.status(200).json(findOrder)
     } catch (error) {
         console.log(error)

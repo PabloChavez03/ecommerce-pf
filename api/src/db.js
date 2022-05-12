@@ -104,8 +104,8 @@ Order.belongsTo(Users);
 // Invoice.belongsTo(Order);
 
 //Order de compra - Payment Response
-PaymentResponse.hasOne(Order);
-Order.belongsTo(PaymentResponse);
+// PaymentResponse.hasOne(Order);
+// Order.belongsTo(PaymentResponse);
 
 // Order.hasOne(PaymentResponse);
 // PaymentResponse.belongsTo(Order);

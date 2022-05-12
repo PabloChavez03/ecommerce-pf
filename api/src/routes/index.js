@@ -1,6 +1,5 @@
 const { Router } = require("express");
 // Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
 
 const router = Router();
 
@@ -8,7 +7,7 @@ const { authMaster, isAdmin } = require("../middleware/authMaster");
 
 // Modularizando las rutas
 
-//----------------  for All  ----------------------------------------------
+//----------------  for All  --------------------------------------------------
 router.use("/categories", require("./categories"));
 router.use("/products", require("./productsByCategory"));
 router.use("/products/detail", require("./productsDetail"));
@@ -16,9 +15,9 @@ router.use("/allproducts", require("./getAllProducts"));
 router.use("/products/genre", require("./productsByGenre.js"));
 router.use("/product/review", require("./review"));
 // router.use("/carrito", require("./carrito"));
-//----------------  chatbot  ----------------------------------------------
+//----------------  chatbot  --------------------------------------------------
 router.use("/chatBot", require("./chatBot"));
-//----------------  for Admin & Client ------------------------------------
+//----------------  for Admin & Client ----------------------------------------
 router.use("/users/create", require("./userCreate"));
 router.use("/users/login", require("./loginUser"));
 router.use("/products/create", [authMaster, isAdmin], require("./postProduct"));
@@ -42,18 +41,19 @@ router.use(
 	[authMaster, isAdmin],
 	require("./usersFindByPk"),
 );
-//----------------------Mercado Pago---------------------------------------
+//----------------------Mercado Pago-------------------------------------------
 router.use("/mercadopago", require("./mercadoPago"));
-//-----------------------  Google  ----------------------------------------
+//-----------------------  Google  --------------------------------------------
 router.use("/auth", require("./auth"));
 //-------------------------------------------------------------------------
 router.use("/users/wishlist", authMaster, require("./wishList"));
 //----------------Ordenes de Compra-------------------------------------------
 router.use("/ordendecompra", require("./postPurchaseOrder"));
-router.use("/PaymentResponse", require("./PaymentResponse"));
 router.use("/findAllOrders", require("./getAllOrders"));
 router.use("/findorderbypk", require("./getOrderByPk"));
 router.use("/findorderbystatus", require("./getFindOrderByStatus"));
+router.use("/findOrderByUser", require("./getOrdersByUser.js"));
+//-----------------------------------------------------------------------------
 
 /* ¡¡¡ACLARACION!!! Para poder utilizar las rutas de ADMIN deberan de registrarse o en su defecto comentar el middleware de authMaster*/
 

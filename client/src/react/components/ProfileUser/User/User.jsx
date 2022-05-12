@@ -7,6 +7,7 @@ import ProfileUser from "../ProfileUser";
 import ReviewsUser from "../ReviewsUser/ReviewsUser";
 import OrderDetail from "../UserOrders/OrderDetail/OrderDetail";
 import UserOrders from "../UserOrders/UserOrders/UserOrders";
+import OrderActual from "../UserOrders/OrderActual/OrderActual"
 import style from "./User.module.css";
 
 export default function User() {
@@ -22,6 +23,7 @@ export default function User() {
           <Route path={"/profile"} element={<ProfileUser />} />
           <Route path={"/orders"} element={<UserOrders />} />
           <Route path={"/orders/:idOrder"} element={<OrderDetail />} />
+          <Route path={"/orders/actual"} element={<OrderActual/> } />
           <Route path={"/reviews"} element={<ReviewsUser />} />
         </Routes>
       </div>

@@ -1,36 +1,30 @@
 const { Router } = require("express");
-const { Users, Order, PaymentResponse } = require("../db");
+const { Users, Order, Invoice } = require("../db");
 const router = Router();
 
 router.post("/", async (req, res) => {
-  const { orderDetails, total, email } = req.body;
+  const { payment_id, orderDetails, total, status, email } = req.body;
 
   const date = Date.now();
 
   try {
-
     let ordenDeCompra = await Order.create({
-      total,
-      orderDetails, //DataTypes.ARRAY(DataTypes.JSON) <--
+      payment_id: Number(payment_id),
+      orderDetails,
+      total: Number(total),
       orderDate: date,
-    });
-
-    let paymentResponse = await PaymentResponse.create({
-      status: null,
-      payment_id: null,
+      status,
     });
 
     let client = await Users.findOne({ where: { email: email } });
-  
+
+    // console.log(client)
 
     await client.addOrder(ordenDeCompra);
 
-    await paymentResponse.addOrder(ordenDeCompra);
-
-
-    return res.status(201).json({ message: "Se creo la orden de compra" });
+    res.status(201).json(ordenDeCompra);
   } catch (error) {
-    console.log(error);
+    return res.status(409).send({ message: error })
   }
 });
 
