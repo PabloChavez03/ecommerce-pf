@@ -438,7 +438,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
       };
-
     case GET_REVIEWS_USER:
       console.log(payload)
       return {
