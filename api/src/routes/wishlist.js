@@ -5,7 +5,7 @@ const router = Router();
 
 router.post("/:user_name", async (req, res) => {
 	const { user_name } = req.params;
-	const { productId } = req.body;
+	const { productId, action } = req.body;
 
 	console.log(user_name);
 	console.log(productId);
@@ -13,13 +13,25 @@ router.post("/:user_name", async (req, res) => {
 	const user = await Users.findByPk(user_name);
 	const product = await Product.findByPk(productId);
 
-	user.addProduct(product);
+	if (action === "add") {
+		user.addProduct(product);
 
-	res
-		.status(200)
-		.json(
-			`Producto con id ${productId} agregado a la wishlist de ${user_name}`,
-		);
+		res
+			.status(200)
+			.json(
+				`Producto con id ${productId} agregado a la wishlist de ${user_name}`,
+			);
+	}
+
+	if (action === "remove") {
+		user.removeProduct(product);
+
+		res
+			.status(200)
+			.json(
+				`Producto con id ${productId} eliminado de la wishlist de ${user_name}`,
+			);
+	}
 });
 
 module.exports = router;
