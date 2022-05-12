@@ -34,11 +34,7 @@ conn
 		server.listen(process.env.PORT || 5000, async () => {
 			// await load_chat_bot();
 
-<<<<<<< HEAD
 			// // Roles
-=======
-			// // // Roles
->>>>>>> b410d4fc79e519c7558fbd801c22d49a16e5e862
 			// await createRoles();
 
 			// // // Categories
