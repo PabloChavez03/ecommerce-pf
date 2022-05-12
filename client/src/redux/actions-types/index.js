@@ -40,6 +40,7 @@ import {
   RESET_CLIENT_DETAIL,
   DELETE_REVIEWS,
   UPDATE_REVIEWS,
+  GET_ALL_CLIENTS_ORDERS,
 } from "../actions-creators";
 import {
   chatBot,
@@ -515,3 +516,19 @@ export const postOrder = (order) => {
     }
   };
 };
+
+
+export function getAllClientsOrders(token, user_name) {
+  return async function (dispatch) {
+    const { data } = await axios.get(`/findOrderByUser/${user_name}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+
+    return dispatch({
+      type: GET_ALL_CLIENTS_ORDERS,
+      payload: data,
+    });
+  };
+}
