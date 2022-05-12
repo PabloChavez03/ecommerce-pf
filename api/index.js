@@ -30,12 +30,12 @@ const { load_chat_bot } = require("./src/controllers/chatBot.js");
 
 // Syncing all the models at once.
 conn
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     server.listen(process.env.PORT || 5000, async () => {
       //admin default
-      await adminDefault();
-      
+      // await adminDefault();
+
       await load_chat_bot();
       // Roles
       await createRoles();

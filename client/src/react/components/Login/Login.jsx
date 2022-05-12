@@ -12,7 +12,7 @@ const Login = () => {
 	const userData  = useSelector((state) => state.userData);
 	useEffect(()=>{
 		console.log(userData)
-		if(userData.name == "AxiosError"){
+		if(userData.name === "AxiosError"){
 			alert('Usuario o contraseña incorrecta')
 			dispatch(loggedOut())
 
