@@ -29,7 +29,7 @@ const { load_chat_bot } = require("./src/controllers/chatBot.js");
 
 // Syncing all the models at once.
 conn
-	.sync({ force: false })
+	.sync({ force: true })
 	.then(() => {
 		server.listen(process.env.PORT || 5000, async () => {
 			await load_chat_bot();

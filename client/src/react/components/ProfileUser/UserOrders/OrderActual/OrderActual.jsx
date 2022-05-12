@@ -42,17 +42,14 @@ function OrderActual() {
 
   return (
     <div className={css.container}>
-      <h1> ORDENESSSSS</h1>
-      <h1>collection_status: {collection_status}</h1>
-      <h1>payment_id: {payment_id}</h1>
-      <h1>status: {status}</h1>
-      <h1>external_reference: {external_reference}</h1>
-      <h1>payment_type: {payment_type}</h1>
-      <h1> merchant_order_id: {merchant_order_id}</h1>
-      <h1>preference_id: {preference_id}</h1>
-      <h1>site_id: site_id</h1>
-      <h1>processing_mode: {processing_mode}</h1>
-      <h1> merchant_account_id: {merchant_account_id}</h1>
+        <h1> ORDENESSSSS</h1>
+        
+        <h1>payment_id: {payment_id}</h1>
+        <h1>status: {status}</h1>
+        <h1>email: {email}</h1>
+        <h1>total: {subTotal}</h1>
+        
+        
     </div>
   );
 }
