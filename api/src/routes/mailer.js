@@ -1,6 +1,6 @@
 const { text } = require("body-parser");
 const { Router } = require("express");
-const { transporter, publicidadEmail, newRegistroCliente } = require("../controllers/mailer");
+const { transporter, publicidadEmail, newRegistroCliente, ordenDeCompraMail } = require("../controllers/mailer");
 require("dotenv").config();
 const { USER_GOOGLE, PASS_GOOGLE } = process.env;
 const router = Router();
@@ -37,6 +37,15 @@ router.get('/newCliente', async (req, res) => {
     const { emailGoogle, emailUsuario } = req.body;
     try {
         await newRegistroCliente({ emailGoogle, emailUsuario })
+            .then((item) => res.json(item))
+    } catch (err) {
+        console.log(err)
+    }
+})
+router.get('/OrdenCompra', async (req, res) => {
+    const { orderDetails, total, status, email, date } = req.body;
+    try {
+        await ordenDeCompraMail({ orderDetails, total, status, email, date })
             .then((item) => res.json(item))
     } catch (err) {
         console.log(err)
