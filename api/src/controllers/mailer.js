@@ -70,7 +70,7 @@ async function publicidadEmail({ emailGoogle, emailAsunto, emailImagenTitle, ema
     })
 }
 
-async function newRegistroCliente({ emailGoogle, emailUsuario }) {
+async function newRegistroCliente( emailGoogle, emailUsuario ) {
 
     if (emailGoogle) {
         if (emailUsuario) {
