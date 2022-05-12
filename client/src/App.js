@@ -16,8 +16,7 @@ import PayPlataform from "./react/components/PayPlataform/PayPlataform";
 import axios from "axios";
 import Failure from "./react/components/back Urls/failure";
 import DevInfo from "./react/components/Footer/DevInfo/DevInfo";
-import User from "./react/components/ProfileUser/User/User";
-
+import UserRoutes from "./react/components/ProfileUser/UserRoutes/UserRoutes";
 function App() {
 	// const [user, setUSer] = useState(null);
 
@@ -60,7 +59,7 @@ function App() {
 				<Route path={"/login"} element={<Login />} />
 				<Route path={"/bag"} element={<ShoppingBag />} />
 				<Route path={"/pay"} element={<PayPlataform />} />
-				<Route path={"/user/*"} element={<User />} />
+				<Route path={"/user/*"} element={<UserRoutes />} />
 				<Route path={"/failure"} element={<Failure />} />
 				<Route path={"/info/dev"} element={<DevInfo />} />
 			</Routes>

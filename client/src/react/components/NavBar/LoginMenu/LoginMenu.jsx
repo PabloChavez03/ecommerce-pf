@@ -30,7 +30,7 @@ const LoginMenu = ({ setLoginMenu }) => {
               <NavLink to={`/user`} className={style.menuLoginItem}>
                 Mi perfil
               </NavLink>
-            ): <NavLink to={`/user`} className={style.menuLoginItem}>
+            ): <NavLink to={`/admin/profile`} className={style.menuLoginItem}>
 			Mi perfil
 		  </NavLink>}
 

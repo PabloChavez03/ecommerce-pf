@@ -33,9 +33,9 @@ const NavAdmin = () => {
 					<NavLink className={style.navLinkAdmin} to={"/admin/clients"}>
 						Mis Clientes
 					</NavLink>
-					{/* <NavLink className={style.navLinkAdmin} to={"/admin/orders"}>
-						Mis Ordenes
-					</NavLink> */}
+					<NavLink className={style.navLinkAdmin} to={"/admin/profile"}>
+						Mi Perfil
+					</NavLink>
 					<NavLink className={style.navLinkAdmin} to={"/admin/chatbot"}>
 						Chat Bot
 					</NavLink>
