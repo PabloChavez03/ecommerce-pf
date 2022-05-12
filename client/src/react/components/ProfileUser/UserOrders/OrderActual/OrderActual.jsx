@@ -8,9 +8,9 @@ function OrderActual() {
   const cartItems = useSelector((state) => state.cartItems);
   const { email } = useSelector((state) => state.userData);
   const subTotal = useSelector((state) => state.subTotal);
-    // console.log(subTotal)
-  const dispatch = useDispatch()
-    const location = useLocation();
+  console.log(subTotal);
+  const dispatch = useDispatch();
+  const location = useLocation();
 
   const params = location.search
     .slice(1)

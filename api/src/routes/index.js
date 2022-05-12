@@ -46,7 +46,7 @@ router.use("/mercadopago", require("./mercadoPago"));
 //-----------------------  Google  --------------------------------------------
 router.use("/auth", require("./auth"));
 //-------------------------------------------------------------------------
-router.use("/users/wishlist", authMaster, require("./wishList"));
+router.use("/users/wishlist", authMaster, require("./wishlist"));
 //----------------Ordenes de Compra-------------------------------------------
 router.use("/ordendecompra", require("./postPurchaseOrder"));
 router.use("/findAllOrders", require("./getAllOrders"));
