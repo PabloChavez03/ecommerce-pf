@@ -21,6 +21,10 @@ export default function HomeAdmin() {
 				<button className={css.item}>MIS CLIENTES</button>
 			</NavLink>
 
+			<NavLink to={"/admin/orders"}>
+				<button className={css.item}>MIS ORDENES</button>
+			</NavLink>
+
 			<button className={css.item} onClick={(e) => handleClickConstruction(e)}>
 				MIS VENTAS
 			</button>
