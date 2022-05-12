@@ -2,12 +2,16 @@ import React from "react";
 
 import s from "./WishlistIcon.module.css";
 
-function WishlistIcon() {
+function WishlistIcon({ user, productId }) {
+	const favorited = user.Products.some((e) => {
+		return e.id === productId;
+	});
+
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			className={s.svg}
-			viewBox="0 0 24 24"
+			className={s.svg + " " + (favorited ? s.favorited : "")}
+			viewBox="0 0 30 30"
 		>
 			<path
 				strokeLinecap="round"

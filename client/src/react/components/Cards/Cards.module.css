@@ -24,6 +24,11 @@
     
 }
 
+.addWishlist {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
 
 .container img {
     width: auto;

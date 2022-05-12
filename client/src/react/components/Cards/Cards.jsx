@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { changeFavorited } from "../../../redux/actions-types";
 
 import WishlistIcon from "../svg/WishlistIcon";
 
@@ -20,9 +22,46 @@ export default function Cards({
 	//     event.preventDefault(); //provisorio hasta que este el carrito
 	//     alert("Funcionalidad en desarrollo");
 	// }
+
+	const dispatch = useDispatch();
+	const user = useSelector((state) => state.userData);
+
+	const favorited = user.Products.some((e) => {
+		return e.id === id;
+	});
+
+	// console.log("User", JSON.stringify(user, null, 2));
+	// console.log(favorited);
+
+	const handleWishlist = (e) => {
+		e.preventDefault();
+
+		if (favorited) {
+			dispatch(
+				changeFavorited(
+					user.username,
+					{ productId: id, action: "remove", token: user.token },
+					user.token,
+				),
+			);
+      alert("Eliminado de favoritos")
+		} else {
+			dispatch(
+				changeFavorited(
+					user.username,
+					{ productId: id, action: "add", token: user.token },
+					user.token,
+				),
+			);
+      alert("Agregado a favoritos")
+		}
+	};
+
 	return (
 		<div className={css.container}>
-			<WishlistIcon />
+			<div className={css.addWishlist} onClick={handleWishlist}>
+				<WishlistIcon user={user} productId={id} />
+			</div>
 			<img src={`https://${image}`} alt="Product Img" />
 			<div className={css.price}>
 				<h3>{isOffertPrice ? previousPrice : `$ ${currentPrice} `}</h3>
