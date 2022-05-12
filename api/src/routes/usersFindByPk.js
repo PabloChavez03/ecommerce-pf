@@ -10,6 +10,7 @@ router.get("/:user_name", async (req, res) => {
 			model: Role,
 		},
 	});
+
 	try {
 		user
 			? res.status(200).send(user)

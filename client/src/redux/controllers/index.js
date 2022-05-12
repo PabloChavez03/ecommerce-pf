@@ -189,7 +189,7 @@ export const putChatBotEmisor = async (data) => {
                 name: data.name,
                 respuesta: data.respuesta,
                 isActive: data.isActive,
-                alternativa: data.alternativa
+                alternativa: data.receptor
             })
     }
     catch (err) {

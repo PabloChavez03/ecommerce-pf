@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "nodemon -L",
+		"start": "node index.js",
 		"test": "mocha -w ./tests/**/*.spec.js"
 	},
 	"author": "ecommercePf",
@@ -25,6 +25,7 @@
 		"jsonwebtoken": "^8.5.1",
 		"mercadopago": "^1.5.12",
 		"morgan": "^1.10.0",
+		"nodemailer": "^6.7.5",
 		"passport": "^0.5.2",
 		"passport-google-oauth20": "^2.0.0",
 		"pg": "^8.7.3",

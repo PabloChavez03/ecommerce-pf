@@ -1,0 +1,7 @@
+.imgContainer {
+    display: flex;
+    flex-direction: row;
+}
+.imgStar {
+    width: 25px;
+}

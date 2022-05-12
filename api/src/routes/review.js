@@ -1,27 +1,36 @@
 const { Router } = require("express");
-const { Review, Cliente, ProductDetail } = require("../db");
+const { Review, Users, ProductDetail, Role } = require("../db");
 
 const router = Router();
 
 router.get("", async (req, res) => {
-	const { clientId } = req.body;
+	try {
+		const { username } = req.query;
 
-	const clientFound = await Cliente.findOne({
-		where: {
-			phone: clientId,
-		},
-		include: [
-			{
-				model: Review,
+		console.log(username);
+
+		const clientFound = await Users.findOne({
+			where: {
+				user_name: username,
 			},
-		],
-	});
+			include: [
+				{
+					model: Review,
+				},
+				{
+					model: Role,
+				},
+			],
+		});
 
-	res.send(clientFound);
+		res.send(clientFound);
+	} catch (e) {
+		console.log(e);
+	}
 });
 
 router.post("", async (req, res) => {
-	let { clientId, productId, calification, comment } = req.body;
+	let { user_name, productId, calification, comment } = req.body;
 
 	let [reviewCreated, created] = await Review.findOrCreate({
 		where: {
@@ -30,10 +39,10 @@ router.post("", async (req, res) => {
 		},
 	}).catch((e) => e);
 
-	const cliente = await Cliente.findByPk(clientId);
+	const usuario = await Users.findByPk(user_name);
 	const product = await ProductDetail.findByPk(productId);
 
-	await reviewCreated.setCliente(cliente).catch((e) => e);
+	await reviewCreated.setUser(usuario).catch((e) => e);
 	await reviewCreated.setProductDetail(product).catch((e) => e);
 
 	if (created) {

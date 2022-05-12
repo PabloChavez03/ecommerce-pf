@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    border-radius: 15px;
+    box-shadow: 5px 8px 15px rgba(51, 50, 50, 0.611);
+    padding: 10px;
+    margin: 20px 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.container h3 {
+    font-size: 17px;
+    margin: 2px;
+    color: rgb(70, 67, 67);
+}
+
+.container h4 {
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: rgb(70, 67, 67);
+}
+.imgContainer {
+    display: flex;
+    flex-direction: row;
+}
+.imgStar {
+    width: 25px;
+}
+
+.textArea{
+    width: 300px;
+    height: 80px;
+    border-radius: 8px;
+}
+
+.buttonSend {
+	width: 100px;
+	height: 50px;
+	border-radius: 25px;
+	background: black;
+	color: #f1f1f1;
+	border: 1px solid #f1f1f1a4;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	font-weight: bold;
+	margin: 15px 5px 5px;
+    padding: 3px;
+}

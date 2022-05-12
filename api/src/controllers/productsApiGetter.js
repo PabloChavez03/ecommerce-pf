@@ -1,6 +1,7 @@
+require("dotenv").config();
 const axios = require("axios");
 const adaptListProducts = require("./productsAdapter");
-
+const { API_KEY } = process.env;
 async function getAPIproducts(categoryId) {
 	const options = {
 		method: "GET",
@@ -13,7 +14,7 @@ async function getAPIproducts(categoryId) {
 		},
 		headers: {
 			"X-RapidAPI-Host": "asos2.p.rapidapi.com",
-			"X-RapidAPI-Key": "4b263d20a9msha7e9b0bfbc799a1p11d5f6jsn447afdb350bc",
+			"X-RapidAPI-Key": API_KEY,
 		},
 	};
 

@@ -74,6 +74,9 @@ export default function NewEmisor({ handleNewEmisor }) {
   const handleEnviar = () => {
     if (respuesta.respuesta !== "") {
       dispatch(PostChatBotEmisor(respuesta));
+      setTimeout(() => {
+        handleNewEmisor();
+      }, 1000);
     }
   };
   return (

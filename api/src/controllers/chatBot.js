@@ -17,24 +17,28 @@ const load_chat_bot = async () => {
             jane.save();
         })
     }
-    if (emisorDB.length === 0) {
-        emisorJson.forEach(async (item) => {
-            const ChatEmisor = await Chat_bot_emisor.create({
-                name: item.name,
-                respuesta: item.respuesta,
-                isActive: item.isActive,
-            });
-            const emisorv1 = await Chat_bot_receptor.findAll({
-                where: { name: item.alternativa }
-            })
-            await ChatEmisor.addChat_bot_receptor(emisorv1);
+    setTimeout(() => {
+        if (emisorDB.length === 0) {
+            emisorJson.forEach(async (item) => {
+                const ChatEmisor = await Chat_bot_emisor.create({
+                    name: item.name,
+                    respuesta: item.respuesta,
+                    isActive: item.isActive,
+                });
+                const emisorv1 = await Chat_bot_receptor.findAll({
+                    where: { name: item.alternativa }
+                })
+                await ChatEmisor.addChat_bot_receptor(emisorv1);
 
-        })
-    }
+            })
+        }
+    }, 1000);
+
 }
+/////////////////////////
 const chat_bot = async (data) => {
     let v1 = await emisor();
-    if (v1) {
+    if (v1.length !== 0) {
         if (!data) {
             v1 = v1.find(item => item.id === 1)
             let v2 = []
@@ -52,17 +56,24 @@ const chat_bot = async (data) => {
         }
         let dato = v1.find(item => item.name === data)
         let v2 = []
-        dato.chat_bot_receptors.forEach(item => {
-            v2.push(item.name)
-        })
-        let v3 = {
-            id: dato.id,
-            name: dato.name,
-            respuesta: dato.respuesta,
-            isActive: dato.isActive,
-            alternativa: [...v2]
+        console.log(dato)
+        if (dato !== undefined) {
+            if (dato.chat_bot_receptors.length > 0) {
+                dato.chat_bot_receptors.forEach(item => {
+                    v2.push(item.name)
+                })
+            }
+            let v3 = {
+                id: dato.id,
+                name: dato.name,
+                respuesta: dato.respuesta,
+                isActive: dato.isActive,
+                alternativa: [...v2]
+            }
+            return v3
+        } else {
+            return { "Info": "Dato no encontrado" }
         }
-        return v3
 
     } else {
         return { "Info": "Dato undefined en la base de datos" }
@@ -77,6 +88,7 @@ const emisor = async () => {
             attributes: ['name'],
             through: { attributes: [] },
         }
+        , order: [['id']]
     });
 }
 const allEmisor = async () => {
@@ -126,7 +138,9 @@ const addEmisor = async ({ name, respuesta, isActive = true, receptor }) => {
 }
 //Editar el Emisor por parametro {id, name, isActive} se puede obviar el isActive pero 
 const updateEmisor = async ({ id, name, respuesta, isActive, alternativa }) => {
+
     if (id) {
+
         if (name || respuesta || isActive === false || isActive || alternativa) {
             await Chat_bot_emisor.update({
                 name,
@@ -134,6 +148,10 @@ const updateEmisor = async ({ id, name, respuesta, isActive, alternativa }) => {
                 isActive,
                 alternativa
             }, { where: { id } })
+            // const receptorDB = await Chat_bot_receptor.findAll({
+            //     where: { name: alternativa },
+            // });
+            // await data.add(receptorDB);
             return { "Info": "Succession" }
         } else {
             return { "Info": "Requisito un dato para poder actualizar el dato" }
