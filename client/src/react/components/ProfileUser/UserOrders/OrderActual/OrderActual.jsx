@@ -7,12 +7,15 @@ import { postOrder } from "../../../../../redux/actions-types";
 function OrderActual() {
   const cartItems = useSelector((state) => state.cartItems);
   const { email } = useSelector((state) => state.userData);
-  const subTotal = useSelector((state) => state.subTotal);
-  console.log(subTotal);
+  // const subTotal = useSelector((state) => state.subTotal);
+  // console.log(subTotal);
   const dispatch = useDispatch();
   const location = useLocation();
   console.log(cartItems
     )
+    let suma = 0;
+    let subtotal = cartItems?.forEach((e) => (suma += e.currentPrice));
+    let envio = 50
 
   const params = location.search
     .slice(1)
@@ -36,7 +39,7 @@ function OrderActual() {
   let order = {
     payment_id: payment_id,
     orderDetails: cartItems,
-    total: subTotal,
+    total: (suma + envio),
     status: status,
     email: email,
   };
@@ -129,7 +132,7 @@ function OrderActual() {
        
 
 
-        <h1>total: {subTotal}</h1>
+        <h1>Total: ${suma + envio}</h1>
         
         
     </div>
