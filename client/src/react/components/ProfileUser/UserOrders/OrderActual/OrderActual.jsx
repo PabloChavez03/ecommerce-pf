@@ -42,9 +42,11 @@ function OrderActual() {
 
   return (
     <div className={css.container}>
-        <h1> ORDENESSSSS</h1>
+
+        <h1> ORDEN DE COMPRA</h1>
+        <h2>Empresa Clothes 22</h2>
+        <h3>Orden de compra Numero :</h3><h4>{payment_id}</h4>
         
-        <h1>payment_id: {payment_id}</h1>
         <h1>status: {status}</h1>
         <h1>email: {email}</h1>
         <h1>total: {subTotal}</h1>
