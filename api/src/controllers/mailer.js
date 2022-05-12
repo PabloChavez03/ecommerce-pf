@@ -130,14 +130,14 @@ async function newRegistroCliente(emailGoogle, emailUsuario) {
 
 async function factura(emailGoogle, emailUsuario) { }
 
-async function ordenDeCompra(order) {
-  if(order){
+async function ordenDeCompraMail({ orderDetails, total, status, email, date }) {
+  if (email) {
 
 
     await transporter.sendMail({
       from: `"CLOTHES 22" ${USER_GOOGLE}`,
-      to: order.email,
-      subject: 'Estado de compra',
+      to: email,
+      subject: `Estado de compra ${status}`,
       html: `
       <div style="width: 80%; margin: auto; border: 0px solid black">
         <div style="width: 100%; background-color: #90006f; display: flex">
@@ -146,6 +146,7 @@ async function ordenDeCompra(order) {
         <div style="padding: 0px 20px 20px">
           <h2 style="color:#90006f;">Orden de compra</h2>
           <p>A realizado una compra en nuestra pagina CLOTHES 22</p>
+          <p>Fecha realizada ${date}</p>
           <table style="width: 100%">
             <tr style="background-color: rgb(116, 116, 116); color: white">
               <th style="padding: 10px 20px">Name of product</th>
@@ -153,29 +154,28 @@ async function ordenDeCompra(order) {
               <th style="padding: 10px 20px">Unit Price</th>
               <th style="padding: 10px 20px">Set price</th>
             </tr>
-            <tr>
-              <td style="padding: 10px 20px">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur,
-                cupiditate. Distinctio, non? Cupiditate, dolorum aperiam!
-              </td>
-              <td style="padding: 10px 20px">5</td>
-              <td style="padding: 10px 20px">$45</td>
-              <td style="padding: 10px 20px">$225</td>
+            ${orderDetails.length !== 0 ?
+          orderDetails.map((item, index) => (`
+            <tr style=${index % 2 === 0 ?
+              "background-color: rgb(202, 202, 202); color: black"
+              :
+              "color:black"
+            }>
+              <td style="padding: 10px 20px">${item.name}</td>
+              <td style="padding: 10px 20px">${item.quantity}</td>
+              <td style="padding: 10px 20px">${item.currentPrice}</td>
+              <td style="padding: 10px 20px">${item.quantity * item.currentPrice}</td>
             </tr>
-            <tr style="background-color: rgb(202, 202, 202); color: black">
-              <td style="padding: 10px 20px;">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur,
-                cupiditate. Distinctio, non? Cupiditate, dolorum aperiam!
-              </td>
-              <td style="padding: 10px 20px;">5</td>
-              <td style="padding: 10px 20px;">$45</td>
-              <td style="padding: 10px 20px;">$225</td>
-            </tr>
+            `
+          ))
+          : null
+        }
+            
             <tr>
               <td></td>
               <td></td>
               <td style="padding: 10px 20px;">Total</td>
-              <td style="padding: 10px 20px;">$1242</td>
+              <td style="padding: 10px 20px;">$ ${total}</td>
             </tr>
           </table>
         </div>
@@ -201,14 +201,15 @@ async function ordenDeCompra(order) {
       </div>
       `
     })
-  }else return{"Info":"No se ingreso los datos"}
-  
+  } else return { "Info": "No se ingreso el correo" }
+
 }
 
 module.exports = {
   transporter,
   publicidadEmail,
-  newRegistroCliente
+  newRegistroCliente,
+  ordenDeCompraMail
 }
 
 

@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { ordenDeCompraMail } = require("../controllers/mailer");
 const { Users, Order, Invoice } = require("../db");
 const router = Router();
 
@@ -21,7 +22,9 @@ router.post("/", async (req, res) => {
     // console.log(client)
 
     await client.addOrder(ordenDeCompra);
-
+    ///Email 
+    await ordenDeCompraMail({ orderDetails, total, status, email, date })
+    //
     res.status(201).json(ordenDeCompra);
   } catch (error) {
     return res.status(409).send({ message: error })
