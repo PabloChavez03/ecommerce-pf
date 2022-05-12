@@ -6,7 +6,7 @@ import style from "./CardReviews.module.css";
 
 export default function CardReviews({ UserUserName, comment, calification }) {
   return (
-    <div>
+    <div className={style.container}>
       <AccountIcon />
       <h4>Usuario:</h4>
       <p>{UserUserName}</p>

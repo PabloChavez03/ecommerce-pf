@@ -5,6 +5,7 @@ import CardReviews from "../../Reviews/ShowReviews/CardReviews";
 import deleteIcon from "../../../AdminComponents/Components/CardsAdmin/images/eliminar.png";
 import editIcon from "../../../AdminComponents/Components/CardsAdmin/images/editar.png";
 import { NavLink } from "react-router-dom";
+import style from "./ReviewsUser.module.css";
 
 export default function ReviewsUser() {
   const dispatch = useDispatch();
@@ -25,10 +26,10 @@ export default function ReviewsUser() {
               calification={e.calification}
             />
             <NavLink to={`/user/reviews/update/${e.id}`}>
-              <img src={editIcon} alt="edit icon" />
+              <img src={editIcon} alt="edit icon" className={style.imgReview} />
             </NavLink>
             <NavLink to={`/user/reviews/delete/${e.id}`}>
-              <img src={deleteIcon} alt="delete icon" />
+              <img src={deleteIcon} alt="delete icon" className={style.imgReview} />
             </NavLink>
           </div>
         ))
