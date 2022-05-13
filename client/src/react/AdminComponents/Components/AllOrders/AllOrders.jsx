@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import {getAllOrders, filterOrderByStatus, modifiedStatusOrder} from "../../../../redux/actions-types/index"
@@ -11,10 +11,10 @@ export default function AllClients() {
     const { token } = useSelector((state) => state.userData);
 
 	useEffect(() => {
-		dispatch(getAllOrders());
+		dispatch(getAllOrders(token));
 	}, [dispatch]);
 
-	const allOrdersClientes = useSelector((state) => state.allOrders);
+	const allOrdersClientes = useSelector((state) => state.ordersAll);
 
  
 
@@ -48,9 +48,9 @@ export default function AllClients() {
             </select>
                 </label>
 
-        <div >
-            <SearchBarOrders/>
-        </div>
+            <div>
+                <SearchBarOrders/>
+            </div>
 
            {allOrdersClientes?.map((client) => {
             
