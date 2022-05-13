@@ -46,7 +46,8 @@ import {
   GET_ALL_CLIENTS_ORDERS,
   GET_ALL_ORDERS,
   GET_ORDERS_BY_PAYMENT_ID,
-  FILTER_ORDER_BY_STATUS
+  FILTER_ORDER_BY_STATUS,
+  UPDATE_STATUS_ORDER
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 

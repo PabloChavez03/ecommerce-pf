@@ -42,7 +42,8 @@ import {
 	UPDATE_REVIEWS,
 	GET_ALL_CLIENTS_ORDERS,
   GET_ALL_ORDERS,
-  FILTER_ORDER_BY_STATUS
+  FILTER_ORDER_BY_STATUS,
+  UPDATE_STATUS_ORDER
 } from "../actions-creators";
 import {
   chatBot,
@@ -577,8 +578,9 @@ export function filterOrderByStatus( token, status) {
 		type: FILTER_ORDER_BY_STATUS,
 		payload: data,
 	  });
-	};
-  }
+	}
+  };
+
 export function getOrdersByPaymentId(token, payment_id) {
   return async function (dispatch) {
     const { data } = await axios.get(`/findOrderByPk/${payment_id}`/* {
@@ -593,3 +595,13 @@ export function getOrdersByPaymentId(token, payment_id) {
     });
   };
 }
+
+export function modifiedStatusOrder( parce, token, payment_id) {
+	return async function (dispatch) {
+	  const { data } = await axios.patch(`updateStatusOrder/${payment_id}`,{ status: parce } , {
+		  headers: {
+			  authorization: `Bearer ${token}`,
+			},
+		});
+	}
+  };
