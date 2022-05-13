@@ -1,0 +1,20 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 3px rgba(41, 40, 40, 0.666);
+    background-color: rgba(249, 247, 247, 0.72);
+    border: 1px solid rgba(235, 229, 229, 0.554);
+}
+
+
+.imgContainer {
+    display: flex;
+    flex-direction: row;
+}
+.imgStar {
+    width: 25px;
+}

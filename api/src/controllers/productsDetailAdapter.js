@@ -7,6 +7,7 @@ async function adaptProductsDetail(product) {
 		gender: product.gender,
 		brandName: product.brand.name,
 		images: product.media.images.map((el) => el.url),
+		isInStock: product.isInStock,
 		isOffertProduct: product.price.isOutletPrice,
 		previousPrice: product.price.rrp.value,
 		currentPrice: product.price.current.value,

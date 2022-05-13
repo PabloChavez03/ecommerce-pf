@@ -1,0 +1,70 @@
+.modalStockProductContainerOverlay {
+	background-color: rgba(0, 0, 0, 0.3);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modalStockProductContainer {
+	background-color: #fff;
+	width: 500px;
+	border-radius: 15px;
+	box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+
+	padding: 30px 40px;
+}
+
+.modalHeader {
+	display: flex;
+	justify-content: space-between;
+	gap: 5px;
+	margin-bottom: 15px;
+}
+
+.productName {
+	font-size: 20px;
+	width: 90%;
+}
+
+.modalCloseButton {
+	background-image: url("../../../../components/svg/volver-flecha.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 25px;
+	height: 20px;
+	transform: scaleX(-1);
+	cursor: pointer;
+	margin-top: 5px;
+}
+
+/* .modalCloseButton:hover {
+	width: 26px;
+	height: 26px;
+} */
+
+.listTitle {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+	font-weight: 600;
+}
+
+.listItems {
+	display: flex;
+	flex-direction: column;
+	max-height: 200px;
+	overflow-y: scroll;
+}
+
+.rowContainer {
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	padding: 5px 10px;
+}

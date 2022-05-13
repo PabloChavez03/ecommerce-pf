@@ -12,14 +12,12 @@ import Admin from "./react/AdminComponents/Pages/Admin";
 import Login from "./react/components/Login/Login";
 import ShoppingBag from "./react/components/ShoppingCart/ShoppingBag/ShoppingBag";
 import PayPlataform from "./react/components/PayPlataform/PayPlataform";
-import ProfileUser from "./react/components/ProfileUser/ProfileUser";
-import OrderDetail from "./react/UserOrders/OrderDetail";
-import UserOrders from "./react/UserOrders/UserOrders";
 // import Success from "./react/components/back Urls/success";
 // import axios from "axios";
 import Failure from "./react/components/back Urls/failure";
 import DevInfo from "./react/components/Footer/DevInfo/DevInfo";
-
+import UserRoutes from "./react/components/ProfileUser/UserRoutes/UserRoutes";
+import DownloadPdf from "./react/components/DownloadPdf/DownloadPdf";
 function App() {
 	// const [user, setUSer] = useState(null);
 
@@ -62,11 +60,10 @@ function App() {
 				<Route path={"/login"} element={<Login />} />
 				<Route path={"/bag"} element={<ShoppingBag />} />
 				<Route path={"/pay"} element={<PayPlataform />} />
-				<Route path={"/user/profile"} element={<ProfileUser />} />
-				<Route path={"/user/orders"} element={<UserOrders />} />
-				<Route path={"/user/orders/:idOrder"} element={<OrderDetail />} />
+				<Route path={"/user/*"} element={<UserRoutes />} />
 				<Route path={"/failure"} element={<Failure />} />
 				<Route path={"/info/dev"} element={<DevInfo />} />
+				<Route path={"/pruebapdf"} element={<DownloadPdf />} />
 			</Routes>
 			<Footer />
 		</BrowserRouter>

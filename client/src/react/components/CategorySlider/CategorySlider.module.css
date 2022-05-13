@@ -1,0 +1,17 @@
+.sliderContainer{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.sliderContainer div {
+    display: flex;
+    width: 700px;
+    max-width: 100%;
+}
+@media screen and (max-width: 700px){
+    .sliderContainer {
+      margin: 100px 10px 0;
+    }
+  }

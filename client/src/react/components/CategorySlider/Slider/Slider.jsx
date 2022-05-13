@@ -50,8 +50,8 @@ export default function Slider({ gender, category }) {
       })}
       <BtnSlider moveSlide={nextSlide} direction={"next"} />
       <BtnSlider moveSlide={prevSlide} direction={"prev"} />
-
-      <div className="container-dots">
+      {/* <div className="container-dots">
+      <div className="container-container-dots">
         {Array.from({ length: category?.img.length }).map((item, index) => {
           return (
             <div
@@ -62,6 +62,7 @@ export default function Slider({ gender, category }) {
           );
         })}
       </div>
+      </div> */}
       <NavLink to={`/home?gender=${gender}`} style={{ textDecoration: "none" }}>
         <button className="btn-show-more">SHOW MORE</button>
       </NavLink>
