@@ -33,9 +33,9 @@ const Login = () => {
 	/** Error function validate */
 
 	/** Buscar todos los usuarios y sus email */
-	useEffect(() => {
-		dispatch(getAllClientsUserEmail());
-	}, [dispatch]);
+	// useEffect(() => {
+	// 	dispatch(getAllClientsUserEmail());
+	// }, [dispatch]);
 
 	const allClients = useSelector((state) => state.allClientsUserEmail);
 
@@ -82,6 +82,7 @@ const Login = () => {
 		if (activeCreate) {
 			setActiveCreate(false);
 		} else {
+			dispatch(getAllClientsUserEmail());
 			setActiveCreate(true);
 		}
 	};
