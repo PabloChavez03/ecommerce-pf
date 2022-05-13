@@ -16,11 +16,17 @@ export default function AllClients() {
 
 	const allOrdersClientes = useSelector((state) => state.allOrders);
 
-    // console.log(allOrdersClientes)
+ 
 
     function handleFilterByStatusOrder(e){
         e.preventDefault();
-        dispatch(filterOrderByStatus(token, e.target.value))
+        if(e.target.value === "todas"){
+            dispatch(getAllOrders())
+        } else {
+
+            dispatch(filterOrderByStatus(token, e.target.value))
+        }
+        
     };
 
 
@@ -28,7 +34,7 @@ export default function AllClients() {
         <div className={style.cardContainer}>
                 <label>Filtras por Estado de Compra
             <select onChange={e => { handleFilterByStatusOrder(e) }}>
-                <option ></option>
+                <option value="todas" >Todas</option>
                 <option value="approved">Success</option>
                 <option value="pending">Pending</option>
                 <option value="failure">Failure</option>
@@ -39,11 +45,12 @@ export default function AllClients() {
             <SearchBarOrders/>
         </div>
 
-           {allOrdersClientes.map((client) => {
+           {allOrdersClientes?.map((client) => {
+            
 					return (
                         <NavLink key={ client.payment_id } to={`/admin/orders/${client.payment_id}`}>
 						<div className={style.cardContainer} >
-                            <p><span >Nombre y Apellido del Cliente: </span>{" "}{client.User.name} {client.User.lastname}</p>
+                            <p><span >Nombre y Apellido del Cliente: </span>{" "}{client.UserUserName} </p>
 
 							<p>	<span >Nº de Orden:</span> {client.payment_id}</p>
 

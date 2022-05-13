@@ -567,15 +567,12 @@ export function getAllOrders(token) {
 }
 
 export function filterOrderByStatus( token, status) {
-	console.log(status)
 	return async function (dispatch) {
 	  const { data } = await axios.get(`/findorderbystatus/${status}`, {
 		  headers: {
 			  authorization: `Bearer ${token}`,
 			},
 		});
-		console.log(data)
-  
 	  return dispatch({
 		type: FILTER_ORDER_BY_STATUS,
 		payload: data,
