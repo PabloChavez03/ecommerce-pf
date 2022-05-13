@@ -42,6 +42,7 @@ import {
   UPDATE_REVIEWS,
   GET_ALL_CLIENTS_ORDERS,
   GET_ALL_ORDERS,
+  GET_ORDERS_BY_PAYMENT_ID,
 } from "../actions-creators";
 import {
   chatBot,
@@ -557,7 +558,7 @@ export function getAllOrders(token) {
         authorization: `Bearer ${token}`,
       },
     });
-
+    // console.log(data);
     return dispatch({
       type: GET_ALL_ORDERS,
       payload: data,
@@ -565,17 +566,18 @@ export function getAllOrders(token) {
   };
 }
 
-export function getOrdersByPaymentId(token, payment_id) {
+export function getOrdersByPaymentId(token,paymentId) {
   return async function (dispatch) {
-    const { data } = await axios.get(`/findOrderByPk/${payment_id}`/* {
+    const { data } = await axios.get(`/findOrderByPk/${paymentId}`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
-    }*/);
-
+    });
+    
     return dispatch({
-      type: GET_ALL_ORDERS,
+      type: GET_ORDERS_BY_PAYMENT_ID,
       payload: data,
     });
   };
 }
+

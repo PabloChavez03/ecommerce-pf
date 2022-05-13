@@ -89,8 +89,8 @@ export const initialState = {
   clientDetail: {},
   reviewsUser: [],
   allOrdersClientes: [],
-  allOrders: [],
-  orderByPaymentId: {},
+  ordersAll: [],
+  ordersAllBackUp: [],
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -465,13 +465,14 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case GET_ALL_ORDERS:
       return {
         ...state,
-        allOrders: payload,
+        ordersAll: payload,
+        ordersAllBackUp: payload,
       };
     case GET_ORDERS_BY_PAYMENT_ID:
       return {
         ...state,
-        orderByPaymentId: payload,
-      };
+        ordersAll: [state.ordersAllBackUp?.find(el => el.payment_id === payload.payment_id)],
+      }
     default:
       return { ...state };
   }
