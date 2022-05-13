@@ -19,19 +19,13 @@ export default function ReviewsUser() {
     <div>
       {reviewsUser?.length ? (
         reviewsUser.map((e, i) => (
-          <div key={i}>
             <CardReviews
               UserUserName={e.UserUserName}
               comment={e.comment}
               calification={e.calification}
+              id={e.id}
+              key={i}
             />
-            <NavLink to={`/user/reviews/update/${e.id}`}>
-              <img src={editIcon} alt="edit icon" className={style.imgReview} />
-            </NavLink>
-            <NavLink to={`/user/reviews/delete/${e.id}`}>
-              <img src={deleteIcon} alt="delete icon" className={style.imgReview} />
-            </NavLink>
-          </div>
         ))
       ) : (
         <p>No se encontraron reseñas</p>

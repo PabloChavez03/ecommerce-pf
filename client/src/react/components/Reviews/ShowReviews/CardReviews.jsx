@@ -3,8 +3,18 @@ import AccountIcon from "../../svg/AccountIcon";
 import starBlack from "../images/estrella-transparent.png";
 import starGold from "../images/estrella-dorada.png";
 import style from "./CardReviews.module.css";
+import editIcon from "../../../AdminComponents/Components/CardsAdmin/images/editar.png";
+import deleteIcon from "../../../AdminComponents/Components/CardsAdmin/images/eliminar.png";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function CardReviews({ UserUserName, comment, calification }) {
+export default function CardReviews({
+  UserUserName,
+  comment,
+  calification,
+  id,
+}) {
+  const userData = useSelector((state) => state.userData).username;
   return (
     <div className={style.container}>
       <AccountIcon />
@@ -44,6 +54,20 @@ export default function CardReviews({ UserUserName, comment, calification }) {
           className={style.imgStar}
           name={5}
         />
+        {UserUserName === userData ? (
+          <div>
+            <NavLink to={`/user/reviews/update/${id}`}>
+              <img src={editIcon} alt="Icon Edit" className={style.imgStar} />
+            </NavLink>
+            <NavLink to={`/user/reviews/delete/${id}`}>
+              <img
+                src={deleteIcon}
+                alt="Icon Delete"
+                className={style.imgStar}
+              />
+            </NavLink>
+          </div>
+        ) : null}
       </div>
     </div>
   );

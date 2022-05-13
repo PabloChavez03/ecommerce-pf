@@ -9,12 +9,11 @@ export default function DeleteReviews() {
   const { reviewId } = useParams();
   const navigate = useNavigate();
 
-  console.log(reviewId)
   const handleClickConfirm = (event) => {
     event.preventDefault();
     dispatch(deleteReview(reviewId));
     alert("Reseña eliminada con exito!");
-    navigate("/user/reviews")
+    navigate("/user/reviews");
   };
 
   return (

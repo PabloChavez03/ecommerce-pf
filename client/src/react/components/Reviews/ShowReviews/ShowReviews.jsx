@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { getDetails } from "../../../../redux/actions-types";
 import CardReviews from "./CardReviews";
 
 export default function ShowReviews({ productId }) {
   const dispatch = useDispatch();
-
+  const {pathname} = useLocation();
+  console.log(pathname)
   useEffect(() => {
     dispatch(getDetails(productId));
   }, [productId, dispatch]);
@@ -23,6 +25,7 @@ export default function ShowReviews({ productId }) {
               UserUserName={e.UserUserName}
               comment={e.comment}
               calification={e.calification}
+              pathname={pathname}
             />
           ))}
         </div>
