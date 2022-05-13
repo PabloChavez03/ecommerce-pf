@@ -11,7 +11,7 @@ export default function DownloadPdf() {
   return (
     <div>
       <NavBar />
-      <h2>Prueba Mica Download PDF</h2>
+      <h2>Prueba Mica Download PDF.</h2>
       <button onClick={(e) => print(e)}>Download</button>
     </div>
   );

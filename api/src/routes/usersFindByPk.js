@@ -1,14 +1,19 @@
 const { Router } = require("express");
-const { Users, Role } = require("../db");
+const { Users, Role, Product } = require("../db");
 const router = Router();
 
 router.get("/:user_name", async (req, res) => {
 	const { user_name } = req.params;
 
 	let user = await Users.findByPk(user_name, {
-		include: {
-			model: Role,
-		},
+		include: [
+			{
+				model: Role,
+			},
+			{
+				model: Product,
+			},
+		],
 	});
 
 	try {

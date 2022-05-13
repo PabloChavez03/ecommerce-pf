@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { URL, ACCESS_TOKEN } = process.env;
 
 class PaymentService {
 	constructor(productsAndDelivery, email) {
@@ -13,16 +14,22 @@ class PaymentService {
 			payer_email: this.email,
 			items: [...this.products],
 			back_urls: {
-				failure: "http://localhost:3000/user/orders/actual",
-				pending: "http://localhost:3000/user/orders/actual",
-				success: "http://localhost:3000/user/orders/actual",
+				failure: URL
+					? `${URL}/user/orders/actual`
+					: "http://localhost:3000/user/orders/actual",
+				pending: URL
+					? `${URL}/user/orders/actual`
+					: "http://localhost:3000/user/orders/actual",
+				success: URL
+					? `${URL}/user/orders/actual`
+					: "http://localhost:3000/user/orders/actual",
 			},
 		};
 
 		const payment = await axios.post(url, body, {
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+				Authorization: `Bearer ${ACCESS_TOKEN}`,
 			},
 		});
 
