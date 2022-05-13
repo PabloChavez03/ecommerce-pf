@@ -2,7 +2,7 @@ import React from "react";
 import DeleteReviews from "../../../ProfileUser/DeleteReviews/DeleteReviews";
 import style from "./ShowReviewsModalDelete.module.css";
 
-const ShowReviewsModalDelete = ({ modalStatus, setModalStatus }) => {
+const ShowReviewsModalDelete = ({ modalStatus, setModalStatus, id }) => {
 	const handleModalStatus = () => {
 		setModalStatus(!modalStatus);
 	};
@@ -16,6 +16,7 @@ const ShowReviewsModalDelete = ({ modalStatus, setModalStatus }) => {
 				<DeleteReviews
 					modalStatus={modalStatus}
 					setModalStatus={setModalStatus}
+					id={id}
 				/>
 				<span
 					className={style.reviewsModalDeleteTitle}
