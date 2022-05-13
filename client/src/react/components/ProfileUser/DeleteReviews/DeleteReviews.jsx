@@ -1,21 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { deleteReview } from "../../../../redux/actions-types";
-import alert from "../../svg/advertencia.png";
+import alertIcon from "../../svg/advertencia.png";
 
-export default function DeleteReviews({ modalStatus, setModalStatus }) {
+export default function DeleteReviews({ modalStatus, setModalStatus, id }) {
 	const dispatch = useDispatch();
-	const { reviewId } = useParams();
 	const navigate = useNavigate();
 
 	const handleClickConfirm = (event) => {
 		event.preventDefault();
-		dispatch(deleteReview(reviewId));
+		dispatch(deleteReview(id));
 		alert("Reseña eliminada con exito!");
+		setModalStatus(!modalStatus);
 		navigate("/user/reviews");
 	};
-
 	const handleModalStatus = (e) => {
 		e.preventDefault();
 		setModalStatus(!modalStatus);
@@ -24,9 +23,9 @@ export default function DeleteReviews({ modalStatus, setModalStatus }) {
 	return (
 		<div>
 			<div>
-				<h2>Desea eliminar este producto?</h2>
+				<h2>Desea eliminar esta reseña?</h2>
 				<div>
-					<img src={alert} alt='Img alert' style={{ width: "25px" }} />
+					<img src={alertIcon} alt='Img alert' style={{ width: "25px" }} />
 					<h5>ADVERTENCIA: Los datos no podrán recuperarse.</h5>
 				</div>
 				<div>
