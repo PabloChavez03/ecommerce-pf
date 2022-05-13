@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import {getAllOrders, filterOrderByStatus} from "../../../../redux/actions-types/index"
 import style from "./AllOrders.module.css"
+import SearchBarOrders from "../SearchBarOrders/SearchBarOrders";
 
 export default function AllClients() {
 
@@ -11,7 +12,7 @@ export default function AllClients() {
 
 	useEffect(() => {
 		dispatch(getAllOrders());
-	}, []);
+	}, [dispatch]);
 
 	const allOrdersClientes = useSelector((state) => state.allOrders);
 
@@ -33,6 +34,11 @@ export default function AllClients() {
                 <option value="failure">Failure</option>
             </select>
                 </label>
+
+        <div >
+            <SearchBarOrders/>
+        </div>
+
            {allOrdersClientes.map((client) => {
 					return (
                         <NavLink key={ client.payment_id } to={`/admin/orders/${client.payment_id}`}>

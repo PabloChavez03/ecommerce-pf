@@ -52,7 +52,7 @@ router.use("/users/wishlist", authMaster, require("./wishlist"));
 //----------------Ordenes de Compra-------------------------------------------
 router.use("/ordendecompra", require("./postPurchaseOrder"));
 router.use("/findAllOrders", require("./getAllOrders"));
-router.use("/findorderbypk", require("./getOrderByPk"));
+router.use("/findOrderByPk", require("./getOrderByPk"));
 router.use("/findorderbystatus", require("./getFindOrderByStatus"));
 router.use("/findOrderByUser", require("./getOrdersByUser.js"));
 router.use("/updateStatusOrder", require("./updateStatusOrder"));
