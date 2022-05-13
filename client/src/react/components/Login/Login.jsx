@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import style from "./Login.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewUser, UserLogin, loggedOut, getAllClients } from "../../../redux/actions-types";
+import { createNewUser, UserLogin, loggedOut, getAllClientsUserEmail } from "../../../redux/actions-types";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -32,23 +32,31 @@ const Login = () => {
 
 	/** Error function validate */
 
-	useEffect(() => {
-		dispatch(getAllClients());
-	}, [dispatch]);
+	/** Buscar todos los usuarios y sus email */
+	// useEffect(() => {
+	// 	dispatch(getAllClientsUserEmail());
+	// }, [dispatch]);
 
-	const allUsers = useSelector((state) => state.allClients);
+	const allClients = useSelector((state) => state.allClientsUserEmail);
 
+	/** fin de busqueda de los usuarios y email */
 	const [error, setError] = useState({});
 
 	function validate(newUser) {
 		let errors = {};
+
+		let usernameEnUso = allClients.find((client) => client.username === newUser.user_name);
+		let emailEnUso = allClients.find((client) => client.email === newUser.email);
+
 		if (!newUser.name) errors.name = "Es necesario ingresar tu nombre";
 		if (/[1-9]/.test(newUser.name)) errors.name = "Tu nombre no puede contener numeros";
 		if (/[^\w\s]/.test(newUser.name)) errors.name = "Tu nombre no puede contener caracteres especiales";
 		if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(newUser.email))
 			errors.email = "El correo brindado no es valido";
 		if (!newUser.email) errors.email = "Es necesario ingresar tu correo electronico";
+		if (emailEnUso) errors.email = "El correo ya esta en uso";
 		if (!newUser.user_name) errors.user_name = "Es necesario ingresar tu usuario";
+		if (usernameEnUso) errors.user_name = "El nombre de usuario ya esta en uso";
 		if (!newUser.user_password) errors.user_password = "Es necesario ingresar tu contraseña";
 		if (newUser.repeat_password !== newUser.user_password) errors.repeat_password = "La contraseña no coinciden";
 
@@ -74,6 +82,7 @@ const Login = () => {
 		if (activeCreate) {
 			setActiveCreate(false);
 		} else {
+			dispatch(getAllClientsUserEmail());
 			setActiveCreate(true);
 		}
 	};
