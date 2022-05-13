@@ -37,7 +37,7 @@ const Login = () => {
 	}, [dispatch]);
 
 	const allUsers = useSelector((state) => state.allClients);
-	console.log(allUsers);
+
 	const [error, setError] = useState({});
 
 	function validate(newUser) {

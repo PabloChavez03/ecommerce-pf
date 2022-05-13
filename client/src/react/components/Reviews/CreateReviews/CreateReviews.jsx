@@ -4,7 +4,7 @@ import starGold from "../images/estrella-dorada.png";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./CreateReviews.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { createReview } from "../../../../redux/actions-types";
+import { createReview, getDetails } from "../../../../redux/actions-types";
 
 export default function CreateReviews({ productId }) {
   const dispatch = useDispatch();
@@ -45,6 +45,7 @@ export default function CreateReviews({ productId }) {
             comment: "",
           });
           alert("Tu reseña fue enviada con éxito. Muchas gracias!");
+          dispatch(getDetails(productId));
         }
       }
     }

@@ -16,7 +16,6 @@ export default function UserRoutes() {
   return (
     <div>
       <NavBar />
-      <div className={style.sectionNavContainer}><NavUser /></div>
       <div className={style.sectionInfoContainer}>
         <Routes>
           <Route path={"/"} element={<HomeUser />} />

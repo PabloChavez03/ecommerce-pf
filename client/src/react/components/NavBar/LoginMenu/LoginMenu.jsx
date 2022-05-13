@@ -27,13 +27,28 @@ const LoginMenu = ({ setLoginMenu }) => {
 
           <ul className={style.menuLoginListContainer}>
             {rol !== "admin" ? (
-              <NavLink to={`/user`} className={style.menuLoginItem}>
+                <NavLink to={`/user/profile`} className={style.menuLoginItem}>
+                  Mi perfil 
+                </NavLink>
+            ) : (
+              <NavLink to={`/admin/profile`} className={style.menuLoginItem}>
                 Mi perfil
               </NavLink>
-            ): <NavLink to={`/admin/profile`} className={style.menuLoginItem}>
-			Mi perfil
-		  </NavLink>}
-
+            )}
+            {
+              rol !== "admin" ? (
+                <NavLink to={`/user/orders`} className={style.menuLoginItem}>
+                  Historial de compras
+                </NavLink> 
+              ): null
+            }
+                        {
+              rol !== "admin" ? (
+                <NavLink to={`/user/reviews`} className={style.menuLoginItem}>
+                Mis reseñas
+              </NavLink>
+              ): null
+            }
             {rol === "admin" && (
               <NavLink to={"/admin"} className={style.menuLoginItem}>
                 Panel de administrador
