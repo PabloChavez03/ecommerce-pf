@@ -11,27 +11,26 @@ import ShowReviewsModalDelete from "../../Reviews/ShowReviews/ShowReviewsModal/S
 export default function ReviewsUser() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData);
+  const [modalStatus, setModalStatus] = useState(false);
   useEffect(() => {
     dispatch(getReviewsUser(userData.username));
-  }, [userData, dispatch]);
-  
-  const reviewsUser = useSelector((state) => state.reviewsUser).Reviews;
-  useEffect(()=>{dispatch(getReviewsUser(userData.username))},[dispatch,userData.username])
-  const [modalStatus, setModalStatus] = useState(false);
-  const handleModalStatus = () => {
-    setModalStatus(!modalStatus);
-  };
+  }, [userData, dispatch, modalStatus]);
+
+  let reviewsUser = useSelector((state) => state.reviewsUser).Reviews;
+  console.log(reviewsUser)
+ 
+
   return (
     <div>
       {reviewsUser?.length ? (
         reviewsUser.map((e, i) => (
-          <div>
+          <div key={i}>
             <CardReviews
               UserUserName={e.UserUserName}
               comment={e.comment}
               calification={e.calification}
               id={e.id}
-              key={i}
+             
               modalStatus={modalStatus}
               setModalStatus={setModalStatus}
             />
