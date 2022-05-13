@@ -3,14 +3,17 @@ const { Users} = require("../db");
 const router = Router();
 
 
-router.get("/:user_name", async (req, res) => {
+router.get("/", async (req, res) => {
 
-    const {user_name} = req.params;
+    // const {user_name} = req.params;
 
     try {
-        let findUser = await Users.findByPk( user_name)
-        console.log(findUser.user_name, findUser.email)
-        res.status(200).json([findUser.user_name, findUser.email])
+        let findUser = await Users.findAll()
+        let user = findUser.map( usuario => { 
+            return { 
+                username :usuario.user_name, email: usuario.email
+            }})
+        res.status(200).json(user)
     } catch (error) {
         console.log(error)
     }
