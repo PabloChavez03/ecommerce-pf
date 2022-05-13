@@ -1,48 +1,50 @@
 import {
-	GET_PRODUCT_BY_NAME,
-	ADD_PRODUCT_TO_CART,
-	REMOVE_PRODUCT_FROM_CART,
-	CHANGE_CART_QUANTITY,
-	SET_CURRENT_PAGE,
-	GET_ALL_PRODUCTS,
-	GET_CURRENT_BRANDS,
-	GET_FILTERS_BRANDS,
-	ORDER_BY_PRICE,
-	GET_DETAILS,
-	SET_DETAILS,
-	GET_ALL_CATEGORIES,
-	GET_CATEGORY_BY_ID,
-	GET_FILTERS_GENDER_PRODUCT,
-	GET_ALL_CATEGORIES_FOR_FORM,
-	CHAT_BOT,
-	GET_CHAT_BOT_RECEPTOR,
-	GET_CHAT_BOT_EMISOR,
-	GET_USER_DATA,
-	GET_PRODUCTS_NAME_ADMIN,
-	CLEAN_FILTERS,
-	GET_STOCK_PRODUCTS,
-	LOGGED_OUT,
-	UPDATE_USER_INFO,
-	GET_ALL_CLIENTS,
-	RESET_ALL_CLIENTS,
-	GET_CLIENT_DETAIL,
-	SET_CHANGE_FORM_CREATE,
-	DELETE_CHAT_BOT_RECEPTOR,
-	DELETE_CHAT_BOT_EMISOR,
-	GET_CHAT_BOT_RECEPTOR_NAME,
-	POST_CHAT_BOT_RECEPTOR,
-	POST_CHAT_BOT_EMISOR,
-	PUT_CHAT_BOT_RECEPTOR,
-	PUT_CHAT_BOT_EMISOR,
-	CREATE_REVIEWS,
-	GET_REVIEWS_USER,
-	UPDATE_CLIENT_INFO,
-	RESET_CLIENT_DETAIL,
-	DELETE_REVIEWS,
-	UPDATE_REVIEWS,
-	GET_ALL_CLIENTS_ORDERS,
+  GET_PRODUCT_BY_NAME,
+  ADD_PRODUCT_TO_CART,
+  REMOVE_PRODUCT_FROM_CART,
+  CHANGE_CART_QUANTITY,
+  SET_CURRENT_PAGE,
+  GET_ALL_PRODUCTS,
+  GET_CURRENT_BRANDS,
+  GET_FILTERS_BRANDS,
+  ORDER_BY_PRICE,
+  GET_DETAILS,
+  SET_DETAILS,
+  GET_ALL_CATEGORIES,
+  GET_CATEGORY_BY_ID,
+  GET_FILTERS_GENDER_PRODUCT,
+  GET_ALL_CATEGORIES_FOR_FORM,
+  CHAT_BOT,
+  GET_CHAT_BOT_RECEPTOR,
+  GET_CHAT_BOT_EMISOR,
+  GET_USER_DATA,
+  GET_PRODUCTS_NAME_ADMIN,
+  CLEAN_FILTERS,
+  GET_STOCK_PRODUCTS,
+  LOGGED_OUT,
+  UPDATE_USER_INFO,
+  GET_ALL_CLIENTS,
+  RESET_ALL_CLIENTS,
+  GET_CLIENT_DETAIL,
+  SET_CHANGE_FORM_CREATE,
+  DELETE_CHAT_BOT_RECEPTOR,
+  DELETE_CHAT_BOT_EMISOR,
+  GET_CHAT_BOT_RECEPTOR_NAME,
+  POST_CHAT_BOT_RECEPTOR,
+  POST_CHAT_BOT_EMISOR,
+  PUT_CHAT_BOT_RECEPTOR,
+  PUT_CHAT_BOT_EMISOR,
+  CREATE_REVIEWS,
+  GET_REVIEWS_USER,
+  UPDATE_CLIENT_INFO,
+  RESET_CLIENT_DETAIL,
+  DELETE_REVIEWS,
+  UPDATE_REVIEWS,
+  GET_ALL_CLIENTS_ORDERS,
   GET_ALL_ORDERS,
-  FILTER_ORDER_BY_STATUS
+  FILTER_ORDER_BY_STATUS,
+  GET_ORDERS_BY_PAYMENT_ID,
+  UPDATE_STATUS_ORDER,
 } from "../actions-creators";
 import {
   chatBot,
@@ -558,7 +560,7 @@ export function getAllOrders(token) {
         authorization: `Bearer ${token}`,
       },
     });
-
+    // console.log(data);
     return dispatch({
       type: GET_ALL_ORDERS,
       payload: data,
@@ -566,30 +568,45 @@ export function getAllOrders(token) {
   };
 }
 
-export function filterOrderByStatus( token, status) {
-	return async function (dispatch) {
-	  const { data } = await axios.get(`/findorderbystatus/${status}`, {
-		  headers: {
-			  authorization: `Bearer ${token}`,
-			},
-		});
-	  return dispatch({
-		type: FILTER_ORDER_BY_STATUS,
-		payload: data,
-	  });
-	};
-  }
-export function getOrdersByPaymentId(token, payment_id) {
+export function filterOrderByStatus(token, status) {
   return async function (dispatch) {
-    const { data } = await axios.get(`/findOrderByPk/${payment_id}`/* {
+    const { data } = await axios.get(`/findorderbystatus/${status}`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
-    }*/);
-
+    });
     return dispatch({
-      type: GET_ALL_ORDERS,
+      type: FILTER_ORDER_BY_STATUS,
       payload: data,
     });
+  };
+}
+
+export function getOrdersByPaymentId(token, paymentId) {
+  return async function (dispatch) {
+    const { data } = await axios.get(`/findOrderByPk/${paymentId}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+
+    return dispatch({
+      type: GET_ORDERS_BY_PAYMENT_ID,
+      payload: data,
+    });
+  };
+}
+
+export function modifiedStatusOrder(parce, token, payment_id) {
+  return async function (dispatch) {
+    const { data } = await axios.patch(
+      `updateStatusOrder/${payment_id}`,
+      { status: parce },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
   };
 }

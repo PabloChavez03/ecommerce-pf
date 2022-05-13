@@ -46,7 +46,8 @@ import {
   GET_ALL_CLIENTS_ORDERS,
   GET_ALL_ORDERS,
   GET_ORDERS_BY_PAYMENT_ID,
-  FILTER_ORDER_BY_STATUS
+  FILTER_ORDER_BY_STATUS,
+  UPDATE_STATUS_ORDER,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -90,9 +91,9 @@ export const initialState = {
   clientDetail: {},
   reviewsUser: [],
   allOrdersClientes: [],
-  allOrders: [],
-  orderByPaymentId: {},
   statusOrder: [],
+  ordersAll: [],
+  ordersAllBackUp: [],
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -132,7 +133,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
           ),
         };
       }
-	  
+
     case REMOVE_PRODUCT_FROM_CART:
       let indexRemoveQty = state.cartItems.findIndex(
         (e) =>
@@ -468,18 +469,23 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case GET_ALL_ORDERS:
       return {
         ...state,
-        allOrders: payload,
+        ordersAll: payload,
+        ordersAllBackUp: payload,
       };
     case GET_ORDERS_BY_PAYMENT_ID:
       return {
         ...state,
-        orderByPaymentId: payload,
+        ordersAll: [
+          state.ordersAllBackUp?.find(
+            (el) => el.payment_id === payload.payment_id
+          ),
+        ],
       };
-	  case FILTER_ORDER_BY_STATUS:
-        return {
-          ...state,
-          allOrders: payload,
-        };
+    case FILTER_ORDER_BY_STATUS:
+      return {
+        ...state,
+        ordersAll: payload,
+      };
     default:
       return { ...state };
   }
