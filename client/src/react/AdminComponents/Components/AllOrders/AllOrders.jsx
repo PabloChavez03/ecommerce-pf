@@ -38,6 +38,7 @@ export default function AllClients() {
 
     return (
         <div className={style.cardContainer}>
+                
                 <label>Filtras por Estado de Compra
             <select onChange={e => { handleFilterByStatusOrder(e) }}>
                 <option></option>
@@ -66,7 +67,7 @@ export default function AllClients() {
                             <p>	<span >Monto Total:</span> $ {client.total}</p>
                        
 
-                           { client.status === "pending" &&
+                           { client.status === "pending"  &&
                             <label>Modificar Estado:
                                  <select onChange={e => { handleModifiedStatus(e, client.payment_id) }}>
                                  <option>Seleccionar</option>
