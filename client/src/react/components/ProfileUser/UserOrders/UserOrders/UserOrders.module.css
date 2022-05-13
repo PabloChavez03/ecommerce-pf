@@ -1,0 +1,15 @@
+.container{ 
+    width: 700px;
+    display: flex;
+    margin: auto;
+    flex-wrap: wrap;
+}
+.title{
+    width: 100%;
+}
+.orders{
+    padding: 3px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.573);
+    margin-bottom : 10px;
+}

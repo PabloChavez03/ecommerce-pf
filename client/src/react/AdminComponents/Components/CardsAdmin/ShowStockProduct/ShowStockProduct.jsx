@@ -42,7 +42,7 @@ const ShowStockProduct = ({ modalStock, setModalStock }) => {
 							</div>
 						))
 					) : (
-						<p>Resolviendo</p>
+						<p>Cargando el stock ...</p>
 					)}
 				</div>
 			</div>

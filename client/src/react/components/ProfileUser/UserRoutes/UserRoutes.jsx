@@ -16,13 +16,12 @@ export default function UserRoutes() {
   return (
     <div>
       <NavBar />
-      <div className={style.sectionNavContainer}>{/* <NavUser /> */}</div>
       <div className={style.sectionInfoContainer}>
         <Routes>
           <Route path={"/"} element={<HomeUser />} />
           <Route path={"/profile"} element={<ProfileUser />} />
           <Route path={"/orders"} element={<UserOrders />} />
-          <Route path={"/orders/:idOrder"} element={<OrderDetail />} />
+          <Route path={"/orders/:payment_id"} element={<OrderDetail />} />
           <Route path={"/orders/actual"} element={<OrderActual />} />
           <Route path={"/reviews"} element={<ReviewsUser />} />
           <Route

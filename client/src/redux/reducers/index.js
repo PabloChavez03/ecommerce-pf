@@ -43,6 +43,8 @@ import {
   GET_REVIEWS_USER,
   DELETE_REVIEWS,
   UPDATE_REVIEWS,
+  GET_ALL_CLIENTS_ORDERS,
+  GET_ALL_ORDERS,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -85,6 +87,8 @@ export const initialState = {
   allClients: [],
   clientDetail: {},
   reviewsUser: [],
+  allOrdersClientes: [],
+  allOrders: [],
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -291,7 +295,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
         chatbot: payload,
       };
     case GET_USER_DATA:
-      console.log(payload);
       return {
         ...state,
         userData: payload,
@@ -438,9 +441,8 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
       };
-
     case GET_REVIEWS_USER:
-      console.log(payload)
+      console.log(payload);
       return {
         ...state,
         reviewsUser: payload,
@@ -452,6 +454,16 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case UPDATE_REVIEWS:
       return {
         ...state,
+      };
+    case GET_ALL_CLIENTS_ORDERS:
+      return {
+        ...state,
+        allOrdersClientes: payload,
+      };
+    case GET_ALL_ORDERS:
+      return {
+        ...state,
+        allOrders: payload,
       };
     default:
       return { ...state };

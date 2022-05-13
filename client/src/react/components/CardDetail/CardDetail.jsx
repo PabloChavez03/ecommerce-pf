@@ -19,7 +19,7 @@ export default function CardDetail() {
 	
 
 	const productDetail = useSelector((state) => state.details);
-	console.log(productDetail)
+
 	return (
 		<div>
 			<NavBar />
