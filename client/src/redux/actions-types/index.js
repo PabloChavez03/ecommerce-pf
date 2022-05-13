@@ -41,7 +41,8 @@ import {
 	DELETE_REVIEWS,
 	UPDATE_REVIEWS,
 	GET_ALL_CLIENTS_ORDERS,
-  GET_ALL_ORDERS
+  GET_ALL_ORDERS,
+  FILTER_ORDER_BY_STATUS
 } from "../actions-creators";
 import {
 	chatBot,
@@ -564,3 +565,20 @@ export function getAllOrders(token) {
     });
   };
 }
+
+export function filterOrderByStatus( token, status) {
+	console.log(status)
+	return async function (dispatch) {
+	  const { data } = await axios.get(`/findorderbystatus/${status}`, {
+		  headers: {
+			  authorization: `Bearer ${token}`,
+			},
+		});
+		console.log(data)
+  
+	  return dispatch({
+		type: FILTER_ORDER_BY_STATUS,
+		payload: data,
+	  });
+	};
+  }

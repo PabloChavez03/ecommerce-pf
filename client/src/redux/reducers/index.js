@@ -44,7 +44,8 @@ import {
 	DELETE_REVIEWS,
 	UPDATE_REVIEWS,
 	GET_ALL_CLIENTS_ORDERS,
-  GET_ALL_ORDERS
+  GET_ALL_ORDERS,
+  FILTER_ORDER_BY_STATUS
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -88,7 +89,8 @@ export const initialState = {
 	clientDetail: {},
 	reviewsUser: [],
 	allOrdersClientes: [],
-  allOrders:[]
+  allOrders:[],
+  statusOrder: [],
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -464,6 +466,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				allOrdersClientes: payload,
 			};
       case GET_ALL_ORDERS:
+        return {
+          ...state,
+          allOrders: payload,
+        };
+		case FILTER_ORDER_BY_STATUS:
         return {
           ...state,
           allOrders: payload,

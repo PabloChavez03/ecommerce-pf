@@ -55,6 +55,8 @@ router.use("/findAllOrders", require("./getAllOrders"));
 router.use("/findorderbypk", require("./getOrderByPk"));
 router.use("/findorderbystatus", require("./getFindOrderByStatus"));
 router.use("/findOrderByUser", require("./getOrdersByUser.js"));
+router.use("/updateStatusOrder", require("./updateStatusOrder"));
+router.use("/findUserByUsername", require("./findUserEmail"));
 //-----------------------------------------------------------------------------
 
 
