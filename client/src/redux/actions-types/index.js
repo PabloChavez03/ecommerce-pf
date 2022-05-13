@@ -42,7 +42,9 @@ import {
   UPDATE_REVIEWS,
   GET_ALL_CLIENTS_ORDERS,
   GET_ALL_ORDERS,
+  FILTER_ORDER_BY_STATUS,
   GET_ORDERS_BY_PAYMENT_ID,
+  UPDATE_STATUS_ORDER,
 } from "../actions-creators";
 import {
   chatBot,
@@ -566,14 +568,28 @@ export function getAllOrders(token) {
   };
 }
 
-export function getOrdersByPaymentId(token,paymentId) {
+export function filterOrderByStatus(token, status) {
+  return async function (dispatch) {
+    const { data } = await axios.get(`/findorderbystatus/${status}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return dispatch({
+      type: FILTER_ORDER_BY_STATUS,
+      payload: data,
+    });
+  };
+}
+
+export function getOrdersByPaymentId(token, paymentId) {
   return async function (dispatch) {
     const { data } = await axios.get(`/findOrderByPk/${paymentId}`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
     });
-    
+
     return dispatch({
       type: GET_ORDERS_BY_PAYMENT_ID,
       payload: data,
@@ -581,3 +597,16 @@ export function getOrdersByPaymentId(token,paymentId) {
   };
 }
 
+export function modifiedStatusOrder(parce, token, payment_id) {
+  return async function (dispatch) {
+    const { data } = await axios.patch(
+      `updateStatusOrder/${payment_id}`,
+      { status: parce },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  };
+}

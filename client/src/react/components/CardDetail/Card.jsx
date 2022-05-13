@@ -43,6 +43,7 @@ export default function Card({
 
 	const handleAddCart = (event) => {
 		event.preventDefault();
+		alert("Agregado al carrito");
 		dispatch(addProductToCart(productToCart));
 	};
 
@@ -67,7 +68,7 @@ export default function Card({
 				<img
 					className={style.cardPrimaryImg}
 					src={imageCurrent}
-					alt='Img Principal'
+					alt="Img Principal"
 				/>
 
 				<div className={style.cardDetailImgContainer}>
@@ -77,7 +78,7 @@ export default function Card({
 									<img
 										className={style.cardCarouselImg}
 										src={`https://${image}`}
-										alt='Img Product'
+										alt="Img Product"
 										onClick={(e) => handleImgChange(e)}
 									/>
 								</div>
@@ -110,7 +111,7 @@ export default function Card({
 				<div className={style.selectcontainer}>
 					<select
 						className={style.selects}
-						name='size'
+						name="size"
 						onChange={(e) => handleChangeSelect(e)}
 					>
 						<option>Talle</option>
