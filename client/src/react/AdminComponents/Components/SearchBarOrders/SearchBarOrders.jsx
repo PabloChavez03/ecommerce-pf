@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  getProductByName,
-  getProductByNameAdmin,
-} from "../../../../redux/actions-types";
+import { getOrdersByPaymentId } from "../../../../redux/actions-types";
 import style from "../../../components/SearchBar/SearchBar.module.css";
 //import lupa from "../../../components/svg/buscar.png";
 
-export default function SearchProducts({ setSelect }) {
+export default function SearchBarOrders() {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
 
@@ -15,15 +12,14 @@ export default function SearchProducts({ setSelect }) {
     event.preventDefault();
     setSearch(event.target.value.toUpperCase());
   };
-
+  // console.log(search)
   const handleClickSearch = (event) => {
     event.preventDefault();
     if (search === "") {
       alert("Debe ingresar un producto a buscar!");
     } else {
-      dispatch(getProductByNameAdmin(search));
+      dispatch(getOrdersByPaymentId("78542232"));
       setSearch("");
-      setSelect("search");
     }
   };
 

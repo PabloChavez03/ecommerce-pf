@@ -9,10 +9,14 @@ router.get("/:payment_id", async (req, res) => {
     const {payment_id} = req.params;
 
     try {
-        let findOrder = await Order.findByPk(payment_id)
-        res.status(200).json(findOrder)
+        if (payment_id) {
+            let findOrder = await Order.findByPk(payment_id);
+            return res.status(200).json(findOrder);
+        }
+
+        return res.status(404).json({ message: "payment_id is invalid or undefined" })
     } catch (error) {
-        console.log(error)
+        return res.status(409).json({ message: error })
     }
 });
 

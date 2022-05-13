@@ -10,9 +10,9 @@ router.get("/:status", async (req, res) => {
 
     try {
         let findOrder = await Order.findAll({where: {status: status}})
-        res.status(200).json(findOrder)
+        return res.status(200).json(findOrder)
     } catch (error) {
-        console.log(error)
+        return res.status(404).json({ message: "el status ingresado no es correcto" });
     }
 });
 
