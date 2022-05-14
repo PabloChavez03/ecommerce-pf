@@ -15,6 +15,7 @@ import ClientDetail from "../Components/AllClients/ClientDetail/ClientDetail";
 import OrderDetail from "../Components/OrderDetail/OrderDetail";
 import ChatBot from "../Components/ChatBot/ChatBot";
 import ProfileUser from "../../components/ProfileUser/ProfileUser";
+import PublicidadMail from "../Components/Email/EmailPublicidad";
 
 const Admin = () => {
 	return (
@@ -41,6 +42,7 @@ const Admin = () => {
 						<Route path={"/orders/:payment_id"} element={<OrderDetail />} />
 						<Route path={"/chatbot"} element={<ChatBot />} />
 						<Route path={"/profile"} element={<ProfileUser />} />
+						<Route path={"/Publicidad"} element={<PublicidadMail/> } />
 					</Routes>
 				</div>
 			</div>

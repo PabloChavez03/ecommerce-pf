@@ -17,36 +17,29 @@ export default function AllClientsOrders() {
 
   // console.log(orderDetails) de momento no vienen ordenes por eso tirar error
 
-  console.log(allOrdersClientes);
 
   return (
     <div className={s.container}>
       <h1 className={s.title}>Todas mis ordenes de compra</h1>
-      <div>
-        {allOrdersClientes?.map((client,id) => (
-          <div key={id} className={s.orders}>
-            <NavLink to={`/user/orders/${client.payment_id}`} style={{ textDecoration: "none" }}>
-            <br /> {/* el br es el espaciador */}
-            <p>
-              <span>Fecha de emisión: </span>
-              {client.orderDate}
-            </p>
-            <p>
-              <span>Nº de Orden: </span>
-              {client.payment_id}
-            </p>
-            <p>
-              <span>Status: </span>
-              {client.status}
-            </p>
-            <p>
-              <span>Total: </span>
-              {client.total}
-            </p>
-            </NavLink>
-          </div>
-        ))}
-      </div>
+
+      {allOrdersClientes?.map((client, id) => (
+        <NavLink
+          key={id}
+          to={`/user/orders/${client.payment_id}`}
+          style={{ textDecoration: "none" }}
+           className={s.orders}
+        >
+            <div className={s.ordenFecha}>
+              <span>Nº: <b>{client.payment_id}</b> </span>
+              <span>{client.orderDate.slice(0, 10)}</span>
+            </div>
+            <div className={s.ordenFecha}>
+              <span>Total: <b>${client.total}</b></span>
+              <div><span>Status: </span><span className= {client.status === 'rejected'? s.rejected :client.status === 'pending'? s.pending : s.approved }>{client.status}</span> </div>
+            </div>
+            
+        </NavLink>
+      ))}
     </div>
   );
 }

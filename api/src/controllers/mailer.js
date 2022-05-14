@@ -17,57 +17,63 @@ transporter.verify().then(() => {
 })
 
 
-async function publicidadEmail({ emailGoogle, emailAsunto, emailImagenTitle, emailTitulo, emailSubTitle, emailDescription }) {
-  await transporter.sendMail({
-    from: `"CLOTHES 22" ${USER_GOOGLE}`,
-    to: emailGoogle,
-    subject: emailAsunto,
-    html: `
-        <div style="width: 80%; margin: auto; border: 0px solid black">
-      <div style="width: 100%; background-color: #90006f; display: flex">
-        <h1 style="color: white; padding: 0px 20px">CLOTHES 22</h1>
-      </div>
-      <div style="padding: 0px 20px 20px">
-        <h2 style="color: #90006f">¡Ultima oportunidad para ahorrar!</h2>
-        <p>
-          Compra nuestros productos a 50% de descuento, de toda la linea de
-          calzados y ropa
-        </p>
-        <img style="width: 100%;margin-bottom: 20px;" src="https://viernesnegro.net/wp-content/uploads/thumbs_dir/ofertas-de-ropa-black-friday-ofou2hqn33oydu8pupxgpuels4vg64tn3biu43h8dc.jpg" alt="">
-        <a
-          style="
-            text-decoration: none;
-            background-color: #90006f;
-            color: white;
-            padding: 10px;
-            cursor: pointer;
-          "
-          href=""
-          >Compra ya!</a
-        >
-      </div>
-      <hr style="color: #90006f; border: 1px solid #90006f" />
-      <footer style="padding: 0px 20px 20px">
-        <p style="font-size: 12px">
-          Si necesitas asistencia tecnica, ponte en contacto con la
-          <a href="" style="text-decoration: none; color: #90006f"
-            >Ayuda de CLOTHES 22</a
+async function publicidadEmail({ emailGoogle, emailAsunto, emailImagenTitle, emailTitulo, emailSubTitle, emailDescription, emailButton = "Compra ya!" }) {
+  if(emailGoogle){
+    await transporter.sendMail({
+      from: `"CLOTHES 22" ${USER_GOOGLE}`,
+      to: emailGoogle,
+      subject: emailAsunto,
+      html: `
+          <div style="width: 80%; margin: auto; border: 0px solid black">
+        <div style="width: 100%; background-color: #90006f; display: flex">
+          <h1 style="color: white; padding: 0px 20px">CLOTHES 22</h1>
+        </div>
+        <div style="padding: 0px 20px 20px">
+          <h2 style="color: #90006f">${emailTitulo}</h2>
+          <p>
+            ${emailSubTitle}
+          </p>
+          ${emailImagenTitle ? `<img style="width: 100%;margin-bottom: 20px;" src="${emailImagenTitle}" alt="" /> ` : null}
+          <p>${emailDescription}</p>
+          <a
+            style="
+              text-decoration: none;
+              background-color: #90006f;
+              color: white;
+              padding: 10px;
+              cursor: pointer;
+            "
+            href=""
+            >${emailButton?emailButton:"Compra ya!"}</a
           >
-        </p>
-        <p style="font-size: 12px">
-          <b>CLOTHES 22</b> te notificara la actividad nueva relacionada
-          contigo. Puedes personalizar estos correos elentronico o desactiarlos
-          en cualquier momento.
-        </p>
-        <p style="font-size: 12px">
-          Tu uso de <b>CLOTHES 22</b> esta sujeto a las condiciones del servicio
-          y la Politica de privacidad de las Normas de la comunidad de
-          <b>CLOTHES 22</b>.
-        </p>
-      </footer>
-    </div>
-        `
-  })
+        </div>
+        <hr style="color: #90006f; border: 1px solid #90006f" />
+        <footer style="padding: 0px 20px 20px">
+          <p style="font-size: 12px">
+            Si necesitas asistencia tecnica, ponte en contacto con la
+            <a href="" style="text-decoration: none; color: #90006f"
+              >Ayuda de CLOTHES 22</a
+            >
+          </p>
+          <p style="font-size: 12px">
+            <b>CLOTHES 22</b> te notificara la actividad nueva relacionada
+            contigo. Puedes personalizar estos correos elentronico o desactiarlos
+            en cualquier momento.
+          </p>
+          <p style="font-size: 12px">
+            Tu uso de <b>CLOTHES 22</b> esta sujeto a las condiciones del servicio
+            y la Politica de privacidad de las Normas de la comunidad de
+            <b>CLOTHES 22</b>.
+          </p>
+        </footer>
+      </div>
+          `
+    })
+  }else{
+    return {"Info":"Falta ingresar el correo"}
+  }
+  
+  
 }
 
 async function newRegistroCliente(emailGoogle, emailUsuario) {

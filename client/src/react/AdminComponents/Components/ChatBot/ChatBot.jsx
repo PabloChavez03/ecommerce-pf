@@ -88,7 +88,7 @@ export default function ChatBot() {
       {/**----------------------------------------------------------------------------- */}
       <div>
         <button className={style.btnNew} onClick={() => handleNewReceptor()}>
-          New Receptor
+          New Pregunta
         </button>
         {newReceptor ? (
           <NewReceptor handleNewReceptor={handleNewReceptor} />
@@ -105,12 +105,12 @@ export default function ChatBot() {
           <thead>
             <tr>
               <th colSpan={6}>
-                <h3>Chat Bot Receptor</h3>
+                <h3>Chat Bot Pregunta</h3>
               </th>
             </tr>
             <tr>
               <th className={style.idTabla}>Id</th>
-              <th>Name</th>
+              <th>Title</th>
               <th className={style.isActiveTable}>IsActive</th>
               <th className={style.optionBtn}>Option</th>
             </tr>
@@ -148,7 +148,7 @@ export default function ChatBot() {
       {/**----------------------------------------------------------------------------- */}
       <div>
         <button className={style.btnNew} onClick={() => handleNewEmisor()}>
-          New Emisor
+          Insertar Pregunta
         </button>
         {newEmisor ? <NewEmisor handleNewEmisor={handleNewEmisor} /> : null}
         {putEmisor ? (
@@ -165,7 +165,7 @@ export default function ChatBot() {
           <thead>
             <tr>
               <th colSpan={6}>
-                <h3>Chat Bot Emisor</h3>
+                <h3>Chat Bot Panel</h3>
               </th>
             </tr>
             <tr>
