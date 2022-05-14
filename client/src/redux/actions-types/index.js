@@ -42,7 +42,9 @@ import {
 	UPDATE_REVIEWS,
 	GET_ALL_CLIENTS_ORDERS,
 	GET_ALL_ORDERS,
-	GET_EMAIL_PUBLICIDAD
+	GET_EMAIL_PUBLICIDAD,
+	FILTER_ORDER_BY_STATUS,
+	GET_ALL_CLIENTS_USER_EMAIL,
 } from "../actions-creators";
 import {
 	chatBot,
@@ -354,6 +356,16 @@ export function getAllClients(token) {
 		});
 	};
 }
+// GET_ALL_CLIENTS_USER_EMAIL
+export function getAllClientsUserEmail() {
+	return async function (dispatch) {
+		const { data } = await axios.get("/findUserByUsername");
+		return dispatch({
+			type: GET_ALL_CLIENTS_USER_EMAIL,
+			payload: data,
+		});
+	};
+}
 
 export function resetAllClients() {
 	return {
@@ -542,7 +554,7 @@ export function getAllClientsOrders(/*token, */ user_name) {
       headers: {
         authorization: `Bearer ${token}`,
       },
-    }*/,
+    }*/
 		);
 
 		return dispatch({
@@ -567,8 +579,41 @@ export function getAllOrders(token) {
 	};
 }
 
+export function filterOrderByStatus(token, status) {
+	console.log(status);
+	return async function (dispatch) {
+		const { data } = await axios.get(`/findorderbystatus/${status}`, {
+			headers: {
+				authorization: `Bearer ${token}`,
+			},
+		});
+		console.log(data);
+
+		return dispatch({
+			type: FILTER_ORDER_BY_STATUS,
+			payload: data,
+		});
+	};
+}
+export function getOrdersByPaymentId(token, payment_id) {
+	return async function (dispatch) {
+		const { data } = await axios.get(
+			`/findOrderByPk/${payment_id}` /* {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }*/
+		);
+
+		return dispatch({
+			type: GET_ALL_ORDERS,
+			payload: data,
+		});
+	};
+}
+
 export const EmailPublicidad = (data) => async (dispatch) => {
-	
+
 	let dato = await emailPublicidad(data)
 	console.log(dato)
 	return dispatch({
