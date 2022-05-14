@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import Swal from 'sweetalert2'
 import {
 	getAllCategoriesForForm,
 	getDetails,
@@ -205,7 +206,11 @@ export default function UpdateProduct() {
 	function handleSubmit(e) {
 		e.preventDefault();
 		if (Object.values(errors).length !== 0) {
-			alert("Faltan campos que rellenar");
+			Swal.fire(
+				'Faltan campos que rellenar!',
+				'',
+				'success'
+			  )
 		} else {
 			dispatch(updateProduct(productId, input, token));
 			navigate("/admin/allproducts");

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 import {
 	ADD_PRODUCT_TO_CART,
 	GET_PRODUCT_BY_NAME,
@@ -118,7 +119,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				if (payload.variants[0].stock !== cartProductAux.quantity) {
 					cartProductAux.quantity++;
 				} else {
-					alert("No hay mas stock de este producto");
+					Swal.fire(
+						'Producto con Stock Agotado!',
+						'',
+						'success'
+					  )
 				}
 				return {
 					...state,
@@ -181,7 +186,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				if (item.variants[variantIndex].stock !== item.quantity) {
 					item.quantity++;
 				} else {
-					alert("No hay mas stock de este producto");
+					Swal.fire(
+						'Producto con Stock Agotado!',
+						'',
+						'success'
+					  )
 				}
 			}
 			return {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import style from "./LoginMenu.module.css";
-
+import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
 import { loggedOut } from "../../../../redux/actions-types";
 
@@ -15,7 +15,11 @@ const LoginMenu = ({ setLoginMenu }) => {
 		e.preventDefault();
 		dispatch(loggedOut());
 		setLoginMenu(false);
-		alert("Sesión cerrada exitosamente!");
+		Swal.fire(
+            'Sesión cerrada exitosamente!',
+            '',
+            'success'
+          )
 		navigate("/");
 	};
 

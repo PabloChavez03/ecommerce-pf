@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrdersByPaymentId } from "../../../../redux/actions-types";
 import style from "../../../components/SearchBar/SearchBar.module.css";
 //import lupa from "../../../components/svg/buscar.png";
+import Swal from 'sweetalert2'
 
 export default function SearchBarOrders() {
   const dispatch = useDispatch();
@@ -17,7 +18,11 @@ export default function SearchBarOrders() {
   const handleClickSearch = (event) => {
     event.preventDefault();
     if (search === "") {
-      alert("Debe ingresar un producto a buscar!");
+      Swal.fire(
+        'Debe ingresar un numero de Orden!',
+        '',
+        'success'
+        )
     } else {
       dispatch(getOrdersByPaymentId(token,search));
       setSearch("");

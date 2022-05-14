@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import style from "./CardDetail.module.css";
 import { addProductToCart } from "../../../redux/actions-types";
 import { NavLink } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 export default function Card({
 	id,
@@ -43,7 +44,11 @@ export default function Card({
 
 	const handleAddCart = (event) => {
 		event.preventDefault();
-		alert("Agregado al carrito");
+		Swal.fire(
+			'Producto agregado al carrito con Éxito!',
+			'',
+			'success'
+		  )
 		dispatch(addProductToCart(productToCart));
 	};
 

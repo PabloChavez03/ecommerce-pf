@@ -3,11 +3,18 @@ import NavBar from "../../NavBar/NavBar";
 import github from "../images/github.png";
 import linkedin from "../images/logotipo-de-linkedin.png";
 import style from "../DevInfo/DevInfo.module.css";
+import Swal from 'sweetalert2'
+
+
 
 export default function DevInfo() {
   const handleClickImg = (e) => {
     e.preventDefault();
-    alert("Perfil en desarrollo!");
+    Swal.fire(
+      'Perfil en desarrollo!',
+      '',
+      'success'
+    )
   };
   return (
     <div className={style.container}>

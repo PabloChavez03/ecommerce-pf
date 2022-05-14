@@ -5,6 +5,7 @@ import { deleteProduct } from "../../../../redux/actions-types";
 import back from "../../../components/svg/volver-flecha.png";
 import style from "./DeleteProduct.module.css";
 import alert from "../../../components/svg/advertencia.png";
+import Swal from 'sweetalert2'
 
 export default function DeleteProduct() {
 	const { productId } = useParams();
@@ -16,7 +17,11 @@ export default function DeleteProduct() {
 	const handleClickSi = (event) => {
 		event.preventDefault();
 		dispatch(deleteProduct(productId, token));
-		// alert("Producto eliminado exitosamente");
+		Swal.fire(
+			'Producto eliminado exitosamente!',
+			'',
+			'success'
+		  )
 		navigate("/admin/allproducts");
 	};
 

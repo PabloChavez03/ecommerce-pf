@@ -3,6 +3,8 @@ import style from "./AdminCreate.module.css";
 import { useDispatch } from "react-redux";
 import { createNewUser } from "../../../../redux/actions-types";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
+
 
 const AdminCreate = () => {
 	const [activeCreate, setActiveCreate] = useState(false);
@@ -95,7 +97,11 @@ const AdminCreate = () => {
 			confirm_user_password: "",
 		});
 		navigate("/admin");
-		alert("sumitie");
+		Swal.fire(
+			'Usuario Administrador creado con Éxito!',
+			'',
+			'success'
+		  )
 	};
 
 	const handleChangeActive = (e) => {

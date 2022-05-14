@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import Swal from 'sweetalert2'
 import {
   getAllCategoriesForForm,
   postProduct,
@@ -134,7 +135,11 @@ export default function ProductCreate() {
     e.preventDefault();
     setCorrect(true);
     if (Object.values(errors).length !== 0) {
-      alert("Faltan campos que rellenar");
+      Swal.fire(
+        'Faltan campos que rellenar!',
+        '',
+        'success'
+      )
     } else {
       dispatch(postProduct(input, token));
       dispatch(
@@ -175,7 +180,11 @@ export default function ProductCreate() {
         },
         variants: [],
       })
-      alert("Producto creado con exito!");
+      Swal.fire(
+        'Producto creado con exito!',
+        '',
+        'success'
+      )
       navigate("/admin");
     }
   }

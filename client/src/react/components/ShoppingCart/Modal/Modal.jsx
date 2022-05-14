@@ -1,5 +1,5 @@
 import React from "react";
-
+import Swal from 'sweetalert2'
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -20,7 +20,11 @@ const Modal = ({ status, setStatus }) => {
 	const handleClickBag = (event) => {
 		event.preventDefault();
 		if (!cartData.length) {
-			alert("Por favor agregue productos al carrito para continuar");
+			Swal.fire(
+				'Por favor agregue productos al carrito para continuar!',
+				'',
+				'success'
+			  )
 			return;
 		}
 

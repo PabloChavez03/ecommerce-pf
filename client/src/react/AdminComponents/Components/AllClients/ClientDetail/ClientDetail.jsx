@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import Swal from 'sweetalert2'
 import {
 	getClientDetail,
 	resetClientDetail,
@@ -32,7 +33,11 @@ export default function ClientDetail() {
 		e.preventDefault();
 
 		if (userData.username === clientDetail.user_name) {
-			alert("No puedes cambiar tus propios permisos");
+			Swal.fire(
+				'No puedes cambiar tus propios permisos!',
+				'',
+				'success'
+			  )
 			return;
 		}
 

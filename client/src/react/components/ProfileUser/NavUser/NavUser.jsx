@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { loggedOut } from "../../../../redux/actions-types";
 import style from "./NavUser.module.css";
+import Swal from 'sweetalert2'
 
 export default function NavUser() {
   const dispatch = useDispatch();
@@ -10,7 +11,11 @@ export default function NavUser() {
   const handleClickLoggedOut = (e) => {
     e.preventDefault();
     dispatch(loggedOut());
-    alert("Sesión cerrada exitosamente!");
+    Swal.fire(
+      'Sesión cerrada exitosamente!',
+      '',
+      'success'
+    )
     navigate("/");
   };
 

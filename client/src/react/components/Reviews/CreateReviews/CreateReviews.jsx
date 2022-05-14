@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./CreateReviews.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createReview, getDetails } from "../../../../redux/actions-types";
+import Swal from 'sweetalert2'
 
 export default function CreateReviews({ productId }) {
   const dispatch = useDispatch();
@@ -21,19 +22,33 @@ export default function CreateReviews({ productId }) {
   const handleClickSend = (event) => {
     event.preventDefault();
     if (!userData.username) {
-      alert("Debe registrarse y/o iniciar sesión para dejar una reseña");
+      Swal.fire(
+        'Debe registrarse y/o iniciar sesión para dejar una reseña!',
+        '',
+        'success'
+      )
       navigate("/login");
     }
     if (userData.rol === "admin") {
-      alert(
-        "No te pases de listo admin, los reviews solo los puede dejar el cliente!"
-      );
+      Swal.fire(
+        'No te pases de listo admin, los reviews solo los puede dejar el cliente!',
+        '',
+        'success'
+      )
     } else {
       if (score === 0) {
-        alert("Por favor seleccionar calificación");
+        Swal.fire(
+          'Por favor seleccionar calificación!',
+          '',
+          'success'
+        )
       }
       if (review.comment === "") {
-        alert("Por favor ingresa comentarios del producto");
+        Swal.fire(
+          'Por favor ingresa comentarios del producto!',
+          '',
+          'success'
+        )
       } else if (score !== 0 && review.comment !== "") {
         if (userData.username) {
           dispatch(createReview(review));
@@ -44,7 +59,11 @@ export default function CreateReviews({ productId }) {
             calification: 0,
             comment: "",
           });
-          alert("Tu reseña fue enviada con éxito. Muchas gracias!");
+          Swal.fire(
+            'Tu reseña fue enviada con éxito. Muchas gracias!',
+            '',
+            'success'
+          )
           dispatch(getDetails(productId));
         }
       }

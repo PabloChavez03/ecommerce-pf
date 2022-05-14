@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteReview } from "../../../../redux/actions-types";
 import alertIcon from "../../svg/advertencia.png";
+import Swal from 'sweetalert2'
 
 export default function DeleteReviews({ modalStatus, setModalStatus, id }) {
 	const dispatch = useDispatch();
@@ -11,7 +12,11 @@ export default function DeleteReviews({ modalStatus, setModalStatus, id }) {
 	const handleClickConfirm = (event) => {
 		event.preventDefault();
 		dispatch(deleteReview(id));
-		alert("Reseña eliminada con exito!");
+		Swal.fire(
+			'Reseña eliminada con exito!',
+			'',
+			'success'
+		  )
 		setModalStatus(!modalStatus);
 		navigate("/user/reviews");
 	};
