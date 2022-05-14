@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import style from "./CardDetail.module.css";
 import { addProductToCart } from "../../../redux/actions-types";
 import { NavLink } from "react-router-dom";
+import Modal from "../ShoppingCart/Modal/Modal";
 
 export default function Card({
 	id,
@@ -31,7 +32,7 @@ export default function Card({
 		id,
 		variants: variants,
 	});
-
+	const [statusModal, setStatusModal] = useState(false);
 	useEffect(() => {
 		setImageCurrent(`https://${images[0]}`);
 	}, [images]);
@@ -43,9 +44,11 @@ export default function Card({
 
 	const handleAddCart = (event) => {
 		event.preventDefault();
-		alert("Agregado al carrito");
+		setStatusModal(!statusModal);
 		dispatch(addProductToCart(productToCart));
 	};
+
+
 
 	const handleChangeSelect = (event) => {
 		event.preventDefault();
@@ -152,6 +155,9 @@ export default function Card({
 						<button className={style.buttonBack}>ATRAS</button>
 					</NavLink>
 				</div>
+				{
+					statusModal && <Modal status={statusModal} setStatus={setStatusModal}/>
+				}
 			</div>
 		</div>
 	);
