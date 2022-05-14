@@ -141,7 +141,7 @@ export default function PutEmisor({
           </div>
         </div>
         <div>
-          <label>Receptor </label>
+          <label>Sub Alternativa: </label>
           <select defaultValue={"select"} onChange={(e) => handleSelect(e)}>
             <option value={"select"}>Seleccione el receptor</option>
             {ReceptorName.length === 0

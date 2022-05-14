@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.confirmation {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(249, 247, 247, 0.72);
+    border: 1px solid rgba(235, 229, 229, 0.554);
+    border-radius: 3px;
+    box-shadow: 0px 3px 3px rgba(41, 40, 40, 0.666);
+    padding: 10px 15px;
+}
+
+.confirmation div {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+.buttons {
+    margin: 5px;
+    background-color: rgba(222, 218, 218, 0.815);
+    margin-left: 10px;
+    border: 1px solid rgba(64, 59, 59, 0.579);
+    padding: 3px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    color: black;
+    transition: 0.2s;
+}
+
+.buttons:hover{
+    background-color: rgba(231, 227, 227, 0.579);
+}

@@ -1,14 +1,15 @@
 import React from "react";
 import css from "./OrderActual.module.css";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { postOrder } from "../../../../../redux/actions-types";
+import { postOrder, emptyCart } from "../../../../../redux/actions-types";
 
 function OrderActual() {
   const cartItems = useSelector((state) => state.cartItems);
   const { email } = useSelector((state) => state.userData);
   // const subTotal = useSelector((state) => state.subTotal);
   // console.log(subTotal);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   console.log(cartItems
@@ -44,8 +45,18 @@ function OrderActual() {
     email: email,
   };
   dispatch(postOrder(order));
+  const handleClose = (e)=>{
+    e.preventDefault()
+    dispatch(emptyCart())
+    navigate('/user/orders')
+
+  }
 
   return (
+    
+    <div onClick={(e)=>handleClose(e)} className={css.overlay}>
+      <div className={css.container1}>
+      
     <div className={css.container}>
 
         <h1> ORDEN DE COMPRA</h1>
@@ -135,6 +146,9 @@ function OrderActual() {
         <h1>Total: ${suma + envio}</h1>
         
         
+    </div>
+   <span onClick={(e)=>handleClose(e)} className={css.x}>X</span>
+    </div>
     </div>
   );
 }

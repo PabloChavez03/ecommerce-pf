@@ -6,8 +6,8 @@ import { useParams } from "react-router-dom";
 
 export default function OrderDetail() {
   const { payment_id } = useParams();
-  const allOrders= useSelector((state) => state.allOrders);
-  const order = allOrders.find(
+  const allOrders= useSelector((state) => state.ordersAll);
+  const order = allOrders?.find(
     (e) => Number(e.payment_id) === Number(payment_id)
   );
   console.log(order);
@@ -27,17 +27,17 @@ export default function OrderDetail() {
 
       <div>
         <h3>Orden de compra Numero :</h3>
-        <h4>{order.payment_id}</h4>
+        <h4>{order?.payment_id}</h4>
       </div>
 
       <div>
         <h3>Estado : </h3>
-        <h4>{order.status}</h4>
+        <h4>{order?.status}</h4>
       </div>
 
       <div>
         <h3>Email: </h3>
-        <h4>{order.email}</h4>
+        <h4>{order?.email}</h4>
       </div>
 
       <div>

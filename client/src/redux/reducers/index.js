@@ -1,4 +1,4 @@
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import {
 	ADD_PRODUCT_TO_CART,
 	GET_PRODUCT_BY_NAME,
@@ -46,10 +46,12 @@ import {
 	UPDATE_REVIEWS,
 	GET_ALL_CLIENTS_ORDERS,
 	GET_ALL_ORDERS,
+	GET_EMAIL_PUBLICIDAD,
 	GET_ORDERS_BY_PAYMENT_ID,
 	FILTER_ORDER_BY_STATUS,
 	GET_ALL_CLIENTS_USER_EMAIL,
 	UPDATE_STATUS_ORDER,
+	EMPTY_CART,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -119,11 +121,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				if (payload.variants[0].stock !== cartProductAux.quantity) {
 					cartProductAux.quantity++;
 				} else {
-					Swal.fire(
-						'Producto con Stock Agotado!',
-						'',
-						'success'
-					  )
+					Swal.fire("Producto con Stock Agotado!", "", "success");
 				}
 				return {
 					...state,
@@ -179,18 +177,13 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				}
 				state.cartItems[index].quantity--;
 			} else {
-				console.log("variants", item.variants);
 				let variantIndex = item.variants.findIndex(
 					(e) => e.brandSize.toString() === payload.size.toString(),
 				);
 				if (item.variants[variantIndex].stock !== item.quantity) {
 					item.quantity++;
 				} else {
-					Swal.fire(
-						'Producto con Stock Agotado!',
-						'',
-						'success'
-					  )
+					Swal.fire("Producto con Stock Agotado!", "", "success");
 				}
 			}
 			return {
@@ -453,7 +446,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				...state,
 				clientDetail: payload,
 			};
-
 		case UPDATE_CLIENT_INFO:
 			return {
 				...state,
@@ -464,7 +456,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				...state,
 			};
 		case GET_REVIEWS_USER:
-			console.log(payload);
 			return {
 				...state,
 				reviewsUser: payload,
@@ -488,6 +479,10 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				ordersAll: payload,
 				ordersAllBackUp: payload,
 			};
+		case GET_EMAIL_PUBLICIDAD:
+			return {
+				...state,
+			};
 		case GET_ORDERS_BY_PAYMENT_ID:
 			return {
 				...state,
@@ -502,11 +497,15 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				...state,
 				ordersAll: payload,
 			};
-
 		case GET_ALL_CLIENTS_USER_EMAIL:
 			return {
 				...state,
 				allClientsUserEmail: payload,
+			};
+		case EMPTY_CART:
+			return {
+				...state,
+				cartItems: [],
 			};
 		default:
 			return { ...state };

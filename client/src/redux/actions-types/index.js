@@ -42,10 +42,12 @@ import {
 	UPDATE_REVIEWS,
 	GET_ALL_CLIENTS_ORDERS,
 	GET_ALL_ORDERS,
+	GET_EMAIL_PUBLICIDAD,
 	FILTER_ORDER_BY_STATUS,
 	GET_ALL_CLIENTS_USER_EMAIL,
 	GET_ORDERS_BY_PAYMENT_ID,
 	UPDATE_STATUS_ORDER,
+	EMPTY_CART,
 } from "../actions-creators";
 import {
 	chatBot,
@@ -53,6 +55,7 @@ import {
 	currentcategory,
 	deleteChatBotEmisor,
 	deleteChatBotReceptor,
+	emailPublicidad,
 	getChatBotEmisor,
 	getChatBotReceptor,
 	getChatBotReceptorName,
@@ -619,5 +622,19 @@ export function modifiedStatusOrder(parce, token, payment_id) {
 				},
 			},
 		);
+	};
+}
+
+export const EmailPublicidad = (data) => async (dispatch) => {
+	let dato = await emailPublicidad(data);
+	console.log(dato);
+	return dispatch({
+		type: GET_EMAIL_PUBLICIDAD,
+	});
+};
+
+export function emptyCart() {
+	return {
+		type: EMPTY_CART,
 	};
 }
