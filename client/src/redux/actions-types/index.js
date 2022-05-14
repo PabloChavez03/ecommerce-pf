@@ -41,7 +41,8 @@ import {
 	DELETE_REVIEWS,
 	UPDATE_REVIEWS,
 	GET_ALL_CLIENTS_ORDERS,
-  GET_ALL_ORDERS
+	GET_ALL_ORDERS,
+	GET_EMAIL_PUBLICIDAD
 } from "../actions-creators";
 import {
 	chatBot,
@@ -49,6 +50,7 @@ import {
 	currentcategory,
 	deleteChatBotEmisor,
 	deleteChatBotReceptor,
+	emailPublicidad,
 	getChatBotEmisor,
 	getChatBotReceptor,
 	getChatBotReceptorName,
@@ -551,16 +553,25 @@ export function getAllClientsOrders(/*token, */ user_name) {
 }
 
 export function getAllOrders(token) {
-  return async function (dispatch) {
-    const { data } = await axios.get("/findAllOrders", {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+	return async function (dispatch) {
+		const { data } = await axios.get("/findAllOrders", {
+			headers: {
+				authorization: `Bearer ${token}`,
+			},
+		});
 
-    return dispatch({
-      type: GET_ALL_ORDERS,
-      payload: data,
-    });
-  };
+		return dispatch({
+			type: GET_ALL_ORDERS,
+			payload: data,
+		});
+	};
+}
+
+export const EmailPublicidad = (data) => async (dispatch) => {
+	
+	let dato = await emailPublicidad(data)
+	console.log(dato)
+	return dispatch({
+		type: GET_EMAIL_PUBLICIDAD
+	})
 }

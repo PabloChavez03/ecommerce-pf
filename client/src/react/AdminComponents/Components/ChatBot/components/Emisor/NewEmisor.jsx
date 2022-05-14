@@ -82,7 +82,7 @@ export default function NewEmisor({ handleNewEmisor }) {
   return (
     <div className={style.modal}>
       <div className={style.head}>
-        <h1>New Emisor</h1>
+        <h1>Insertar Pregunta</h1>
         <p onClick={() => handleCerrar()}>X</p>
       </div>
       <div>
@@ -132,7 +132,7 @@ export default function NewEmisor({ handleNewEmisor }) {
           </div>
         </div>
         <div>
-          <label>Receptor </label>
+          <label>Sub Alternativa:</label>
           <select defaultValue={"select"} onChange={(e) => handleSelect(e)}>
             <option value={"select"}>Seleccione el receptor</option>
             {ReceptorName.length === 0

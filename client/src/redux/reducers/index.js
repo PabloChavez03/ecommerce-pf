@@ -45,6 +45,7 @@ import {
   UPDATE_REVIEWS,
   GET_ALL_CLIENTS_ORDERS,
   GET_ALL_ORDERS,
+  GET_EMAIL_PUBLICIDAD,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -465,6 +466,10 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         allOrders: payload,
       };
+    case GET_EMAIL_PUBLICIDAD:
+      return{
+        ...state
+      }
     default:
       return { ...state };
   }
