@@ -23,10 +23,10 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/publicidad', async (req, res) => {
-    const { emailGoogle, emailImagenTitle, emailAsunto, emailTitulo, emailSubTitle, emailDescription } = req.body;
+router.post('/publicidad', async (req, res) => {
+    const { emailGoogle, emailImagenTitle, emailAsunto, emailTitulo, emailSubTitle, emailDescription, emailButton } = req.body;
     try {
-        await publicidadEmail({ emailGoogle, emailImagenTitle, emailAsunto, emailTitulo, emailSubTitle, emailDescription })
+        await publicidadEmail({ emailGoogle, emailImagenTitle, emailAsunto, emailTitulo, emailSubTitle, emailDescription, emailButton })
             .then(() => res.json({ "Info": "Enviado Publicidad" }));
     } catch (err) {
         console.log(err)

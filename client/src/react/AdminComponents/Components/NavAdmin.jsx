@@ -49,6 +49,9 @@ const NavAdmin = () => {
 					<NavLink className={style.navLinkAdmin} to={"/admin/orders"}>
 						Ordenes
 					</NavLink>
+					<NavLink className={style.navLinkAdmin} to={"/admin/Publicidad"}>
+						Publicidad Mail
+					</NavLink>
 					
 					<button
 						onClick={(e) => handleClickLoggedOut(e)}

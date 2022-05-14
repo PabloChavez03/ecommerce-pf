@@ -211,3 +211,23 @@ export const deleteChatBotEmisor = async (id) => {
         console.log(err);
     }
 }
+
+export const emailPublicidad = async (data) => {
+    try {
+        if (data) {
+            return await axios 
+            .post(`/email/publicidad`,
+            {
+                emailGoogle:data.emailGoogle,
+                emailAsunto:data.emailAsunto,
+                emailImagenTitle:data.emailImagenTitle,
+                emailTitulo:data.emailTitulo,
+                emailSubTitle:data.emailSubTitle,
+                emailDescription:data.emailDescription,
+                emailButton:data.emailButton
+            }
+            )
+        } else {console.log({"Info":"No hay datos" })}
+    }
+    catch (err) { console.log(err); }
+}

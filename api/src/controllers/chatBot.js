@@ -41,7 +41,7 @@ const chat_bot = async (data) => {
 	let v1 = await emisor();
 	if (v1.length !== 0) {
 		if (!data) {
-			v1 = v1.find((item) => item.id === 1);
+			v1 = v1[0];
 			let v2 = [];
 			v1.chat_bot_receptors.forEach((item) => {
 				v2.push(item.name);
@@ -57,7 +57,6 @@ const chat_bot = async (data) => {
 		}
 		let dato = v1.find((item) => item.name === data);
 		let v2 = [];
-		console.log(dato);
 		if (dato !== undefined) {
 			if (dato.chat_bot_receptors.length > 0) {
 				dato.chat_bot_receptors.forEach((item) => {
