@@ -5,13 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./CreateReviews.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createReview, getDetails } from "../../../../redux/actions-types";
+import ModalConfirmation from "../../ModalConfirmation/ModalConfirmation";
 
 export default function CreateReviews({ productId }) {
   const dispatch = useDispatch();
   const [score, setScore] = useState(0);
   const userData = useSelector((state) => state.userData);
   const navigate = useNavigate();
-
+  const [statusModal, setStatusModal] = useState(false);
+  let [message, setMessage] = useState("");
   const [review, setReview] = useState({
     user_name: userData.username,
     productId: productId,
@@ -21,19 +23,21 @@ export default function CreateReviews({ productId }) {
   const handleClickSend = (event) => {
     event.preventDefault();
     if (!userData.username) {
-      alert("Debe registrarse y/o iniciar sesión para dejar una reseña");
+      setMessage("Debe registrarse y/o iniciar sesión para dejar una reseña");
+      setStatusModal(!statusModal);
       navigate("/login");
     }
     if (userData.rol === "admin") {
-      alert(
-        "No te pases de listo admin, los reviews solo los puede dejar el cliente!"
-      );
+      setMessage("No te pases de listo admin, los reviews solo los puede dejar el cliente!");
+        setStatusModal(!statusModal);
     } else {
       if (score === 0) {
-        alert("Por favor seleccionar calificación");
+        setMessage("Por favor seleccionar calificación");
+        setStatusModal(!statusModal);
       }
       if (review.comment === "") {
-        alert("Por favor ingresa comentarios del producto");
+        setMessage("Por favor ingresa comentarios del producto");
+        setStatusModal(!statusModal);
       } else if (score !== 0 && review.comment !== "") {
         if (userData.username) {
           dispatch(createReview(review));
@@ -44,13 +48,16 @@ export default function CreateReviews({ productId }) {
             calification: 0,
             comment: "",
           });
-          alert("Tu reseña fue enviada con éxito. Muchas gracias!");
+          console.log(review)
+          setMessage("Tu reseña fue enviada con éxito. Muchas gracias!");
+         setStatusModal(!statusModal);
           dispatch(getDetails(productId));
         }
       }
     }
   };
 
+  useEffect((state)=>{dispatch(getDetails(productId))},[productId, dispatch])
   const handleClickScore = (event) => {
     event.preventDefault();
     setScore(event.target.name);
@@ -131,6 +138,13 @@ export default function CreateReviews({ productId }) {
       <button onClick={(e) => handleClickSend(e)} className={style.buttonSend}>
         ENVIAR
       </button>
+      {statusModal && (
+        <ModalConfirmation
+          message={message}
+          status={statusModal}
+          setStatus={setStatusModal}
+        />
+      )}
     </div>
   );
 }
