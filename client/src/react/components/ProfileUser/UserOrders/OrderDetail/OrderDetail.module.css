@@ -25,7 +25,7 @@ background-image: url('../../../svg/MarcaAgua.jpg');
 background-size: cover;
 border-radius: 10px;
 box-shadow: rgba(100, 100, 111, 0.3) 0px 0px 29px 10px;
-z-index: 9999;
+z-index: 999999999999999999;
 }
 
 .container {

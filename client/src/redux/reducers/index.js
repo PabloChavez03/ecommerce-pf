@@ -170,7 +170,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				}
 				state.cartItems[index].quantity--;
 			} else {
-				console.log("variants", item.variants);
 				let variantIndex = item.variants.findIndex(
 					(e) => e.brandSize.toString() === payload.size.toString()
 				);
@@ -450,7 +449,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				...state,
 			};
 		case GET_REVIEWS_USER:
-			console.log(payload);
 			return {
 				...state,
 				reviewsUser: payload,

@@ -2,9 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import css from "./OrderDetail.module.css";
 
-import { NavLink, useParams } from "react-router-dom";
+import { Navigate, NavLink, useNavigate, useParams } from "react-router-dom";
 
 export default function OrderDetail() {
+  const navigate = useNavigate()
   const { payment_id } = useParams()
   console.log('IDDDDDd',payment_id)
   const allOrdersClientes = useSelector((state) => state.allOrdersClientes);
@@ -12,9 +13,12 @@ export default function OrderDetail() {
     (e) => Number(e.payment_id) === Number(payment_id)
   );
   console.log(order);
+  const handleClose= ()=>{
+    navigate('/user/orders')
+  }
 
   return (
-    <div className={css.overlay}>
+    <div className={css.overlay} onClick={()=>handleClose()}>
       <div className={css.container1}>
     <div className={css.container}>
       <h1> ORDEN DE COMPRA</h1>

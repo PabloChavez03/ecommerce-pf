@@ -17,7 +17,6 @@ export default function ReviewsUser() {
   }, [userData, dispatch, modalStatus]);
 
   let reviewsUser = useSelector((state) => state.reviewsUser).Reviews;
-  console.log(reviewsUser)
  
 
   return (
