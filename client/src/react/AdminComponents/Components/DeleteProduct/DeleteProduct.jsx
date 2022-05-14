@@ -16,12 +16,25 @@ export default function DeleteProduct() {
 
 	const handleClickSi = (event) => {
 		event.preventDefault();
-		dispatch(deleteProduct(productId, token));
-		Swal.fire(
-			'Producto eliminado exitosamente!',
-			'',
-			'success'
-		  )
+		
+		// Swal.fire({
+        //     title: '¿Seguro desea eliminar el Producto?',
+        //     text: "Una vez aceptado no se puede revertir los cambios!",
+        //     icon: 'No',
+        //     showCancelButton: true,
+        //     confirmButtonColor: '#3085d6',
+        //     cancelButtonColor: '#d33',
+        //     confirmButtonText: 'Sí, Eliminar!'
+        //   }).then((result) => {
+        //     if (result.isConfirmed) {
+		// 		dispatch(deleteProduct(productId, token));
+        //       Swal.fire(
+        //         'Confirmado!',
+        //         'Su producto fue eliminado con éxito!',
+        //         'success'
+        //       )
+        //     }
+        //   })
 		navigate("/admin/allproducts");
 	};
 

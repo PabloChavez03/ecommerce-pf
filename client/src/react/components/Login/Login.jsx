@@ -18,7 +18,7 @@ const Login = () => {
 			Swal.fire(
 				'Usuario o contraseña incorrecta!',
 				'',
-				'success'
+				'error'
 			  )
 			dispatch(loggedOut());
 		} else if (userData.username) {
