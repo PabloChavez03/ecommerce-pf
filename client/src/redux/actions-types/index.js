@@ -45,6 +45,7 @@ import {
 	GET_EMAIL_PUBLICIDAD,
 	FILTER_ORDER_BY_STATUS,
 	GET_ALL_CLIENTS_USER_EMAIL,
+	EMPTY_CART
 } from "../actions-creators";
 import {
 	chatBot,
@@ -619,4 +620,10 @@ export const EmailPublicidad = (data) => async (dispatch) => {
 	return dispatch({
 		type: GET_EMAIL_PUBLICIDAD
 	})
+}
+
+export function emptyCart(){
+	return{
+		type: EMPTY_CART
+	}
 }

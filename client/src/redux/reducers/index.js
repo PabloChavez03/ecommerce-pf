@@ -49,6 +49,7 @@ import {
 	GET_ORDERS_BY_PAYMENT_ID,
 	FILTER_ORDER_BY_STATUS,
 	GET_ALL_CLIENTS_USER_EMAIL,
+	EMPTY_CART
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -491,6 +492,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				...state,
 				allClientsUserEmail: payload,
 			};
+		case EMPTY_CART:
+			return{
+				...state,
+				cartItems: []
+			}
 		default:
 			return { ...state };
 	}

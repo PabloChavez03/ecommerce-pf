@@ -2,7 +2,7 @@ import React from "react";
 import css from "./OrderActual.module.css";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { postOrder } from "../../../../../redux/actions-types";
+import { postOrder, emptyCart } from "../../../../../redux/actions-types";
 
 function OrderActual() {
   const cartItems = useSelector((state) => state.cartItems);
@@ -47,7 +47,7 @@ function OrderActual() {
   dispatch(postOrder(order));
   const handleClose = (e)=>{
     e.preventDefault()
-    
+    dispatch(emptyCart())
     navigate('/user/orders')
 
   }
