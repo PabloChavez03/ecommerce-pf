@@ -640,12 +640,61 @@ export function emptyCart() {
 	};
 }
 
+/** Categories */
+export const getCategories = () => {
+	return async function (dispatch) {
+		const { data } = await axios.get("/categories");
+		return dispatch({
+			type: GET_ALL_CATEGORIES,
+			payload: data,
+		});
+	};
+};
+
+export const createCategory = (token, payload) => {
+	return async function () {
+		await axios.post(
+			"/modify/categories",
+			{ payload },
+			{
+				headers: {
+					authorization: `Bearer ${token}`,
+				},
+			},
+		);
+	};
+};
+
+export const updateCategory = (token, categoryId, payload) => {
+	return async function () {
+		await axios.patch(
+			`/modify/categories/${categoryId}`,
+			{ payload },
+			{
+				headers: {
+					authorization: `Bearer ${token}`,
+				},
+			},
+		);
+	};
+};
+
+export const deleteCategory = (token, categoryId) => {
+	return async function () {
+		await axios.delete(`/modify/categories/${categoryId}`, {
+			headers: {
+				authorization: `Bearer ${token}`,
+			},
+		});
+	};
+};
+
 export const getLoginGoogle = () => {
 	return async function (dispatch) {
 		const { data } = await axios.get("/auth/login/success");
 		return dispatch({
 			type: GET_LOGIN_GOOGLE,
 			payload: data,
-		})
-	}
-}
+		});
+	};
+};

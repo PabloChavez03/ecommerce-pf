@@ -16,6 +16,8 @@ import OrderDetail from "../Components/OrderDetail/OrderDetail";
 import ChatBot from "../Components/ChatBot/ChatBot";
 import ProfileUser from "../../components/ProfileUser/ProfileUser";
 import PublicidadMail from "../Components/Email/EmailPublicidad";
+import Categories from "../Components/Categories/Categories";
+import CategoryDetail from "../Components/Categories/components/CategoryDetail";
 
 const Admin = () => {
 	return (
@@ -43,6 +45,8 @@ const Admin = () => {
 						<Route path={"/chatbot"} element={<ChatBot />} />
 						<Route path={"/profile"} element={<ProfileUser />} />
 						<Route path={"/Publicidad"} element={<PublicidadMail/> } />
+						<Route path={"/categories"} element={<Categories/> } />
+						<Route path={"/categories/:id"} element={<CategoryDetail/> } />
 					</Routes>
 				</div>
 			</div>
