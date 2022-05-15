@@ -37,7 +37,7 @@ export default function CreateReviews({ productId }) {
       Swal.fire(
         'No te pases de listo admin, los reviews solo los puede dejar el cliente!',
         '',
-        'success'
+        'error'
       )
       setStatusModal(!statusModal);
     } else {
@@ -51,9 +51,9 @@ export default function CreateReviews({ productId }) {
       setStatusModal(!statusModal);
       if (review.comment === "") {
         Swal.fire(
-          'Por favor ingresa comentarios del producto!',
+          'Debe ingresar a su cueta!',
           '',
-          'success'
+          'warning'
         )
         setStatusModal(!statusModal);
       } else if (score !== 0 && review.comment !== "") {
