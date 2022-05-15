@@ -34,7 +34,7 @@ export default function AllClients() {
     Swal.fire({
       title: "¿Seguro desea modificar?",
       text: "Una vez aceptado no se puede revertir los cambios!",
-      icon: "No",
+      icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
