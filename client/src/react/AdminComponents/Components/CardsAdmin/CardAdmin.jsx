@@ -22,7 +22,7 @@ export default function CardAdmin({ name, currentPrice, id, isInStock, modalStoc
 		e.preventDefault();
 		Swal.fire({
             title: '¿Seguro desea eliminar el Producto?',
-            text: "Una vez aceptado no se puede revertir los cambios!",
+            text: "Una vez aceptado no se pueden revertir los cambios!",
             icon: 'No',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
