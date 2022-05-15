@@ -19,7 +19,7 @@ export default function OrderDetail() {
 		const doc = new jsPDF();
 		doc.html(content, {
 			callback: function (doc) {
-				doc.save("ejemplo.pdf");
+				doc.save("Order.pdf");
 			},
 			html2canvas: { scale: 0.3 },
 		});
@@ -128,7 +128,6 @@ export default function OrderDetail() {
 						onClick={(e) => handleClickDownload(e)}
 						className={css.imgDownload}
 					/>
-					{/* <button onClick={(e)=>handleClickDownload(e)}>Descargar orden</button> */}
 				</div>
 			</div>
 		</div>

@@ -21,10 +21,10 @@
 }
 .container1 {
   display: flex;
-  justify-content: start;
+  flex-direction: column;
   font-size: 13px;
   max-width: 100%;
-  
+  align-items: center;
   width: auto;
   padding: 20px 30px;
   padding-left: 0;
@@ -70,6 +70,9 @@ display: flex;
 justify-content: start;
 
 
+}
+.shoppingOrderContainer {
+	display: flex;
 }
 .product{
   width: 80px;
@@ -124,5 +127,5 @@ cursor: pointer;
 
 .imgDownload{
   width: 25px;
-  
+  cursor: pointer;
 }

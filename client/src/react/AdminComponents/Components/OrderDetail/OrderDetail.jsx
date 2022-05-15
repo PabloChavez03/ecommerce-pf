@@ -30,6 +30,7 @@ export default function OrderDetail() {
     <div className={css.overlay}>
       <div className={css.ovelayClose} onClick={() => handleClose()}></div>
       <div className={css.container1}>
+      <div className={css.shoppingOrderContainer}>
         <div className={css.container} ref={pdfDownload}>
           <h1> ORDEN DE COMPRA</h1>
 
@@ -119,6 +120,7 @@ export default function OrderDetail() {
         <NavLink to={"/admin/orders"} style={{ textDecoration: "none" }}>
           <span className={css.x}>X</span>
         </NavLink>
+        </div>
         <div className={css.containerImg}>
           <img
             src={download}
@@ -127,6 +129,7 @@ export default function OrderDetail() {
             className={css.imgDownload}
           />
         </div>
+      
       </div>
     </div>
   );
