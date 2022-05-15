@@ -209,7 +209,7 @@ export default function UpdateProduct() {
 			Swal.fire(
 				'Faltan campos que rellenar!',
 				'',
-				'success'
+				'warning'
 			  )
 		} else {
 			dispatch(updateProduct(productId, input, token));

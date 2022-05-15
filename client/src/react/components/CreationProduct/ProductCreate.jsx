@@ -138,7 +138,7 @@ export default function ProductCreate() {
       Swal.fire(
         'Faltan campos que rellenar!',
         '',
-        'success'
+        'warning'
       )
     } else {
       dispatch(postProduct(input, token));
