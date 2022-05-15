@@ -48,6 +48,7 @@ import {
 	GET_ORDERS_BY_PAYMENT_ID,
 	UPDATE_STATUS_ORDER,
 	EMPTY_CART,
+	GET_LOGIN_GOOGLE,
 } from "../actions-creators";
 import {
 	chatBot,
@@ -684,6 +685,16 @@ export const deleteCategory = (token, categoryId) => {
 			headers: {
 				authorization: `Bearer ${token}`,
 			},
+		});
+	};
+};
+
+export const getLoginGoogle = () => {
+	return async function (dispatch) {
+		const { data } = await axios.get("/auth/login/success");
+		return dispatch({
+			type: GET_LOGIN_GOOGLE,
+			payload: data,
 		});
 	};
 };

@@ -5,14 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./CreateReviews.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createReview, getDetails } from "../../../../redux/actions-types";
-import Swal from 'sweetalert2'
+import ModalConfirmation from "../../ModalConfirmation/ModalConfirmation";
+import Swal from "sweetalert2";
+
 
 export default function CreateReviews({ productId }) {
   const dispatch = useDispatch();
   const [score, setScore] = useState(0);
   const userData = useSelector((state) => state.userData);
   const navigate = useNavigate();
-
+  const [statusModal, setStatusModal] = useState(false);
+  // let [message, setMessage] = useState("");
   const [review, setReview] = useState({
     user_name: userData.username,
     productId: productId,
@@ -27,14 +30,16 @@ export default function CreateReviews({ productId }) {
         '',
         'success'
       )
+      setStatusModal(!statusModal);
       navigate("/login");
     }
     if (userData.rol === "admin") {
       Swal.fire(
         'No te pases de listo admin, los reviews solo los puede dejar el cliente!',
         '',
-        'success'
+        'error'
       )
+      setStatusModal(!statusModal);
     } else {
       if (score === 0) {
         Swal.fire(
@@ -43,12 +48,14 @@ export default function CreateReviews({ productId }) {
           'success'
         )
       }
+      setStatusModal(!statusModal);
       if (review.comment === "") {
         Swal.fire(
-          'Por favor ingresa comentarios del producto!',
+          'Debe ingresar a su cueta!',
           '',
-          'success'
+          'warning'
         )
+        setStatusModal(!statusModal);
       } else if (score !== 0 && review.comment !== "") {
         if (userData.username) {
           dispatch(createReview(review));
@@ -64,12 +71,14 @@ export default function CreateReviews({ productId }) {
             '',
             'success'
           )
+          setStatusModal(!statusModal);
           dispatch(getDetails(productId));
         }
       }
     }
   };
 
+  useEffect((state)=>{dispatch(getDetails(productId))},[productId, dispatch])
   const handleClickScore = (event) => {
     event.preventDefault();
     setScore(event.target.name);
@@ -150,6 +159,13 @@ export default function CreateReviews({ productId }) {
       <button onClick={(e) => handleClickSend(e)} className={style.buttonSend}>
         ENVIAR
       </button>
+      {statusModal && (
+        <ModalConfirmation
+          // message={message}
+          status={statusModal}
+          setStatus={setStatusModal}
+        />
+      )}
     </div>
   );
 }

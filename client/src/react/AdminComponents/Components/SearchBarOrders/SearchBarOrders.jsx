@@ -21,7 +21,7 @@ export default function SearchBarOrders() {
       Swal.fire(
         'Debe ingresar un numero de Orden!',
         '',
-        'success'
+        'warning'
         )
     } else {
       dispatch(getOrdersByPaymentId(token,search));

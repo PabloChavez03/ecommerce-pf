@@ -52,6 +52,7 @@ import {
 	GET_ALL_CLIENTS_USER_EMAIL,
 	UPDATE_STATUS_ORDER,
 	EMPTY_CART,
+	GET_LOGIN_GOOGLE,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -101,6 +102,7 @@ export const initialState = {
 	statusOrder: [],
 	ordersAll: [],
 	ordersAllBackUp: [],
+	getLoginGoogle: {},
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -507,6 +509,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				...state,
 				cartItems: [],
 			};
+		case GET_LOGIN_GOOGLE:
+			return {
+				...state,
+				getLoginGoogle: payload,
+			}
 		default:
 			return { ...state };
 	}
