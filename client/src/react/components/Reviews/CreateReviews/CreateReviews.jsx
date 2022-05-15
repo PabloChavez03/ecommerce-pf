@@ -12,8 +12,6 @@ export default function CreateReviews({ productId }) {
   const [score, setScore] = useState(0);
   const userData = useSelector((state) => state.userData);
   const navigate = useNavigate();
-  const [statusModal, setStatusModal] = useState(false);
-  let [message, setMessage] = useState("");
   const [review, setReview] = useState({
     user_name: userData.username,
     productId: productId,
@@ -23,21 +21,17 @@ export default function CreateReviews({ productId }) {
   const handleClickSend = (event) => {
     event.preventDefault();
     if (!userData.username) {
-      setMessage("Debe registrarse y/o iniciar sesión para dejar una reseña");
-      setStatusModal(!statusModal);
+      alert("Debe registrarse y/o iniciar sesión para dejar una reseña");
       navigate("/login");
     }
     if (userData.rol === "admin") {
-      setMessage("No te pases de listo admin, los reviews solo los puede dejar el cliente!");
-        setStatusModal(!statusModal);
+      alert("No te pases de listo admin, los reviews solo los puede dejar el cliente!");
     } else {
       if (score === 0) {
-        setMessage("Por favor seleccionar calificación");
-        setStatusModal(!statusModal);
+        alert("Por favor seleccionar calificación");
       }
       if (review.comment === "") {
-        setMessage("Por favor ingresa comentarios del producto");
-        setStatusModal(!statusModal);
+        alert("Por favor ingresa comentarios del producto");
       } else if (score !== 0 && review.comment !== "") {
         if (userData.username) {
           dispatch(createReview(review));
@@ -49,8 +43,7 @@ export default function CreateReviews({ productId }) {
             comment: "",
           });
           console.log(review)
-          setMessage("Tu reseña fue enviada con éxito. Muchas gracias!");
-         setStatusModal(!statusModal);
+          alert("Tu reseña fue enviada con éxito. Muchas gracias!");
           dispatch(getDetails(productId));
         }
       }
@@ -138,13 +131,6 @@ export default function CreateReviews({ productId }) {
       <button onClick={(e) => handleClickSend(e)} className={style.buttonSend}>
         ENVIAR
       </button>
-      {statusModal && (
-        <ModalConfirmation
-          message={message}
-          status={statusModal}
-          setStatus={setStatusModal}
-        />
-      )}
     </div>
   );
 }
