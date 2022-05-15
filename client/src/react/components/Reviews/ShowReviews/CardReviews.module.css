@@ -1,20 +1,33 @@
 .container {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	max-width: 400px;
-	border-radius: 5px;
-	box-shadow: 0px 3px 3px rgba(41, 40, 40, 0.666);
-	background-color: rgba(249, 247, 247, 0.72);
+	width: 100%;
+	max-width: 500px;
+	height: 200px;
+	border-radius: 15px;
+    box-shadow: 5px 8px 15px rgba(51, 50, 50, 0.611);
 	border: 1px solid rgba(235, 229, 229, 0.554);
+	text-align: center;
+	padding: 10px
 }
-
+.container1 {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin: 10px;
+	font-size: 15px;
+	width: 50%;
+	
+}
 .imgContainer {
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
 }
 .imgStar {
-	width: 25px;
-	cursor: pointer;
+	width: 20px;
 }
+
+

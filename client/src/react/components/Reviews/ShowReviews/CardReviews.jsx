@@ -46,11 +46,14 @@ export default function CardReviews({
   }
   return (
     <div className={style.container}>
+      
       <AccountIcon />
-      <h4>Usuario:</h4>
-      <p>{UserUserName}</p>
+      <div className={style.container1}>
+      <h4>Usuario: {UserUserName}</h4>
+      <br/>
       <h4>Comentario:</h4>
       <span>{comment}</span>
+      <br/>
       <h4>Calificación:</h4>
       <div className={style.imgContainer}>
         <img
@@ -83,6 +86,7 @@ export default function CardReviews({
           className={style.imgStar}
           name={5}
         />
+        </div>
         {UserUserName === userData ? (
           <div>
             <NavLink to={`/user/reviews/update/${id}`}>
@@ -97,6 +101,7 @@ export default function CardReviews({
             />
           </div>
         ) : null}
+      
       </div>
     </div>
   );
