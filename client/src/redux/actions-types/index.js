@@ -699,9 +699,14 @@ export const getLoginGoogle = () => {
 	};
 };
 
-export const removeStock  = (cart) => {
-	return async function (dispatch){
-		await axios.patch('/product/stock/restar', cart)
-	}
-}
+export const removeStock = (cart) => {
+	return async function (dispatch) {
+		await axios.patch("/product/stock/restar", cart);
+	};
+};
 
+export const addStock = (cart) => {
+	return async function (dispatch) {
+		await axios.patch("/product/stock/sumar", cart);
+	};
+};
