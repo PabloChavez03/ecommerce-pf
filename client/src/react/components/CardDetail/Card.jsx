@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import style from "./CardDetail.module.css";
 import { addProductToCart } from "../../../redux/actions-types";
 import { NavLink } from "react-router-dom";
+import Swal from 'sweetalert2'
 import Modal from "../ShoppingCart/Modal/Modal";
 
 export default function Card({
@@ -44,6 +45,11 @@ export default function Card({
 
 	const handleAddCart = (event) => {
 		event.preventDefault();
+		Swal.fire(
+			'Producto agregado al carrito con Éxito!',
+			'',
+			'success'
+		  )
 		setStatusModal(!statusModal);
 		dispatch(addProductToCart(productToCart));
 	};

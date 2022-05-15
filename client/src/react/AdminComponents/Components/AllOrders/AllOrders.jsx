@@ -1,62 +1,132 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import {getAllOrders, filterOrderByStatus} from "../../../../redux/actions-types/index"
-import style from "./AllOrders.module.css"
+import {
+  getAllOrders,
+  filterOrderByStatus,
+  modifiedStatusOrder,
+} from "../../../../redux/actions-types/index";
+import style from "./AllOrders.module.css";
 import SearchBarOrders from "../SearchBarOrders/SearchBarOrders";
+import Swal from "sweetalert2";
 
 export default function AllClients() {
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.userData);
 
-	const dispatch = useDispatch();
-    const { token } = useSelector((state) => state.userData);
+  useEffect(() => {
+    dispatch(getAllOrders(token));
+  }, [dispatch]);
 
-	useEffect(() => {
-		dispatch(getAllOrders());
-	}, [dispatch]);
+  const allOrdersClientes = useSelector((state) => state.ordersAll);
 
-	const allOrdersClientes = useSelector((state) => state.allOrders);
+  function handleFilterByStatusOrder(e) {
+    e.preventDefault();
+    if (e.target.value === "todas") {
+      dispatch(getAllOrders());
+    } else {
+      dispatch(filterOrderByStatus(token, e.target.value));
+    }
+  }
 
-    // console.log(allOrdersClientes)
+  function handleModifiedStatus(e, payment_id) {
+    e.preventDefault();
+    Swal.fire({
+      title: "¿Seguro desea modificar?",
+      text: "Una vez aceptado no se puede revertir los cambios!",
+      icon: "No",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, modificar!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(modifiedStatusOrder(e.target.value, token, payment_id));
+        Swal.fire("Confirmado!", "Su orden ha sido modificada.", "success");
+      }
+    });
+    dispatch(getAllOrders());
+  }
 
-    function handleFilterByStatusOrder(e){
-        e.preventDefault();
-        dispatch(filterOrderByStatus(token, e.target.value))
-    };
+  return (
+    <div className={style.cardContainer}>
+      <div className={style.searchFilter}>
+      <label>
+        Estado :
+        <select
+          onChange={(e) => {
+            handleFilterByStatusOrder(e);
+          }}
+        >
+          <option value="todas">Todas</option>
+          <option value="approved">Success</option>
+          <option value="pending">Pending</option>
+          <option value="failure">Failure</option>
+        </select>
+      </label>
 
-
-    return (
-        <div className={style.cardContainer}>
-                <label>Filtras por Estado de Compra
-            <select onChange={e => { handleFilterByStatusOrder(e) }}>
-                <option ></option>
-                <option value="approved">Success</option>
-                <option value="pending">Pending</option>
-                <option value="failure">Failure</option>
-            </select>
+      <div>
+        <SearchBarOrders />
+      </div>
+      </div>
+      <div className={style.container}>
+        <h1 className={style.title}>Todas mis ordenes de compra</h1>
+        {allOrdersClientes?.map((client) => {
+          return (
+              <div
+              className={style.orders} key={client.payment_id}>
+                    <NavLink
+              style={{ textDecoration: "none" }}
+              to={`/admin/orders/${client.payment_id}`}
+             
+            >
+              <div className={style.ordenFecha}>
+                <span>
+                  Nº: <b>{client.payment_id}</b>{" "}
+                </span>
+                <span>{client.orderDate.slice(0, 10)}</span>
+              </div>
+              <div className={style.ordenFecha}>
+                <span>
+                  Total: <b>${client.total}</b>
+                </span>
+                <div>
+                  <span>Status: </span>
+                  <span
+                    className={
+                      client.status === "rejected"
+                        ? style.rejected
+                        : client.status === "pending"
+                        ? style.pending
+                        : style.approved
+                    }
+                  >
+                    {client.status}
+                  </span>{" "}
+                </div>
+              </div>
+</NavLink>
+              {client.status === "pending" && (
+                <label>
+                  Modificar Estado:
+                  <select
+                    onChange={(e) => {
+                      handleModifiedStatus(e, client.payment_id);
+                    }}
+                  >
+                    <option>Seleccionar</option>
+                    <option value="approved">Success</option>
+                    <option value="failure">Failure</option>
+                  </select>
                 </label>
-
-        <div >
-            <SearchBarOrders/>
-        </div>
-
-           {allOrdersClientes.map((client) => {
-					return (
-                        <NavLink key={ client.payment_id } to={`/admin/orders/${client.payment_id}`}>
-						<div className={style.cardContainer} >
-                            <p><span >Nombre y Apellido del Cliente: </span>{" "}{client.User.name} {client.User.lastname}</p>
-
-							<p>	<span >Nº de Orden:</span> {client.payment_id}</p>
-
-                            <p>	<span >Estado de Pago:</span> {client.status}</p>
-
-                            <p>	<span >Monto Total:</span> $ {client.total}</p>
-
-						</div>
-                        </NavLink>
-					);
-				})}
-        </div>
-    )
+              )}
+            
+              </div>
+            
+          
+          );
+        })}
+      </div>
+    </div>
+  );
 }
-
-

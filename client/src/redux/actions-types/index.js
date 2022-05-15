@@ -45,7 +45,9 @@ import {
 	GET_EMAIL_PUBLICIDAD,
 	FILTER_ORDER_BY_STATUS,
 	GET_ALL_CLIENTS_USER_EMAIL,
-	EMPTY_CART
+	GET_ORDERS_BY_PAYMENT_ID,
+	UPDATE_STATUS_ORDER,
+	EMPTY_CART,
 } from "../actions-creators";
 import {
 	chatBot,
@@ -555,7 +557,7 @@ export function getAllClientsOrders(/*token, */ user_name) {
       headers: {
         authorization: `Bearer ${token}`,
       },
-    }*/
+    }*/,
 		);
 
 		return dispatch({
@@ -572,7 +574,7 @@ export function getAllOrders(token) {
 				authorization: `Bearer ${token}`,
 			},
 		});
-
+		// console.log(data);
 		return dispatch({
 			type: GET_ALL_ORDERS,
 			payload: data,
@@ -581,49 +583,58 @@ export function getAllOrders(token) {
 }
 
 export function filterOrderByStatus(token, status) {
-	console.log(status);
 	return async function (dispatch) {
 		const { data } = await axios.get(`/findorderbystatus/${status}`, {
 			headers: {
 				authorization: `Bearer ${token}`,
 			},
 		});
-		console.log(data);
-
 		return dispatch({
 			type: FILTER_ORDER_BY_STATUS,
 			payload: data,
 		});
 	};
 }
-export function getOrdersByPaymentId(token, payment_id) {
+
+export function getOrdersByPaymentId(token, paymentId) {
 	return async function (dispatch) {
-		const { data } = await axios.get(
-			`/findOrderByPk/${payment_id}` /* {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    }*/
-		);
+		const { data } = await axios.get(`/findOrderByPk/${paymentId}`, {
+			headers: {
+				authorization: `Bearer ${token}`,
+			},
+		});
 
 		return dispatch({
-			type: GET_ALL_ORDERS,
+			type: GET_ORDERS_BY_PAYMENT_ID,
 			payload: data,
 		});
 	};
 }
 
-export const EmailPublicidad = (data) => async (dispatch) => {
-
-	let dato = await emailPublicidad(data)
-	console.log(dato)
-	return dispatch({
-		type: GET_EMAIL_PUBLICIDAD
-	})
+export function modifiedStatusOrder(parce, token, payment_id) {
+	return async function (dispatch) {
+		const { data } = await axios.patch(
+			`updateStatusOrder/${payment_id}`,
+			{ status: parce },
+			{
+				headers: {
+					authorization: `Bearer ${token}`,
+				},
+			},
+		);
+	};
 }
 
-export function emptyCart(){
-	return{
-		type: EMPTY_CART
-	}
+export const EmailPublicidad = (data) => async (dispatch) => {
+	let dato = await emailPublicidad(data);
+	console.log(dato);
+	return dispatch({
+		type: GET_EMAIL_PUBLICIDAD,
+	});
+};
+
+export function emptyCart() {
+	return {
+		type: EMPTY_CART,
+	};
 }

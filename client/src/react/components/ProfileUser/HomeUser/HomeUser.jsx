@@ -1,11 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import css from "./HomeUser.module.css";
+import Swal from 'sweetalert2'
 
 export default function HomeUser() {
   const handleClickConstruction = (e) => {
     e.preventDefault();
-    alert("Funcionalidad en desarrollo!");
+    Swal.fire(
+      'Funcionalidad en desarrollo!',
+      '',
+      'success'
+    )
   };
 
   return (

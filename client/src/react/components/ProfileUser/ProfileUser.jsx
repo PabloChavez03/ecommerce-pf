@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "../NavBar/NavBar";
 import style from "./ProfileUser.module.css";
+import Swal from 'sweetalert2'
 
 import { loggedOut, updateUserInfo, UserLogin } from "../../../redux/actions-types";
 
@@ -62,7 +63,11 @@ export default function ProfileUser() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		dispatch(updateUserInfo(userData.username, userData.token, user));
-		alert("Los cambios se guardaron");
+		Swal.fire(
+			'Cambios guardados!',
+			'',
+			'success'
+		  )
 		dispatch(loggedOut());
 		dispatch(
 			UserLogin({

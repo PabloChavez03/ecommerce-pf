@@ -1,24 +1,30 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getOrdersByPaymentId } from "../../../../redux/actions-types";
 import style from "../../../components/SearchBar/SearchBar.module.css";
 //import lupa from "../../../components/svg/buscar.png";
+import Swal from 'sweetalert2'
 
 export default function SearchBarOrders() {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
+  const { token } = useSelector((state) => state.userData);
 
   const handleChangeInput = (event) => {
     event.preventDefault();
-    setSearch(event.target.value.toUpperCase());
+    setSearch(event.target.value);
   };
   // console.log(search)
   const handleClickSearch = (event) => {
     event.preventDefault();
     if (search === "") {
-      alert("Debe ingresar un producto a buscar!");
+      Swal.fire(
+        'Debe ingresar un numero de Orden!',
+        '',
+        'warning'
+        )
     } else {
-      dispatch(getOrdersByPaymentId("78542232"));
+      dispatch(getOrdersByPaymentId(token,search));
       setSearch("");
     }
   };

@@ -5,33 +5,58 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./CreateReviews.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createReview, getDetails } from "../../../../redux/actions-types";
-import ModalConfirmation from "../../ModalConfirmation/ModalConfirmation";
+import Swal from "sweetalert2";
 
 export default function CreateReviews({ productId }) {
   const dispatch = useDispatch();
   const [score, setScore] = useState(0);
   const userData = useSelector((state) => state.userData);
+  const reviewsOfTheProduct = useSelector((state) => state.details).Reviews;
   const navigate = useNavigate();
+
   const [review, setReview] = useState({
     user_name: userData.username,
     productId: productId,
     calification: 0,
     comment: "",
   });
+  const userReview = reviewsOfTheProduct.find((e)=>e.UserUserName === userData.username);
+
+  useEffect(() => {
+    dispatch(getDetails(productId));
+  }, [productId, dispatch,userReview]);
+
+
+console.log(userReview)
   const handleClickSend = (event) => {
     event.preventDefault();
+if(userReview?.UserUserName) {
+  Swal.fire(
+    "Solo se permite una reseña por producto! Intente editando la reseña ya realizada.",
+    "",
+    "error"
+  )
+} else{    
     if (!userData.username) {
-      alert("Debe registrarse y/o iniciar sesión para dejar una reseña");
+      Swal.fire(
+        "Debe registrarse y/o iniciar sesión para dejar una reseña!",
+        "",
+        "success"
+      );
       navigate("/login");
     }
     if (userData.rol === "admin") {
-      alert("No te pases de listo admin, los reviews solo los puede dejar el cliente!");
+      Swal.fire(
+        "No te pases de listo admin, los reviews solo los puede dejar el cliente!",
+        "",
+        "error"
+      );
     } else {
       if (score === 0) {
-        alert("Por favor seleccionar calificación");
+        Swal.fire("Por favor seleccionar calificación!", "", "success");
       }
       if (review.comment === "") {
-        alert("Por favor ingresa comentarios del producto");
+        Swal.fire("Debe ingresar a su cueta!", "", "warning");
       } else if (score !== 0 && review.comment !== "") {
         if (userData.username) {
           dispatch(createReview(review));
@@ -42,15 +67,18 @@ export default function CreateReviews({ productId }) {
             calification: 0,
             comment: "",
           });
-          console.log(review)
-          alert("Tu reseña fue enviada con éxito. Muchas gracias!");
+          Swal.fire(
+            "Tu reseña fue enviada con éxito. Muchas gracias!",
+            "",
+            "success"
+          );
           dispatch(getDetails(productId));
         }
       }
     }
+  }
   };
 
-  useEffect((state)=>{dispatch(getDetails(productId))},[productId, dispatch])
   const handleClickScore = (event) => {
     event.preventDefault();
     setScore(event.target.name);

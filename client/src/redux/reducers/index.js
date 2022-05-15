@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import {
 	ADD_PRODUCT_TO_CART,
 	GET_PRODUCT_BY_NAME,
@@ -49,7 +50,8 @@ import {
 	GET_ORDERS_BY_PAYMENT_ID,
 	FILTER_ORDER_BY_STATUS,
 	GET_ALL_CLIENTS_USER_EMAIL,
-	EMPTY_CART
+	UPDATE_STATUS_ORDER,
+	EMPTY_CART,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -97,6 +99,8 @@ export const initialState = {
 	allOrders: [],
 	orderByPaymentId: {},
 	statusOrder: [],
+	ordersAll: [],
+	ordersAllBackUp: [],
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -108,23 +112,23 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			};
 		case ADD_PRODUCT_TO_CART:
 			let cartProductAux = state.cartItems.find(
-				(e) => e.id + e.brandSize === payload.id + payload.brandSize
+				(e) => e.id + e.brandSize === payload.id + payload.brandSize,
 			);
 			if (cartProductAux) {
 				const prevCart = state.cartItems.filter(
-					(e) => e.id + e.brandSize !== payload.id + payload.brandSize
+					(e) => e.id + e.brandSize !== payload.id + payload.brandSize,
 				);
 				if (payload.variants[0].stock !== cartProductAux.quantity) {
 					cartProductAux.quantity++;
 				} else {
-					alert("No hay mas stock de este producto");
+					Swal.fire("Producto con Stock Agotado!", "", "success");
 				}
 				return {
 					...state,
 					cartItems: [...prevCart, cartProductAux],
 					subTotal: Number(
 						state.subTotal +
-						Math.round(cartProductAux.currentPrice * cartProductAux.quantity)
+							Math.round(cartProductAux.currentPrice * cartProductAux.quantity),
 					),
 				};
 			} else {
@@ -132,7 +136,8 @@ export default function rootReducer(state = initialState, { type, payload }) {
 					...state,
 					cartItems: [...state.cartItems, payload],
 					subTotal: Number(
-						state.subTotal + Math.round(payload.currentPrice * payload.quantity)
+						state.subTotal +
+							Math.round(payload.currentPrice * payload.quantity),
 					),
 				};
 			}
@@ -140,7 +145,8 @@ export default function rootReducer(state = initialState, { type, payload }) {
 		case REMOVE_PRODUCT_FROM_CART:
 			let indexRemoveQty = state.cartItems.findIndex(
 				(e) =>
-					e.id + e.brandSize.toString() === payload.id + payload.size.toString()
+					e.id + e.brandSize.toString() ===
+					payload.id + payload.size.toString(),
 			);
 			state.cartItems[indexRemoveQty].quantity = 1;
 			return {
@@ -148,13 +154,14 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				cartItems: state.cartItems.filter(
 					(e) =>
 						e.id + e.brandSize.toString() !==
-						payload.id + payload.size.toString()
+						payload.id + payload.size.toString(),
 				),
 			};
 		case CHANGE_CART_QUANTITY:
 			let index = state.cartItems.findIndex(
 				(e) =>
-					e.id + e.brandSize.toString() === payload.id + payload.size.toString()
+					e.id + e.brandSize.toString() ===
+					payload.id + payload.size.toString(),
 			);
 			let item = state.cartItems[index];
 			if (payload.sign === "-") {
@@ -164,19 +171,19 @@ export default function rootReducer(state = initialState, { type, payload }) {
 						cartItems: state.cartItems.filter(
 							(e) =>
 								e.id + e.brandSize.toString() !==
-								payload.id + payload.size.toString()
+								payload.id + payload.size.toString(),
 						),
 					};
 				}
 				state.cartItems[index].quantity--;
 			} else {
 				let variantIndex = item.variants.findIndex(
-					(e) => e.brandSize.toString() === payload.size.toString()
+					(e) => e.brandSize.toString() === payload.size.toString(),
 				);
 				if (item.variants[variantIndex].stock !== item.quantity) {
 					item.quantity++;
 				} else {
-					alert("No hay mas stock de este producto");
+					Swal.fire("Producto con Stock Agotado!", "", "success");
 				}
 			}
 			return {
@@ -230,25 +237,25 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			let arr =
 				payload[0] === "high"
 					? productsSort?.sort(function (a, b) {
-						if (a.currentPrice < b.currentPrice) {
-							return 1;
-						}
-						if (a.currentPrice > b.currentPrice) {
-							return -1;
-						} else {
-							return 0;
-						}
-					})
+							if (a.currentPrice < b.currentPrice) {
+								return 1;
+							}
+							if (a.currentPrice > b.currentPrice) {
+								return -1;
+							} else {
+								return 0;
+							}
+					  })
 					: productsSort?.sort(function (a, b) {
-						if (a.currentPrice > b.currentPrice) {
-							return 1;
-						}
-						if (a.currentPrice < b.currentPrice) {
-							return -1;
-						} else {
-							return 0;
-						}
-					});
+							if (a.currentPrice > b.currentPrice) {
+								return 1;
+							}
+							if (a.currentPrice < b.currentPrice) {
+								return -1;
+							} else {
+								return 0;
+							}
+					  });
 			return {
 				...state,
 				productFilter: arr,
@@ -338,7 +345,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			return {
 				...state,
 				productFilterAdmin: state.productsAdmin.filter(
-					(e) => e.isInStock === true
+					(e) => e.isInStock === true,
 				),
 			};
 		case LOGGED_OUT:
@@ -469,21 +476,26 @@ export default function rootReducer(state = initialState, { type, payload }) {
 		case GET_ALL_ORDERS:
 			return {
 				...state,
-				allOrders: payload,
+				ordersAll: payload,
+				ordersAllBackUp: payload,
 			};
 		case GET_EMAIL_PUBLICIDAD:
 			return {
-				...state
-			}
+				...state,
+			};
 		case GET_ORDERS_BY_PAYMENT_ID:
 			return {
 				...state,
-				orderByPaymentId: payload,
+				ordersAll: [
+					state.ordersAllBackUp?.find(
+						(el) => el.payment_id === payload.payment_id,
+					),
+				],
 			};
 		case FILTER_ORDER_BY_STATUS:
 			return {
 				...state,
-				allOrders: payload,
+				ordersAll: payload,
 			};
 		case GET_ALL_CLIENTS_USER_EMAIL:
 			return {
@@ -491,12 +503,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				allClientsUserEmail: payload,
 			};
 		case EMPTY_CART:
-			return{
+			return {
 				...state,
-				cartItems: []
-			}
+				cartItems: [],
+			};
 		default:
 			return { ...state };
 	}
-
 }

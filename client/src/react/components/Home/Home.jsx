@@ -13,6 +13,7 @@ import {
 } from "../../../redux/actions-types";
 import NavBar from "../NavBar/NavBar";
 import SearchBar from "../SearchBar/SearchBar";
+import Loader from "../Loader/Loader";
 
 export default function Home() {
 	const dispatch = useDispatch();
@@ -68,7 +69,9 @@ export default function Home() {
 				/>
 			</div>
 			<div className={css.cardContainer}>
-				{productsCurent?.length ? (
+				{!productsCurent?.length ? (
+					<Loader/>
+				) : (
 					productsCurent?.map((product, index) => {
 						return (
 							<div key={index}>
@@ -90,8 +93,6 @@ export default function Home() {
 							</div>
 						);
 					})
-				) : (
-					<p>No hay productos disponibles.</p>
 				)}
 			</div>
 		</div>

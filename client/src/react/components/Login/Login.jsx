@@ -4,6 +4,7 @@ import style from "./Login.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewUser, UserLogin, loggedOut, getAllClientsUserEmail } from "../../../redux/actions-types";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 const Login = () => {
 	const [activeCreate, setActiveCreate] = useState(false);
@@ -14,7 +15,11 @@ const Login = () => {
 	useEffect(() => {
 		// console.log(userData);
 		if (userData.name === "AxiosError") {
-			alert("Usuario o contraseña incorrecta");
+			Swal.fire(
+				'Usuario o contraseña incorrecta!',
+				'',
+				'error'
+			  )
 			dispatch(loggedOut());
 		} else if (userData.username) {
 			navigate("/");
@@ -119,7 +124,11 @@ const Login = () => {
 			name: "",
 			isRegistered: true,
 		});
-		alert("Usuario creado exitosamente!");
+		Swal.fire(
+            'Usuario creado exitosamente!',
+            '',
+            'success'
+          )
 		setActiveCreate(false);
 	};
 
@@ -151,6 +160,23 @@ const Login = () => {
 			user_password: "",
 		});
 		dispatch(UserLogin(login));
+
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+			  toast.addEventListener('mouseenter', Swal.stopTimer)
+			  toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		  })
+		  
+		  Toast.fire({
+			icon: 'success',
+			title: 'Iniciado sesion con éxito!'
+		  })
 	};
 
 	const GOOGLE = () => {

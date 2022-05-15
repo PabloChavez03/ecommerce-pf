@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getProductByName } from "../../../redux/actions-types";
 import style from "./SearchBar.module.css";
+import Swal from 'sweetalert2'
+
 
 export default function SearchBar({setSelectFilter}) {
 	const dispatch = useDispatch();
@@ -15,7 +17,11 @@ export default function SearchBar({setSelectFilter}) {
 	const handleClickSearch = (event) => {
 		event.preventDefault();
 		if(search === "") {
-			alert("Debe ingresar un producto a buscar!");
+			Swal.fire(
+				'Debe ingresar un producto a buscar!',
+				'',
+				'success'
+			  )
 		} else {
 			dispatch(getProductByName(search));
 			setSearch("");

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { changeFavorited } from "../../../redux/actions-types";
-
+import Swal from 'sweetalert2'
 import WishlistIcon from "../svg/WishlistIcon";
+
 
 // import Construction from "../Construction/Construction";
 import css from "./Cards.module.css";
@@ -44,7 +45,22 @@ export default function Cards({
             user.token
           )
         );
-        alert("Eliminado de favoritos");
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'Producto quitado de Favoritos'
+        })
       } else {
         dispatch(
           changeFavorited(
@@ -53,7 +69,23 @@ export default function Cards({
             user.token
           )
         );
-        alert("Agregado a favoritos");
+      
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'Producto agregado a Favoritos'
+        })
       }
     };
 

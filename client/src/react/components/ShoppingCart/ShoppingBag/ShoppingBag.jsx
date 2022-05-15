@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import NavBar from "../../NavBar/NavBar";
 import ProductCardModal from "../CardModal/ProductCardModal";
 import css from "./ShoppingBag.module.css";
-
+import Swal from 'sweetalert2'
 import axios from "axios";
 
 export default function ShoppingBag() {
@@ -20,18 +20,30 @@ export default function ShoppingBag() {
 
   const handleClickSend = (e) => {
     e.preventDefault();
-    alert("Funcionalidad en desarrollo!");
+    Swal.fire(
+      'Funcionalidad en desarrollo!',
+      '',
+      'success'
+    )
   };
 
   const handlePayment = async (e) => {
     e.preventDefault();
     if (suma === 0) {
-      alert("Debe agregar productos al carrito para continuar");
+      Swal.fire(
+        'Debe agregar productos al carrito para continuar!',
+        '',
+        'success'
+      )
       navigate("/");
       return;
     }
     if (userData.rol === "admin") {
-      alert("Un administrador no puede realizar compras");
+      Swal.fire(
+        'Un administrador no puede realizar compras!',
+        '',
+        'success'
+      )
       return;
     }
     const emailAux = userData.email ? userData.email : email;
