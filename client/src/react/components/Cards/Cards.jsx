@@ -45,12 +45,21 @@ export default function Cards({
             user.token
           )
         );
-        Swal.fire({
+        const Toast = Swal.mixin({
+          toast: true,
           position: 'top-end',
-          icon: 'success',
-          title: 'Producto quitado de Favoritos!',
           showConfirmButton: false,
-          timer: 1500
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'Producto quitado de Favoritos'
         })
       } else {
         dispatch(
@@ -60,12 +69,22 @@ export default function Cards({
             user.token
           )
         );
-        Swal.fire({
+      
+        const Toast = Swal.mixin({
+          toast: true,
           position: 'top-end',
-          icon: 'success',
-          title: 'Producto agregado a Favoritos!',
           showConfirmButton: false,
-          timer: 1500
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'Producto agregado a Favoritos'
         })
       }
     };
