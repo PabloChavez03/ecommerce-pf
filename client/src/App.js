@@ -17,7 +17,7 @@ import PayPlataform from "./react/components/PayPlataform/PayPlataform";
 import Failure from "./react/components/back Urls/failure";
 import DevInfo from "./react/components/Footer/DevInfo/DevInfo";
 import UserRoutes from "./react/components/ProfileUser/UserRoutes/UserRoutes";
-import DownloadPdf from "./react/components/DownloadPdf/DownloadPdf";
+
 function App() {
 	// const [user, setUSer] = useState(null);
 
@@ -63,7 +63,6 @@ function App() {
 				<Route path={"/user/*"} element={<UserRoutes />} />
 				<Route path={"/failure"} element={<Failure />} />
 				<Route path={"/info/dev"} element={<DevInfo />} />
-				<Route path={"/pruebapdf"} element={<DownloadPdf />} />
 			</Routes>
 			<Footer />
 		</BrowserRouter>
