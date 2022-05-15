@@ -698,3 +698,10 @@ export const getLoginGoogle = () => {
 		});
 	};
 };
+
+export const removeStock  = (cart) => {
+	return async function (dispatch){
+		await axios.patch('/product/stock/restar', cart)
+	}
+}
+

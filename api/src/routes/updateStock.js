@@ -4,6 +4,7 @@ const router = Router();
 
 router.patch("/restar", async (req, res) => {
 	const { productsChanged } = req.body;
+	console.log(req.body)
 	// productsChanged = [
 	// 	{
 	// 		id: 0,

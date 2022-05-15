@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import NavBar from "../../NavBar/NavBar";
 import ProductCardModal from "../CardModal/ProductCardModal";
 import css from "./ShoppingBag.module.css";
 import Swal from 'sweetalert2'
 import axios from "axios";
+import { removeStock } from '../../../../redux/actions-types'
 
 export default function ShoppingBag() {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const cartItems = useSelector((state) => state.cartItems);
   const userData = useSelector((state) => state.userData);
 
@@ -19,6 +21,7 @@ export default function ShoppingBag() {
   const [email, setEmail] = useState("");
 
   const handleClickSend = (e) => {
+    
     e.preventDefault();
     Swal.fire(
       'Funcionalidad en desarrollo!',
@@ -46,8 +49,9 @@ export default function ShoppingBag() {
       )
       return;
     }
-    const emailAux = userData.email ? userData.email : email;
 
+    const emailAux = userData.email ? userData.email : email;
+    dispatch(removeStock(cartItems))
     const { data } = await axios.get(
       "/mercadopago/payment",
       {
