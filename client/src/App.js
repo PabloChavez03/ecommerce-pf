@@ -17,7 +17,6 @@ import PayPlataform from "./react/components/PayPlataform/PayPlataform";
 import Failure from "./react/components/back Urls/failure";
 import DevInfo from "./react/components/Footer/DevInfo/DevInfo";
 import UserRoutes from "./react/components/ProfileUser/UserRoutes/UserRoutes";
-
 function App() {
 	// const [user, setUSer] = useState(null);
 
