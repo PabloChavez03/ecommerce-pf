@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import css from "./OrderActual.module.css";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postOrder, emptyCart } from "../../../../../redux/actions-types";
-
+import download from "../../../svg/archivo.png";
+import jsPDF from "jspdf";
 function OrderActual() {
   const cartItems = useSelector((state) => state.cartItems);
   const { email } = useSelector((state) => state.userData);
@@ -12,8 +13,7 @@ function OrderActual() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(cartItems
-    )
+  const pdfDownload = useRef(null);
     let suma = 0;
     let subtotal = cartItems?.forEach((e) => (suma += e.currentPrice));
     let envio = 50
@@ -51,13 +51,22 @@ function OrderActual() {
     navigate('/user/orders')
 
   }
-
+  const handleClickDownload = (e) => {
+    const content = pdfDownload.current;
+    const doc = new jsPDF();
+    doc.html(content, {
+      callback: function (doc) {
+        doc.save("Order.pdf");
+      },
+      html2canvas: { scale: 0.3 },
+    });
+  };
   return (
-    
-    <div onClick={(e)=>handleClose(e)} className={css.overlay}>
+    <div className={css.overlay}>
+      <div className={css.ovelayClose} onClick={() => handleClose()}></div>
       <div className={css.container1}>
-      
-    <div className={css.container}>
+      <div className={css.shoppingOrderContainer}>
+    <div className={css.container} ref={pdfDownload}>
 
         <h1> ORDEN DE COMPRA</h1>
 
@@ -149,6 +158,16 @@ function OrderActual() {
     </div>
    <span onClick={(e)=>handleClose(e)} className={css.x}>X</span>
     </div>
+    <div className={css.containerImg}>
+          <img
+            src={download}
+            alt="download pdf"
+            onClick={(e) => handleClickDownload(e)}
+            className={css.imgDownload}
+          />
+        </div>
+    </div>
+   
     </div>
   );
 }

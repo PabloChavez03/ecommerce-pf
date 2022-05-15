@@ -33,13 +33,6 @@ export default function ReviewsUser() {
               modalStatus={modalStatus}
               setModalStatus={setModalStatus}
             />
-            {modalStatus && (
-              <ShowReviewsModalDelete
-                modalStatus={modalStatus}
-                setModalStatus={setModalStatus}
-                id={e.id}
-              />
-            )}
           </div>
         ))
       ) : (
