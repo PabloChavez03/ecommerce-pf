@@ -23,17 +23,19 @@ export default function Card({
 	const dispatch = useDispatch();
 	const [imageCurrent, setImageCurrent] = useState("");
 	const sizes = variants.map((e) => e);
+
 	const [productToCart, setProductToCart] = useState({
 		name,
 		image: images[0],
 		currentPrice,
 		color,
-		brandSize: sizes[0],
+		brandSize: sizes[0].brandSize,
 		quantity: 1,
 		id,
 		variants: variants,
 	});
 	const [statusModal, setStatusModal] = useState(false);
+
 	useEffect(() => {
 		setImageCurrent(`https://${images[0]}`);
 	}, [images]);
