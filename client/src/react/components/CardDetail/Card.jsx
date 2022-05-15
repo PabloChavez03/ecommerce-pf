@@ -45,11 +45,6 @@ export default function Card({
 
 	const handleAddCart = (event) => {
 		event.preventDefault();
-		Swal.fire(
-			'Producto agregado al carrito con Éxito!',
-			'',
-			'success'
-		  )
 		setStatusModal(!statusModal);
 		dispatch(addProductToCart(productToCart));
 	};
