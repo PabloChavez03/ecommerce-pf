@@ -45,11 +45,13 @@ export default function Cards({
             user.token
           )
         );
-        Swal.fire(
-          'Producto quitado de Favoritos!',
-          '',
-          'success'
-        )
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Producto quitado de Favoritos!',
+          showConfirmButton: false,
+          timer: 1500
+        })
       } else {
         dispatch(
           changeFavorited(
@@ -58,11 +60,13 @@ export default function Cards({
             user.token
           )
         );
-        Swal.fire(
-          'Producto agregado a Favoritos!',
-          '',
-          'success'
-        )
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Producto agregado a Favoritos!',
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
     };
 
