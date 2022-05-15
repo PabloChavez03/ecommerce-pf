@@ -5,80 +5,87 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./CreateReviews.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createReview, getDetails } from "../../../../redux/actions-types";
-import ModalConfirmation from "../../ModalConfirmation/ModalConfirmation";
 import Swal from "sweetalert2";
 
-
-export default function CreateReviews({ productId }) {
+export default function CreateReviews({
+  productId,
+  setModalStatus,
+  modalStatus,
+}) {
   const dispatch = useDispatch();
   const [score, setScore] = useState(0);
   const userData = useSelector((state) => state.userData);
+  const reviewsOfTheProduct = useSelector((state) => state.details).Reviews;
   const navigate = useNavigate();
-  const [statusModal, setStatusModal] = useState(false);
-  // let [message, setMessage] = useState("");
+
   const [review, setReview] = useState({
     user_name: userData.username,
     productId: productId,
     calification: 0,
     comment: "",
   });
+
+  useEffect(() => {
+    dispatch(getDetails(productId));
+  }, [productId, dispatch, score]);
+
   const handleClickSend = (event) => {
     event.preventDefault();
-    if (!userData.username) {
+    const userReview = reviewsOfTheProduct?.find(
+      (e) => e.UserUserName === userData.username
+    );
+
+    if (userReview?.UserUserName) {
       Swal.fire(
-        'Debe registrarse y/o iniciar sesión para dejar una reseña!',
-        '',
-        'success'
-      )
-      setStatusModal(!statusModal);
-      navigate("/login");
-    }
-    if (userData.rol === "admin") {
-      Swal.fire(
-        'No te pases de listo admin, los reviews solo los puede dejar el cliente!',
-        '',
-        'error'
-      )
-      setStatusModal(!statusModal);
+        "Solo se permite una reseña por producto! Intente editando la reseña ya realizada.",
+        "",
+        "error"
+      );
     } else {
-      if (score === 0) {
+      if (!userData.username) {
         Swal.fire(
-          'Por favor seleccionar calificación!',
-          '',
-          'success'
-        )
+          "Debe registrarse y/o iniciar sesión para dejar una reseña!",
+          "",
+          "warning"
+        );
+        navigate("/login");
       }
-      setStatusModal(!statusModal);
-      if (review.comment === "") {
+      if (userData.rol === "admin") {
         Swal.fire(
-          'Debe ingresar a su cueta!',
-          '',
-          'warning'
-        )
-        setStatusModal(!statusModal);
-      } else if (score !== 0 && review.comment !== "") {
-        if (userData.username) {
-          dispatch(createReview(review));
-          setScore(0);
-          setReview({
-            UserUserName: userData.username,
-            productId: productId,
-            calification: 0,
-            comment: "",
-          });
-          Swal.fire(
-            'Tu reseña fue enviada con éxito. Muchas gracias!',
-            '',
-            'success'
-          )
-          setStatusModal(!statusModal);
-          dispatch(getDetails(productId));
+          "No te pases de listo admin, los reviews solo los puede dejar el cliente!",
+          "",
+          "error"
+        );
+      } else {
+        if (score === 0) {
+          Swal.fire("Por favor seleccionar calificación!", "", "warning");
+        }
+        if (review.comment === "") {
+          Swal.fire("Debe ingresar a su cuenta!", "", "warning");
+        } else if (score !== 0 && review.comment !== "") {
+          if (userData.username) {
+            dispatch(createReview(review));
+            setScore(0);
+            setReview({
+              UserUserName: userData.username,
+              productId: productId,
+              calification: 0,
+              comment: "",
+            });
+            Swal.fire(
+              "Tu reseña fue enviada con éxito. Muchas gracias!",
+              "",
+              "success"
+            );
+
+            dispatch(getDetails(productId));
+            setModalStatus(!modalStatus);
+          }
         }
       }
     }
   };
 
-  useEffect((state)=>{dispatch(getDetails(productId))},[productId, dispatch])
   const handleClickScore = (event) => {
     event.preventDefault();
     setScore(event.target.name);
@@ -159,13 +166,6 @@ export default function CreateReviews({ productId }) {
       <button onClick={(e) => handleClickSend(e)} className={style.buttonSend}>
         ENVIAR
       </button>
-      {statusModal && (
-        <ModalConfirmation
-          // message={message}
-          status={statusModal}
-          setStatus={setStatusModal}
-        />
-      )}
     </div>
   );
 }

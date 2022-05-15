@@ -5,20 +5,19 @@ import { getDetails } from "../../../../redux/actions-types";
 import CardReviews from "./CardReviews";
 import ShowReviewsModalDelete from "./ShowReviewsModal/ShowReviewsModalDelete";
 
-export default function ShowReviews({ productId }) {
+export default function ShowReviews({ productId, setModalStatus, modalStatus }) {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  console.log(pathname);
+
   useEffect(() => {
     dispatch(getDetails(productId));
-  }, [productId, dispatch]);
+  }, [productId, dispatch,modalStatus]);
 
   const productRender = useSelector((state) => state.details);
   const reviews = productRender.Reviews;
 
   /** Funcionamiento Modal */
 
-  const [modalStatus, setModalStatus] = useState(false);
 
   /** Fin funcionamiento Modal */
 
@@ -28,25 +27,16 @@ export default function ShowReviews({ productId }) {
       {reviews?.length ? (
         <div>
           {productRender.Reviews.map((e) => (
-            <div>
-              <CardReviews
-                key={e.UserUserName + e.comment}
-                UserUserName={e.UserUserName}
-                comment={e.comment}
-                calification={e.calification}
-                pathname={pathname}
-                modalStatus={modalStatus}
-                setModalStatus={setModalStatus}
-                id={e.id}
-              />
-              {modalStatus && (
-                <ShowReviewsModalDelete
-                  modalStatus={modalStatus}
-                  setModalStatus={setModalStatus}
-                  id={e.id}
-                />
-              )}
-            </div>
+            <CardReviews
+              key={e.UserUserName + e.comment}
+              UserUserName={e.UserUserName}
+              comment={e.comment}
+              calification={e.calification}
+              pathname={pathname}
+              modalStatus={modalStatus}
+              setModalStatus={setModalStatus}
+              id={e.id}
+            />
           ))}
         </div>
       ) : (
