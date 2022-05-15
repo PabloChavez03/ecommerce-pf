@@ -11,6 +11,11 @@ const Login = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const userData = useSelector((state) => state.userData);
+	const userGoogle = useSelector((state) => state.getLoginGoogle);
+	let newLoginGoogle = {
+		user_name: userGoogle.username,
+		user_password: userGoogle.password,
+	}
 
 	useEffect(() => {
 		// console.log(userData);
@@ -109,7 +114,7 @@ const Login = () => {
 			setDisabledButton(false);
 		}
 	}, [error, newUser, setDisabledButton]);
-
+  
 	/** Terminando la validacion para el boton disabled */
 	/** Crear usuario */
 	const handleSubmit = (e) => {
