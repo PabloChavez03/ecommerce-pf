@@ -1,0 +1,11 @@
+.svg {
+	stroke-width: 1.5px;
+	stroke: #00000050;
+	fill: none;
+  height: 40px;
+  width: 40px;
+}
+
+.svg:hover {
+	stroke: #881a1ac8;
+}
