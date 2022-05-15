@@ -1,41 +1,58 @@
-.container {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	margin: auto;
-	background-color: #eef3f5;
-	box-shadow: 0px 0px 2px rgba(41, 40, 40, 0.666);
-	border-radius: 10px;
+.cardContainer{
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
-.cardsContainer {
-	justify-content: center;
-	display: flex;
-	flex-wrap: wrap;
-	margin-top: 40px;
+.container{ 
+    width: 800px;
+    max-width: 100%;
+    display: flex;
+    margin: auto;
+    flex-wrap: wrap;
+    justify-content: center;
 }
+.title{
+    color:rgb(63, 58, 58); 
+    width: 70%;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.774);
+    margin:30px auto ;
+    text-align: center;
+    padding-bottom: 10px;
+   
+    
+}
+.orders{
+    width: 300px;
+    max-width: 90%;
+    padding:5px 10px;
+    border-radius:3px;
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.573);
+    margin: 10px;
+    transition: 0.2s;
 
-.cardContainer {
-	margin: auto;
-	background-color: #fff;
-	width: 40vw;
-	min-height: 80px;
-	margin: 6px 10px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	border-radius: 10px;
-	box-shadow: 0px 0px 2px rgba(41, 40, 40, 0.666);
-	font-weight: bold;
 }
-
-
-.cardContainer h4 {
-	width: fit-content;
-	margin: auto;
+.orders:hover{
+    transform: scale(1.05);
 }
-.cardContainer div {
-	display: flex;
-	justify-content: end;
+.ordenFecha{
+    padding: 3px 0px;
+    color: rgb(26, 25, 25);
+    display: flex;
+    justify-content: space-between;
+}
+.approved{
+    color: rgb(6, 182, 50);
+    font-weight: 600;
+}
+.rejected{
+    color: rgb(231, 6, 6);
+    font-weight: 600;
+
+}
+.pending{
+    color: rgb(254, 156, 69);
+    font-weight: 600;
 }
 .btn {
 	margin-right: 15px;
@@ -70,7 +87,9 @@
 .filter {
 	display: flex;
 	justify-content: space-around;
-	margin-top: 30px;
+	
+    margin: 20px;
+    margin-top: 30px;
 }
 .filter select {
 	/* margin: 15px; */
@@ -80,4 +99,11 @@
 	border: 1px solid rgb(41, 41, 41);
 	border-radius: 3px;
 	cursor: pointer;
+}
+.searchFilter{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    
 }
