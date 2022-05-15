@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 //import style from "./CardDetail.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -13,6 +13,7 @@ import style from "./CardDetail.module.css";
 export default function CardDetail() {
   const dispatch = useDispatch();
   const { productId } = useParams();
+  const [modalStatus, setModalStatus] = useState(false);
 
   useEffect(() => {
     dispatch(getDetails(productId));
@@ -41,8 +42,8 @@ export default function CardDetail() {
             variants={productDetail.variants}
             info={productDetail.info}
           />
-          <CreateReviews productId={productId} />
-          <ShowReviews productId={productId} />
+          <CreateReviews productId={productId} modalStatus={modalStatus} setModalStatus={setModalStatus}/>
+          <ShowReviews productId={productId} modalStatus={modalStatus} setModalStatus={setModalStatus}/>
           
         </div>
       )}

@@ -7,7 +7,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { createReview, getDetails } from "../../../../redux/actions-types";
 import Swal from "sweetalert2";
 
-export default function CreateReviews({ productId }) {
+export default function CreateReviews({
+  productId,
+  setModalStatus,
+  modalStatus,
+}) {
   const dispatch = useDispatch();
   const [score, setScore] = useState(0);
   const userData = useSelector((state) => state.userData);
@@ -20,63 +24,66 @@ export default function CreateReviews({ productId }) {
     calification: 0,
     comment: "",
   });
-  const userReview = reviewsOfTheProduct.find((e)=>e.UserUserName === userData.username);
 
   useEffect(() => {
     dispatch(getDetails(productId));
-  }, [productId, dispatch,userReview]);
+  }, [productId, dispatch, score]);
 
-
-console.log(userReview)
   const handleClickSend = (event) => {
     event.preventDefault();
-if(userReview?.UserUserName) {
-  Swal.fire(
-    "Solo se permite una reseña por producto! Intente editando la reseña ya realizada.",
-    "",
-    "error"
-  )
-} else{    
-    if (!userData.username) {
+    const userReview = reviewsOfTheProduct?.find(
+      (e) => e.UserUserName === userData.username
+    );
+
+    if (userReview?.UserUserName) {
       Swal.fire(
-        "Debe registrarse y/o iniciar sesión para dejar una reseña!",
-        "",
-        "success"
-      );
-      navigate("/login");
-    }
-    if (userData.rol === "admin") {
-      Swal.fire(
-        "No te pases de listo admin, los reviews solo los puede dejar el cliente!",
+        "Solo se permite una reseña por producto! Intente editando la reseña ya realizada.",
         "",
         "error"
       );
     } else {
-      if (score === 0) {
-        Swal.fire("Por favor seleccionar calificación!", "", "success");
+      if (!userData.username) {
+        Swal.fire(
+          "Debe registrarse y/o iniciar sesión para dejar una reseña!",
+          "",
+          "warning"
+        );
+        navigate("/login");
       }
-      if (review.comment === "") {
-        Swal.fire("Debe ingresar a su cueta!", "", "warning");
-      } else if (score !== 0 && review.comment !== "") {
-        if (userData.username) {
-          dispatch(createReview(review));
-          setScore(0);
-          setReview({
-            UserUserName: userData.username,
-            productId: productId,
-            calification: 0,
-            comment: "",
-          });
-          Swal.fire(
-            "Tu reseña fue enviada con éxito. Muchas gracias!",
-            "",
-            "success"
-          );
-          dispatch(getDetails(productId));
+      if (userData.rol === "admin") {
+        Swal.fire(
+          "No te pases de listo admin, los reviews solo los puede dejar el cliente!",
+          "",
+          "error"
+        );
+      } else {
+        if (score === 0) {
+          Swal.fire("Por favor seleccionar calificación!", "", "warning");
+        }
+        if (review.comment === "") {
+          Swal.fire("Debe ingresar a su cuenta!", "", "warning");
+        } else if (score !== 0 && review.comment !== "") {
+          if (userData.username) {
+            dispatch(createReview(review));
+            setScore(0);
+            setReview({
+              UserUserName: userData.username,
+              productId: productId,
+              calification: 0,
+              comment: "",
+            });
+            Swal.fire(
+              "Tu reseña fue enviada con éxito. Muchas gracias!",
+              "",
+              "success"
+            );
+
+            dispatch(getDetails(productId));
+            setModalStatus(!modalStatus);
+          }
         }
       }
     }
-  }
   };
 
   const handleClickScore = (event) => {
