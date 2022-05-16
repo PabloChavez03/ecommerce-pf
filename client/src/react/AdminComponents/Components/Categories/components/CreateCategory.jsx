@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 
 import {
 	createCategory,
@@ -86,8 +88,21 @@ function CreateCategory({ closeModal }) {
 
 	const handleCreate = (e) => {
 		e.preventDefault();
-		dispatch(createCategory(token, category));
-		alert("Categoría creada");
+		
+		Swal.fire({
+			title: "¿Seguro desea crear Categiria?",
+			text: "",
+			icon: "question",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Sí, agregar!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				dispatch(createCategory(token, category));
+				Swal.fire("Confirmado!", "Su orden ha sido creada con Éxito!", "success");
+			}
+		});
 		dispatch(getCategories());
 		navigate("/admin/categories");
 		closeModal();
