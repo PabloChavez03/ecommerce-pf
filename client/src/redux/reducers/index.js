@@ -513,6 +513,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			return {
 				...state,
 				getLoginGoogle: payload,
+				// userData: payload,
 			}
 		default:
 			return { ...state };

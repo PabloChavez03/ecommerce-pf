@@ -691,10 +691,38 @@ export const deleteCategory = (token, categoryId) => {
 
 export const getLoginGoogle = () => {
 	return async function (dispatch) {
-		const { data } = await axios.get("/auth/login/success");
+		const { data } = await axios({
+      url: "/auth/login/success",
+      method: "GET",
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+      },
+    });
+
 		return dispatch({
 			type: GET_LOGIN_GOOGLE,
 			payload: data,
 		});
 	};
 };
+
+// const getUser = () =>
+//   axios({
+//     url: "/auth/login/success",
+//     method: "GET",
+//     withCredentials: true,
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Access-Control-Allow-Credentials": true,
+//     },
+//   })
+//     .then((response) => {
+//       if (response.status === 200) return response.data;
+//       else throw new Error("Authentication has been failed");
+//     })
+//     .then((resObject) => {
+//       setUSer(resObject.user);
+//     })
+//     .catch((e) => console.log(e));
