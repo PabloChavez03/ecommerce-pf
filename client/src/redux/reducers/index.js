@@ -123,11 +123,13 @@ export default function rootReducer(state = initialState, { type, payload }) {
 						payload.id + payload.brandSize.toString(),
 				);
 				let itemToAddQty = state.cartItems[indexAddToCart];
-					
+
 				let variantIndexAddQty = itemToAddQty.variants.findIndex(
 					(e) => e.brandSize.toString() === payload.brandSize.toString(),
 				);
-				if (payload.variants[variantIndexAddQty].stock !== itemToAddQty.quantity) {
+				if (
+					payload.variants[variantIndexAddQty].stock !== itemToAddQty.quantity
+				) {
 					itemToAddQty.quantity++;
 				} else {
 					Swal.fire("Producto con Stock Agotado!", "", "error");
@@ -521,7 +523,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				...state,
 				getLoginGoogle: payload,
 				// userData: payload,
-			}
+			};
 		default:
 			return { ...state };
 	}
