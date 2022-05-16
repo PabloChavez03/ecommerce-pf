@@ -46,10 +46,10 @@ export default function CardReviews({
   }
   return (
     <div className={style.container}>
+      <div><AccountIcon /><h4>{UserUserName}</h4></div>
       
-      <AccountIcon />
       <div className={style.container1}>
-      <h4>Usuario: {UserUserName}</h4>
+      
       <br/>
       <h4>Comentario:</h4>
       <span>{comment}</span>
