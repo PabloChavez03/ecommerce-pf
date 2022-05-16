@@ -4,11 +4,17 @@ export const handleShowAddingImage = (e, canAddImage, setCanAddImage) => {
 	setCanAddImage(!canAddImage);
 };
 
-export const handleAddImage = (e, urlImage, setUrlImage, validateUrl) => {
+export const handleAddImage = (
+	e,
+	urlImage,
+	setUrlImage,
+	setUrlError,
+	validateUrl,
+) => {
 	const { value } = e.target;
 	e.preventDefault();
 	setUrlImage(value);
-	validateUrl(urlImage);
+	setUrlError(validateUrl(value));
 };
 
 export const handleSubmitAddImage = (
@@ -133,8 +139,8 @@ export const handleSubmitAddSize = (
 	setVariants({
 		brandSize: "",
 		isInStock: false,
-		stock: ""
-	})
+		stock: "",
+	});
 };
 export const handleSizeDelete = (e, elClicked, input, setInput) => {
 	e.preventDefault();
