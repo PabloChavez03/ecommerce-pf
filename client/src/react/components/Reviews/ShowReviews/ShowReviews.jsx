@@ -61,7 +61,6 @@ export default function ShowReviews({
               UserUserName={e.UserUserName}
               comment={e.comment}
               calification={e.calification}
-              pathname={pathname}
               modalStatus={modalStatus}
               setModalStatus={setModalStatus}
               id={e.id}
