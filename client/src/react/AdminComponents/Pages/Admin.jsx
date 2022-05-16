@@ -18,6 +18,7 @@ import ProfileUser from "../../components/ProfileUser/ProfileUser";
 import PublicidadMail from "../Components/Email/EmailPublicidad";
 import Categories from "../Components/Categories/Categories";
 import CategoryDetail from "../Components/Categories/components/CategoryDetail";
+import ReviewsAdmin from "../Components/ReviewsAdmin/ReviewsAdmin";
 
 const Admin = () => {
 	return (
@@ -47,6 +48,7 @@ const Admin = () => {
 						<Route path={"/Publicidad"} element={<PublicidadMail/> } />
 						<Route path={"/categories"} element={<Categories/> } />
 						<Route path={"/categories/:id"} element={<CategoryDetail/> } />
+						<Route path={"reviews/:idReview"} element={<ReviewsAdmin/> } />
 					</Routes>
 				</div>
 			</div>

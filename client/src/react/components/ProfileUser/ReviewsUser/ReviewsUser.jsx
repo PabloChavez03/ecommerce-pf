@@ -20,10 +20,10 @@ export default function ReviewsUser() {
  
 
   return (
-    <div>
+    <div className={style.container}>
       {reviewsUser?.length ? (
         reviewsUser.map((e, i) => (
-          <div key={i}>
+          <div key={i} className={style.container1}>
             <CardReviews
               UserUserName={e.UserUserName}
               comment={e.comment}
