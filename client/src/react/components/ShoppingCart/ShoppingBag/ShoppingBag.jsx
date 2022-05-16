@@ -48,7 +48,7 @@ export default function ShoppingBag() {
       Swal.fire(
         'Un administrador no puede realizar compras!',
         '',
-        'success'
+        'error'
       )
       return;
     }
@@ -132,8 +132,9 @@ export default function ShoppingBag() {
         )}
 
         <br></br>
-        <NavLink to={"/"}>
+        <NavLink to={"/"} >
           <button className={css.btn}>Seguir comprando</button>
+          
         </NavLink>
       </div>
     </div>
