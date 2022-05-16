@@ -15,7 +15,7 @@ export default function ShoppingBag() {
   const userData = useSelector((state) => state.userData);
 
   let suma = 0;
-  let subtotal = cartItems?.forEach((e) => (suma += e.currentPrice));
+  let subtotal = cartItems?.forEach((e) => (suma += e.currentPrice * e.quantity));
   let envio = 50;
 
   const [email, setEmail] = useState("");
@@ -30,8 +30,11 @@ export default function ShoppingBag() {
     )
   };
 
+
+
   const handlePayment = async (e) => {
     e.preventDefault();
+
     if (suma === 0) {
       Swal.fire(
         'Debe agregar productos al carrito para continuar!',
@@ -48,6 +51,9 @@ export default function ShoppingBag() {
         'success'
       )
       return;
+    }
+    let validateStock =()=>{
+      cartItems.forEach(e=> e.brandSize )
     }
 
     const emailAux = userData.email ? userData.email : email;
@@ -115,11 +121,11 @@ export default function ShoppingBag() {
         <br />
         {userData.username ? (
           <>
-            <NavLink to={"/pay"}>
+            
               <button className={css.btn} onClick={(e) => handlePayment(e)}>
                 Ir a pagar
               </button>
-            </NavLink>
+           
           </>
         ) : (
           "Inicia sesión para comprar"
