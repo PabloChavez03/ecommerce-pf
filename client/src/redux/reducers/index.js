@@ -130,7 +130,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				if (payload.variants[variantIndexAddQty].stock !== itemToAddQty.quantity) {
 					itemToAddQty.quantity++;
 				} else {
-					Swal.fire("Producto con Stock Agotado!", "", "success");
+					Swal.fire("Producto con Stock Agotado!", "", "error");
 				}
 				return {
 					...state,
@@ -192,7 +192,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				if (item.variants[variantIndex].stock !== item.quantity) {
 					item.quantity++;
 				} else {
-					Swal.fire("Producto con Stock Agotado!", "", "success");
+					Swal.fire("Producto con Stock Agotado!", "", "error");
 				}
 			}
 			return {
