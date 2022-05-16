@@ -5,14 +5,6 @@ import Swal from 'sweetalert2'
 
 
 export default function HomeAdmin() {
-	const handleClickConstruction = (e) => {
-		e.preventDefault();
-		Swal.fire(
-			'Funcionalidad en desarrollo!',
-			'',
-			'success'
-		  )
-	};
 
 	return (
 		<div className={css.container}>
@@ -30,10 +22,6 @@ export default function HomeAdmin() {
 			<NavLink to={"/admin/orders"}>
 				<button className={css.item}>MIS ORDENES</button>
 			</NavLink>
-
-			<button className={css.item} onClick={(e) => handleClickConstruction(e)}>
-				MIS VENTAS
-			</button>
 		</div>
 	);
 }

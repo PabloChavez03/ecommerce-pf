@@ -117,17 +117,24 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				(e) => e.id + e.brandSize === payload.id + payload.brandSize,
 			);
 			if (cartProductAux) {
-				const prevCart = state.cartItems.filter(
-					(e) => e.id + e.brandSize !== payload.id + payload.brandSize,
+				let indexAddToCart = state.cartItems.findIndex(
+					(e) =>
+						e.id + e.brandSize.toString() ===
+						payload.id + payload.brandSize.toString(),
 				);
-				if (payload.variants[0].stock !== cartProductAux.quantity) {
-					cartProductAux.quantity++;
+				let itemToAddQty = state.cartItems[indexAddToCart];
+					
+				let variantIndexAddQty = itemToAddQty.variants.findIndex(
+					(e) => e.brandSize.toString() === payload.brandSize.toString(),
+				);
+				if (payload.variants[variantIndexAddQty].stock !== itemToAddQty.quantity) {
+					itemToAddQty.quantity++;
 				} else {
 					Swal.fire("Producto con Stock Agotado!", "", "success");
 				}
 				return {
 					...state,
-					cartItems: [...prevCart, cartProductAux],
+					cartItems: [...state.cartItems],
 					subTotal: Number(
 						state.subTotal +
 							Math.round(cartProductAux.currentPrice * cartProductAux.quantity),

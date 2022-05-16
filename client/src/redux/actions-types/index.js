@@ -530,8 +530,12 @@ export const postOrder = (order) => {
 	return async function (dispatch) {
 		try {
 			await axios.post("/ordendecompra", order);
+			
 		} catch (error) {
-			console.log(error);
+			return
+		}
+		if(order.status === 'rejected' ||order.status === 'failure' || order.status === 'null' ){
+			await axios.patch("/product/stock/sumar", order.orderDetails);
 		}
 	};
 };
@@ -708,21 +712,14 @@ export const getLoginGoogle = () => {
 	};
 };
 
-// const getUser = () =>
-//   axios({
-//     url: "/auth/login/success",
-//     method: "GET",
-//     withCredentials: true,
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Access-Control-Allow-Credentials": true,
-//     },
-//   })
-//     .then((response) => {
-//       if (response.status === 200) return response.data;
-//       else throw new Error("Authentication has been failed");
-//     })
-//     .then((resObject) => {
-//       setUSer(resObject.user);
-//     })
-//     .catch((e) => console.log(e));
+export const removeStock = (cart) => {
+	return async function (dispatch) {
+		await axios.patch("/product/stock/restar", cart);
+	};
+};
+
+export const addStock = (cart) => {
+	return async function (dispatch) {
+		await axios.patch("/product/stock/sumar", cart);
+	};
+};

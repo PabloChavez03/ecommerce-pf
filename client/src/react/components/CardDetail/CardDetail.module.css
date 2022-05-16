@@ -27,6 +27,10 @@
 	justify-content: center;
 }
 
+.containerReviews {
+	display: flex;
+	width: 100%;
+}
 .cardCarouselImg {
 	width: 65px;
 	margin: 5px;

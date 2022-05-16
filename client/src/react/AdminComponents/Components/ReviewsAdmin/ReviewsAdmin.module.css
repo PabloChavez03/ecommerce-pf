@@ -1,0 +1,27 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+.container h2 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.container1{
+    display: flex;
+    flex-direction: wrap;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.imgBack {
+    width: 30px;
+}
+.imgBack:hover{
+    width: 35px;
+}
+.imgContainer {
+    display: flex;
+    justify-content: start;
+    min-height: 50px;
+}

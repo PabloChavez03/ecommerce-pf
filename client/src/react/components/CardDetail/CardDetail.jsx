@@ -42,9 +42,18 @@ export default function CardDetail() {
             variants={productDetail.variants}
             info={productDetail.info}
           />
-          <CreateReviews productId={productId} modalStatus={modalStatus} setModalStatus={setModalStatus}/>
-          <ShowReviews productId={productId} modalStatus={modalStatus} setModalStatus={setModalStatus}/>
-          
+          <div className={style.containerReviews}>
+            <CreateReviews
+              productId={productId}
+              modalStatus={modalStatus}
+              setModalStatus={setModalStatus}
+            />
+            <ShowReviews
+              productId={productId}
+              modalStatus={modalStatus}
+              setModalStatus={setModalStatus}
+            />
+          </div>
         </div>
       )}
     </div>
