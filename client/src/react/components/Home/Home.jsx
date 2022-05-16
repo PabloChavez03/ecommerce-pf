@@ -27,29 +27,34 @@ export default function Home() {
 	const lastProduct = currentPage * productsPerPage;
 	const firstProduct = lastProduct - productsPerPage;
 	const productsCurent =
-	selectFilter === ""
+		selectFilter === ""
 			? allProducts?.slice(firstProduct, lastProduct)
 			: productFilter?.slice(firstProduct, lastProduct);
 	const [render, setRender] = useState();
-		useEffect(() => {
+	useEffect(() => {
 		dispatch(getFiltersGenderProduct(gender));
 		dispatch(setCurrentPage(1));
 		dispatch(setDetails());
-		setSelectFilter("")
+		setSelectFilter("");
 	}, [dispatch, gender, setSelectFilter]);
 
 	const handleClickReset = (e) => {
 		e.preventDefault();
 		setSelectFilter("");
 		dispatch(cleanFilters("home"));
-	}
+	};
 	return (
 		<div className={css.principalDivHome}>
 			<NavBar />
-			<div className={css.search}><div className={css.reset}><button onClick={(e)=>handleClickReset(e)}>Restablecer filtros</button></div><SearchBar
-			setSelectFilter={setSelectFilter}
-			/></div>
-			
+			<div className={css.search}>
+				<div className={css.reset}>
+					<button onClick={(e) => handleClickReset(e)}>
+						Restablecer filtros
+					</button>
+				</div>
+				<SearchBar setSelectFilter={setSelectFilter} />
+			</div>
+
 			<Filter
 				setRender={setRender}
 				setCurrentPage={setCurrentPage}
@@ -60,7 +65,9 @@ export default function Home() {
 			/>
 			<div>
 				<Paginated
-					productsToPaginated={selectFilter !== "" ? productsCurent : allProducts}
+					productsToPaginated={
+						selectFilter !== "" ? productsCurent : allProducts
+					}
 					lastProduct={lastProduct}
 					firstProduct={firstProduct}
 					productsPerPage={productsPerPage}
@@ -69,8 +76,8 @@ export default function Home() {
 				/>
 			</div>
 			<div className={css.cardContainer}>
-				{!productsCurent?.length ? (
-					<Loader/>
+				{productsCurent?.length < 2 ? (
+					<Loader />
 				) : (
 					productsCurent?.map((product, index) => {
 						return (
