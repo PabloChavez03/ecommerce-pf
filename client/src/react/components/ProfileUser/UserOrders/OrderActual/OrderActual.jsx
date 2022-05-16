@@ -52,9 +52,9 @@ function OrderActual() {
 	console.log(status);
 
 	dispatch(postOrder(order));
-	if (status === "failure") {
-		dispatch(addStock(cartItems));
-	}
+	// if (status === "failure") {
+	// 	dispatch(addStock(cartItems));
+	// }
 
 	const handleClose = (e) => {
 		e.preventDefault();
@@ -75,7 +75,7 @@ function OrderActual() {
 
 	return (
 		<div className={css.overlay}>
-			<div className={css.ovelayClose} onClick={() => handleClose()}></div>
+			<div className={css.ovelayClose} onClick={(e) => handleClose(e)}></div>
 			<div className={css.container1}>
 				<div className={css.shoppingOrderContainer}>
 					<div className={css.container} ref={pdfDownload}>

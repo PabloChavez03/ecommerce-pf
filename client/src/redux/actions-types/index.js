@@ -530,8 +530,12 @@ export const postOrder = (order) => {
 	return async function (dispatch) {
 		try {
 			await axios.post("/ordendecompra", order);
+			
 		} catch (error) {
-			console.log(error);
+			return
+		}
+		if(order.status === 'rejected' ||order.status === 'failure' || order.status === 'null' ){
+			await axios.patch("/product/stock/sumar", order.orderDetails);
 		}
 	};
 };
