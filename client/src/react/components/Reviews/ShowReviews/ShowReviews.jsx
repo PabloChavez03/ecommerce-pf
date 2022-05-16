@@ -26,7 +26,9 @@ export default function ShowReviews({
   useEffect(() => {
     dispatch(getDetails(productId));
   }, [productId, dispatch, modalStatus]);
-
+  useEffect(() => {
+    setCurrentPageReview(1);
+  },[productRender])
   const handleClickPrev = (e) => {
     e.preventDefault();
     if (currentPageReview - 1 < 1) {
@@ -38,7 +40,7 @@ export default function ShowReviews({
 
   const handleClickNext = (e) => {
     e.preventDefault();
-    if ((currentPageReview + 1) >= quantityPages) {
+    if ((currentPageReview + 1) > quantityPages) {
       return;
     } else {
       setCurrentPageReview(currentPageReview + 1);
