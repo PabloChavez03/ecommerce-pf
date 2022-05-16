@@ -144,19 +144,19 @@ const updateEmisor = async ({ id, name, respuesta, isActive, alternativa }) => {
 				},
 				{ where: { id } },
 			);
+			const emisor = await Chat_bot_emisor.findAll({
+				where: { name },
+				include: {
+					model: Chat_bot_receptor,
+				},
+			}).catch((e) => console.log(e));
+			console.log(emisor)
+			for (el of emisor[0].chat_bot_receptors) {
 
-			if (alternativa.length) {
-				const emisor = await Chat_bot_emisor.findAll({
-					where: { name },
-					include: {
-						model: Chat_bot_receptor,
-					},
-				}).catch((e) => console.log(e));
+				await emisor[0].removeChat_bot_receptor(el);
 
-				for (el of emisor[0].chat_bot_receptors) {
-					await emisor[0].removeChat_bot_receptor(el);
-				}
-
+			}
+			if (alternativa.length !== 0) {
 				for (el of alternativa) {
 					const receptorDB = await Chat_bot_receptor.findAll({
 						where: { name: alternativa },
@@ -164,7 +164,6 @@ const updateEmisor = async ({ id, name, respuesta, isActive, alternativa }) => {
 					await emisor[0].addChat_bot_receptor(receptorDB);
 				}
 			}
-
 			return { Info: "Succession" };
 		} else {
 			return { Info: "Requisito un dato para poder actualizar el dato" };
@@ -191,16 +190,38 @@ const allReceptor = async () => {
 };
 //Agregar un nuevo Receptor
 const addReceptor = async ({ name, isActive = true }) => {
-	const data = await Chat_bot_receptor.create({
-		name,
-		isActive,
-	});
-	return data;
+	let receptor = await Chat_bot_receptor.findAll({ where: { name } })
+	if (receptor.length === 0) {
+		const data = await Chat_bot_receptor.create({
+			name,
+			isActive,
+		});
+		return data;
+	} else{
+		return {"Info":"Nombre repetido"}
+	}
+
+
 };
 //Editar el receptor por parametro {id, name, isActive} se puede obviar el isActive pero
 const updateReceptor = async ({ id, name, isActive }) => {
 	if (id) {
-		if (name || isActive === false || isActive) {
+		if (name || isActive === true || isActive) {
+			let data = await Chat_bot_receptor.findAll({ where: { id } })
+			let Newdata = data[0].name
+			let emisor = await Chat_bot_emisor.findOne({
+				where: { name: Newdata },
+			});
+			if (emisor !== null) {
+				await Chat_bot_emisor.update(
+					{
+						name: name,
+						respuesta: emisor.respuesta,
+						isActive: emisor.isActive,
+					},
+					{ where: { id: emisor.id } },
+				);
+			}
 			await Chat_bot_receptor.update(
 				{
 					name,
