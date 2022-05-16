@@ -14,7 +14,6 @@ export default function ShowReviews({
   modalStatus,
 }) {
   const dispatch = useDispatch();
-  const { pathname } = useLocation();
   const productRender = useSelector((state) => state.details);
   const reviews = productRender.Reviews;
   const [currentPageReview, setCurrentPageReview] = useState(1);
