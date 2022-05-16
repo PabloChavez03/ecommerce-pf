@@ -127,10 +127,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				let variantIndexAddQty = itemToAddQty.variants.findIndex(
 					(e) => e.brandSize.toString() === payload.brandSize.toString(),
 				);
-				if (payload.variants[variantIndexAddQty].stock !== itemToAddQty.quantity) {
+				if (
+					payload.variants[variantIndexAddQty].stock !== itemToAddQty.quantity
+				) {
 					itemToAddQty.quantity++;
 				} else {
-					Swal.fire("Producto con Stock Agotado!", "", "success");
+					Swal.fire("Producto con Stock Agotado!", "", "error");
 				}
 				return {
 					...state,
@@ -192,7 +194,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				if (item.variants[variantIndex].stock !== item.quantity) {
 					item.quantity++;
 				} else {
-					Swal.fire("Producto con Stock Agotado!", "", "success");
+					Swal.fire("Producto con Stock Agotado!", "", "error");
 				}
 			}
 			return {
@@ -524,7 +526,8 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			return {
 				...state,
 				getLoginGoogle: payload,
-			}
+				// userData: payload,
+			};
 		default:
 			return { ...state };
 	}

@@ -113,7 +113,7 @@ export default function ProfileUser() {
 					<fieldset className={style.section}>
 						<legend>General</legend>
 						<div className={style.infoContainer}>
-							<label htmlFor="username">Nombre de usuario: </label>
+							<label htmlFor="username">Nombre de usuario:</label>
 							<input
 								className={style.input}
 								id="username"
@@ -124,7 +124,7 @@ export default function ProfileUser() {
 							/>
 						</div>
 						<div className={style.infoContainer}>
-							<label htmlFor="name">Nombre: </label>
+							<label htmlFor="name">Nombre:</label>
 							<input
 								className={style.input}
 								id="name"
@@ -135,7 +135,7 @@ export default function ProfileUser() {
 							/>
 						</div>
 						<div className={style.infoContainer}>
-							<label htmlFor="lastname">Apellido: </label>
+							<label htmlFor="lastname">Apellido:</label>
 							<input
 								className={style.input}
 								id="lastname"
@@ -146,7 +146,7 @@ export default function ProfileUser() {
 							/>
 						</div>
 						<div className={style.infoContainer}>
-							<label htmlFor="dni">DNI: </label>
+							<label htmlFor="dni">DNI:</label>
 							<input
 								className={style.input}
 								id="dni"
@@ -160,7 +160,7 @@ export default function ProfileUser() {
 					<fieldset className={style.section}>
 						<legend>Contacto</legend>
 						<div className={style.infoContainer}>
-							<label htmlFor="phone">Número de celular: </label>
+							<label htmlFor="phone">Número de celular:</label>
 							<input
 								className={style.input}
 								id="phone"
@@ -171,7 +171,7 @@ export default function ProfileUser() {
 							/>
 						</div>
 						<div className={style.infoContainer}>
-							<label htmlFor="email">Email: </label>
+							<label htmlFor="email">Email:</label>
 							<input
 								className={style.input}
 								id="email"
@@ -182,7 +182,7 @@ export default function ProfileUser() {
 							/>
 						</div>
 						<div className={style.infoContainer}>
-							<label htmlFor="address">Dirección de residencia: </label>
+							<label htmlFor="address">Dirección de residencia:</label>
 							<input
 								className={style.input}
 								id="address"

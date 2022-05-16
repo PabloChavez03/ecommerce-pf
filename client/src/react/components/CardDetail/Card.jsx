@@ -128,7 +128,7 @@ export default function Card({
 												value={e.brandSize}
 												name={e.brandSize}
 											>
-												{e.brandSize}
+												{e.brandSize} -- ( {e.stock} en stock )
 											</option>
 										);
 									} else {
@@ -139,7 +139,7 @@ export default function Card({
 												value={e.brandSize}
 												name={e.brandSize}
 											>
-												{e.brandSize} -- No hay stock
+												{e.brandSize} -- ( No hay stock )
 											</option>
 										);
 									}

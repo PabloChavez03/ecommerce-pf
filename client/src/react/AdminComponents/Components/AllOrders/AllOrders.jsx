@@ -102,7 +102,8 @@ export default function AllClients() {
 										<span>Status: </span>
 										<span
 											className={
-												client.status === "rejected"
+												client.status === "rejected" ||
+												client.status === "failure"
 													? style.rejected
 													: client.status === "pending"
 													? style.pending
