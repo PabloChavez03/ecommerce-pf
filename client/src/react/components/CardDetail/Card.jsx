@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import style from "./CardDetail.module.css";
 import { addProductToCart } from "../../../redux/actions-types";
 import { NavLink } from "react-router-dom";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import Modal from "../ShoppingCart/Modal/Modal";
 
 export default function Card({
@@ -22,18 +22,20 @@ export default function Card({
 }) {
 	const dispatch = useDispatch();
 	const [imageCurrent, setImageCurrent] = useState("");
-	const sizes = variants.map((e) => e.brandSize);
+	const sizes = variants.map((e) => e);
+
 	const [productToCart, setProductToCart] = useState({
 		name,
 		image: images[0],
 		currentPrice,
 		color,
-		brandSize: sizes[0],
+		brandSize: sizes[0].brandSize,
 		quantity: 1,
 		id,
 		variants: variants,
 	});
 	const [statusModal, setStatusModal] = useState(false);
+
 	useEffect(() => {
 		setImageCurrent(`https://${images[0]}`);
 	}, [images]);
@@ -48,8 +50,6 @@ export default function Card({
 		setStatusModal(!statusModal);
 		dispatch(addProductToCart(productToCart));
 	};
-
-
 
 	const handleChangeSelect = (event) => {
 		event.preventDefault();
@@ -120,11 +120,30 @@ export default function Card({
 					>
 						<option>Talle</option>
 						{sizes.length
-							? sizes.map((e) => (
-									<option key={e} value={e} name={e}>
-										{e}
-									</option>
-							  ))
+							? sizes.map((e) => {
+									if (e.isInStock) {
+										return (
+											<option
+												key={e.brandSize}
+												value={e.brandSize}
+												name={e.brandSize}
+											>
+												{e.brandSize}
+											</option>
+										);
+									} else {
+										return (
+											<option
+												disabled
+												key={e.brandSize}
+												value={e.brandSize}
+												name={e.brandSize}
+											>
+												{e.brandSize} -- No hay stock
+											</option>
+										);
+									}
+							  })
 							: null}
 					</select>
 				</div>
@@ -156,9 +175,9 @@ export default function Card({
 						<button className={style.buttonBack}>ATRAS</button>
 					</NavLink>
 				</div>
-				{
-					statusModal && <Modal status={statusModal} setStatus={setStatusModal}/>
-				}
+				{statusModal && (
+					<Modal status={statusModal} setStatus={setStatusModal} />
+				)}
 			</div>
 		</div>
 	);

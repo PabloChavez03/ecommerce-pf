@@ -530,8 +530,12 @@ export const postOrder = (order) => {
 	return async function (dispatch) {
 		try {
 			await axios.post("/ordendecompra", order);
+			
 		} catch (error) {
-			console.log(error);
+			return
+		}
+		if(order.status === 'rejected' ||order.status === 'failure' || order.status === 'null' ){
+			await axios.patch("/product/stock/sumar", order.orderDetails);
 		}
 	};
 };
@@ -696,5 +700,17 @@ export const getLoginGoogle = () => {
 			type: GET_LOGIN_GOOGLE,
 			payload: data,
 		});
+	};
+};
+
+export const removeStock = (cart) => {
+	return async function (dispatch) {
+		await axios.patch("/product/stock/restar", cart);
+	};
+};
+
+export const addStock = (cart) => {
+	return async function (dispatch) {
+		await axios.patch("/product/stock/sumar", cart);
 	};
 };
