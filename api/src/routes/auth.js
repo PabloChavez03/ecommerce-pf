@@ -21,12 +21,16 @@ router.get("/login/success", async (req, res) => {
   const username = req.user?.userGoogle.user_name;
   const password = req.user?.userGoogle.user_password;
   const token = req.user?.token;
-  
+  const roleId = req.user?.userGoogle.RoleId;
+
+  const roleUser = await Role.findByPk(roleId);
+
   return res.status(200).json({
     // rue,
     status: "successful",
     username: username,
     password: password,
+    rol: roleUser.name,
     token: token,
   });
 });

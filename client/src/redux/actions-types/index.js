@@ -695,7 +695,16 @@ export const deleteCategory = (token, categoryId) => {
 
 export const getLoginGoogle = () => {
 	return async function (dispatch) {
-		const { data } = await axios.get("/auth/login/success");
+		const { data } = await axios({
+      url: "/auth/login/success",
+      method: "GET",
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+      },
+    });
+
 		return dispatch({
 			type: GET_LOGIN_GOOGLE,
 			payload: data,
