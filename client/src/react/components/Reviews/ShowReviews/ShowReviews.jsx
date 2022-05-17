@@ -45,6 +45,7 @@ export default function ShowReviews({
       setCurrentPageReview(currentPageReview + 1);
     }
   };
+
   return (
     <div className={style.container}>
       <h3>Todas las reseñas:</h3>

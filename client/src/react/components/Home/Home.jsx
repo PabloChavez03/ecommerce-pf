@@ -45,6 +45,7 @@ export default function Home() {
     setSelectFilter("");
     dispatch(cleanFilters("home"));
   };
+
   return (
     <div className={css.principalDivHome}>
       <NavBar />

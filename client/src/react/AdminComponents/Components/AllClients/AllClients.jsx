@@ -21,9 +21,12 @@ console.log(username)
     return () => {
       dispatch(resetAllClients());
     };
-  }, []);
+  }, [dispatch,token]);
 
   const allClients = useSelector((state) => state.allClients);
+  useEffect(()=> {
+    dispatch(getAllClients(token));
+  },[allClients, token, dispatch])
   const handleClickDeleteUser = (event) => {
     event.preventDefault();
 		Swal.fire({
