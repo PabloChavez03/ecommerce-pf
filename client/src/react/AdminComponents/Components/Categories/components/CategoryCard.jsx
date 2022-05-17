@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2'
-
+import Swal from "sweetalert2";
 
 import {
 	deleteCategory,
@@ -27,8 +26,6 @@ function CategoryCard({ category: { title, id, genre } }) {
 	};
 
 	const handleDeleteCategory = (e) => {
-		
-		
 		Swal.fire({
 			title: "¿Seguro desea eliminar Categoria?",
 			text: "Una vez aceptado no se puede revertir los cambios!",
@@ -41,6 +38,7 @@ function CategoryCard({ category: { title, id, genre } }) {
 			if (result.isConfirmed) {
 				dispatch(deleteCategory(token, id));
 				Swal.fire("Confirmado!", "Su categoria ha sido eliminada.", "success");
+				navigate("/admin");
 			}
 		});
 		dispatch(getCategories());
