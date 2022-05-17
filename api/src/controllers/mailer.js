@@ -18,7 +18,7 @@ transporter.verify().then(() => {
 
 
 async function publicidadEmail({ emailGoogle, emailAsunto, emailImagenTitle, emailTitulo, emailSubTitle, emailDescription, emailButton = "Compra ya!" }) {
-  if(emailGoogle){
+  if (emailGoogle) {
     await transporter.sendMail({
       from: `"CLOTHES 22" ${USER_GOOGLE}`,
       to: emailGoogle,
@@ -44,39 +44,41 @@ async function publicidadEmail({ emailGoogle, emailAsunto, emailImagenTitle, ema
               cursor: pointer;
             "
             href=""
-            >${emailButton?emailButton:"Compra ya!"}</a
+            >${emailButton ? emailButton : "Compra ya!"}</a
           >
         </div>
         <hr style="color: #90006f; border: 1px solid #90006f" />
         <footer style="padding: 0px 20px 20px">
-          <p style="font-size: 12px">
-            Si necesitas asistencia tecnica, ponte en contacto con la
-            <a href="" style="text-decoration: none; color: #90006f"
-              >Ayuda de CLOTHES 22</a
-            >
-          </p>
-          <p style="font-size: 12px">
-            <b>CLOTHES 22</b> te notificara la actividad nueva relacionada
-            contigo. Puedes personalizar estos correos elentronico o desactiarlos
-            en cualquier momento.
-          </p>
-          <p style="font-size: 12px">
-            Tu uso de <b>CLOTHES 22</b> esta sujeto a las condiciones del servicio
-            y la Politica de privacidad de las Normas de la comunidad de
-            <b>CLOTHES 22</b>.
-          </p>
-        </footer>
+        <p style="font-size: 12px">
+          Si necesitas asistencia tecnica, ponte en contacto con la
+          <a
+            href="mailto:atencionCliente@clothes22.com?Subject=Asistencia%20tecnica"
+            style="text-decoration: none; color: #90006f"
+            >Ayuda de CLOTHES 22</a
+          >
+        </p>
+        <p style="font-size: 12px">
+          <b>CLOTHES 22</b> te notificara la actividad nueva relacionada
+          contigo. Puedes personalizar estos correos elentronico o desactiarlos
+          en cualquier momento.
+        </p>
+        <p style="font-size: 12px">
+          Tu uso de <b>CLOTHES 22</b> esta sujeto a las condiciones del servicio
+          y la Politica de privacidad de las Normas de la comunidad de
+          <b>CLOTHES 22</b>.
+        </p>
+      </footer>
       </div>
           `
     })
-  }else{
-    return {"Info":"Falta ingresar el correo"}
+  } else {
+    return { "Info": "Falta ingresar el correo" }
   }
-  
-  
+
+
 }
 
-async function newRegistroCliente(emailGoogle, emailUsuario) {
+async function newRegistroCliente({ emailGoogle, emailUsuario }) {
 
   if (emailGoogle) {
     if (emailUsuario) {
@@ -108,24 +110,26 @@ async function newRegistroCliente(emailGoogle, emailUsuario) {
                 </div>
               </div>
               <hr style="color: #90006f; border: 1px solid #90006f" />
-              <div style="padding: 0px 20px 20px">
-                <p style="font-size: 12px">
-                  Si necesitas asistencia tecnica, ponte en contacto con la
-                  <a href="" style="text-decoration: none; color: #90006f"
-                    >Ayuda de CLOTHES 22</a
-                  >
-                </p>
-                <p style="font-size: 12px">
-                  <b>CLOTHES 22</b> te notificara la actividad nueva relacionada
-                  contigo. Puedes personalizar estos correos elentronico o desactiarlos
-                  en cualquier momento.
-                </p>
-                <p style="font-size: 12px">
-                  Tu uso de <b>CLOTHES 22</b> esta sujeto a las condiciones del servicio
-                  y la Politica de privacidad de las Normas de la comunidad de
-                  <b>CLOTHES 22</b>.
-                </p>
-              </div>
+              <footer style="padding: 0px 20px 20px">
+        <p style="font-size: 12px">
+          Si necesitas asistencia tecnica, ponte en contacto con la
+          <a
+            href="mailto:atencionCliente@clothes22.com?Subject=Asistencia%20tecnica"
+            style="text-decoration: none; color: #90006f"
+            >Ayuda de CLOTHES 22</a
+          >
+        </p>
+        <p style="font-size: 12px">
+          <b>CLOTHES 22</b> te notificara la actividad nueva relacionada
+          contigo. Puedes personalizar estos correos elentronico o desactiarlos
+          en cualquier momento.
+        </p>
+        <p style="font-size: 12px">
+          Tu uso de <b>CLOTHES 22</b> esta sujeto a las condiciones del servicio
+          y la Politica de privacidad de las Normas de la comunidad de
+          <b>CLOTHES 22</b>.
+        </p>
+      </footer>
             </div>
                 `
       })
@@ -187,9 +191,95 @@ async function ordenDeCompraMail({ orderDetails, total, status, email, newDate }
         </div>
         <hr style="color: #90006f; border: 1px solid #90006f" />
         <footer style="padding: 0px 20px 20px">
+        <p style="font-size: 12px">
+          Si necesitas asistencia tecnica, ponte en contacto con la
+          <a
+            href="mailto:atencionCliente@clothes22.com?Subject=Asistencia%20tecnica"
+            style="text-decoration: none; color: #90006f"
+            >Ayuda de CLOTHES 22</a
+          >
+        </p>
+        <p style="font-size: 12px">
+          <b>CLOTHES 22</b> te notificara la actividad nueva relacionada
+          contigo. Puedes personalizar estos correos elentronico o desactiarlos
+          en cualquier momento.
+        </p>
+        <p style="font-size: 12px">
+          Tu uso de <b>CLOTHES 22</b> esta sujeto a las condiciones del servicio
+          y la Politica de privacidad de las Normas de la comunidad de
+          <b>CLOTHES 22</b>.
+        </p>
+      </footer>
+      </div>
+      `
+    })
+    return { "Info": "Se envio la orden de compra" }
+  } else return { "Info": "No se ingreso el correo" }
+
+}
+const despachoEmail = async ({ email, name, direccion, time, orderDetails }) => {
+  if (email) {
+    setTimeout(async () => {
+      await transporter.sendMail({
+        from: `"CLOTHES 22" ${USER_GOOGLE}`,
+        to: email,
+        subject: `Compra enviada a domicilio`,
+        html: `
+        <div style="width: 80%; margin: auto; border: 0px solid black">
+        <div style="width: 100%; background-color: #90006f; display: flex">
+          <h1 style="color: white; padding: 0px 20px">CLOTHES 22</h1>
+        </div>
+        <div style="padding: 0px 20px 20px">
+          <h2 style="color: #90006f">
+            Hola ${name}!, su compra estara llegando a su domicilio.
+          </h2>
+          <p>Dirección a llegar: ${direccion}</p>
+          <p>
+            Este correo se le hace entrega la informacion de productos que le
+            llegara a su domicilio.
+          </p>
+          <table style="width: 100%">
+            <tr style="background-color: rgb(116, 116, 116); color: white">
+              <th style="padding: 10px 20px">NOMBRE DEL PRODUCTO</th>
+              <th style="padding: 10px 20px">CANTIDAD</th>
+            </tr>
+            ${orderDetails.length !== 0 ?
+            orderDetails.map((item, index) => (`
+                <tr style=${index % 2 === 0 ?
+                "background-color: rgb(202, 202, 202); color: black"
+                :
+                "color:black"
+              }>
+                  <td style="padding: 10px 20px">${item.name}</td>
+                  <td style="padding: 10px 20px">${item.quantity}</td>
+                </tr>
+                `
+            ))
+            : null
+          }
+          </table>
+          <p>
+            Las compras realizada sera enviada a la direccion confirmada por el
+            usuario, en caso de tener un problema con la direccion o compra,
+            enviar un correo a la empresa
+            <b>
+              <a
+                href="mailto:atencionCliente@clothes22.com?Subject=Reclamo%20de%20compra%20enviada"
+                style="text-decoration: none; color: #90006f"
+                >atencionCliente@clothes22.com</a
+              ></b
+            >
+            con el asunto <b>Reclamo de compra enviada</b> para tener un
+            seguimiento de reclamo.
+          </p>
+        </div>
+        <hr style="color: #90006f; border: 1px solid #90006f" />
+        <footer style="padding: 0px 20px 20px">
           <p style="font-size: 12px">
             Si necesitas asistencia tecnica, ponte en contacto con la
-            <a href="" style="text-decoration: none; color: #90006f"
+            <a
+              href="mailto:atencionCliente@clothes22.com?Subject=Asistencia%20tecnica"
+              style="text-decoration: none; color: #90006f"
               >Ayuda de CLOTHES 22</a
             >
           </p>
@@ -205,17 +295,18 @@ async function ordenDeCompraMail({ orderDetails, total, status, email, newDate }
           </p>
         </footer>
       </div>
-      `
-    })
+        `
+      })
+    }, time);
+    return { "Info": "Enviado Despacho" }
   } else return { "Info": "No se ingreso el correo" }
-
 }
-
 module.exports = {
   transporter,
   publicidadEmail,
   newRegistroCliente,
-  ordenDeCompraMail
+  ordenDeCompraMail,
+  despachoEmail
 }
 
 

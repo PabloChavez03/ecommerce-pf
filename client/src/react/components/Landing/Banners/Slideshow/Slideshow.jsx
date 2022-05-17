@@ -6,9 +6,9 @@ import styled from "styled-components";
 const Slideshow = ({
 	children,
 	controles = false,
-	autoplay = false,
+	autoplay = true,
 	velocidad = "500",
-	intervalo = "5000",
+	intervalo = "10000",
 }) => {
 	const slideshow = useRef(null);
 	const intervaloSlideshow = useRef(null);
@@ -71,9 +71,9 @@ const Slideshow = ({
 			}, intervalo);
 
 			// Eliminamos los intervalos
-			// slideshow.current.addEventListener("mouseenter", () => {
-			// 	clearInterval(intervaloSlideshow.current);
-			// });
+			slideshow.current.addEventListener("mouseenter", () => {
+				clearInterval(intervaloSlideshow.current);
+			});
 
 			// Volvemos a poner el intervalo cuando saquen el cursor del slideshow
 			slideshow.current.addEventListener("mouseleave", () => {
