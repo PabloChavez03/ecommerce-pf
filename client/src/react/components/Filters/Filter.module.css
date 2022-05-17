@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    
+    align-items: center;
     box-shadow: 0 3px 5px 1px #00000020;
 }
 .container select {
@@ -13,4 +13,21 @@
     border: 1px solid rgb(41, 41, 41) ;
     border-radius: 3px;
     cursor: pointer;
+}
+
+.reset {
+	background-color: transparent;
+	padding: 5px 7px;
+	color: rgb(70, 67, 67);
+	font-weight: bold;
+	border: 1px solid rgb(41, 41, 41);
+	border-radius: 3px;
+	cursor: pointer;
+	transition: 0.2s;
+    
+}
+.reset:hover {
+	background-color: black;
+
+	color: rgb(240, 238, 238);
 }
