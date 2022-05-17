@@ -52,7 +52,7 @@ import {
 	GET_ALL_CLIENTS_USER_EMAIL,
 	UPDATE_STATUS_ORDER,
 	EMPTY_CART,
-	GET_LOGIN_GOOGLE,
+	EPIC_GOOGLE,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -102,7 +102,7 @@ export const initialState = {
 	statusOrder: [],
 	ordersAll: [],
 	ordersAllBackUp: [],
-	getLoginGoogle: {},
+	// epicGoogle: {},
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {

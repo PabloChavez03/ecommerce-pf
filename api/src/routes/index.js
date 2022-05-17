@@ -4,7 +4,6 @@ const { Router } = require("express");
 const router = Router();
 
 const { authMaster, isAdmin } = require("../middleware/authMaster");
-// const { checkStock } = require("../middleware/checkStock");
 
 // Modularizando las rutas
 

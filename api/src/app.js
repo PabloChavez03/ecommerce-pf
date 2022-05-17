@@ -13,28 +13,28 @@ require("./db.js");
 
 const server = express();
 
+
+server.use(cors());
 server.name = "API";
 server.use(
 	cookieSession({
-		name: "session",
-		keys: ["test"],
 		maxAge: 24 * 60 * 60 * 100,
+		name: "API",
+		keys: [process.env.COOKIE_KEY],
 	}),
-);
-
-
+	);
+	
+	
 server.use(passport.initialize());
 server.use(passport.session());
 
-// server.use(
-//   cors({
-//     origin: "http://localhost:3000",
-//     methods: "GET, POST, PATCH, DELETE",
-//     credentials: true,
-//   })
-// );
+server.use(
+  cors({
+    origin: "http://localhost:3000/",
+    credentials: false,
+  })
+);
 
-server.use(cors());
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());

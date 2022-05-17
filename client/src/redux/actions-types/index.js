@@ -48,7 +48,7 @@ import {
 	GET_ORDERS_BY_PAYMENT_ID,
 	UPDATE_STATUS_ORDER,
 	EMPTY_CART,
-	GET_LOGIN_GOOGLE,
+	EPIC_GOOGLE,
 } from "../actions-creators";
 import {
 	chatBot,
@@ -723,3 +723,14 @@ export const addStock = (cart) => {
 		await axios.patch("/product/stock/sumar", cart);
 	};
 };
+
+// export const epicGoogle = () => {
+// 	return async function (dispatch) {
+// 		const response = await axios.get("/auth/user", {withCredentials: false});
+
+// 		return dispatch({
+// 			type: EPIC_GOOGLE,
+// 			payload: response.data,
+// 		})
+// 	}
+// }

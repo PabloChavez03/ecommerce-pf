@@ -45,6 +45,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(),
         allowNull: true,
       },
+      googleId: {
+        type: DataTypes.STRING(),
+        allowNull: true,
+      },
       isRegistered: {
         type: DataTypes.BOOLEAN(),
         allowNull: true,

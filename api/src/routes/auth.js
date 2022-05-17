@@ -2,9 +2,28 @@ const router = require("express").Router();
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const { Users, Role } = require("../db");
+// const { isAuthenticate } = require("../middleware/auth");
 
-const CLIENT_URL = "http://localhost:3000/";
+const CLIENT_URL = "http://localhost:3000";
 
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+  );
+
+  router.get(
+    "/google/callback",
+    passport.authenticate("google", {
+      failureMessage: "Cannot login to Google, please try later again!",
+      failureRedirect: "/login/failed",
+      successRedirect: CLIENT_URL,
+    }),
+    (req,res) => {
+      console.log(req.user);
+      return res.send("Thank you for signing in!");
+    }
+    );
+  
 router.get("/login/failed", (req, res) => {
   res.status(401).json({
     success: false,
@@ -12,7 +31,7 @@ router.get("/login/failed", (req, res) => {
   });
 });
 
-router.get("/login/success", async (req, res) => {
+router.get("/login/success" ,async (req, res) => {
   if (req.user) {
     try {
       // console.log("soy el response de auth perrin",req.user);
@@ -49,10 +68,12 @@ router.get("/login/success", async (req, res) => {
       const token = jwt.sign(userGoogleForToken, process.env.SECRET);
       // console.log(req.user)
       return res.status(200).json({
+        accessToken: req.accessToken,
         success: true,
         msg: "Successful",
         user: userPerGoogle,
         cookies: req.cookies,
+        // accessToken: req.user.accessToken,
         token,
       });
     } catch (error) {
@@ -66,17 +87,6 @@ router.get("/logout", (req, res) => {
   res.redirect(CLIENT_URL);
 });
 
-router.get(
-  "/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
 
-router.get(
-  "/google/callback",
-  passport.authenticate("google", {
-    successRedirect: CLIENT_URL,
-    failureRedirect: "/login/failed",
-  })
-);
 
 module.exports = router;
