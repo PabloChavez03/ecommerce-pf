@@ -181,10 +181,16 @@ async function ordenDeCompraMail({ orderDetails, total, status, email, newDate }
           : null
         }
             
+        <tr>
+              <td></td>
+              <td></td>
+              <td style="padding: 10px 20px;">Envio:</td>
+              <td style="padding: 10px 20px;">$ 50</td>
+            </tr>
             <tr>
               <td></td>
               <td></td>
-              <td style="padding: 10px 20px;">Total</td>
+              <td style="padding: 10px 20px;">Total:</td>
               <td style="padding: 10px 20px;">$ ${total}</td>
             </tr>
           </table>
@@ -302,7 +308,7 @@ const despachoEmail = async ({ email, name, direccion, time, orderDetails }) => 
   } else return { "Info": "No se ingreso el correo" }
 }
 
-const resetPassword = async ({email, linkPassword}) => {
+const resetPassword = async ({ email, linkPassword }) => {
   if (email) {
     await transporter.sendMail({
       from: `"CLOTHES 22" ${USER_GOOGLE}`,
