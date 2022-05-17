@@ -15,8 +15,8 @@ function Landing() {
 			<div className={style.landingMainContainer}>
 				<NewsMen />
 				<NewsWomen />
-				<InfoExtraEcommerce />
 			</div>
+			<InfoExtraEcommerce />
 			<ChatBot />
 		</div>
 	);
