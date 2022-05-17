@@ -15,7 +15,7 @@ router.get("/login/failed", (req, res) => {
 router.get("/login/success", async (req, res) => {
   if (req.user) {
     try {
-      console.log(req.user);
+      // console.log("soy el response de auth perrin",req.user);
       let userGoogle = await Users.findOne({
         where: { email: req.user.emails[0].value },
       });
@@ -39,12 +39,19 @@ router.get("/login/success", async (req, res) => {
         role: rol.id,
       };
 
+      const userPerGoogle = {
+        googleId: req.user.id,
+        user_name: req.user.emails[0].value,
+        user_password: "clothes22",
+        provider: req.provider,
+      }
+
       const token = jwt.sign(userGoogleForToken, process.env.SECRET);
       // console.log(req.user)
       return res.status(200).json({
         success: true,
         msg: "Successful",
-        user: req.user,
+        user: userPerGoogle,
         cookies: req.cookies,
         token,
       });

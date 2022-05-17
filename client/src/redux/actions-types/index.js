@@ -712,28 +712,6 @@ export const deleteCategory = (token, categoryId) => {
 	};
 };
 
-<<<<<<< HEAD
-=======
-export const getLoginGoogle = () => {
-	return async function (dispatch) {
-		const { data } = await axios({
-			url: "/auth/login/success",
-			method: "GET",
-			withCredentials: true,
-			headers: {
-				"Content-Type": "application/json",
-				"Access-Control-Allow-Credentials": true,
-			},
-		});
-
-		return dispatch({
-			type: GET_LOGIN_GOOGLE,
-			payload: data,
-		});
-	};
-};
-
->>>>>>> 8a6a05dc3b7ea649937bfe1b7605cd1b722c2770
 export const removeStock = (cart) => {
 	return async function (dispatch) {
 		await axios.patch("/product/stock/restar", cart);
