@@ -1,6 +1,6 @@
 const { text } = require("body-parser");
 const { Router } = require("express");
-const { transporter, publicidadEmail, newRegistroCliente, ordenDeCompraMail, despachoEmail } = require("../controllers/mailer");
+const { transporter, publicidadEmail, newRegistroCliente, ordenDeCompraMail, despachoEmail, resetPassword } = require("../controllers/mailer");
 require("dotenv").config();
 const { USER_GOOGLE, PASS_GOOGLE } = process.env;
 const router = Router();
@@ -62,4 +62,15 @@ router.get('/Despacho', async (req, res) => {
         console.log(err)
     }
 })
+
+router.post('/ResetPassword', async (req, res) => {
+    const { email, linkPassword } = req.body;
+    try {
+        await resetPassword({ email, linkPassword })
+            .then((item) => res.json(item))
+    } catch (err) {
+        console.log(err)
+    }
+})
+
 module.exports = router;
