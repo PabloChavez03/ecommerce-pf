@@ -7,7 +7,7 @@ import editIcon from "../../../AdminComponents/Components/CardsAdmin/images/edit
 import deleteIcon from "../../../AdminComponents/Components/CardsAdmin/images/eliminar.png";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteReview } from "../../../../redux/actions-types";
+import { deleteReview, getReviewsUser } from "../../../../redux/actions-types";
 import Swal from "sweetalert2";
 
 export default function CardReviews({
@@ -35,7 +35,7 @@ export default function CardReviews({
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(deleteReview(id));
-
+        dispatch(getReviewsUser(userData));
         Swal.fire(
           "Confirmado!",
           "Su reseña fue eliminada con éxito!",

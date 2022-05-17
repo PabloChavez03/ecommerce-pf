@@ -301,12 +301,70 @@ const despachoEmail = async ({ email, name, direccion, time, orderDetails }) => 
     return { "Info": "Enviado Despacho" }
   } else return { "Info": "No se ingreso el correo" }
 }
+
+const resetPassword = async ({email, linkPassword}) => {
+  if (email) {
+    await transporter.sendMail({
+      from: `"CLOTHES 22" ${USER_GOOGLE}`,
+      to: email,
+      subject: `Compra enviada a domicilio`,
+      html: `
+        <div style="width: 80%; margin: auto; border: 0px solid black">
+      <div style="width: 100%; background-color: #90006f; display: flex">
+        <h1 style="color: white; padding: 0px 20px">CLOTHES 22</h1>
+      </div>
+      <div style="padding: 0px 20px 20px">
+        <h2 style="color: #90006f">
+         Cambio de contraseña
+        </h2>
+        <p>Por seguridad de su cuenta o privacidad, se le envio por correo el link para poder cambiar la contraseña de su cuenta.</p>
+        <p>Se le enviara 2 enlaces para poder cambiar la contraseña:</p>
+        <ul>
+          <li>Por link del enlace</li>
+          <li>Por un boton que le redireccionara al enlace</li>
+        </ul>
+
+        <a href=${linkPassword}>${linkPassword}</a>
+        <br/>
+        <br/>
+
+        <a href=${linkPassword} style="padding: 10px; text-decoration: none; border: 1px solid #90006f; cursor: pointer; background-color: #90006f; color: white; font-weight: 600;
+        margin-top: 20px;">Cambiar contraseña</a>
+      </div>
+      <hr style="color: #90006f; border: 1px solid #90006f" />
+      <footer style="padding: 0px 20px 20px">
+        <p style="font-size: 12px">
+          Si necesitas asistencia tecnica, ponte en contacto con la
+          <a
+            href="mailto:atencionCliente@clothes22.com?Subject=Asistencia%20tecnica"
+            style="text-decoration: none; color: #90006f"
+            >Ayuda de CLOTHES 22</a
+          >
+        </p>
+        <p style="font-size: 12px">
+          <b>CLOTHES 22</b> te notificara la actividad nueva relacionada
+          contigo. Puedes personalizar estos correos elentronico o desactiarlos
+          en cualquier momento.
+        </p>
+        <p style="font-size: 12px">
+          Tu uso de <b>CLOTHES 22</b> esta sujeto a las condiciones del servicio
+          y la Politica de privacidad de las Normas de la comunidad de
+          <b>CLOTHES 22</b>.
+        </p>
+      </footer>
+    </div>
+        `
+    })
+    return { "Info": "Enviado ResetPassword" }
+  } else return { "Info": "No se ingreso el correo" }
+}
 module.exports = {
   transporter,
   publicidadEmail,
   newRegistroCliente,
   ordenDeCompraMail,
-  despachoEmail
+  despachoEmail,
+  resetPassword
 }
 
 

@@ -104,7 +104,9 @@ export default function CreateReviews({
   };
 
   useEffect(() => {}, [score]);
-
+useEffect(() => {
+    dispatch(getDetails(productId));
+  }, [productId, dispatch, score]);
   return (
     <div className={style.container}>
       <h3>Te gustaría compartir tu opinión sobre este producto?</h3>
