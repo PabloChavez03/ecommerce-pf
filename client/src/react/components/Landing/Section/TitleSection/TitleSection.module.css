@@ -1,0 +1,22 @@
+.titleLanding {
+	display: flex;
+	margin: 20px 10px;
+	align-items: center;
+}
+
+.titleLanding::before {
+	content: " ";
+	height: 1px;
+	flex-grow: 1;
+	width: 5%;
+	background-color: #ccc;
+	margin-right: 0.75rem;
+}
+.titleLanding::after {
+	content: " ";
+	height: 1px;
+	flex-grow: 1;
+	width: 5%;
+	background-color: #ccc;
+	margin-left: 0.75rem;
+}

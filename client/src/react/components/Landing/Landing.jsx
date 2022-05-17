@@ -1,14 +1,21 @@
 import React from "react";
-import CategorySlider from "../CategorySlider/CategorySlider";
 import ChatBot from "../ChatBot/ChatBot";
 import NavBar from "../NavBar/NavBar";
+import LandingBanners from "./Banners/LandingBanners/LandingBanners";
+import style from "./Landing.module.css";
+import NewsMen from "./Section/NewsMen/NewsMen";
+import NewsWomen from "./Section/NewsWomen/NewsWomen";
 
 function Landing() {
 	return (
-		<div>
+		<div className={style.landingContainer}>
 			<NavBar />
-			<CategorySlider />
-			<ChatBot/>
+			<LandingBanners />
+			<div className={style.landingMainContainer}>
+				<NewsMen />
+				<NewsWomen />
+			</div>
+			<ChatBot />
 		</div>
 	);
 }
