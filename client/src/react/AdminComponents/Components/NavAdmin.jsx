@@ -25,7 +25,7 @@ const NavAdmin = () => {
 		<>
 			<nav className={style.navContainer}>
 				<ul className={style.listContainer}>
-					<NavLink className={style.navLinkAdmin} to={"/admin"}>
+					<NavLink className={style.navLinkAdmin} to={"/admin/principal"}>
 						Principal
 					</NavLink>
 					<NavLink className={style.navLinkAdmin} to={"/admin/categories"}>

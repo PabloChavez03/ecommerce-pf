@@ -52,7 +52,14 @@ import {
 	GET_ALL_CLIENTS_USER_EMAIL,
 	UPDATE_STATUS_ORDER,
 	EMPTY_CART,
+<<<<<<< HEAD
 	EPIC_GOOGLE,
+=======
+	GET_LOGIN_GOOGLE,
+	DELETE_USER,
+	CHECK_STOCK,
+	EMPTY_CHECK_STOCK
+>>>>>>> 7d5b026838741ab79ed22777eeed33847833c5d4
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -102,7 +109,8 @@ export const initialState = {
 	statusOrder: [],
 	ordersAll: [],
 	ordersAllBackUp: [],
-	// epicGoogle: {},
+	cartItemsCheckStock: [],
+		// epicGoogle: {},
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -175,7 +183,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
 					payload.id + payload.size.toString(),
 			);
 			let item = state.cartItems[index];
-			console.log(item)
 			if (payload.sign === "-") {
 				if (item.quantity === 1) {
 					return {
@@ -311,6 +318,10 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			return {
 				...state,
 			};
+		case DELETE_USER:
+			return {
+				...state,
+			}
 		case GET_ALL_CATEGORIES_FOR_FORM:
 			return {
 				...state,
@@ -523,6 +534,28 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				...state,
 				cartItems: [],
 			};
+		case GET_LOGIN_GOOGLE:
+			return {
+				...state,
+				getLoginGoogle: payload,
+				// userData: payload,
+			};
+		case CHECK_STOCK:
+			payload = {id : payload.id, variants: payload.variants}
+			return {
+				...state,
+				cartItemsCheckStock: [...state.cartItemsCheckStock, payload]
+			}
+		case EMPTY_CHECK_STOCK:
+		return {
+			...state,
+			cartItemsCheckStock: []
+		};
+		// case EPIC_GOOGLE:
+		// return {
+		// 	...state,
+		// 	epicGoogle: payload,
+		// }
 		default:
 			return { ...state };
 	}
