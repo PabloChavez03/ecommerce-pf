@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 import {
 	createCategory,
@@ -21,9 +22,13 @@ function CreateCategory({ closeModal }) {
 		genre: "",
 	});
 
-	const [errors, setErrors] = useState({});
+	const [errors, setErrors] = useState({
+		id: "",
+		title: "",
+		genre: "",
+	});
 
-	function validate({ id, title }) {
+	function validate({ id, title, genre }) {
 		let errors = {};
 
 		if (!id || id === 0) errors.id = "Debe ingresar un id distinto a 0";
@@ -34,6 +39,7 @@ function CreateCategory({ closeModal }) {
 		if (typeof title !== "string" || title.length > 60)
 			errors.title =
 				"El titulo solo debe contener letras y su extensión menor a 60 caracteres";
+		if (!genre || genre === "none") errors.genre = "Seleccione un género";
 
 		return errors;
 	}
@@ -45,7 +51,8 @@ function CreateCategory({ closeModal }) {
 		if (
 			category.title === "" ||
 			errors.hasOwnProperty("id") ||
-			errors.hasOwnProperty("title")
+			errors.hasOwnProperty("title") ||
+			errors.hasOwnProperty("genre")
 		) {
 			setDisabledButton(true);
 		} else {
@@ -86,10 +93,27 @@ function CreateCategory({ closeModal }) {
 
 	const handleCreate = (e) => {
 		e.preventDefault();
-		dispatch(createCategory(token, category));
-		alert("Categoría creada");
+
+		Swal.fire({
+			title: "¿Seguro desea crear Categiria?",
+			text: "",
+			icon: "question",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Sí, agregar!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				dispatch(createCategory(token, category));
+				Swal.fire(
+					"Confirmado!",
+					"Su orden ha sido creada con Éxito!",
+					"success",
+				);
+				navigate("/admin");
+			}
+		});
 		dispatch(getCategories());
-		navigate("/admin/categories");
 		closeModal();
 		setCategory({
 			id: "",
@@ -141,6 +165,7 @@ function CreateCategory({ closeModal }) {
 					id="genre"
 					onChange={handleChangeInput}
 				>
+					<option value="none">Género</option>
 					<option value="women">Mujer</option>
 					<option value="men">Hombre</option>
 				</select>

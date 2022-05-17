@@ -107,3 +107,17 @@
     flex-wrap: wrap;
     
 }
+.select {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+.select select{
+    border: 2px solid rgb(66, 66, 64);
+    border-radius: 5px;
+    font-weight: 600;
+}
+.select option{
+    font-weight: 600;
+}

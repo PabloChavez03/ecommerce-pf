@@ -116,7 +116,7 @@ export default function AllClients() {
 								</div>
 							</NavLink>
 							{client.status === "pending" && (
-								<label>
+								<label className={style.select}>
 									Modificar Estado:
 									<select
 										onChange={(e) => {
@@ -124,8 +124,8 @@ export default function AllClients() {
 										}}
 									>
 										<option>Seleccionar</option>
-										<option value="approved">Success</option>
-										<option value="failure">Failure</option>
+										<option className={style.approved} value="approved">Success</option>
+										<option className={style.rejected} value="failure">Failure</option>
 									</select>
 								</label>
 							)}

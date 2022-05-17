@@ -19,7 +19,7 @@ function OrderActual() {
 	const location = useLocation();
 	const pdfDownload = useRef(null);
 	let suma = 0;
-	let subtotal = cartItems?.forEach((e) => (suma += e.currentPrice));
+	let subtotal = cartItems?.forEach((e) => (suma += e.currentPrice * e.quantity));
 	let envio = 50;
 
 	const params = location.search

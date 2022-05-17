@@ -42,6 +42,10 @@
   padding: 20px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.438);
   border-top: 1px solid rgba(128, 128, 128, 0.438);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .mail input,
 .mail label {

@@ -123,21 +123,23 @@ export default function rootReducer(state = initialState, { type, payload }) {
 						payload.id + payload.brandSize.toString(),
 				);
 				let itemToAddQty = state.cartItems[indexAddToCart];
-					
+
 				let variantIndexAddQty = itemToAddQty.variants.findIndex(
 					(e) => e.brandSize.toString() === payload.brandSize.toString(),
 				);
-				if (payload.variants[variantIndexAddQty].stock !== itemToAddQty.quantity) {
+				if (
+					payload.variants[variantIndexAddQty].stock > itemToAddQty.quantity
+				) {
 					itemToAddQty.quantity++;
 				} else {
-					Swal.fire("Producto con Stock Agotado!", "", "success");
+					Swal.fire("Producto con Stock Agotado!", "", "error");
 				}
 				return {
 					...state,
 					cartItems: [...state.cartItems],
 					subTotal: Number(
 						state.subTotal +
-							Math.round(cartProductAux.currentPrice * cartProductAux.quantity),
+						Math.round(cartProductAux.currentPrice * cartProductAux.quantity),
 					),
 				};
 			} else {
@@ -146,7 +148,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 					cartItems: [...state.cartItems, payload],
 					subTotal: Number(
 						state.subTotal +
-							Math.round(payload.currentPrice * payload.quantity),
+						Math.round(payload.currentPrice * payload.quantity),
 					),
 				};
 			}
@@ -173,6 +175,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 					payload.id + payload.size.toString(),
 			);
 			let item = state.cartItems[index];
+			console.log(item)
 			if (payload.sign === "-") {
 				if (item.quantity === 1) {
 					return {
@@ -189,10 +192,10 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				let variantIndex = item.variants.findIndex(
 					(e) => e.brandSize.toString() === payload.size.toString(),
 				);
-				if (item.variants[variantIndex].stock !== item.quantity) {
+				if (item.variants[variantIndex].stock > item.quantity) {
 					item.quantity++;
 				} else {
-					Swal.fire("Producto con Stock Agotado!", "", "success");
+					Swal.fire("Producto con Stock Agotado!", "", "error");
 				}
 			}
 			return {
@@ -246,25 +249,25 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			let arr =
 				payload[0] === "high"
 					? productsSort?.sort(function (a, b) {
-							if (a.currentPrice < b.currentPrice) {
-								return 1;
-							}
-							if (a.currentPrice > b.currentPrice) {
-								return -1;
-							} else {
-								return 0;
-							}
-					  })
+						if (a.currentPrice < b.currentPrice) {
+							return 1;
+						}
+						if (a.currentPrice > b.currentPrice) {
+							return -1;
+						} else {
+							return 0;
+						}
+					})
 					: productsSort?.sort(function (a, b) {
-							if (a.currentPrice > b.currentPrice) {
-								return 1;
-							}
-							if (a.currentPrice < b.currentPrice) {
-								return -1;
-							} else {
-								return 0;
-							}
-					  });
+						if (a.currentPrice > b.currentPrice) {
+							return 1;
+						}
+						if (a.currentPrice < b.currentPrice) {
+							return -1;
+						} else {
+							return 0;
+						}
+					});
 			return {
 				...state,
 				productFilter: arr,
@@ -410,22 +413,26 @@ export default function rootReducer(state = initialState, { type, payload }) {
 		case POST_CHAT_BOT_RECEPTOR:
 			return {
 				...state,
-				chatBotReceptor: payload,
+				chatBotReceptor: payload.receptor,
+				chatBotEmisor: payload.emisor,
 			};
 		case POST_CHAT_BOT_EMISOR:
 			return {
 				...state,
-				chatBotEmisor: payload,
+				chatBotReceptor: payload.receptor,
+				chatBotEmisor: payload.emisor,
 			};
 		case PUT_CHAT_BOT_RECEPTOR:
 			return {
 				...state,
-				chatBotReceptor: payload,
+				chatBotReceptor: payload.receptor,
+				chatBotEmisor: payload.emisor,
 			};
 		case PUT_CHAT_BOT_EMISOR:
 			return {
 				...state,
-				chatBotEmisor: payload,
+				chatBotReceptor: payload.receptor,
+				chatBotEmisor: payload.emisor,
 			};
 		case SET_CHANGE_FORM_CREATE:
 			return {

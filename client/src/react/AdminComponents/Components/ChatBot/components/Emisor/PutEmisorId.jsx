@@ -27,12 +27,21 @@ export default function PutEmisor({
     isActive: isActive,
     receptor: alternativa,
   });
-  console.log(respuesta)
+  const [pregunta, setPregunta] = useState(true);
+  console.log(respuesta);
   //Dispath useEffect
   useEffect(() => {
     dispatch(GetChatBotReceptorName());
   }, [dispatch]);
 
+  //
+
+  const Preguntav2 = [...ReceptorName];
+  if (respuesta.name) {
+    let position = Preguntav2.indexOf(respuesta.name);
+    Preguntav2.splice(position, 1);
+  }
+  //
   const handleCerrar = () => {
     handleEdit();
   };
@@ -88,27 +97,22 @@ export default function PutEmisor({
       }, 1000);
     }
   };
+
   return (
     <div className={style.modal}>
       <div className={style.head}>
-        <h1>New Emisor</h1>
+        <h1>Insertar Pregunta</h1>
         <p onClick={() => handleCerrar()}>X</p>
       </div>
       <div>
-        <select
+        <input
           className={style.title}
           name={"name"}
           value={respuesta.name}
-          onChange={(e) => handleInputChange(e)}
-        >
-          {ReceptorName.length === 0
-            ? null
-            : ReceptorName.map((item, index) => (
-                <option key={index} value={item}>
-                  {item}
-                </option>
-              ))}
-        </select>
+          // onChange={(e) => handleInputChange(e)}
+          disabled={pregunta}
+        />
+
         <br />
         <label>Respuesta</label>
         <input
@@ -144,9 +148,9 @@ export default function PutEmisor({
           <label>Sub Alternativa: </label>
           <select defaultValue={"select"} onChange={(e) => handleSelect(e)}>
             <option value={"select"}>Seleccione el receptor</option>
-            {ReceptorName.length === 0
+            {Preguntav2.length === 0
               ? null
-              : ReceptorName.map((item, index) => (
+              : Preguntav2.map((item, index) => (
                   <option key={index} value={item}>
                     {item}
                   </option>

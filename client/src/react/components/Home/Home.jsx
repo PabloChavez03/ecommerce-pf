@@ -29,7 +29,9 @@ export default function Home() {
 	const productsCurent =
 		selectFilter === ""
 			? allProducts?.slice(firstProduct, lastProduct)
-			: productFilter?.slice(firstProduct, lastProduct);
+			: typeof productFilter !== "string" &&
+			  productFilter?.slice(firstProduct, lastProduct);
+
 	const [render, setRender] = useState();
 	useEffect(() => {
 		dispatch(getFiltersGenderProduct(gender));
@@ -55,53 +57,69 @@ export default function Home() {
 				<SearchBar setSelectFilter={setSelectFilter} />
 			</div>
 
-			<Filter
-				setRender={setRender}
-				setCurrentPage={setCurrentPage}
-				render={render}
-				selectFilter={selectFilter}
-				setSelectFilter={setSelectFilter}
-				productsCurent={productsCurent}
-			/>
-			<div>
-				<Paginated
-					productsToPaginated={
-						selectFilter !== "" ? productsCurent : allProducts
-					}
-					lastProduct={lastProduct}
-					firstProduct={firstProduct}
-					productsPerPage={productsPerPage}
+			{typeof productFilter !== "string" && (
+				<Filter
+					setRender={setRender}
+					setCurrentPage={setCurrentPage}
+					render={render}
 					selectFilter={selectFilter}
 					setSelectFilter={setSelectFilter}
+					productsCurent={productsCurent}
 				/>
-			</div>
-			<div className={css.cardContainer}>
-				{productsCurent?.length < 2 ? (
-					<Loader />
-				) : (
-					productsCurent?.map((product, index) => {
-						return (
-							<div key={index}>
-								<NavLink
-									to={`/detail/${product.id}`}
-									style={{ textDecoration: "none" }}
-								>
-									<Cards
-										id={product.id}
-										name={product.name}
-										image={product.image}
-										isOffertPrice={product.isOffertPrice}
-										previousPrice={product.previousPrice}
-										currentPrice={product.currentPrice}
-										color={product.color}
-										variants={product.variants}
-									/>
-								</NavLink>
-							</div>
-						);
-					})
-				)}
-			</div>
+			)}
+
+			{typeof productFilter !== "string" && (
+				<div>
+					<Paginated
+						productsToPaginated={
+							selectFilter !== "" ? productsCurent : allProducts
+						}
+						lastProduct={lastProduct}
+						firstProduct={firstProduct}
+						productsPerPage={productsPerPage}
+						selectFilter={selectFilter}
+						setSelectFilter={setSelectFilter}
+					/>
+				</div>
+			)}
+
+			{typeof productFilter === "string" ? (
+				<div className={css.cardContainer}>
+					<h1 className={css.notFound} onClick={(e) => handleClickReset(e)}>
+						No se encontraron productos.
+						<br />
+						Haz click aquí para reestablecer
+					</h1>
+				</div>
+			) : (
+				<div className={css.cardContainer}>
+					{productsCurent?.length < 2 ? (
+						<Loader />
+					) : (
+						productsCurent?.map((product, index) => {
+							return (
+								<div key={index}>
+									<NavLink
+										to={`/detail/${product.id}`}
+										style={{ textDecoration: "none" }}
+									>
+										<Cards
+											id={product.id}
+											name={product.name}
+											image={product.image}
+											isOffertPrice={product.isOffertPrice}
+											previousPrice={product.previousPrice}
+											currentPrice={product.currentPrice}
+											color={product.color}
+											variants={product.variants}
+										/>
+									</NavLink>
+								</div>
+							);
+						})
+					)}
+				</div>
+			)}
 		</div>
 	);
 }
