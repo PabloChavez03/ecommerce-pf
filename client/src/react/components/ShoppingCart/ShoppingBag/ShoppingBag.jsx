@@ -1,24 +1,27 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import NavBar from "../../NavBar/NavBar";
 import ProductCardModal from "../CardModal/ProductCardModal";
 import css from "./ShoppingBag.module.css";
 import Swal from 'sweetalert2'
 import axios from "axios";
+import { removeStock } from '../../../../redux/actions-types'
 
 export default function ShoppingBag() {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const cartItems = useSelector((state) => state.cartItems);
   const userData = useSelector((state) => state.userData);
 
   let suma = 0;
-  let subtotal = cartItems?.forEach((e) => (suma += e.currentPrice));
+  let subtotal = cartItems?.forEach((e) => (suma += e.currentPrice * e.quantity));
   let envio = 50;
 
   const [email, setEmail] = useState("");
 
   const handleClickSend = (e) => {
+    
     e.preventDefault();
     Swal.fire(
       'Funcionalidad en desarrollo!',
@@ -27,8 +30,11 @@ export default function ShoppingBag() {
     )
   };
 
+
+
   const handlePayment = async (e) => {
     e.preventDefault();
+
     if (suma === 0) {
       Swal.fire(
         'Debe agregar productos al carrito para continuar!',
@@ -42,12 +48,16 @@ export default function ShoppingBag() {
       Swal.fire(
         'Un administrador no puede realizar compras!',
         '',
-        'success'
+        'error'
       )
       return;
     }
-    const emailAux = userData.email ? userData.email : email;
+    let validateStock =()=>{
+      cartItems.forEach(e=> e.brandSize )
+    }
 
+    const emailAux = userData.email ? userData.email : email;
+    dispatch(removeStock(cartItems))
     const { data } = await axios.get(
       "/mercadopago/payment",
       {
@@ -111,19 +121,20 @@ export default function ShoppingBag() {
         <br />
         {userData.username ? (
           <>
-            <NavLink to={"/pay"}>
+            
               <button className={css.btn} onClick={(e) => handlePayment(e)}>
                 Ir a pagar
               </button>
-            </NavLink>
+           
           </>
         ) : (
           "Inicia sesión para comprar"
         )}
 
         <br></br>
-        <NavLink to={"/"}>
+        <NavLink to={"/"} >
           <button className={css.btn}>Seguir comprando</button>
+          
         </NavLink>
       </div>
     </div>

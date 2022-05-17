@@ -9,7 +9,8 @@ router.get("", async (req, res) => {
 
 	if (productName) {
 		const productsFound = await getDDBBproductsByName(productName);
-		res.json(productsFound);
+
+		productsFound.length ? res.json(productsFound) : res.send("Not found");
 	}
 
 	if (categoryId) {

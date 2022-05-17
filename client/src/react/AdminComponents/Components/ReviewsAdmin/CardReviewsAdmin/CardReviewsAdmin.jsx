@@ -1,16 +1,15 @@
 import React from "react";
-import AccountIcon from "../../svg/AccountIcon";
-import starBlack from "../images/estrella-transparent.png";
-import starGold from "../images/estrella-dorada.png";
-import style from "./CardReviews.module.css";
-import editIcon from "../../../AdminComponents/Components/CardsAdmin/images/editar.png";
-import deleteIcon from "../../../AdminComponents/Components/CardsAdmin/images/eliminar.png";
+import AccountIcon from "../../../../components/svg/AccountIcon";
+import starBlack from "../../../../components/Reviews/images/estrella-transparent.png";
+import starGold from "../../../../components/Reviews/images/estrella-dorada.png";
+import style from "./CardReviewsAdmin.module.css";
+import deleteIcon from "../../../Components/CardsAdmin/images/eliminar.png";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteReview } from "../../../../redux/actions-types";
 import Swal from "sweetalert2";
+import { deleteReview } from "../../../../../redux/actions-types";
 
-export default function CardReviews({
+export default function CardReviewsAdmin({
   UserUserName,
   comment,
   calification,
@@ -46,10 +45,10 @@ export default function CardReviews({
   }
   return (
     <div className={style.container}>
-      <div><AccountIcon /><h4>{UserUserName}</h4></div>
       
+      <AccountIcon />
       <div className={style.container1}>
-      
+      <h4>Usuario: {UserUserName}</h4>
       <br/>
       <h4>Comentario:</h4>
       <span>{comment}</span>
@@ -87,21 +86,14 @@ export default function CardReviews({
           name={5}
         />
         </div>
-        {UserUserName === userData ? (
           <div>
-            <NavLink to={`/user/reviews/update/${id}`}>
-              <img src={editIcon} alt="Icon Edit" className={style.imgStar} />
-            </NavLink>
-
             <img
               src={deleteIcon}
               alt="Icon Delete"
               className={style.imgStar}
               onClick={(e) => handleClickConfirm(e)}
             />
-          </div>
-        ) : null}
-      
+          </div> 
       </div>
     </div>
   );

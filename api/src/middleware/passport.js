@@ -50,6 +50,8 @@ passport.use(
   )
 );
 
+//creo que la idea de serializar y desearealizar es para passport-jwt
+
 passport.serializeUser((user, done) => {
   done(null, user);
 });

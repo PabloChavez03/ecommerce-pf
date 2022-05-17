@@ -3,8 +3,10 @@ const { Product, ProductDetail, Category } = require("../db");
 const router = Router();
 
 router.patch("/restar", async (req, res) => {
-	const { productsChanged } = req.body;
-	// productsChanged = [
+	const productsChanged = req.body;
+	console.log(productsChanged);
+	// {
+	//	[
 	// 	{
 	// 		id: 0,
 	// 		brandSize: "",
@@ -15,14 +17,13 @@ router.patch("/restar", async (req, res) => {
 	//    "brandSize": "US 5",
 	//    "quantity": 10
 	// 	},
-	// ];
+	// ]
+	// }
 
 	for (let product of productsChanged) {
 		const { id, brandSize, quantity } = product;
 		let productFound = await Product.findByPk(id);
 		let productDetailFound = await ProductDetail.findByPk(id);
-
-		console.log("Anterior", productDetailFound.variants);
 
 		productDetailFound.variants = productDetailFound.variants.map((variant) => {
 			if (variant.brandSize === brandSize) {
@@ -53,7 +54,7 @@ router.patch("/restar", async (req, res) => {
 });
 
 router.patch("/sumar", async (req, res) => {
-	const { productsChanged } = req.body;
+	const productsChanged = req.body;
 
 	for (let product of productsChanged) {
 		const { id, brandSize, quantity } = product;

@@ -29,14 +29,35 @@ function Categories() {
 				<CreateCategory closeModal={closeModalCreate} />
 			</Modal>
 
-			<div className={s.cards}>
-				{categories?.map((category) => {
-					return (
-						<div>
-							<CategoryCard category={category} />
-						</div>
-					);
-				})}
+			<div className={s.cardsContainer}>
+				<h3 className={s.subtitulo}>Hombres</h3>
+				<div className={s.cards}>
+					{categories?.map((category) => {
+
+						return (
+							<div key={category.id}>
+								{category.genre === "men" && (
+									<CategoryCard category={category} />
+								)}
+							</div>
+						);
+					})}
+				</div>
+			</div>
+
+			<div className={s.cardsContainer}>
+				<h3 className={s.subtitulo}>Mujeres</h3>
+				<div className={s.cards}>
+					{categories?.map((category) => {
+						return (
+							<div key={category.id}>
+								{category.genre === "women" && (
+									<CategoryCard  category={category} />
+								)}
+							</div>
+						);
+					})}
+				</div>
 			</div>
 		</div>
 	);
