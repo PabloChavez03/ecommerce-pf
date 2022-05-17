@@ -14,7 +14,6 @@ import Swal from 'sweetalert2'
 export default function AllClients() {
   const dispatch = useDispatch();
   const { token, username } = useSelector((state) => state.userData);
-console.log(username)
   useEffect(() => {
     dispatch(getAllClients(token));
 
@@ -24,9 +23,9 @@ console.log(username)
   }, [dispatch,token]);
 
   const allClients = useSelector((state) => state.allClients);
-  useEffect(()=> {
-    dispatch(getAllClients(token));
-  },[allClients, token, dispatch])
+  // useEffect(()=> {
+  //   dispatch(getAllClients(token));
+  // },[allClients, token, dispatch])
   const handleClickDeleteUser = (event) => {
     event.preventDefault();
 		Swal.fire({

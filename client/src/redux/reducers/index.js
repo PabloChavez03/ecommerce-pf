@@ -54,6 +54,8 @@ import {
 	EMPTY_CART,
 	GET_LOGIN_GOOGLE,
 	DELETE_USER,
+	CHECK_STOCK,
+	EMPTY_CHECK_STOCK
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -104,6 +106,7 @@ export const initialState = {
 	ordersAll: [],
 	ordersAllBackUp: [],
 	getLoginGoogle: {},
+	cartItemsCheckStock: []
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -176,7 +179,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
 					payload.id + payload.size.toString(),
 			);
 			let item = state.cartItems[index];
-			console.log(item)
 			if (payload.sign === "-") {
 				if (item.quantity === 1) {
 					return {
@@ -534,6 +536,17 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				getLoginGoogle: payload,
 				// userData: payload,
 			};
+		case CHECK_STOCK:
+			payload = {id : payload.id, variants: payload.variants}
+			return {
+				...state,
+				cartItemsCheckStock: [...state.cartItemsCheckStock, payload]
+			}
+		case EMPTY_CHECK_STOCK:
+		return {
+			...state,
+			cartItemsCheckStock: []
+		}
 		default:
 			return { ...state };
 	}
