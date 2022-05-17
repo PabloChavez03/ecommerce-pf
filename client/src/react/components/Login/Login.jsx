@@ -11,12 +11,17 @@ const Login = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const userData = useSelector((state) => state.userData);
-	const userGoogle = useSelector((state) => state.getLoginGoogle);
-	let newLoginGoogle = {
-		user_name: userGoogle.username,
-		user_password: userGoogle.password,
-	}
 
+
+	// useEffect(() => {
+	// 	dispatch(getLoginGoogle());
+	// },[dispatch]);
+	// console.log(userData)
+	
+		// let newLoginGoogle = {
+		// 	user_name: userData.username,
+		// 	user_password: userData.password,
+		// }
 	useEffect(() => {
 		// console.log(userData);
 		if (userData.name === "AxiosError") {
@@ -158,13 +163,22 @@ const Login = () => {
 		// console.log(login);
 	};
 
+		const GOOGLE = () => {
+      window.open("http://localhost:3001/auth/google", "_self");
+    };
+
+
 	const handleLoginSubmit = (e) => {
 		e.preventDefault();
 		setLogin({
 			user_name: "",
 			user_password: "",
 		});
-		dispatch(UserLogin(login));
+		// if (userData.status) {
+		// 	dispatch(UserLogin(newLoginGoogle));
+		// }
+
+		dispatch(UserLogin(login))
 
 		const Toast = Swal.mixin({
 			toast: true,
@@ -182,10 +196,6 @@ const Login = () => {
 			icon: 'success',
 			title: 'Iniciado sesion con éxito!'
 		  })
-	};
-
-	const GOOGLE = () => {
-		window.open("http://localhost:3001/auth/google", "_self");
 	};
 
 	return (

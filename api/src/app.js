@@ -21,8 +21,18 @@ server.use(
 		maxAge: 24 * 60 * 60 * 100,
 	}),
 );
+
+
 server.use(passport.initialize());
 server.use(passport.session());
+
+// server.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//     methods: "GET, POST, PATCH, DELETE",
+//     credentials: true,
+//   })
+// );
 
 server.use(cors());
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));

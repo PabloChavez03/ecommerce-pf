@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { ordenDeCompraMail } = require("../controllers/mailer");
+const { ordenDeCompraMail,despachoEmail } = require("../controllers/mailer");
 const { Users, Order, Invoice } = require("../db");
 const router = Router();
 
@@ -38,8 +38,12 @@ router.post("/", async (req, res) => {
     // console.log(client)
 
     await client.addOrder(ordenDeCompra);
+    const name = client.name;
+    const time = 10000;
+    const direccion = client.address;
     ///Email 
-    await ordenDeCompraMail({ orderDetails, total, status, email, newDate })
+    await ordenDeCompraMail({ orderDetails, total, status, email, newDate });
+    await despachoEmail({email, name, direccion, orderDetails, time});
     //
     res.status(201).json(ordenDeCompra);
   } catch (error) {
