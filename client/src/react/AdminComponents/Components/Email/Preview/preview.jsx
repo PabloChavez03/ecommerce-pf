@@ -30,7 +30,7 @@ const Preview = ({ handleView, data }) => {
           ) : null}
           <p>{data.emailDescription}</p>
           <br />
-          <Link className={style.a} to={"/home"}>
+          <Link className={style.a} to={"/"}>
             {data.emailButton ? data.emailButton : "Compra ya!"}
           </Link>
         </div>
@@ -38,7 +38,7 @@ const Preview = ({ handleView, data }) => {
         <footer className={style.footer}>
           <p className={style.footerP}>
             Si necesitas asistencia tecnica, ponte en contacto con la{" "}
-            <Link to={"/home"} className={style.footerA}>
+            <Link to={"/"} className={style.footerA}>
               Ayuda de CLOTHES 22
             </Link>
           </p>
