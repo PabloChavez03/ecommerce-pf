@@ -74,7 +74,6 @@ import axios from "axios";
 export const getProductByName = (nameProduct) => {
   return async function (dispatch) {
     const { data } = await axios.get(`/products?productName=${nameProduct}`);
-    console.log(data);
     return dispatch({ type: GET_PRODUCT_BY_NAME, payload: data });
   };
 };
@@ -263,7 +262,7 @@ export function UserLogin(payload) {
         payload: userLogin.data,
       });
     } catch (error) {
-      console.log("ERROOOOOOOOOORRRRR", error.name);
+      // console.log("ERROOOOOOOOOORRRRR", error.name);
       return dispatch({
         type: GET_USER_DATA,
         payload: error,
@@ -538,7 +537,6 @@ export function deleteReview(reviewId) {
 export function updateReview(update) {
   return async function (dispatch) {
     const reviewUpdate = await axios.patch("/product/review", update);
-    console.log(reviewUpdate);
     return dispatch({
       type: UPDATE_REVIEWS,
       payload: reviewUpdate,
@@ -655,7 +653,6 @@ export function modifiedStatusOrder(parce, token, payment_id) {
 
 export const EmailPublicidad = (data) => async (dispatch) => {
   let dato = await emailPublicidad(data);
-  console.log(dato);
   return dispatch({
     type: GET_EMAIL_PUBLICIDAD,
   });

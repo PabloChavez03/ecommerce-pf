@@ -179,7 +179,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
 					payload.id + payload.size.toString(),
 			);
 			let item = state.cartItems[index];
-			console.log(item)
 			if (payload.sign === "-") {
 				if (item.quantity === 1) {
 					return {
