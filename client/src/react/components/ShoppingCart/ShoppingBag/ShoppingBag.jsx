@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import NavBar from "../../NavBar/NavBar";
@@ -6,7 +6,7 @@ import ProductCardModal from "../CardModal/ProductCardModal";
 import css from "./ShoppingBag.module.css";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { removeStock } from "../../../../redux/actions-types";
+import { removeStock, addCheckStock, emptyCartCheckStock } from "../../../../redux/actions-types";
 
 export default function ShoppingBag() {
 	const navigate = useNavigate();
@@ -21,11 +21,44 @@ export default function ShoppingBag() {
 	let envio = 50;
 
 	const [email, setEmail] = useState("");
+	useEffect(() => {
+	 	
+		cartItems?.forEach(e=> dispatch(addCheckStock(e.id)))
+		console.log(theStock)
+	  
+	}, [dispatch])
+	const validateStockFunc = ()=>{
+		let theVal = validateStock(cartItems)
+		console.log(theVal)
+	}
 
-	const handleClickSend = (e) => {
-		e.preventDefault();
-		Swal.fire("Funcionalidad en desarrollo!", "", "success");
-	};
+	const validateStock= (cart)=>{
+		let goodToGo = true
+		cart?.forEach(e=>{
+			let aux = theStock.find(s=> s.id === e.id)
+			let varIndex = aux.variants.findIndex(variant=> variant.brandSize === e.brandSize)
+			console.log(aux.variants[varIndex])
+			if(aux.variants[varIndex].stock < e.quantity){
+			goodToGo = false
+			return Swal.fire(`El producto "${e.name}" tiene menos stock del que usted desea comprar o se ha quedado sin stock`, "", "error");}
+			})
+		return goodToGo
+	} 
+
+
+const theStock = useSelector(state => state.cartItemsCheckStock)
+	const checkCartStock = (e) => {
+		e.preventDefault()
+		
+	}
+	const emptyCartCheck = (e)=> {
+		dispatch(emptyCartCheckStock())
+		console.log(theStock)
+	}
+	
+	
+
+
 
 	const handlePayment = async (e) => {
 		e.preventDefault();
@@ -43,9 +76,10 @@ export default function ShoppingBag() {
 			Swal.fire("Un administrador no puede realizar compras!", "", "error");
 			return;
 		}
-		let validateStock = () => {
-			cartItems.forEach((e) => e.brandSize);
-		};
+		let theRealVal = validateStock(cartItems)
+		if(theRealVal&& theRealVal === false){
+			return
+		}
 
 		const emailRegex = new RegExp(
 			/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/,
@@ -65,8 +99,10 @@ export default function ShoppingBag() {
 
 		//generamos nuestra orden de compra
 		//cartItems === orderDetails, envio + suma === total, userData.dni_client === dni_client
-
-		window.open(data.init_point, "_self");
+		if(theRealVal&& theRealVal === true){
+			return window.open(data.init_point, "_self");
+		}
+		
 	};
 
 	return (
@@ -135,6 +171,7 @@ export default function ShoppingBag() {
 				<NavLink to={"/"}>
 					<button className={css.btn}>Seguir comprando</button>
 				</NavLink>
+				
 			</div>
 		</div>
 	);

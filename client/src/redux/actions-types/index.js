@@ -50,6 +50,8 @@ import {
   EMPTY_CART,
   GET_LOGIN_GOOGLE,
   DELETE_USER,
+  CHECK_STOCK,
+  EMPTY_CHECK_STOCK
 } from "../actions-creators";
 import {
   chatBot,
@@ -757,4 +759,21 @@ export function deleteUser(token, user_name) {
       payload: data,
     });
   };
+}
+
+export const addCheckStock = (id) => {
+  return async function (dispatch) {
+    
+    const {data} = await axios.get(`/products/detail/${id}`)
+      
+    return dispatch({
+      type: CHECK_STOCK,
+      payload: data,
+    });
+  };
+};
+export const emptyCartCheckStock =() =>{
+  return {
+    type: EMPTY_CHECK_STOCK
+  }
 }
