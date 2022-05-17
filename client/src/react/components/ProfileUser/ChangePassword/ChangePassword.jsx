@@ -29,6 +29,7 @@ export default function ChangePassword() {
 		userData.password !== user.prevPassword ||
 		userData.password === user.newPassword ||
         user.newPassword === ''||
+        user.newPassword.length < 4 ||
 		user.newPassword !== user.confirmNewPassword
 		
 			? false
