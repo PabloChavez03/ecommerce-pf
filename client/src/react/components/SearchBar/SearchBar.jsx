@@ -53,7 +53,7 @@ export default function SearchBar({ setSelectFilter }) {
           placeholder="Ingrese producto a buscar..."
           onChange={(e) => handleChangeInput(e)}
         />
-        {display ? (
+        {/* {display ? (
           <SuggestModal
             options={options}
             setOptions={setOptions}
@@ -62,7 +62,7 @@ export default function SearchBar({ setSelectFilter }) {
           />
         ) : (
           ""
-        )}
+        )} */}
         <button onClick={(e) => handleClickSearch(e)}>BUSCAR</button>
       </form>
     </div>

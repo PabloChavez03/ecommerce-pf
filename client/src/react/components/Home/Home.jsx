@@ -49,11 +49,7 @@ export default function Home() {
     <div className={css.principalDivHome}>
       <NavBar />
       <div className={css.search}>
-        <div className={css.reset}>
-          <button onClick={(e) => handleClickReset(e)}>
-            Restablecer filtros
-          </button>
-        </div>
+
         <SearchBar setSelectFilter={setSelectFilter} />
       </div>
 

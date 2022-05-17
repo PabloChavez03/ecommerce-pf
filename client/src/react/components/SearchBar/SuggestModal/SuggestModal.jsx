@@ -13,9 +13,9 @@ export default function SuggestModal({
       <div className={style.modalStockProductContainer}>
         <div className={style.modalHeader}></div>
         <div className={style.listItems}>
-          {options?.length &&
+          {options?.length ?
             options.map((e) => (
-              <div>
+              <div key={e.id}>
                 <NavLink
                   to={`/detail/${e.id}`}
                   style={{ textDecoration: "none" }}
@@ -23,7 +23,7 @@ export default function SuggestModal({
                   <h3>{e.name}</h3>
                 </NavLink>
               </div>
-            ))}
+            )):<p>No hay coincidencias</p>}
         </div>
       </div>
     </div>

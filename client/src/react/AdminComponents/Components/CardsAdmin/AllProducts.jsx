@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cleanFilters, getAllProducts, setDetails } from "../../../../redux/actions-types";
+import {
+	cleanFilters,
+	getAllProducts,
+	setDetails,
+} from "../../../../redux/actions-types";
 import Paginated from "../../../components/Paginated/Paginated";
 import FiltersAdmin from "../FiltersAdmin/FiltersAdmin";
 import SearchProducts from "../SearchProducts/SearchProducts";
@@ -18,7 +22,10 @@ export default function AllProducts() {
 	const lastProduct = currentPage * productsPerPage;
 	const firstProduct = lastProduct - productsPerPage;
 	const productsCurent =
-		select === "" ? allProducts.slice(firstProduct, lastProduct) : productFilter.slice(firstProduct, lastProduct);
+		select === ""
+			? allProducts.slice(firstProduct, lastProduct)
+			: typeof productFilter !== "string" &&
+			  productFilter.slice(firstProduct, lastProduct);
 
 	useEffect(() => {
 		dispatch(getAllProducts());
@@ -44,7 +51,10 @@ export default function AllProducts() {
 			/> */}
 			<div className={style.search}>
 				<div>
-					<button onClick={(e) => handleClickReset(e)} className={style.btnResetFilters}>
+					<button
+						onClick={(e) => handleClickReset(e)}
+						className={style.btnResetFilters}
+					>
 						Restablecer filtros
 					</button>
 				</div>
@@ -57,11 +67,15 @@ export default function AllProducts() {
 				firstProduct={firstProduct}
 				productsPerPage={productsPerPage}
 			/>
-			<div className={style.filter}>
-				<FiltersAdmin setSelect={setSelect} />
-			</div>
+
+			{typeof productFilter !== "string" && (
+				<div className={style.filter}>
+					<FiltersAdmin setSelect={setSelect} />
+				</div>
+			)}
+
 			<div className={style.cardsContainer}>
-				{productsCurent?.length ? (
+				{typeof productFilter !== "string" && productsCurent?.length ? (
 					productsCurent.map((e, index) => (
 						<CardAdmin
 							key={index}
@@ -77,7 +91,12 @@ export default function AllProducts() {
 					<p>No se encontraron productos</p>
 				)}
 			</div>
-			{modalStock && <ShowStockProduct modalStock={modalStock} setModalStock={setModalStock} />}
+			{modalStock && (
+				<ShowStockProduct
+					modalStock={modalStock}
+					setModalStock={setModalStock}
+				/>
+			)}
 		</div>
 	);
 }

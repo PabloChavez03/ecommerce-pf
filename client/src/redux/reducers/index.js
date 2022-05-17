@@ -53,6 +53,7 @@ import {
 	UPDATE_STATUS_ORDER,
 	EMPTY_CART,
 	GET_LOGIN_GOOGLE,
+	DELETE_USER,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -311,6 +312,10 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			return {
 				...state,
 			};
+		case DELETE_USER:
+			return {
+				...state,
+			}
 		case GET_ALL_CATEGORIES_FOR_FORM:
 			return {
 				...state,
