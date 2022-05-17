@@ -75,15 +75,19 @@ export default function ProductCreate() {
 
 	//   useEffect(() => {setCorrect(false)}, [initialState]);
 	function handleChange(e) {
-		console.log(errors);
+		let { value, maxLength } = e.target;
+		value = maxLength !== -1 ? value.slice(0, maxLength) : value;
+
+		console.log(maxLength);
+
 		setInput({
 			...input,
-			[e.target.name]: e.target.value,
+			[e.target.name]: value,
 		});
 		setError(
 			validate({
 				...input,
-				[e.target.name]: e.target.value,
+				[e.target.name]: value,
 			}),
 		);
 		dispatch(setChangeFormCreate(input));
@@ -241,6 +245,7 @@ export default function ProductCreate() {
 					<div className={s.name}>
 						<label>Nombre: </label>
 						<input
+							maxLength={"70"}
 							className={s.input}
 							type="text"
 							placeholder="Ingrese nombre"
@@ -315,6 +320,7 @@ export default function ProductCreate() {
 						<div>
 							<label>Precio anterior: </label>
 							<input
+								maxLength={"5"}
 								className={s.input}
 								type="number"
 								placeholder="Ingrese precio anterior"
@@ -329,6 +335,7 @@ export default function ProductCreate() {
 					<div>
 						<label>Precio actual: </label>
 						<input
+							maxLength={"5"}
 							className={s.input}
 							type="number"
 							placeholder="Ingrese precio"
@@ -344,6 +351,7 @@ export default function ProductCreate() {
 					<div>
 						<label>Marca: </label>
 						<input
+							maxLength={"20"}
 							className={s.input}
 							type="text"
 							placeholder="Ingrese marca"
@@ -357,6 +365,7 @@ export default function ProductCreate() {
 					<div>
 						<label>Color: </label>
 						<input
+							maxLength={"20"}
 							className={s.input}
 							type="text"
 							placeholder="Ingrese color"

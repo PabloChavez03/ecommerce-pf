@@ -70,6 +70,11 @@ const LoginMenu = ({ setLoginMenu }) => {
 								Lista de deseos
 							</NavLink>
 						)}
+					
+							<NavLink to={`/user/changepassword`} className={style.menuLoginItem}>
+								Cambiar contraseña
+							</NavLink>
+						
 					</ul>
 
 					<button

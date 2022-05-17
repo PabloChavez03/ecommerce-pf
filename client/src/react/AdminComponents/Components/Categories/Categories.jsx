@@ -33,13 +33,12 @@ function Categories() {
 				<h3 className={s.subtitulo}>Hombres</h3>
 				<div className={s.cards}>
 					{categories?.map((category) => {
-
 						return (
-							<div key={category.id}>
+							<>
 								{category.genre === "men" && (
 									<CategoryCard category={category} />
 								)}
-							</div>
+							</>
 						);
 					})}
 				</div>
@@ -50,11 +49,11 @@ function Categories() {
 				<div className={s.cards}>
 					{categories?.map((category) => {
 						return (
-							<div key={category.id}>
+							<>
 								{category.genre === "women" && (
-									<CategoryCard  category={category} />
+									<CategoryCard category={category} />
 								)}
-							</div>
+							</>
 						);
 					})}
 				</div>

@@ -6,10 +6,10 @@ import Filter from "../Filters/Filter";
 import { NavLink, useSearchParams } from "react-router-dom";
 import Paginated from "../Paginated/Paginated";
 import {
-	cleanFilters,
-	getFiltersGenderProduct,
-	setCurrentPage,
-	setDetails,
+  cleanFilters,
+  getFiltersGenderProduct,
+  setCurrentPage,
+  setDetails,
 } from "../../../redux/actions-types";
 import NavBar from "../NavBar/NavBar";
 import SearchBar from "../SearchBar/SearchBar";
@@ -40,22 +40,18 @@ export default function Home() {
 		setSelectFilter("");
 	}, [dispatch, gender, setSelectFilter]);
 
-	const handleClickReset = (e) => {
-		e.preventDefault();
-		setSelectFilter("");
-		dispatch(cleanFilters("home"));
-	};
-	return (
-		<div className={css.principalDivHome}>
-			<NavBar />
-			<div className={css.search}>
-				<div className={css.reset}>
-					<button onClick={(e) => handleClickReset(e)}>
-						Restablecer filtros
-					</button>
-				</div>
-				<SearchBar setSelectFilter={setSelectFilter} />
-			</div>
+  const handleClickReset = (e) => {
+    e.preventDefault();
+    setSelectFilter("");
+    dispatch(cleanFilters("home"));
+  };
+  return (
+    <div className={css.principalDivHome}>
+      <NavBar />
+      <div className={css.search}>
+
+        <SearchBar setSelectFilter={setSelectFilter} />
+      </div>
 
 			{typeof productFilter !== "string" && (
 				<Filter

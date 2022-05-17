@@ -1,14 +1,7 @@
 .container {
-	/* border: 1px solid gray ;
-    border-radius: 10px;
-    width: 300px;
-    height: 500px;
-    background-color: rgb(217, 217, 217);
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; */
-	width: 330px;
+	box-shadow: 0 2px 5px 1px #00000050;
+	min-width: 330px;
+	max-width: 330px;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
@@ -17,10 +10,9 @@
 	position: relative;
 
 	justify-content: space-around;
-	background-color: rgba(249, 247, 247, 0.72);
+	background-color: #f9f7f7b8;
 	border-radius: 1rem;
 	padding-bottom: 1rem;
-	align-self: normal;
 }
 
 .addWishlist {

@@ -1,9 +1,18 @@
 .container{
     display: flex;
-    flex-direction:column;
-    justify-content: space-around;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1000px;
+    margin: auto
 }
 
+.container1 {
+    display: flex;
+    margin: auto;
+    width: 500px;
+    max-width: 100%;
+}
 
 .imgReview {
     width: 25px;
