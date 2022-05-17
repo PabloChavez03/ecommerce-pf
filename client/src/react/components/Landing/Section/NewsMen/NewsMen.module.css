@@ -1,0 +1,57 @@
+.sectionNewMen {
+	margin-top: 70px;
+}
+
+.sectionNewMenItems {
+	display: flex;
+	align-items: center;
+	padding: 0 30px;
+}
+.sliderNewMenContainer {
+	width: 50%;
+	padding: 0 20px;
+}
+
+.sliderNewMen {
+	width: 300px;
+}
+
+.productsMenNewMenContainer {
+	width: 50%;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	place-items: center;
+}
+
+.cardProductMen {
+	text-decoration: none;
+}
+
+@media (max-width: 1300px) {
+	.sliderNewMenContainer {
+		width: 100%;
+		padding: 0 20px;
+	}
+	.productsMenNewMenContainer {
+		width: 70%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	.sectionNewMenItems {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+@media (max-width: 1000px) {
+	.productsMenNewMenContainer {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	.sliderNewMenContainer {
+		display: none;
+	}
+}

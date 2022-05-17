@@ -6,6 +6,8 @@ import {
 	updateCategory,
 } from "../../../../../redux/actions-types";
 import s from "./CategoryDetail.module.css";
+import Swal from "sweetalert2";
+
 
 function CategoryDetail({ id, closeModal }) {
 	const dispatch = useDispatch();
@@ -41,8 +43,20 @@ function CategoryDetail({ id, closeModal }) {
 
 	const handleUpdate = (e) => {
 		e.preventDefault();
-		dispatch(updateCategory(token, id, category));
-		alert("Categoría actualizada");
+		Swal.fire({
+			title: "¿Seguro desea modificar?",
+			text: "",
+			icon: "question",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Sí, modificar!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				dispatch(updateCategory(token, id, category));
+				Swal.fire("Confirmado!", "Categoría actualizada!", "success");
+			}
+		});
 		dispatch(getCategories());
 		navigate("/admin/categories");
 		closeModal();

@@ -19,7 +19,6 @@ export default function AllClients() {
 	}, []);
 
 	const allClients = useSelector((state) => state.allClients);
-	console.log(allClients);
 	return (
 		<div className={s.container}>
 			<h1>Todos mis clientes</h1>

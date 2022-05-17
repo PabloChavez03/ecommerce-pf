@@ -38,3 +38,8 @@
     margin-bottom: 10px;
     resize:none;
 }
+.error {
+	color: deeppink;
+	font-size: 12px;
+	margin-bottom: 10px;
+}

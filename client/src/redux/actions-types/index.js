@@ -427,37 +427,53 @@ export const GetChatBotReceptorName = () => async (dispatch) => {
 
 export const PostChatBotReceptor = (data) => async (dispatch) => {
 	await postChatBotReceptor(data);
+	let emisor = await getChatBotEmisor();
 	let receptor = await getChatBotReceptor();
 	return dispatch({
 		type: POST_CHAT_BOT_RECEPTOR,
-		payload: receptor,
+		payload:  {
+			emisor,
+			receptor,
+		},
 	});
 };
 
 export const PostChatBotEmisor = (data) => async (dispatch) => {
 	await postChatBotEmisor(data);
 	let emisor = await getChatBotEmisor();
+	let receptor = await getChatBotReceptor();
 	return dispatch({
 		type: POST_CHAT_BOT_EMISOR,
-		payload: emisor,
+		payload:  {
+			emisor,
+			receptor,
+		},
 	});
 };
 
 export const PutChatBotReceptor = (data) => async (dispatch) => {
 	await putChatBotReceptor(data);
+	let emisor = await getChatBotEmisor();
 	let receptor = await getChatBotReceptor();
 	return dispatch({
 		type: PUT_CHAT_BOT_RECEPTOR,
-		payload: receptor,
+		payload:  {
+			emisor,
+			receptor,
+		},
 	});
 };
 
 export const PutChatBotEmisor = (data) => async (dispatch) => {
 	await putChatBotEmisor(data);
 	let emisor = await getChatBotEmisor();
+	let receptor = await getChatBotReceptor();
 	return dispatch({
 		type: PUT_CHAT_BOT_EMISOR,
-		payload: emisor,
+		payload:  {
+			emisor,
+			receptor,
+		},
 	});
 };
 
@@ -530,11 +546,14 @@ export const postOrder = (order) => {
 	return async function (dispatch) {
 		try {
 			await axios.post("/ordendecompra", order);
-			
 		} catch (error) {
-			return
+			return;
 		}
-		if(order.status === 'rejected' ||order.status === 'failure' || order.status === 'null' ){
+		if (
+			order.status === "rejected" ||
+			order.status === "failure" ||
+			order.status === "null"
+		) {
 			await axios.patch("/product/stock/sumar", order.orderDetails);
 		}
 	};
@@ -695,7 +714,16 @@ export const deleteCategory = (token, categoryId) => {
 
 export const getLoginGoogle = () => {
 	return async function (dispatch) {
-		const { data } = await axios.get("/auth/login/success");
+		const { data } = await axios({
+			url: "/auth/login/success",
+			method: "GET",
+			withCredentials: true,
+			headers: {
+				"Content-Type": "application/json",
+				"Access-Control-Allow-Credentials": true,
+			},
+		});
+
 		return dispatch({
 			type: GET_LOGIN_GOOGLE,
 			payload: data,

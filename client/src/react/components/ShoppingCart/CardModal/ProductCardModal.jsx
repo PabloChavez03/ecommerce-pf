@@ -27,7 +27,6 @@ const ProductCardModal = ({
 	};
 	useEffect(() => {}, [cartItems, variants]);
 
-	console.log(variants);
 	return (
 		<div className={style.cardModalContainer}>
 			<img

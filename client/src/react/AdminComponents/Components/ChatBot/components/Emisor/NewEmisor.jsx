@@ -3,33 +3,55 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   GetChatBotReceptorName,
   PostChatBotEmisor,
+  AllChatBotEmisor,
 } from "../../../../../../redux/actions-types";
 import style from "./NewEmisor.module.css";
 export default function NewEmisor({ handleNewEmisor }) {
   //Dispath reducer
   const dispatch = useDispatch();
   const ReceptorName = useSelector((state) => state.chatBotReceptorName);
+  const emisor = useSelector((state) => state.chatBotEmisor);
   const [focusCheck, setFocusCheck] = useState({
     activo: true,
     desactivado: false,
   });
   const [respuesta, setRespuesta] = useState({
-    name: ReceptorName[0],
+    name: "",
     respuesta: "",
     isActive: focusCheck.activo,
     receptor: [],
   });
+  //const [Preguntav1, setPreguntav1] = useState([]);
   //Dispath useEffect
   useEffect(() => {
     dispatch(GetChatBotReceptorName());
+    dispatch(AllChatBotEmisor());
   }, [dispatch]);
+  //
+  let Preguntav1 = [...ReceptorName];
+  if (emisor.length !== 0) {
+    emisor.forEach((item) => {
+      let position = Preguntav1.indexOf(item.name);
+      Preguntav1.splice(position, 1);
+    });
+  }
 
+  const Preguntav2 = [...ReceptorName];
+  if (respuesta.name) {
+    let position = Preguntav2.indexOf(respuesta.name);
+    Preguntav2.splice(position, 1);
+  }
+  //
   const handleCerrar = () => {
     handleNewEmisor();
   };
   const handleInputChange = (e) => {
     e.preventDefault();
-    setRespuesta({ ...respuesta, [e.target.name]: e.target.value });
+    if (e.target.value !== "selectPregunta") {
+      setRespuesta({ ...respuesta, [e.target.name]: e.target.value });
+    } else {
+      setRespuesta({ ...respuesta, [e.target.name]: "" });
+    }
   };
   const handleCheck = () => {
     if (focusCheck.activo) {
@@ -74,11 +96,10 @@ export default function NewEmisor({ handleNewEmisor }) {
   const handleEnviar = () => {
     if (respuesta.respuesta !== "") {
       dispatch(PostChatBotEmisor(respuesta));
-      setTimeout(() => {
-        handleNewEmisor();
-      }, 1000);
+      handleNewEmisor();
     }
   };
+
   return (
     <div className={style.modal}>
       <div className={style.head}>
@@ -92,9 +113,10 @@ export default function NewEmisor({ handleNewEmisor }) {
           value={respuesta.name}
           onChange={(e) => handleInputChange(e)}
         >
-          {ReceptorName.length === 0
+          <option value={"selectPregunta"}>Seleccion de alternativa</option>
+          {Preguntav1.length === 0
             ? null
-            : ReceptorName.map((item, index) => (
+            : Preguntav1.map((item, index) => (
                 <option key={index} value={item}>
                   {item}
                 </option>
@@ -132,12 +154,12 @@ export default function NewEmisor({ handleNewEmisor }) {
           </div>
         </div>
         <div>
-          <label>Sub Alternativa:</label>
+          <label>Sub Alternativa:</label>{" "}
           <select defaultValue={"select"} onChange={(e) => handleSelect(e)}>
-            <option value={"select"}>Seleccione el receptor</option>
-            {ReceptorName.length === 0
+            <option value={"select"}>Seleccion de alternativa</option>
+            {Preguntav2.length === 0
               ? null
-              : ReceptorName.map((item, index) => (
+              : Preguntav2.map((item, index) => (
                   <option key={index} value={item}>
                     {item}
                   </option>
