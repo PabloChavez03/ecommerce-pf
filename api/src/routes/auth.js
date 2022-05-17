@@ -13,26 +13,45 @@ router.get("/login/failed", (req, res) => {
 });
 
 router.get("/login/success", async (req, res) => {
+  if (req.user) {
+    try {
+      console.log(req.user);
+      let userGoogle = await Users.findOne({
+        where: { email: req.user.emails[0].value },
+      });
 
-  if (!req.user) {
-    return res.status(409).json({ message: "user not register" });
+      const rol = await Role.findOne({ where: { name: "client" } });
+
+      if (!userGoogle) {
+        userGoogle = await Users.create({
+          user_name: req.user.displayName,
+          user_password: req.user.id,
+          email: req.user.emails[0].value,
+        });
+
+        await userGoogle.setRole(rol);
+
+        await userGoogle.save();
+      }
+
+      const userGoogleForToken = {
+        username: req.user.displayName,
+        role: rol.id,
+      };
+
+      const token = jwt.sign(userGoogleForToken, process.env.SECRET);
+      // console.log(req.user)
+      return res.status(200).json({
+        success: true,
+        msg: "Successful",
+        user: req.user,
+        cookies: req.cookies,
+        token,
+      });
+    } catch (error) {
+      return res.status(409).json({ message: error})
+    }
   }
-
-  const username = req.user?.userGoogle.user_name;
-  const password = req.user?.userGoogle.user_password;
-  const token = req.user?.token;
-  const roleId = req.user?.userGoogle.RoleId;
-
-  const roleUser = await Role.findByPk(roleId);
-
-  return res.status(200).json({
-    // rue,
-    status: "successful",
-    username: username,
-    password: password,
-    rol: roleUser.name,
-    token: token,
-  });
 });
 
 router.get("/logout", (req, res) => {
@@ -50,8 +69,7 @@ router.get(
   passport.authenticate("google", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed",
-  }),
-  async (req, res) => {}
+  })
 );
 
 module.exports = router;

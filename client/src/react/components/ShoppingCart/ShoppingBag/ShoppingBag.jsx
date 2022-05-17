@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import NavBar from "../../NavBar/NavBar";
@@ -13,6 +13,7 @@ export default function ShoppingBag() {
   const dispatch = useDispatch()
   const cartItems = useSelector((state) => state.cartItems);
   const userData = useSelector((state) => state.userData);
+
 
   let suma = 0;
   let subtotal = cartItems?.forEach((e) => (suma += e.currentPrice));

@@ -516,12 +516,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
 				...state,
 				cartItems: [],
 			};
-		case GET_LOGIN_GOOGLE:
-			return {
-				...state,
-				getLoginGoogle: payload,
-				// userData: payload,
-			}
 		default:
 			return { ...state };
 	}
