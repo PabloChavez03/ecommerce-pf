@@ -24,6 +24,7 @@
   border: 2px solid #57318b;
   border-radius: 25px 25px 0px;
   /* overflow-y: scroll; */
+  z-index: 77;
 }
 .ChatBotTitle {
   width: 100%;
