@@ -12,6 +12,7 @@ import OrderActual from "../UserOrders/OrderActual/OrderActual";
 import style from "../UserRoutes/User.module.css";
 import UpdateReviews from "../UpdateReviews/UpdateReviews";
 import Wishlist from "../Wishlist/Wishlist";
+import ChangePassword from "../ChangePassword/ChangePassword";
 
 export default function UserRoutes() {
 	return (
@@ -34,6 +35,8 @@ export default function UserRoutes() {
 						element={<UpdateReviews />}
 					/>
 					<Route path={"/wishlist"} element={<Wishlist />} />
+					<Route path={"/changepassword"} element={<ChangePassword/> } />
+
 				</Routes>
 			</div>
 		</div>
