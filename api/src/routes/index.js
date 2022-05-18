@@ -7,6 +7,9 @@ const { authMaster, isAdmin } = require("../middleware/authMaster");
 
 // Modularizando las rutas
 
+//Pedidos
+router.use("/user",require("./usersFindByPk"))
+
 //----------------  for All  --------------------------------------------------
 router.use("/categories", require("./categories"));
 router.use("/products", require("./productsByCategory"));
@@ -44,6 +47,7 @@ router.use(
 	[authMaster, isAdmin],
 	require("./usersFindByPk"),
 );
+
 //----------------------Mercado Pago-------------------------------------------
 router.use("/mercadopago", require("./mercadoPago"));
 //-----------------------  Google  --------------------------------------------
