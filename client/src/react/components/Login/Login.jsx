@@ -190,7 +190,7 @@ const Login = () => {
 	const GOOGLE = () => {
 		let timer = null;
 
-		const googleLoginUrl = "http://localhost:3001/auth/login/google";
+		const googleLoginUrl = "http://clothes-22.vercel.app/auth/login/google";
 		const newWindow = window.open(
 			googleLoginUrl,
 			"_blank",
