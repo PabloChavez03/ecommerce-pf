@@ -7,31 +7,39 @@ const cors = require("cors");
 
 const cookieSession = require("cookie-session");
 const passport = require("passport");
-const passportSetup = require("../src/middleware/passport");
+// const passportSetup = require("../src/middleware/passport");
 
+require("./auth/googleAuth");
 require("./db.js");
 
 const server = express();
 
+server.use(cors());
 server.name = "API";
+
+server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+server.use(bodyParser.json({ limit: "50mb" }));
+server.use(cookieParser());
+server.use(morgan("dev"));
+server.use(
+	cors({
+		origin: "https://clothes-22.vercel.app",
+		credentials: true,
+	}),
+);
+
 server.use(
 	cookieSession({
+		maxAge: 24 * 60 * 60 * 100,
 		name: "session",
 		keys: ["test"],
-		maxAge: 24 * 60 * 60 * 100,
 	}),
 );
 server.use(passport.initialize());
 server.use(passport.session());
 
-server.use(cors());
-server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-server.use(bodyParser.json({ limit: "50mb" }));
-server.use(cookieParser());
-server.use(morgan("dev"));
 server.use((req, res, next) => {
-	res.header("Access-Control-Allow-Origin", "*");
-
+	// res.header("Access-Control-Allow-Origin", "*");
 	// authorized headers for preflight requests
 	// https://developer.mozilla.org/en-US/docs/Glossary/preflight_request
 	res.header(

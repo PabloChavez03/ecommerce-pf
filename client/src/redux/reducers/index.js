@@ -52,7 +52,7 @@ import {
   GET_ALL_CLIENTS_USER_EMAIL,
   UPDATE_STATUS_ORDER,
   EMPTY_CART,
-  GET_LOGIN_GOOGLE,
+ // GET_LOGIN_GOOGLE,
   DELETE_USER,
   CHECK_STOCK,
   EMPTY_CHECK_STOCK,
@@ -534,12 +534,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         cartItems: [],
       };
-    case GET_LOGIN_GOOGLE:
-      return {
-        ...state,
-        getLoginGoogle: payload,
-        // userData: payload,
-      };
+    // case GET_LOGIN_GOOGLE:
+    //   return {
+    //     ...state,
+    //     getLoginGoogle: payload,
+    //     // userData: payload,
+    //   };
     case CHECK_STOCK:
       payload = { id: payload.id, variants: payload.variants };
       return {
