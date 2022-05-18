@@ -205,7 +205,7 @@ const Login = () => {
 					navigate("/");
 					if (timer) clearInterval(timer);
 				}
-			}, 500);
+			}, 2000);
 		}
 	};
 
