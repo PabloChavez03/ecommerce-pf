@@ -53,6 +53,7 @@ import {
   CHECK_STOCK,
   EMPTY_CHECK_STOCK,
   SEND_RESET_PASSWORD,
+  USER_TO_CHANGE,
 } from "../actions-creators";
 import {
   chatBot,
@@ -781,10 +782,19 @@ export function sendMailResetPassword(dataUser) {
       "http://localhost:3001/email/ResetPassword",
       dataUser
     );
-    console.log(data)
     return dispatch({
       type: SEND_RESET_PASSWORD,
       payload: data,
     });
   };
+}
+
+export function userToChange(user_name) {
+  return async function (dispatch) {
+    const {data} = await axios.get(`http://localhost:3001/user/${user_name}`);
+    return dispatch({
+      type: USER_TO_CHANGE,
+      payload: data
+    })
+  }
 }

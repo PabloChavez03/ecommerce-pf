@@ -57,6 +57,7 @@ import {
   CHECK_STOCK,
   EMPTY_CHECK_STOCK,
   SEND_RESET_PASSWORD,
+  USER_TO_CHANGE,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -108,6 +109,7 @@ export const initialState = {
   ordersAllBackUp: [],
   getLoginGoogle: {},
   cartItemsCheckStock: [],
+  userToChange: {},
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -548,6 +550,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         cartItemsCheckStock: [],
+      };
+    case USER_TO_CHANGE:
+      return {
+        ...state,
+        userToChange: payload,
       };
     default:
       return { ...state };
