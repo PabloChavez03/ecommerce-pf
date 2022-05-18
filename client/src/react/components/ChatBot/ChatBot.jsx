@@ -33,17 +33,19 @@ export default function ChatBot() {
             <div className={styles.ChatContainer}>
               <p>{dataChatBot.respuesta}</p>
               <br />
-              {dataChatBot.alternativa
-                ? dataChatBot.alternativa.map((item) => (
-                    <p
-                      key={item}
-                      className={styles.alterChat}
-                      onClick={() => handleoption(item)}
-                    >
-                      {item}
-                    </p>
-                  ))
-                : null}
+              <div className={styles.contenedoreAlterChat}>
+                {dataChatBot.alternativa
+                  ? dataChatBot.alternativa.map((item) => (
+                      <p
+                        key={item}
+                        className={styles.alterChat}
+                        onClick={() => handleoption(item)}
+                      >
+                        {item}
+                      </p>
+                    ))
+                  : null}
+              </div>
             </div>
           ) : null}
         </div>
