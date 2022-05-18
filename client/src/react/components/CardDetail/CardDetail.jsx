@@ -20,7 +20,9 @@ export default function CardDetail() {
   }, [dispatch, productId]);
 
   const productDetail = useSelector((state) => state.details);
-
+  useEffect(() => {
+    dispatch(getDetails(productId));
+  }, [dispatch, productId]);
   return (
     <div>
       <NavBar />

@@ -30,7 +30,7 @@ const Admin = () => {
 				</div>
 				<div className={style.sectionInfoContainer}>
 					<Routes>
-						<Route path={"/"} element={<HomeAdmin />} />
+						<Route path={"/principal"} element={<HomeAdmin />} />
 						<Route path={"/createproduct"} element={<ProductCreate />} />
 						<Route path={"/allproducts"} element={<AllProducts />} />
 						<Route path={"/delete/:productId"} element={<DeleteProduct />} />

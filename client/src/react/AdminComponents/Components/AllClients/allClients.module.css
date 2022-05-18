@@ -43,3 +43,12 @@
 	font-weight: bold;
 	color: #00000070;
 }
+.containerImg{
+	display: flex;
+	justify-content: end;
+}
+.imgDelete {
+	width: 25px;
+	cursor: pointer;
+	
+}

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteReview } from "../../../../redux/actions-types";
+import { deleteReview, getDetails } from "../../../../redux/actions-types";
 import alertIcon from "../../svg/advertencia.png";
 import Swal from 'sweetalert2'
 

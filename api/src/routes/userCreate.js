@@ -59,7 +59,9 @@ router.post("", async (req, res) => {
 		}
 
 		await user.save();
-		await newRegistroCliente(email,name);
+		const emailGoogle = email;
+		const emailUsuario = name;
+		await newRegistroCliente({emailGoogle,emailUsuario});
 		created
 			? res.status(201).json(user + "creado")
 			: res.status(409).json({ message: "user exists" });

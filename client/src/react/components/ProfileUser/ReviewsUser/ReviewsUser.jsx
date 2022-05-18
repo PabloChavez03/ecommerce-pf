@@ -18,6 +18,9 @@ export default function ReviewsUser() {
 
   let reviewsUser = useSelector((state) => state.reviewsUser).Reviews;
  
+  useEffect(() => {
+    dispatch(getReviewsUser(userData.username));
+  }, [userData, dispatch, reviewsUser]);
 
   return (
     <div className={style.container}>

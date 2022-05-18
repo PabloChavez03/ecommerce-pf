@@ -14,6 +14,7 @@ require("./db.js");
 
 const server = express();
 
+server.use(cors());
 server.name = "API";
 
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
@@ -29,9 +30,9 @@ server.use(
 
 server.use(
 	cookieSession({
-		name: "session",
-		keys: ["test"],
 		maxAge: 24 * 60 * 60 * 100,
+		name: "API",
+		keys: [process.env.COOKIE_KEY],
 	}),
 );
 server.use(passport.initialize());
@@ -39,7 +40,6 @@ server.use(passport.session());
 
 // server.use((req, res, next) => {
 // 	res.header("Access-Control-Allow-Origin", "*");
-
 // 	// authorized headers for preflight requests
 // 	// https://developer.mozilla.org/en-US/docs/Glossary/preflight_request
 // 	res.header(
