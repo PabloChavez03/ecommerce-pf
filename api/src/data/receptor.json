@@ -1,0 +1,22 @@
+[
+	{
+		"id": 1,
+		"name": "Menu de Respuestas",
+		"isActive": true
+	},
+	{
+		"id": 2,
+		"name": "Problema de usuario",
+		"isActive": true
+	},
+	{
+		"id": 3,
+		"name": "Atencion al cliente",
+		"isActive": true
+	},
+	{
+		"id": 4,
+		"name": "Problemas de Compra",
+		"isActive": true
+	}
+]

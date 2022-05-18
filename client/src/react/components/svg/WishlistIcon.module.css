@@ -1,0 +1,13 @@
+.svg {
+	fill: none;
+	stroke: #e4111160;
+	stroke-width: 1;
+}
+
+.svg:hover {
+	fill: #e4111190;
+}
+
+.favorited {
+	fill: #e4111190;
+}

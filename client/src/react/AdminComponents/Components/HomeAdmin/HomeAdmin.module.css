@@ -1,0 +1,23 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	max-width: 600px;
+	margin: auto;
+}
+.item {
+	width: 100px;
+	height: 100px;
+	border-radius: 10px;
+	border: none;
+	box-shadow: 0px 0px 2px 0.5px rgba(0, 0, 0, 0.459);
+	font-weight: 600;
+	background-color: transparent;
+	transition: 0.3s;
+
+	cursor: pointer;
+}
+.item:hover {
+	color: aliceblue;
+	background-color: rgba(0, 0, 0, 0.836);
+}

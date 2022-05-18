@@ -1,0 +1,97 @@
+.cardModalContainer {
+	display: flex;
+	background: #fff;
+	padding: 10px 15px;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.cardModalInfoContainer {
+	font-size: 14px;
+	font-weight: 400;
+	width: 100%;
+}
+
+.cardModalTitle {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.cardModalInfoPrice {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+}
+
+.cardModalInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-weight: 600;
+}
+
+.cardModalInfo span {
+	font-weight: 400;
+}
+
+.cardModalImg {
+	width: 75px;
+	height: 120px;
+}
+
+.btnMasMenos {
+	border: none;
+	font-weight: bold;
+	background-color: transparent;
+	margin: 0px 3px;
+	font-size: 14px;
+	color: rgb(85, 77, 77);
+	cursor: pointer;
+}
+
+.quantity {
+	border: 1px solid rgb(129, 120, 120);
+	border-radius: 4px;
+	padding: 0px 10px;
+	cursor: default;
+}
+
+.modalCardClose {
+	width: 23px;
+	height: 20px;
+	background-image: url("../../../AdminComponents/Components/CardsAdmin/images/eliminar.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	cursor: pointer;
+
+	transition: width 0.2s, height 0.2s;
+}
+
+.modalCardClose:hover {
+	width: 24px;
+	height: 21px;
+}
+
+@media (max-width: 500px) {
+	.cardModalTitle,
+	.cardModalInfoContainer {
+		font-size: 12px;
+	}
+
+	.cardModalInfoPrice {
+		font-size: 10px;
+	}
+
+	.modalCardClose {
+		width: 22px;
+		height: 16px;
+
+		transition: width 0.2s, height 0.2s;
+	}
+
+	.modalCardClose:hover {
+		width: 22px;
+		height: 16px;
+	}
+}

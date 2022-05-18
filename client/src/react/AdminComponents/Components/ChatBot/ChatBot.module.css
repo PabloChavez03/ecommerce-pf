@@ -1,0 +1,81 @@
+.navChat {
+  width: 100%;
+  padding: 10px 30px;
+  background-color: black;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.navChat h1 {
+  color: white;
+  font-size: 30px;
+}
+.btnChat {
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
+}
+.btnChat button {
+  padding: 10px 25px;
+  background-color: rgba(256, 256, 256, 0.1);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+}
+.btnNew {
+  border: 0px;
+  padding: 10px 15px;
+  background-color: green;
+  color: white;
+  border-radius: 20px;
+  font-weight: 900;
+  cursor: pointer;
+}
+.table {
+  width: 100%;
+  margin: 20px 0px;
+}
+.table th {
+  background-color: rgb(116, 116, 116);
+  color: white;
+}
+.table td {
+  padding: 3px 10px;
+}
+.idTabla {
+  width: 30px;
+  text-align: center;
+}
+.name {
+  width: 230px;
+}
+.isActiveTable {
+  width: 130px;
+}
+.optionBtn {
+  width: 120px;
+}
+.optionBtn button {
+  padding: 2px 5px;
+  margin: 2px 5px 2px 0px;
+  border: 0px;
+  border-radius: 5px;
+}
+.orange {
+  background-color: rgb(194, 126, 0);
+  color: white;
+  cursor: pointer;
+}
+.red {
+  background-color: rgb(177, 18, 18);
+  color: white;
+  cursor: pointer;
+}
+.fondoGres {
+  background-color: rgb(202, 202, 202);
+  color: black;
+}

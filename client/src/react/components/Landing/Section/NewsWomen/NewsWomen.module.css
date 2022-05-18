@@ -1,0 +1,57 @@
+.sectionNewWomen {
+	margin-top: 70px;
+}
+
+.sectionNewWomenItems {
+	display: flex;
+	align-items: center;
+	padding: 0 30px;
+}
+.sliderNewWomenContainer {
+	width: 50%;
+	padding: 0 20px;
+}
+
+.sliderNewen {
+	width: 300px;
+}
+
+.productsNewWomenContainer {
+	width: 50%;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	place-items: center;
+}
+
+.cardProductWomen {
+	text-decoration: none;
+}
+
+@media (max-width: 1300px) {
+	.sliderNewWomenContainer {
+		width: 100%;
+		padding: 0 20px;
+	}
+	.productsNewWomenContainer {
+		width: 70%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	.sectionNewWomenItems {
+		display: flex;
+		flex-direction: column-reverse;
+	}
+}
+
+@media (max-width: 1000px) {
+	.productsNewWomenContainer {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	.sliderNewWomenContainer {
+		display: none;
+	}
+}

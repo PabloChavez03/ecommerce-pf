@@ -1,0 +1,48 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.title {
+	text-align: center;
+}
+
+.cards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	gap: 0.5rem;
+}
+
+.createButton {
+	max-width: fit-content;
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	border: 3px solid #1b5618;
+	background-color: transparent;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: bold;
+	color: #1b5618;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+.createButton:hover {
+	background-color: #1b5618;
+	color: #fff;
+}
+
+.cardsContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.subtitulo {
+	text-transform: uppercase;
+	margin-top: 2rem;
+}

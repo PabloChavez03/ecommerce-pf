@@ -1,0 +1,32 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+  max-width: 600px;
+  margin: auto;
+  border: 1px solid #00000040;
+  border-radius: 1.5rem;
+  padding: 2rem;
+}
+
+.infoContainer {
+  min-width: 250px;
+  margin-top: 2rem;
+}
+
+.container p {
+  margin-top: 0.5rem;
+}
+
+.container span {
+  /* margin-right: 1.5rem; */
+  font-weight: bold;
+  color: #00000080;
+}
+
+@media (min-width: 600px) {
+  .infoContainer {
+    min-width: 400px;
+  }
+}

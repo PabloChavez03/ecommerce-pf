@@ -1,0 +1,71 @@
+.container {
+	border: 1px solid #00000080;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+	padding: 1rem;
+	border-radius: 1rem;
+	max-width: 350px;
+}
+
+.label {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: bold;
+	max-width: fit-content;
+}
+
+.input {
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	border: none;
+	border-bottom: 1px solid #00000050;
+	min-width: fit-content;
+	max-width: 300px;
+}
+
+.select {
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid #00000050;
+}
+
+.section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.button {
+	max-width: fit-content;
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	border: 3px solid #1b5618;
+	background-color: transparent;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: bold;
+	color: #1b5618;
+	transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.button:hover {
+	background-color: #1b5618;
+	color: #fff;
+}
+
+.disabled {
+	max-width: fit-content;
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: bold;
+	transition: all 0.3s ease-in-out;
+  cursor: not-allowed;
+}
