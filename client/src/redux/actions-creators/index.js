@@ -56,6 +56,7 @@ export const GET_LOGIN_GOOGLE = "GET_LOGIN_GOOGLE";
 export const DELETE_USER = "DELETE_USER";
 export const CHECK_STOCK = "CHECK_STOCK";
 export const EMPTY_CHECK_STOCK = "EMPTY_CHECK_STOCK";
+export const SEND_RESET_PASSWORD = "SEND_RESET_PASSWORD";
 
 
 

@@ -51,7 +51,8 @@ import {
   GET_LOGIN_GOOGLE,
   DELETE_USER,
   CHECK_STOCK,
-  EMPTY_CHECK_STOCK
+  EMPTY_CHECK_STOCK,
+  SEND_RESET_PASSWORD,
 } from "../actions-creators";
 import {
   chatBot,
@@ -760,17 +761,30 @@ export function deleteUser(token, user_name) {
 
 export const addCheckStock = (id) => {
   return async function (dispatch) {
-    
-    const {data} = await axios.get(`/products/detail/${id}`)
-      
+    const { data } = await axios.get(`/products/detail/${id}`);
+
     return dispatch({
       type: CHECK_STOCK,
       payload: data,
     });
   };
 };
-export const emptyCartCheckStock =() =>{
+export const emptyCartCheckStock = () => {
   return {
-    type: EMPTY_CHECK_STOCK
-  }
+    type: EMPTY_CHECK_STOCK,
+  };
+};
+
+export function sendMailResetPassword(dataUser) {
+  return async function (dispatch) {
+    const { data } = await axios.post(
+      "http://localhost:3001/email/ResetPassword",
+      dataUser
+    );
+    console.log(data)
+    return dispatch({
+      type: SEND_RESET_PASSWORD,
+      payload: data,
+    });
+  };
 }
