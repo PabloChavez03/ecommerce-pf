@@ -17,6 +17,7 @@ router.get(
 		failureMessage: "Cannot login to Google",
 		failureRedirect: errorLoginUrl,
 		successRedirect: successLoginUrl,
+		session: true,
 	}),
 	(req, res) => {
 		console.log("User: ", req.user);
