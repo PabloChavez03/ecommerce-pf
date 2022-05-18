@@ -190,9 +190,8 @@ const Login = () => {
 	const GOOGLE = () => {
 		let timer = null;
 
-		const googleLoginUrl = "http://clothes-22.vercel.app/auth/login/google";
 		const newWindow = window.open(
-			googleLoginUrl,
+			"http://clothes-22.vercel.app/auth/login/google",
 			"_blank",
 			"width=500, height=600",
 		);
