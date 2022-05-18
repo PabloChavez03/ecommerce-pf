@@ -31,8 +31,8 @@ server.use(
 server.use(
 	cookieSession({
 		maxAge: 24 * 60 * 60 * 100,
-		name: "API",
-		keys: [process.env.COOKIE_KEY],
+		name: "session",
+		keys: ["test"],
 	}),
 );
 server.use(passport.initialize());

@@ -726,3 +726,34 @@ export const addStock = (cart) => {
 		await axios.patch("/product/stock/sumar", cart);
 	};
 };
+
+export function deleteUser(token, user_name) {
+  return async function (dispatch) {
+    const { data } = await axios.delete(`/users/delete/${user_name}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return dispatch({
+      type: DELETE_USER,
+      payload: data,
+    });
+  };
+}
+
+export const addCheckStock = (id) => {
+  return async function (dispatch) {
+    const { data } = await axios.get(`/products/detail/${id}`);
+
+    return dispatch({
+      type: CHECK_STOCK,
+      payload: data,
+    });
+  };
+};
+
+export const emptyCartCheckStock = () => {
+  return {
+    type: EMPTY_CHECK_STOCK,
+  };
+};
