@@ -706,13 +706,13 @@ export const updateCategory = (token, categoryId, payload) => {
 };
 
 export const deleteCategory = (token, categoryId) => {
-	return async function () {
-		await axios.delete(`/modify/categories/${categoryId}`, {
-			headers: {
-				authorization: `Bearer ${token}`,
-			},
-		});
-	};
+  return async function () {
+    await axios.delete(`/modify/categories/${categoryId}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  };
 };
 
 export const removeStock = (cart) => {
