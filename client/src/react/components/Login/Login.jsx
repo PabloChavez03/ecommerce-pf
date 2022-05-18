@@ -190,9 +190,8 @@ const Login = () => {
 	const GOOGLE = () => {
 		let timer = null;
 
-		const googleLoginUrl = "https://clothes-22.herokuapp.com/auth/login/google";
 		const newWindow = window.open(
-			googleLoginUrl,
+			"https://clothes-22.herokuapp.com/auth/login/google",
 			"_blank",
 			"width=500, height=600",
 		);

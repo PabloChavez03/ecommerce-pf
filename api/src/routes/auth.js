@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const { Users, Role } = require("../db");
 // const { isAuthenticate } = require("../middleware/auth");
 
-const CLIENT_URL = "https://clothes-22.vercel.app/";
+const CLIENT_URL = "https://clothes-22.herokuapp.com/";
 
 router.get(
 	"/google",

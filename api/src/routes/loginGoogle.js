@@ -3,8 +3,8 @@ const passport = require("passport");
 
 const router = express.Router();
 
-const successLoginUrl = "https://clothes-22.vercel.app/login/success";
-const errorLoginUrl = "https://clothes-22.vercel.app/login";
+const successLoginUrl = "http://clothes-22.vercel.app/login/success";
+const errorLoginUrl = "http://clothes-22.vercel.app/login";
 
 router.get(
 	"/login/google",

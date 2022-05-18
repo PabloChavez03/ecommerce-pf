@@ -3,7 +3,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 const { Users, Role } = require("../db");
 
-const CLIENT_URL = "https://clothes-22.vercel.app/auth/google/callback";
+const CLIENT_URL = "https://clothes-22.herokuapp.com/auth/google/callback";
 
 passport.use(
 	new GoogleStrategy(
