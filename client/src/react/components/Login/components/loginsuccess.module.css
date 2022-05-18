@@ -1,0 +1,14 @@
+.container {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.text {
+	color: #fff;
+	text-align: center;
+	padding: 2rem 4rem;
+	background-color: #275d27;
+	box-shadow: 5px 5px 5px 0px #00000080;
+}

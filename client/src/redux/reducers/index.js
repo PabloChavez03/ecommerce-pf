@@ -1,61 +1,61 @@
 import Swal from "sweetalert2";
 import {
-  ADD_PRODUCT_TO_CART,
-  GET_PRODUCT_BY_NAME,
-  REMOVE_PRODUCT_FROM_CART,
-  CHANGE_CART_QUANTITY,
-  SET_CURRENT_PAGE,
-  GET_ALL_PRODUCTS,
-  GET_CURRENT_BRANDS,
-  GET_FILTERS_BRANDS,
-  ORDER_BY_PRICE,
-  GET_DETAILS,
-  SET_DETAILS,
-  GET_ALL_CATEGORIES,
-  GET_CATEGORY_BY_ID,
-  GET_FILTERS_GENDER_PRODUCT,
-  POST_PRODUCT,
-  UPDATE_PRODUCT,
-  DELETE_PRODUCT,
-  GET_ALL_CATEGORIES_FOR_FORM,
-  CHAT_BOT,
-  GET_CHAT_BOT_RECEPTOR,
-  GET_CHAT_BOT_EMISOR,
-  GET_USER_DATA,
-  GET_PRODUCTS_NAME_ADMIN,
-  CLEAN_FILTERS,
-  GET_STOCK_PRODUCTS,
-  LOGGED_OUT,
-  UPDATE_USER_INFO,
-  DELETE_CHAT_BOT_RECEPTOR,
-  DELETE_CHAT_BOT_EMISOR,
-  GET_CHAT_BOT_RECEPTOR_NAME,
-  POST_CHAT_BOT_RECEPTOR,
-  POST_CHAT_BOT_EMISOR,
-  PUT_CHAT_BOT_RECEPTOR,
-  PUT_CHAT_BOT_EMISOR,
-  SET_CHANGE_FORM_CREATE,
-  GET_ALL_CLIENTS,
-  GET_CLIENT_DETAIL,
-  RESET_ALL_CLIENTS,
-  RESET_CLIENT_DETAIL,
-  UPDATE_CLIENT_INFO,
-  CREATE_REVIEWS,
-  GET_REVIEWS_USER,
-  DELETE_REVIEWS,
-  UPDATE_REVIEWS,
-  GET_ALL_CLIENTS_ORDERS,
-  GET_ALL_ORDERS,
-  GET_EMAIL_PUBLICIDAD,
-  GET_ORDERS_BY_PAYMENT_ID,
-  FILTER_ORDER_BY_STATUS,
-  GET_ALL_CLIENTS_USER_EMAIL,
-  UPDATE_STATUS_ORDER,
-  EMPTY_CART,
+	ADD_PRODUCT_TO_CART,
+	GET_PRODUCT_BY_NAME,
+	REMOVE_PRODUCT_FROM_CART,
+	CHANGE_CART_QUANTITY,
+	SET_CURRENT_PAGE,
+	GET_ALL_PRODUCTS,
+	GET_CURRENT_BRANDS,
+	GET_FILTERS_BRANDS,
+	ORDER_BY_PRICE,
+	GET_DETAILS,
+	SET_DETAILS,
+	GET_ALL_CATEGORIES,
+	GET_CATEGORY_BY_ID,
+	GET_FILTERS_GENDER_PRODUCT,
+	POST_PRODUCT,
+	UPDATE_PRODUCT,
+	DELETE_PRODUCT,
+	GET_ALL_CATEGORIES_FOR_FORM,
+	CHAT_BOT,
+	GET_CHAT_BOT_RECEPTOR,
+	GET_CHAT_BOT_EMISOR,
+	GET_USER_DATA,
+	GET_PRODUCTS_NAME_ADMIN,
+	CLEAN_FILTERS,
+	GET_STOCK_PRODUCTS,
+	LOGGED_OUT,
+	UPDATE_USER_INFO,
+	DELETE_CHAT_BOT_RECEPTOR,
+	DELETE_CHAT_BOT_EMISOR,
+	GET_CHAT_BOT_RECEPTOR_NAME,
+	POST_CHAT_BOT_RECEPTOR,
+	POST_CHAT_BOT_EMISOR,
+	PUT_CHAT_BOT_RECEPTOR,
+	PUT_CHAT_BOT_EMISOR,
+	SET_CHANGE_FORM_CREATE,
+	GET_ALL_CLIENTS,
+	GET_CLIENT_DETAIL,
+	RESET_ALL_CLIENTS,
+	RESET_CLIENT_DETAIL,
+	UPDATE_CLIENT_INFO,
+	CREATE_REVIEWS,
+	GET_REVIEWS_USER,
+	DELETE_REVIEWS,
+	UPDATE_REVIEWS,
+	GET_ALL_CLIENTS_ORDERS,
+	GET_ALL_ORDERS,
+	GET_EMAIL_PUBLICIDAD,
+	GET_ORDERS_BY_PAYMENT_ID,
+	FILTER_ORDER_BY_STATUS,
+	GET_ALL_CLIENTS_USER_EMAIL,
+	UPDATE_STATUS_ORDER,
+	EMPTY_CART,
+	GET_LOGIN_GOOGLE,
   DELETE_USER,
   CHECK_STOCK,
   EMPTY_CHECK_STOCK,
-  EPIC_GOOGLE,
 } from "../actions-creators";
 import { filterbrands } from "../controllers";
 
@@ -105,8 +105,7 @@ export const initialState = {
 	statusOrder: [],
 	ordersAll: [],
 	ordersAllBackUp: [],
-	cartItemsCheckStock: [],
-		// epicGoogle: {},
+	getLoginGoogle: {},
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -179,6 +178,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 					payload.id + payload.size.toString(),
 			);
 			let item = state.cartItems[index];
+			console.log(item)
 			if (payload.sign === "-") {
 				if (item.quantity === 1) {
 					return {
@@ -314,10 +314,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			return {
 				...state,
 			};
-		case DELETE_USER:
-			return {
-				...state,
-			}
 		case GET_ALL_CATEGORIES_FOR_FORM:
 			return {
 				...state,
@@ -541,11 +537,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			...state,
 			cartItemsCheckStock: []
 		};
-		// case EPIC_GOOGLE:
-		// return {
-		// 	...state,
-		// 	epicGoogle: payload,
-		// }
 		default:
 			return { ...state };
 	}

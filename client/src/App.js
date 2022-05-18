@@ -14,29 +14,31 @@ import PayPlataform from "./react/components/PayPlataform/PayPlataform";
 import Failure from "./react/components/back Urls/failure";
 import DevInfo from "./react/components/Footer/DevInfo/DevInfo";
 import UserRoutes from "./react/components/ProfileUser/UserRoutes/UserRoutes";
+import GoogleLoginSuccess from "./react/components/Login/components/GoogleLoginSuccess";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={"/"} element={<Landing />} />
-        <Route path={"/home"} element={<Home />} />
-        <Route path={"/detail/:productId"} element={<CardDetail />} />
-        <Route path={"/creation"} element={<ProductCreate />} />
-        <Route path={"/about"} element={<Construction />} />
-        <Route path={"/account"} element={<Construction />} />
-        <Route path={"/construction"} element={<Construction />} />
-        <Route path={"/admin/*"} element={<Admin />} />
-        <Route path={"/login"} element={<Login />} />
-        <Route path={"/bag"} element={<ShoppingBag />} />
-        <Route path={"/pay"} element={<PayPlataform />} />
-        <Route path={"/user/*"} element={<UserRoutes />} />
-        <Route path={"/failure"} element={<Failure />} />
-        <Route path={"/info/dev"} element={<DevInfo />} />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path={"/"} element={<Landing />} />
+				<Route path={"/home"} element={<Home />} />
+				<Route path={"/detail/:productId"} element={<CardDetail />} />
+				<Route path={"/creation"} element={<ProductCreate />} />
+				<Route path={"/about"} element={<Construction />} />
+				<Route path={"/account"} element={<Construction />} />
+				<Route path={"/construction"} element={<Construction />} />
+				<Route path={"/admin/*"} element={<Admin />} />
+				<Route path={"/login"} element={<Login />} />
+				<Route path={"/bag"} element={<ShoppingBag />} />
+				<Route path={"/pay"} element={<PayPlataform />} />
+				<Route path={"/user/*"} element={<UserRoutes />} />
+				<Route path={"/failure"} element={<Failure />} />
+				<Route path={"/info/dev"} element={<DevInfo />} />
+				<Route exact path={"/login/success"} element={<GoogleLoginSuccess />} />
+			</Routes>
+			<Footer />
+		</BrowserRouter>
+	);
 }
 
 export default App;
