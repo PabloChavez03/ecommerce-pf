@@ -7,6 +7,9 @@ const { authMaster, isAdmin } = require("../middleware/authMaster");
 
 // Modularizando las rutas
 
+//Pedidos
+router.use("/user",require("./usersFindByPk"))
+
 //----------------  for All  --------------------------------------------------
 router.use("/categories", require("./categories"));
 router.use("/products", require("./productsByCategory"));
@@ -36,9 +39,7 @@ router.use(
 );
 router.use("/users/update", authMaster, require("./userUpdate"));
 router.use("/client/update", [authMaster, isAdmin], require("./updateClient"));
-router.use("/product/stock", 
-// [authMaster, isAdmin], 
-require("./updateStock"));
+router.use("/product/stock", [authMaster, isAdmin], require("./updateStock"));
 router.use("/users/delete", [authMaster, isAdmin], require("./userDelete"));
 router.use("/users/findall", [authMaster, isAdmin], require("./getUsers"));
 router.use(
@@ -46,10 +47,13 @@ router.use(
 	[authMaster, isAdmin],
 	require("./usersFindByPk"),
 );
+
 //----------------------Mercado Pago-------------------------------------------
 router.use("/mercadopago", require("./mercadoPago"));
 //-----------------------  Google  --------------------------------------------
-router.use("/auth", require("./auth"));
+// router.use("/auth", require("./auth"));
+router.use("/auth", require("./loginGoogle"));
+router.use("/auth", require("./googleUser"));
 //-------------------------------------------------------------------------
 router.use("/users/wishlist", authMaster, require("./wishlist"));
 //----------------Ordenes de Compra-------------------------------------------

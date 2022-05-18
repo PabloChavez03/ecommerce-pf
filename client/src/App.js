@@ -1,4 +1,3 @@
-// import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import CardDetail from "./react/components/CardDetail/CardDetail";
@@ -12,40 +11,12 @@ import Admin from "./react/AdminComponents/Pages/Admin";
 import Login from "./react/components/Login/Login";
 import ShoppingBag from "./react/components/ShoppingCart/ShoppingBag/ShoppingBag";
 import PayPlataform from "./react/components/PayPlataform/PayPlataform";
-// import Success from "./react/components/back Urls/success";
-// import axios from "axios";
 import Failure from "./react/components/back Urls/failure";
 import DevInfo from "./react/components/Footer/DevInfo/DevInfo";
 import UserRoutes from "./react/components/ProfileUser/UserRoutes/UserRoutes";
+import GoogleLoginSuccess from "./react/components/Login/components/GoogleLoginSuccess";
+
 function App() {
-
-	// const [user, setUSer] = useState(null);
-
-	// useEffect(() => {
-		// const getUser = () =>
-		// 	axios({
-		// 		url: "/auth/login/success",
-		// 		method: "GET",
-		// 		withCredentials: true,
-		// 		headers: {
-		// 			"Content-Type": "application/json",
-		// 			"Access-Control-Allow-Credentials": true,
-		// 		},
-		// 	})
-		// 		.then((response) => {
-		// 			if (response.status === 200) return response.data;
-		// 			else throw new Error("Authentication has been failed");
-		// 		})
-		// 		.then((resObject) => {
-		// 			setUSer(resObject.user);
-		// 		})
-		// 		.catch((e) => console.log(e));
-
-	// 	getUser();
-	// }, []);
-
-	// console.log(user);
-
 	return (
 		<BrowserRouter>
 			<Routes>
@@ -63,6 +34,7 @@ function App() {
 				<Route path={"/user/*"} element={<UserRoutes />} />
 				<Route path={"/failure"} element={<Failure />} />
 				<Route path={"/info/dev"} element={<DevInfo />} />
+				<Route exact path={"/login/success"} element={<GoogleLoginSuccess />} />
 			</Routes>
 			<Footer />
 		</BrowserRouter>
