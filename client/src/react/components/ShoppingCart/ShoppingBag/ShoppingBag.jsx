@@ -27,17 +27,13 @@ export default function ShoppingBag() {
 		console.log(theStock)
 	  
 	}, [dispatch])
-	const validateStockFunc = ()=>{
-		let theVal = validateStock(cartItems)
-		console.log(theVal)
-	}
+	
 
 	const validateStock= (cart)=>{
 		let goodToGo = true
 		cart?.forEach(e=>{
 			let aux = theStock.find(s=> s.id === e.id)
 			let varIndex = aux.variants.findIndex(variant=> variant.brandSize === e.brandSize)
-			console.log(aux.variants[varIndex])
 			if(aux.variants[varIndex].stock < e.quantity){
 			goodToGo = false
 			return Swal.fire(`El producto "${e.name}" tiene menos stock del que usted desea comprar o se ha quedado sin stock`, "", "error");}
@@ -47,13 +43,9 @@ export default function ShoppingBag() {
 
 
 const theStock = useSelector(state => state.cartItemsCheckStock)
-	const checkCartStock = (e) => {
-		e.preventDefault()
-		
-	}
+	
 	const emptyCartCheck = (e)=> {
 		dispatch(emptyCartCheckStock())
-		console.log(theStock)
 	}
 	
 	
@@ -91,8 +83,10 @@ const theStock = useSelector(state => state.cartItemsCheckStock)
 			alert("Por favor verifique su correo electrónico");
 			return;
 		}
-
-		dispatch(removeStock(cartItems));
+		if(theRealVal&& theRealVal === true){
+			dispatch(removeStock(cartItems));
+		}
+		
 		const { data } = await axios.get("/mercadopago/payment", {
 			params: { cartItems, emailAux, envio },
 		});
