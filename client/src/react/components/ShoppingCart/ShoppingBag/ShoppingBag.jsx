@@ -90,7 +90,12 @@ const theStock = useSelector(state => state.cartItemsCheckStock)
 		const { data } = await axios.get("/mercadopago/payment", {
 			params: { cartItems, emailAux, envio },
 		});
-
+		
+		if(theRealVal&& theRealVal === true){
+			emptyCartCheck()
+		}
+		
+		
 		//generamos nuestra orden de compra
 		//cartItems === orderDetails, envio + suma === total, userData.dni_client === dni_client
 		if(theRealVal&& theRealVal === true){

@@ -538,9 +538,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
 			};
 		case CHECK_STOCK:
 			payload = {id : payload.id, variants: payload.variants}
+			let auxCartItemsCheckStock =[...state.cartItemsCheckStock]
+			auxCartItemsCheckStock.unshift(payload)
 			return {
 				...state,
-				cartItemsCheckStock: [...state.cartItemsCheckStock, payload]
+				cartItemsCheckStock: auxCartItemsCheckStock
 			}
 		case EMPTY_CHECK_STOCK:
 		return {
