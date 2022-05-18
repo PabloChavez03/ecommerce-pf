@@ -14,6 +14,7 @@ require("./db.js");
 
 const server = express();
 
+server.use(cors());
 server.name = "API";
 
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
@@ -29,34 +30,33 @@ server.use(
 
 server.use(
 	cookieSession({
+		maxAge: 24 * 60 * 60 * 100,
 		name: "session",
 		keys: ["test"],
-		maxAge: 24 * 60 * 60 * 100,
 	}),
 );
 server.use(passport.initialize());
 server.use(passport.session());
 
-// server.use((req, res, next) => {
-// 	res.header("Access-Control-Allow-Origin", "*");
+server.use((req, res, next) => {
+	// res.header("Access-Control-Allow-Origin", "*");
+	// authorized headers for preflight requests
+	// https://developer.mozilla.org/en-US/docs/Glossary/preflight_request
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin, X-Requested-With, Content-Type, Accept",
+	);
+	next();
 
-// 	// authorized headers for preflight requests
-// 	// https://developer.mozilla.org/en-US/docs/Glossary/preflight_request
-// 	res.header(
-// 		"Access-Control-Allow-Headers",
-// 		"Origin, X-Requested-With, Content-Type, Accept",
-// 	);
-// 	next();
-
-// 	server.options("*", (req, res) => {
-// 		// allowed XHR methods
-// 		res.header(
-// 			"Access-Control-Allow-Methods",
-// 			"GET, PATCH, PUT, POST, DELETE, OPTIONS",
-// 		);
-// 		res.send();
-// 	});
-// });
+	server.options("*", (req, res) => {
+		// allowed XHR methods
+		res.header(
+			"Access-Control-Allow-Methods",
+			"GET, PATCH, PUT, POST, DELETE, OPTIONS",
+		);
+		res.send();
+	});
+});
 
 server.use("/", routes);
 

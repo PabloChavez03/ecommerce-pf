@@ -3,8 +3,7 @@
 	flex-direction: column;
 	flex-wrap: wrap;
 	margin: auto;
-	background-color: #eef3f5;
-	box-shadow: 0px 0px 2px rgba(41, 40, 40, 0.666);
+	background-color: transparent;
 	border-radius: 10px;
 }
 .cardsContainer {
@@ -18,13 +17,19 @@
 	margin: auto;
 	background-color: #fff;
 	width: 35vw;
+	padding: 1px 3px;
 	min-height: 80px;
 	margin: 6px 10px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	border-radius: 10px;
-	box-shadow: 0px 0px 2px rgba(41, 40, 40, 0.666);
+	box-shadow: 0px 0px 5px 1px rgba(41, 40, 40, 0.666);
+	transition: 0.2s;
+}
+
+.cardContainer:hover {
+	transform: scale(1.02);
 }
 .cardContainer h4 {
 	width: fit-content;

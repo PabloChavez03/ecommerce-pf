@@ -21,7 +21,7 @@ const NewsMen = () => {
 	const dispatch = useDispatch();
 	const allProducts = useSelector((state) => state.productsAdmin);
 
-	let productsFiltered = allProducts.filter((item) => item.Category.genre === "men").slice(2, 6);
+	let productsFiltered = allProducts?.filter((item) => item.Category?.genre === "men").slice(2, 6);
 
 	useEffect(() => {
 		dispatch(getAllProducts());

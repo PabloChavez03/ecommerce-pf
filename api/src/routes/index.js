@@ -4,9 +4,11 @@ const { Router } = require("express");
 const router = Router();
 
 const { authMaster, isAdmin } = require("../middleware/authMaster");
-// const { checkStock } = require("../middleware/checkStock");
 
 // Modularizando las rutas
+
+//Pedidos
+router.use("/user",require("./usersFindByPk"))
 
 //----------------  for All  --------------------------------------------------
 router.use("/categories", require("./categories"));
@@ -37,7 +39,7 @@ router.use(
 );
 router.use("/users/update", authMaster, require("./userUpdate"));
 router.use("/client/update", [authMaster, isAdmin], require("./updateClient"));
-router.use("/product/stock", [authMaster, isAdmin], require("./updateStock"));
+router.use("/product/stock", require("./updateStock"));
 router.use("/users/delete", [authMaster, isAdmin], require("./userDelete"));
 router.use("/users/findall", [authMaster, isAdmin], require("./getUsers"));
 router.use(
@@ -45,6 +47,7 @@ router.use(
 	[authMaster, isAdmin],
 	require("./usersFindByPk"),
 );
+
 //----------------------Mercado Pago-------------------------------------------
 router.use("/mercadopago", require("./mercadoPago"));
 //-----------------------  Google  --------------------------------------------

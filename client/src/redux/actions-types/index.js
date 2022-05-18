@@ -48,7 +48,11 @@ import {
 	GET_ORDERS_BY_PAYMENT_ID,
 	UPDATE_STATUS_ORDER,
 	EMPTY_CART,
-	GET_LOGIN_GOOGLE,
+  DELETE_USER,
+  CHECK_STOCK,
+  EMPTY_CHECK_STOCK,
+  SEND_RESET_PASSWORD,
+  USER_TO_CHANGE,
 } from "../actions-creators";
 import {
 	chatBot,
@@ -703,13 +707,13 @@ export const updateCategory = (token, categoryId, payload) => {
 };
 
 export const deleteCategory = (token, categoryId) => {
-	return async function () {
-		await axios.delete(`/modify/categories/${categoryId}`, {
-			headers: {
-				authorization: `Bearer ${token}`,
-			},
-		});
-	};
+  return async function () {
+    await axios.delete(`/modify/categories/${categoryId}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  };
 };
 
 export const removeStock = (cart) => {
@@ -723,3 +727,56 @@ export const addStock = (cart) => {
 		await axios.patch("/product/stock/sumar", cart);
 	};
 };
+
+export function deleteUser(token, user_name) {
+  return async function (dispatch) {
+    const { data } = await axios.delete(`/users/delete/${user_name}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return dispatch({
+      type: DELETE_USER,
+      payload: data,
+    });
+  };
+}
+
+export const addCheckStock = (id) => {
+  return async function (dispatch) {
+    const { data } = await axios.get(`/products/detail/${id}`);
+
+    return dispatch({
+      type: CHECK_STOCK,
+      payload: data,
+    });
+  };
+};
+export const emptyCartCheckStock = () => {
+  return {
+    type: EMPTY_CHECK_STOCK,
+  };
+};
+
+export function sendMailResetPassword(dataUser) {
+  return async function (dispatch) {
+    const { data } = await axios.post(
+      "http://localhost:3001/email/ResetPassword",
+      dataUser
+    );
+    return dispatch({
+      type: SEND_RESET_PASSWORD,
+      payload: data,
+    });
+  };
+}
+
+export function userToChange(user_name) {
+  return async function (dispatch) {
+    const {data} = await axios.get(`http://localhost:3001/user/${user_name}`);
+    return dispatch({
+      type: USER_TO_CHANGE,
+      payload: data
+    })
+  }
+}
