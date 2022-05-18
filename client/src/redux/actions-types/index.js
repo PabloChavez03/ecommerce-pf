@@ -1,56 +1,4 @@
 import {
-<<<<<<< HEAD
-	GET_PRODUCT_BY_NAME,
-	ADD_PRODUCT_TO_CART,
-	REMOVE_PRODUCT_FROM_CART,
-	CHANGE_CART_QUANTITY,
-	SET_CURRENT_PAGE,
-	GET_ALL_PRODUCTS,
-	GET_CURRENT_BRANDS,
-	GET_FILTERS_BRANDS,
-	ORDER_BY_PRICE,
-	GET_DETAILS,
-	SET_DETAILS,
-	GET_ALL_CATEGORIES,
-	GET_CATEGORY_BY_ID,
-	GET_FILTERS_GENDER_PRODUCT,
-	GET_ALL_CATEGORIES_FOR_FORM,
-	CHAT_BOT,
-	GET_CHAT_BOT_RECEPTOR,
-	GET_CHAT_BOT_EMISOR,
-	GET_USER_DATA,
-	GET_PRODUCTS_NAME_ADMIN,
-	CLEAN_FILTERS,
-	GET_STOCK_PRODUCTS,
-	LOGGED_OUT,
-	UPDATE_USER_INFO,
-	GET_ALL_CLIENTS,
-	RESET_ALL_CLIENTS,
-	GET_CLIENT_DETAIL,
-	SET_CHANGE_FORM_CREATE,
-	DELETE_CHAT_BOT_RECEPTOR,
-	DELETE_CHAT_BOT_EMISOR,
-	GET_CHAT_BOT_RECEPTOR_NAME,
-	POST_CHAT_BOT_RECEPTOR,
-	POST_CHAT_BOT_EMISOR,
-	PUT_CHAT_BOT_RECEPTOR,
-	PUT_CHAT_BOT_EMISOR,
-	CREATE_REVIEWS,
-	GET_REVIEWS_USER,
-	UPDATE_CLIENT_INFO,
-	RESET_CLIENT_DETAIL,
-	DELETE_REVIEWS,
-	UPDATE_REVIEWS,
-	GET_ALL_CLIENTS_ORDERS,
-	GET_ALL_ORDERS,
-	GET_EMAIL_PUBLICIDAD,
-	FILTER_ORDER_BY_STATUS,
-	GET_ALL_CLIENTS_USER_EMAIL,
-	GET_ORDERS_BY_PAYMENT_ID,
-	UPDATE_STATUS_ORDER,
-	EMPTY_CART,
-	EPIC_GOOGLE,
-=======
   GET_PRODUCT_BY_NAME,
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
@@ -103,8 +51,8 @@ import {
   GET_LOGIN_GOOGLE,
   DELETE_USER,
   CHECK_STOCK,
-  EMPTY_CHECK_STOCK
->>>>>>> 7d5b026838741ab79ed22777eeed33847833c5d4
+  EMPTY_CHECK_STOCK,
+  EPIC_GOOGLE,
 } from "../actions-creators";
 import {
   chatBot,
@@ -762,25 +710,6 @@ export const deleteCategory = (token, categoryId) => {
       headers: {
         authorization: `Bearer ${token}`,
       },
-    });
-  };
-};
-
-export const getLoginGoogle = () => {
-  return async function (dispatch) {
-    const { data } = await axios({
-      url: "/auth/login/success",
-      method: "GET",
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
-      },
-    });
-
-    return dispatch({
-      type: GET_LOGIN_GOOGLE,
-      payload: data,
     });
   };
 };
