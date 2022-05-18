@@ -23,7 +23,7 @@ server.use(cookieParser());
 server.use(morgan("dev"));
 server.use(
 	cors({
-		origin: "http://localhost:3000",
+		origin: "https://clothes-22.vercel.app",
 		credentials: true,
 	}),
 );

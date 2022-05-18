@@ -28,8 +28,9 @@ let sequelize =
 				username: DB_USER,
 				password: DB_PASSWORD,
 				pool: {
-					max: 3,
-					min: 1,
+					max: 20,
+					min: 0,
+					acquire: 80000,
 					idle: 10000,
 				},
 				dialectOptions: {
